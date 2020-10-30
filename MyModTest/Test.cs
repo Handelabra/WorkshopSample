@@ -5,156 +5,64 @@ using Workshopping.MigrantCoder;
 using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.Engine.Controller;
 using System.Linq;
-using System.Reflection;
 using System.Collections;
+using Handelabra.Sentinels.UnitTest;
 
 namespace MyModTest
 {
     [TestFixture()]
-    public class Test
+    public class Test : BaseTest
     {
-        private bool _continueRunningGame;
-        private GameController GameController;
+        protected HeroTurnTakerController migrant { get { return FindHero("MigrantCoder"); } }
 
-        protected GameController SetupGameController(Game game)
-        {
-            GameController gameController = new GameController(game);
-            gameController.StartCoroutine = StartCoroutine;
-            gameController.ExhaustCoroutine = RunCoroutine;
-            gameController.OnMakeDecisions -= this.MakeDecisions;
-            gameController.OnMakeDecisions += this.MakeDecisions;
-            gameController.OnSendMessage += this.ReceiveMessage;
-            gameController.OnWillPerformAction += this.WillPerformAction;
-            gameController.OnWillApplyActionChanges += this.WillApplyActionChanges;
-            gameController.OnDidPerformAction += this.DidPerformAction;
-
-            this.GameController = gameController;
-            this._continueRunningGame = true;
-
-            return gameController;
-        }
-
-    
         [Test()]
-        public void TestCase()
+        public void TestModWorks()
         {
-            var a = Assembly.GetAssembly(typeof(MigrantCoderCharacterCardController));
-            Assert.IsNotNull(a);
+            SetupGameController("BaronBlade", "Workshopping.MigrantCoder", "Megalopolis");
 
-            ModHelper.AddAssembly("Workshopping", a);
+            Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
-            var game = new Game(new string[] { "BaronBlade", "Workshopping.MigrantCoder", "Megalopolis" });
-
-            var gc = SetupGameController(game);
-
-            Assert.AreEqual(3, gc.TurnTakerControllers.Count());
-
-            var migrant = gc.FindTurnTakerController("MigrantCoder");
             Assert.IsNotNull(migrant);
             Assert.IsInstanceOf(typeof(MigrantCoderTurnTakerController), migrant);
             Assert.IsInstanceOf(typeof(MigrantCoderCharacterCardController), migrant.CharacterCardController);
 
             Assert.AreEqual(39, migrant.CharacterCard.HitPoints);
+        }
+
+        [Test()]
+        public void TestPunchingBag()
+        {
+            SetupGameController("BaronBlade", "Workshopping.MigrantCoder", "Megalopolis");
 
             StartGame();
 
-            var bag = this.GameController.FindCard("PunchingBag");
-            RunCoroutine(this.GameController.PlayCard(migrant, bag));
-            Assert.AreEqual(38, migrant.CharacterCard.HitPoints);
+            GoToUsePowerPhase(migrant);
 
-            var worst = this.GameController.FindCard("WorstCardEver");
-            RunCoroutine(this.GameController.PlayCard(migrant, worst));
-
-            RunCoroutine(this.GameController.UsePower(migrant.CharacterCard, 0));
+            // Punching Bag does 1 damage!
+            QuickHPStorage(migrant);
+            PlayCard("PunchingBag");
+            QuickHPCheck(-1);
         }
 
-        protected void StartGame()
+        [Test()]
+        public void TestInnatePower()
         {
+            SetupGameController("BaronBlade", "Workshopping.MigrantCoder", "Megalopolis");
 
-            RunCoroutine(this.GameController.StartGame());
+            StartGame();
 
+            var mdp = GetCardInPlay("MobileDefensePlatform");
 
-            EnterNextTurnPhase();
-        }
+            // Base power draws 3 cards! Deals 1 target 2 damage!
+            QuickHandStorage(migrant.ToHero());
+            DecisionSelectTarget = mdp;
+            QuickHPStorage(mdp);
 
-        protected void EnterNextTurnPhase(int times = 1)
-        {
-            for (int i = 0; i < times; i++)
-            {
-                this.RunCoroutine(this.GameController.EnterNextTurnPhase());
-            }
-        }
+            UsePower(migrant.CharacterCard);
 
-        protected void RunCoroutine(IEnumerator e)
-        {
-            while (_continueRunningGame && e.MoveNext())
-            {
+            QuickHandCheck(3);
+            QuickHPCheck(-2);
 
-            }
-        }
-
-        protected IEnumerator StartCoroutine(IEnumerator e)
-        {
-            while (_continueRunningGame && e.MoveNext())
-            {
-
-            }
-
-            yield return null;
-        }
-
-        // You can override this, or just set the properties that it will use to make decisions.
-        protected virtual IEnumerator MakeDecisions(IDecision decision)
-        {
-            // Make sure we are not allowing fast coroutines!
-            if (this.GameController.PeekFastCoroutines())
-            {
-                Assert.Fail("MakeDecisions was forcing fast coroutines!");
-            }
-
-            Console.WriteLine("MakeDecisions: " + decision.ToStringForMultiplayerDebugging());
-
-            yield return null;
-        }
-
-        private IEnumerator MakeDecisions(IDecision decision, string failAfter)
-        {
-            this.StartCoroutine(MakeDecisions(decision));
-
-            if (failAfter != null)
-            {
-                Assert.Fail(failAfter);
-            }
-
-            yield return null;
-        }
-
-        public IEnumerator ReceiveMessage(MessageAction message)
-        {
-            string msg = message.Message;
-            Console.WriteLine("Message: " + msg);
-            yield return null;
-        }
-
-        private IEnumerator WillPerformAction(GameAction gameAction)
-        {
-            yield return null;
-        }
-
-        private IEnumerator WillApplyActionChanges(GameAction gameAction)
-        {
-            yield return null;
-        }
-
-        private IEnumerator DidPerformAction(GameAction gameAction)
-        {
-            if (gameAction is GameOverAction && gameAction.IsSuccessful)
-            {
-                Console.WriteLine("GAME OVER");
-                this._continueRunningGame = false;
-            }
-
-            yield return null;
         }
     }
 }

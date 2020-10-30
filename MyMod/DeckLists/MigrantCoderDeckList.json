@@ -15,7 +15,7 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "Draw 3 cards."
+        "Draw 3 cards. {MigrantCoder} deals 1 target 2 Psychic damage."
       ],
       "icons": [
         "HasPower"

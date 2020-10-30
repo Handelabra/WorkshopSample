@@ -63,16 +63,27 @@ namespace Workshopping.MigrantCoder
         public override IEnumerator UsePower(int index = 0)
         {
             // Draw 3 cards!
-            IEnumerator drawCardE = DrawCards(this.HeroTurnTakerController, 3);
+            IEnumerator e = DrawCards(this.HeroTurnTakerController, 3);
 
             if (UseUnityCoroutines)
             {
-                yield return this.GameController.StartCoroutine(drawCardE);
+                yield return this.GameController.StartCoroutine(e);
             }
             else
             {
-                this.GameController.ExhaustCoroutine(drawCardE);
+                this.GameController.ExhaustCoroutine(e);
+            }
 
+            // Deal 1 target 2 psychic damage
+            e = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 2, DamageType.Psychic, 1, false, 1, cardSource:GetCardSource());
+
+            if (UseUnityCoroutines)
+            {
+                yield return this.GameController.StartCoroutine(e);
+            }
+            else
+            {
+                this.GameController.ExhaustCoroutine(e);
             }
         }
     }
