@@ -17,5 +17,6 @@ Making your mod:
 - Feel free to rename the project files, etc etc to whatever you like.
 - The Default Namespace setting in the main project (MyMod) must be a unique namespace for your mod. It must match the namespace of your code. (Currently only a single string with no dots is supported).
 - The namespace of your deck's code (card controllers, etc) should be YourNameSpace.DeckIdentifier
+- Update the Setup.cs in the test project to register your own class & namespace with the engine in the DoSetup method.
 
 More documentation and proper template project to come some day!
