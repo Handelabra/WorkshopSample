@@ -1,0 +1,64 @@
+﻿{
+  "name": "Migrant Coder",
+  "kind": "Hero",
+  "initialCardIdentifiers": [
+    "MigrantCoderCharacter"
+  ],
+  "cards": [
+    {
+      "identifier": "MigrantCoderCharacter",
+      "count": 1,
+      "title": "Migrant Coder",
+      "body": "Hack the Gibson",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": [
+        "Draw 3 cards."
+      ],
+      "icons": [
+        "HasPower"
+      ],
+      "hitpoints": 39,
+      "nemesisIdentifiers": [
+        "Legacy"
+      ],
+      "incapacitatedAbilities": [
+        "One hero may do something.",
+        "One player may actually do something.",
+        "The villain really super will do something."
+      ],
+      "flippedIcons": [
+      ],
+      "openingLines": {
+        "default": "I'm a mod! Whatcha gonna do?"
+      },
+      "complexity": 1
+    },
+    {
+      "identifier": "WorstCardEver",
+      "count": 39,
+      "title": "Worst... Card... Ever.",
+      "keywords": [
+        "one-shot"
+      ],
+      "body": "Nothing happens.",
+      "icons": [
+      ],
+      "flavorText": "Ugh."
+    },
+    {
+      "identifier": "PunchingBag",
+      "count": 1,
+      "title": "Punching Bag",
+      "keywords": [
+        "one-shot"
+      ],
+      "body": "{MigrantCoder} deals himself 1 melee damage.",
+      "icons": [
+      ],
+      "flavorText": "Ouch!"
+    }
+  ]
+}
