@@ -1,6 +1,8 @@
 # WorkshopSample
 Example project for developing a mod for Sentinels of the Multiverse
 
+For more information please visit the Trello board: https://trello.com/b/vYBMImbg/sotm-workshop
+
 This project is a very rough template for starting work on making a mod with new hero, villain, and/or environment decks.
 
 Getting started:
