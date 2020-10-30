@@ -3,11 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{44F8C838-553C-482C-B389-2B375B8590C9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Workshopping</RootNamespace>
-    <AssemblyName>MyMod</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ProjectGuid>{79F7ED14-FC8A-4625-A297-2CC51C5D803D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MyModConsole</RootNamespace>
+    <AssemblyName>MyModConsole</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -17,14 +16,14 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ExternalConsole>true</ExternalConsole>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ExternalConsole>true</ExternalConsole>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -34,20 +33,18 @@
     <Reference Include="SentinelsEngine">
       <HintPath>..\..\..\Library\Application Support\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels.app\Contents\Resources\Data\Managed\SentinelsEngine.dll</HintPath>
     </Reference>
+    <Reference Include="Troschuetz.Random">
+      <HintPath>..\packages\Troschuetz.Random.5.0.1\lib\net472\Troschuetz.Random.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MigrantCoder\WorstCardEverCardController.cs" />
-    <Compile Include="MigrantCoder\MigrantCoderCharacterCardController.cs" />
-    <Compile Include="MigrantCoder\PunchingBagCardController.cs" />
-    <Compile Include="MigrantCoder\MigrantCoderTurnTakerController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DeckLists\" />
-    <Folder Include="MigrantCoder\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

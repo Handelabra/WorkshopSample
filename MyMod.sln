@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMod", "MyMod\MyMod.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyModTest", "MyModTest\MyModTest.csproj", "{AFE958F0-3C90-4493-A425-48A660B58E76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyModConsole", "MyModConsole\MyModConsole.csproj", "{79F7ED14-FC8A-4625-A297-2CC51C5D803D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AFE958F0-3C90-4493-A425-48A660B58E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFE958F0-3C90-4493-A425-48A660B58E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFE958F0-3C90-4493-A425-48A660B58E76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F7ED14-FC8A-4625-A297-2CC51C5D803D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F7ED14-FC8A-4625-A297-2CC51C5D803D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F7ED14-FC8A-4625-A297-2CC51C5D803D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F7ED14-FC8A-4625-A297-2CC51C5D803D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
