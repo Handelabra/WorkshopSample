@@ -18,7 +18,7 @@ namespace Workshopping.RuduenFanMods.Inquirer
         protected override IEnumerator ActivateNextToEffect(Card nextTo)
         {
             // Damage another target. 
-            IEnumerator coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, nextTo), 4, DamageType.Psychic, new int?(1), false, new int?(1), true, false, false, (Card c) => !c.IsHero && c != nextTo);
+            IEnumerator coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, nextTo), 3, DamageType.Psychic, new int?(1), false, new int?(1), true, false, false, (Card c) => !c.IsHero && c != nextTo);
             yield return base.RunCoroutine(coroutine);
         }
 
@@ -28,7 +28,7 @@ namespace Workshopping.RuduenFanMods.Inquirer
             Card nextTo = base.GetCardThisCardIsNextTo(true);
             if (nextTo != null && nextTo.IsInPlayAndHasGameText)
             {
-                IEnumerator coroutine = base.DealDamage(nextTo, base.CharacterCard, 2, DamageType.Melee);
+                IEnumerator coroutine = base.DealDamage(nextTo, base.CharacterCard, 1, DamageType.Melee);
                 yield return base.RunCoroutine(coroutine);
             }
         }

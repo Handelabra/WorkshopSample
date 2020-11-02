@@ -16,15 +16,16 @@ namespace Workshopping.RuduenFanMods.Inquirer
 
         public override void AddTriggers()
         {
-            // Add trigger for discard-to-draw. 
-            base.AddTrigger<DiscardCardAction>((DiscardCardAction d) => d.WasCardDiscarded && d.Origin.IsHand && d.Origin.OwnerTurnTaker == base.TurnTaker, new Func<DiscardCardAction, IEnumerator>(this.DrawResponse), TriggerType.IncreaseDamage, TriggerTiming.After, ActionDescription.Unspecified, false, true, null, false, null, null, false, false);
+            // Add trigger for discard-to-discard.
+            base.AddTrigger<DiscardCardAction>((DiscardCardAction d) => d.WasCardDiscarded && d.Origin.IsHand && d.Origin.OwnerTurnTaker == base.TurnTaker, new Func<DiscardCardAction, IEnumerator>(this.DiscardResponse), TriggerType.IncreaseDamage, TriggerTiming.After, ActionDescription.Unspecified, false, true, null, false, null, null, false, false);
 
             // Add trigger for healing.
             base.AddEndOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, (PhaseChangeAction p) => base.GameController.GainHP(this.CharacterCard, 1),TriggerType.GainHP);
         }
-        private IEnumerator DrawResponse(DiscardCardAction discardCard)
+        private IEnumerator DiscardResponse(DiscardCardAction discardCard)
         {
-            IEnumerator coroutine = base.DrawCard(null, false, null, true);
+            List<MoveCardAction> storedResults = new List<MoveCardAction>();
+            IEnumerator coroutine = base.GameController.DiscardTopCard(base.HeroTurnTaker.Deck, storedResults);
             yield return base.RunCoroutine(coroutine);
         }
     }

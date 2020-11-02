@@ -18,7 +18,7 @@ namespace Workshopping.RuduenFanMods.Inquirer
         protected override IEnumerator ActivateNextToEffect(Card nextTo)
         {
             // Damage.
-            IEnumerator coroutine = base.DealDamage(nextTo, nextTo, 5, DamageType.Psychic, true, false, false, null, null, null, false, null);
+            IEnumerator coroutine = base.DealDamage(nextTo, nextTo, 4, DamageType.Psychic, true, false, false, null, null, null, false, null);
             yield return base.RunCoroutine(coroutine);
         }
 
@@ -28,7 +28,7 @@ namespace Workshopping.RuduenFanMods.Inquirer
             Card nextTo = base.GetCardThisCardIsNextTo(true);
             if (nextTo != null && nextTo.IsInPlayAndHasGameText)
             {
-                IEnumerator coroutine = base.GameController.GainHP(nextTo, 3);
+                IEnumerator coroutine = base.GameController.GainHP(nextTo, 2);
                 yield return base.RunCoroutine(coroutine);
             }
         }
