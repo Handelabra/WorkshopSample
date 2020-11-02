@@ -2,20 +2,25 @@
 using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Workshopping.MigrantCoder
+// TODO: TEST! 
+
+namespace Workshopping.RuduenFanMods.Inquirer
 {
-    public class MigrantCoderCharacterCardController : HeroCharacterCardController
+    public class InquirerCharacterCardController : RuduenHeroCharacterCardController
     {
         public string str;
 
-        public MigrantCoderCharacterCardController(Card card, TurnTakerController turnTakerController)
+        public InquirerCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
 
         public override IEnumerator UseIncapacitatedAbility(int index)
         {
+            // TODO: Implement Incapacitated Abilities. 
             switch (index)
             {
                 case 0:
@@ -62,29 +67,26 @@ namespace Workshopping.MigrantCoder
 
         public override IEnumerator UsePower(int index = 0)
         {
-            // Draw 3 cards!
-            IEnumerator e = DrawCards(this.HeroTurnTakerController, 3);
+            IEnumerator coroutine;
+            List<DestroyCardAction> storedResults = new List<DestroyCardAction>();
 
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(e);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(e);
-            }
+            // Draw a card. 
+            coroutine = base.DrawCard(null, false, null, true);
+            yield return base.RunCoroutine(coroutine);
 
-            // Deal 1 target 2 psychic damage
-            e = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 2, DamageType.Psychic, 1, false, 1, cardSource:GetCardSource());
+            // You may destroy one of your ongoings. 
+            coroutine = base.GameController.SelectAndDestroyCard(base.HeroTurnTakerController,
+                new LinqCardCriteria((Card c) => c.IsOngoing && c.Owner == base.TurnTaker, "ongoing", true, false, null, null, false),
+                true, storedResults, null, base.GetCardSource(null));
+            yield return base.RunCoroutine(coroutine);
 
-            if (UseUnityCoroutines)
+            // If you do, play a card.
+            if (storedResults.Count<DestroyCardAction>() >= 1)
             {
-                yield return this.GameController.StartCoroutine(e);
+                coroutine = base.SelectAndPlayCardFromHand(base.HeroTurnTakerController, true, null, null, false, false, false, null);
+                yield return base.RunCoroutine(coroutine);
             }
-            else
-            {
-                this.GameController.ExhaustCoroutine(e);
-            }
+            yield break;
         }
     }
 }

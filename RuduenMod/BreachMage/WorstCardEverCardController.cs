@@ -3,7 +3,7 @@ using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 
-namespace Workshopping.MigrantCoder
+namespace Workshopping.RuduenFanMods.BreachMage
 {
     public class WorstCardEverCardController : CardController
     {
@@ -14,14 +14,14 @@ namespace Workshopping.MigrantCoder
 
         public override IEnumerator Play()
         {
-            var message = this.GameController.SendMessageAction("You knew this card does nothing. Why would you play it?", Priority.Medium, GetCardSource());
+            var message = GameController.SendMessageAction("You knew this card does nothing. Why would you play it?", Priority.Medium, GetCardSource());
             if (UseUnityCoroutines)
             {
-                yield return this.GameController.StartCoroutine(message);
+                yield return GameController.StartCoroutine(message);
             }
             else
             {
-                this.GameController.ExhaustCoroutine(message);
+                GameController.ExhaustCoroutine(message);
             }
         }
     }

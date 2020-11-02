@@ -1,30 +1,30 @@
 ﻿using NUnit.Framework;
 using System;
 using Workshopping;
-using Workshopping.MigrantCoder;
+using Workshopping.RuduenFanMods.BreachMage;
 using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.Engine.Controller;
 using System.Linq;
 using System.Collections;
 using Handelabra.Sentinels.UnitTest;
 
-namespace MyModTest
+namespace RuduenModTest
 {
     [TestFixture()]
     public class Test : BaseTest
     {
-        protected HeroTurnTakerController migrant { get { return FindHero("MigrantCoder"); } }
+        protected HeroTurnTakerController migrant { get { return FindHero("BreachMage"); } }
 
         [Test()]
         public void TestModWorks()
         {
-            SetupGameController("BaronBlade", "Workshopping.MigrantCoder", "Megalopolis");
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
 
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
             Assert.IsNotNull(migrant);
-            Assert.IsInstanceOf(typeof(MigrantCoderTurnTakerController), migrant);
-            Assert.IsInstanceOf(typeof(MigrantCoderCharacterCardController), migrant.CharacterCardController);
+            Assert.IsInstanceOf(typeof(BreachMageTurnTakerController), migrant);
+            Assert.IsInstanceOf(typeof(BreachMageCharacterCardController), migrant.CharacterCardController);
 
             Assert.AreEqual(39, migrant.CharacterCard.HitPoints);
         }
@@ -32,7 +32,7 @@ namespace MyModTest
         [Test()]
         public void TestPunchingBag()
         {
-            SetupGameController("BaronBlade", "Workshopping.MigrantCoder", "Megalopolis");
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -47,7 +47,7 @@ namespace MyModTest
         [Test()]
         public void TestInnatePower()
         {
-            SetupGameController("BaronBlade", "Workshopping.MigrantCoder", "Megalopolis");
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
 
             StartGame();
 

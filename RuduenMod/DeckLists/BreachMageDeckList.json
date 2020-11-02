@@ -1,0 +1,61 @@
+﻿{
+  "name": "Breach Mage",
+  "kind": "Hero",
+  "initialCardIdentifiers": [
+    "BreachMageCharacter"
+  ],
+  "cards": [
+    {
+      "identifier": "BreachMageCharacter",
+      "count": 1,
+      "title": "Mist",
+      "body": "Dagger Captain",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": [
+        "Destroy an Ongoing card."
+      ],
+      "icons": [
+        "HasPower"
+      ],
+      "hitpoints": 39,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Destroy an Ongoing card.",
+        "One Hero uses a power.",
+        "One Hero deals 1 target 2 Fire Damage."
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "..."
+      },
+      "complexity": 3
+    },
+    {
+      "identifier": "Spark",
+      "count": 4,
+      "title": "Spark",
+      "keywords": [
+        "ongoing"
+      ],
+      "body": "At the start of your turn, you may return this card to your hand. If you do, {BreachMage} deals 1 Target 1 Fire Damage.",
+      "icons": [],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "Open Breach",
+      "count": 4,
+      "title": "Open Breach",
+      "keywords": [
+        "Ongoing"
+      ],
+      "body": "You may play an additional Spell card during your play phase.",
+      "icons": [],
+      "flavorText": "..."
+    }
+  ]
+}
