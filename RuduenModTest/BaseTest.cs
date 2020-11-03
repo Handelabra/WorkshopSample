@@ -5880,6 +5880,8 @@ namespace Handelabra.Sentinels.UnitTest
 			return this.GameController.DoesCardContainKeyword(card, CardDefinition.KEYWORD_EQUIPMENT);
 		}
 
+
+
         protected bool IsMechanicalGolem(Card card)
         {
             return this.GameController.DoesCardContainKeyword(card, CardDefinition.KEYWORD_MECHANICAL_GOLEM);

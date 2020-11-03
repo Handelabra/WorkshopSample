@@ -4,18 +4,19 @@ using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Workshopping.RuduenFanMods.Inquirer
+namespace Workshopping.Inquirer
 {
     // TODO: TEST!
-    public class CardControllerImANinja : CardControllerFormShared
+    public class ImANinjaCardController : InquirerFormSharedCardController
     {
-        public CardControllerImANinja(Card card, TurnTakerController turnTakerController)
+        public ImANinjaCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
 
         public override void AddTriggers()
         {
+            base.AddTriggers();
             // Add trigger for increasing damage.
             base.AddIncreaseDamageTrigger((DealDamageAction dd) => dd.DamageSource.Card == base.CharacterCard, 1, null, null, false);
 
@@ -32,14 +33,26 @@ namespace Workshopping.RuduenFanMods.Inquirer
             IEnumerator coroutine;
 
             coroutine = base.GameController.SelectAndDiscardCard(base.HeroTurnTakerController, true, null, storedResults, SelectionType.DiscardCard);
-            yield return base.RunCoroutine(coroutine);
+            if (base.UseUnityCoroutines)
+            {
+                yield return base.GameController.StartCoroutine(coroutine);
+            }
+            else
+            {
+                base.GameController.ExhaustCoroutine(coroutine);
+            }
             if (base.DidDiscardCards(storedResults, null, false))
             {
                 coroutine = base.GameController.SelectAndUsePower(base.HeroTurnTakerController);
-                yield return base.RunCoroutine(coroutine);
+                if (base.UseUnityCoroutines)
+                {
+                    yield return base.GameController.StartCoroutine(coroutine);
+                }
+                else
+                {
+                    base.GameController.ExhaustCoroutine(coroutine);
+                }
             }
-
-            yield break;
         }
     }
 }

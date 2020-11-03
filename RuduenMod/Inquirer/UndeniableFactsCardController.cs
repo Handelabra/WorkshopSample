@@ -3,12 +3,12 @@ using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 
-namespace Workshopping.RuduenFanMods.Inquirer
+namespace Workshopping.Inquirer
 {
-    public class CardControllerUndeniableFacts : RuduenCardController
+    public class UndeniableFactsCardController : CardController
     {
 		// TODO: TEST!
-		public CardControllerUndeniableFacts(Card card, TurnTakerController turnTakerController)
+		public UndeniableFactsCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -26,11 +26,25 @@ namespace Workshopping.RuduenFanMods.Inquirer
 			// Cancel the destroy card action. 
 			IEnumerator coroutine;
 			coroutine = base.CancelAction(d, true, true, null, false);
-			yield return base.RunCoroutine(coroutine);
+			if (base.UseUnityCoroutines)
+			{
+				yield return base.GameController.StartCoroutine(coroutine);
+			}
+			else
+			{
+				base.GameController.ExhaustCoroutine(coroutine);
+			}
 
 			// Move the card to the bottom of your deck instead.
 			coroutine = base.GameController.MoveCard(base.TurnTakerController, d.CardToDestroy.Card, d.CardToDestroy.Card.Owner.Deck, true);
-			yield return base.RunCoroutine(coroutine);
+			if (base.UseUnityCoroutines)
+			{
+				yield return base.GameController.StartCoroutine(coroutine);
+			}
+			else
+			{
+				base.GameController.ExhaustCoroutine(coroutine);
+			}
 		}
 
 		//      private IEnumerator DrawCardResponse(GameAction d)
@@ -49,9 +63,18 @@ namespace Workshopping.RuduenFanMods.Inquirer
 
 		public override IEnumerator UsePower(int index = 0)
 		{
-            // Play 2 Distortion cards.
-            IEnumerator coroutine = base.SelectAndPlayCardsFromHand(base.HeroTurnTakerController, 2, false, new int?(0), new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
-			yield return base.RunCoroutine(coroutine);
-        }
+			int powerNumeral = base.GetPowerNumeral(0, 2);
+
+			// Play 2 Distortion cards.
+			IEnumerator coroutine = base.SelectAndPlayCardsFromHand(base.HeroTurnTakerController, powerNumeral, false, new int?(0), new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
+			if (base.UseUnityCoroutines)
+			{
+				yield return base.GameController.StartCoroutine(coroutine);
+			}
+			else
+			{
+				base.GameController.ExhaustCoroutine(coroutine);
+			}
+		}
 	}
 }

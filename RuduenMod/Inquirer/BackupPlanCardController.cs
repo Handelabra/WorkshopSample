@@ -4,11 +4,11 @@ using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Workshopping.RuduenFanMods.Inquirer
+namespace Workshopping.Inquirer
 {
-    public class CardControllerBackupPlan : RuduenCardController
+    public class BackupPlanCardController : CardController
     {
-        public CardControllerBackupPlan(Card card, TurnTakerController turnTakerController)
+        public BackupPlanCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -24,15 +24,36 @@ namespace Workshopping.RuduenFanMods.Inquirer
             IEnumerator coroutine;
             // Deal Damage.
             coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.CharacterCard), powerNumerals[2], DamageType.Melee, powerNumerals[1], false, 1);
-            yield return base.RunCoroutine(coroutine);
+                        if (base.UseUnityCoroutines)
+            {
+                yield return base.GameController.StartCoroutine(coroutine);
+            }
+            else
+            {
+                base.GameController.ExhaustCoroutine(coroutine);
+            }
 
             // Heal.
             coroutine = base.GameController.GainHP(this.CharacterCard, powerNumerals[3]);
-            yield return base.RunCoroutine(coroutine);
+            if (base.UseUnityCoroutines)
+            {
+                yield return base.GameController.StartCoroutine(coroutine);
+            }
+            else
+            {
+                base.GameController.ExhaustCoroutine(coroutine);
+            }
 
             // Discard card.
             coroutine = base.GameController.SelectAndDiscardCard(base.HeroTurnTakerController, true, null, null, SelectionType.DiscardCard);
-            yield return base.RunCoroutine(coroutine);
+            if (base.UseUnityCoroutines)
+            {
+                yield return base.GameController.StartCoroutine(coroutine);
+            }
+            else
+            {
+                base.GameController.ExhaustCoroutine(coroutine);
+            }
 
         }
 	}

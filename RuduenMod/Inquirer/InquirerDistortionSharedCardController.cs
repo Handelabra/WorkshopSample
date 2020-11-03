@@ -5,13 +5,13 @@ using System.Linq;
 using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 
-namespace Workshopping.RuduenFanMods.Inquirer
+namespace Workshopping.Inquirer
 {
 	// Token: 0x0200054D RID: 1357
-	public class CardControllerInquirerDistortionShared : RuduenCardController
+	public class InquirerDistortionSharedCardController : CardController
 	{
 		protected LinqCardCriteria NextToCriteria { get; set; }
-		public CardControllerInquirerDistortionShared(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
+		public InquirerDistortionSharedCardController(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
 		{
 			this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget, "targets", false, false, null, null, false);
 		}
@@ -32,7 +32,14 @@ namespace Workshopping.RuduenFanMods.Inquirer
 		public override IEnumerator DeterminePlayLocation(List<MoveCardDestination> storedResults, bool isPutIntoPlay, List<IDecision> decisionSources, Location overridePlayArea = null, LinqTurnTakerCriteria additionalTurnTakerCriteria = null)
 		{
 			IEnumerator coroutine = base.SelectCardThisCardWillMoveNextTo(this.NextToCriteria, storedResults, isPutIntoPlay, decisionSources);
-			yield return base.RunCoroutine(coroutine);
+			if (base.UseUnityCoroutines)
+			{
+				yield return base.GameController.StartCoroutine(coroutine);
+			}
+			else
+			{
+				base.GameController.ExhaustCoroutine(coroutine);
+			}
 		}
 
 		public override IEnumerator Play()

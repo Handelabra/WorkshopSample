@@ -4,12 +4,12 @@ using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Workshopping.RuduenFanMods.Inquirer
+namespace Workshopping.Inquirer
 {
     // TODO: TEST!
-    public class CardControllerLookADistraction : CardControllerInquirerDistortionShared
+    public class LookADistractionCardController : InquirerDistortionSharedCardController
     {
-        public CardControllerLookADistraction(Card card, TurnTakerController turnTakerController)
+        public LookADistractionCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
             this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && !card.IsHero, "non-hero targets", false, false, null, null, false);
@@ -19,7 +19,14 @@ namespace Workshopping.RuduenFanMods.Inquirer
         {
             // Damage other targets.
             IEnumerator coroutine = base.DealDamage(nextTo, (Card c) => !c.IsHero && c != nextTo, 2, DamageType.Melee);
-            yield return base.RunCoroutine(coroutine);
+            if (base.UseUnityCoroutines)
+            {
+                yield return base.GameController.StartCoroutine(coroutine);
+            }
+            else
+            {
+                base.GameController.ExhaustCoroutine(coroutine);
+            }
         }
 
         protected override IEnumerator OnDestroyResponse(DestroyCardAction dc)
@@ -29,7 +36,14 @@ namespace Workshopping.RuduenFanMods.Inquirer
             if (nextTo != null && nextTo.IsInPlayAndHasGameText)
             {
                 IEnumerator coroutine = base.DealDamage(nextTo, base.CharacterCard, 1, DamageType.Melee);
-                yield return base.RunCoroutine(coroutine);
+                if (base.UseUnityCoroutines)
+                {
+                    yield return base.GameController.StartCoroutine(coroutine);
+                }
+                else
+                {
+                    base.GameController.ExhaustCoroutine(coroutine);
+                }
             }
         }
     }

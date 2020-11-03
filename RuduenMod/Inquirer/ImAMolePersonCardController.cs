@@ -3,17 +3,18 @@ using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 
-namespace Workshopping.RuduenFanMods.Inquirer
+namespace Workshopping.Inquirer
 {
-    public class CardControllerImAMolePerson : CardControllerFormShared
+    public class ImAMolePersonCardController : InquirerFormSharedCardController
     {
-        public CardControllerImAMolePerson(Card card, TurnTakerController turnTakerController)
+        public ImAMolePersonCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
 
         public override void AddTriggers()
         {
+            base.AddTriggers();
             // Add trigger for increasing healing.
             base.AddTrigger<GainHPAction>((GainHPAction g) => g.HpGainer == base.CharacterCard,
                 (GainHPAction g) => base.GameController.IncreaseHPGain(g, 1, base.GetCardSource(null)),

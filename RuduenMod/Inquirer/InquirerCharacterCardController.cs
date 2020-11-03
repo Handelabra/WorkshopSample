@@ -7,9 +7,9 @@ using System.Linq;
 
 // TODO: TEST! 
 
-namespace Workshopping.RuduenFanMods.Inquirer
+namespace Workshopping.Inquirer
 {
-    public class InquirerCharacterCardController : RuduenHeroCharacterCardController
+    public class InquirerCharacterCardController : HeroCharacterCardController
     {
         public string str;
 
@@ -71,20 +71,41 @@ namespace Workshopping.RuduenFanMods.Inquirer
             List<DestroyCardAction> storedResults = new List<DestroyCardAction>();
 
             // Draw a card. 
-            coroutine = base.DrawCard(null, false, null, true);
-            yield return base.RunCoroutine(coroutine);
+            coroutine = base.DrawCard(this.HeroTurnTaker, false, null, true);
+            if (base.UseUnityCoroutines)
+            {
+                yield return base.GameController.StartCoroutine(coroutine);
+            }
+            else
+            {
+                base.GameController.ExhaustCoroutine(coroutine);
+            }
 
             // You may destroy one of your ongoings. 
             coroutine = base.GameController.SelectAndDestroyCard(base.HeroTurnTakerController,
                 new LinqCardCriteria((Card c) => c.IsOngoing && c.Owner == base.TurnTaker, "ongoing", true, false, null, null, false),
                 true, storedResults, null, base.GetCardSource(null));
-            yield return base.RunCoroutine(coroutine);
+            if (base.UseUnityCoroutines)
+            {
+                yield return base.GameController.StartCoroutine(coroutine);
+            }
+            else
+            {
+                base.GameController.ExhaustCoroutine(coroutine);
+            }
 
             // If you do, play a card.
             if (storedResults.Count<DestroyCardAction>() >= 1)
             {
                 coroutine = base.SelectAndPlayCardFromHand(base.HeroTurnTakerController, true, null, null, false, false, false, null);
-                yield return base.RunCoroutine(coroutine);
+                if (base.UseUnityCoroutines)
+                {
+                    yield return base.GameController.StartCoroutine(coroutine);
+                }
+                else
+                {
+                    base.GameController.ExhaustCoroutine(coroutine);
+                }
             }
             yield break;
         }

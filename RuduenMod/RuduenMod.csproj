@@ -38,24 +38,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Inquirer\CardControllerFormShared.cs" />
-    <Compile Include="Inquirer\CardControllerImAVictorian.cs" />
-    <Compile Include="Inquirer\CardControllerImANinja.cs" />
-    <Compile Include="Inquirer\CardControllerImAMolePerson.cs" />
+    <Compile Include="Inquirer\IveFixedTheWoundCardController.cs" />
+    <Compile Include="Inquirer\LookADistractionCardController.cs" />
+    <Compile Include="Inquirer\FisticuffsCardController.cs" />
+    <Compile Include="Inquirer\BackupPlanCardController.cs" />
+    <Compile Include="Inquirer\UntilYouMakeItCardController.cs" />
+    <Compile Include="Inquirer\YoureOnOurSideCardController.cs" />
+    <Compile Include="Inquirer\YoureLookingPaleCardController.cs" />
+    <Compile Include="Inquirer\InquirerDistortionSharedCardController.cs" />
+    <Compile Include="Inquirer\InquirerFormSharedCardController.cs" />
+    <Compile Include="Inquirer\ImAVictorianCardController.cs" />
+    <Compile Include="Inquirer\ImANinjaCardController.cs" />
+    <Compile Include="Inquirer\ImAMolePersonCardController.cs" />
     <Compile Include="Inquirer\InquirerCharacterCardController.cs" />
     <Compile Include="Inquirer\InquirerTurnTakerController.cs" />
-    <Compile Include="Inquirer\CardControllerTheLieTheyTellThemselves.cs" />
-    <Compile Include="Inquirer\CardControllerUndeniableFacts.cs" />
+    <Compile Include="Inquirer\TheLieTheyTellThemselvesCardController.cs" />
+    <Compile Include="Inquirer\UndeniableFactsCardController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BreachMage\WorstCardEverCardController.cs" />
     <Compile Include="BreachMage\BreachMageCharacterCardController.cs" />
     <Compile Include="BreachMage\PunchingBagCardController.cs" />
     <Compile Include="BreachMage\BreachMageTurnTakerController.cs" />
-    <Compile Include="RuduenControls.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\BreachMageDeckList.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="DeckLists\InquirerDeckList.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
