@@ -27,14 +27,7 @@ namespace Workshopping.Inquirer
         {
             List<MoveCardAction> storedResults = new List<MoveCardAction>();
             IEnumerator coroutine = base.GameController.DiscardTopCard(base.HeroTurnTaker.Deck, storedResults);
-            if (base.UseUnityCoroutines)
-            {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
-            }
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

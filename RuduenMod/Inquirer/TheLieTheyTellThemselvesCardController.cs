@@ -24,27 +24,12 @@ namespace Workshopping.Inquirer
             // Pick any target
             List<SelectCardDecision> storedResults = new List<SelectCardDecision>();
             IEnumerator coroutine = base.GameController.SelectCardAndStoreResults(this.DecisionMaker, SelectionType.SelectTarget, new LinqCardCriteria((Card c) => c.IsInPlayAndHasGameText && c.IsTarget, "targets", false, false, null, null, false), storedResults, false, false, null, true, base.GetCardSource(null));
-            if (base.UseUnityCoroutines)
-            {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
-            }
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             Card selectedCard = base.GetSelectedCard(storedResults);
 
             // That target damages themselves.
             coroutine = base.DealDamage(selectedCard, selectedCard, 1, DamageType.Psychic, false, false, false, null, null, null, false, null);
-            if (base.UseUnityCoroutines)
-            {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
-            }
-            yield break;
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
         }
 
         public override IEnumerator UsePower(int index = 0)
@@ -52,27 +37,13 @@ namespace Workshopping.Inquirer
             // Draw 2 cards.
             int powerNumeral = base.GetPowerNumeral(0, 2);
             IEnumerator coroutine = base.DrawCards(this.HeroTurnTakerController, powerNumeral);
-            if (base.UseUnityCoroutines)
-            {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
-            }
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
             // Destroy a distortion.
             coroutine = base.GameController.SelectAndDestroyCard(this.DecisionMaker, 
                 new LinqCardCriteria((Card c) => c.IsInPlay && c.IsDistortion, "distortion"), 
                 true);
-            if (base.UseUnityCoroutines)
-            {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
-            }
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

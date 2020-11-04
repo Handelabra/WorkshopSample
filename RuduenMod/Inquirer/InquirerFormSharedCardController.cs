@@ -25,7 +25,7 @@ namespace Workshopping.Inquirer
 			}, null, false);
 		}
 
-		// TODO: Change to Select Cards and Move. 
+		// TODO: Change to Select Cards and Move if appropriate. 
 		// TODO: Validate if DecisionMaker should be this.DecisionMaker, or if base.HeroTurnTakerController works well.
 		private IEnumerator MoveOrDestroyResponse(PhaseChangeAction phaseChange)
 		{
@@ -37,39 +37,19 @@ namespace Workshopping.Inquirer
 				// Ask if we should move the top two cards of the trash to the bottom of the deck for things. 
 				YesNoAmountDecision yesNoDecision = new YesNoAmountDecision(base.GameController, base.HeroTurnTakerController, SelectionType.MoveCard, 2);
 				coroutine = base.GameController.MakeDecisionAction(yesNoDecision);
-				if (base.UseUnityCoroutines)
-				{
-					yield return base.GameController.StartCoroutine(coroutine);
-				}
-				else
-				{
-					base.GameController.ExhaustCoroutine(coroutine);
-				}
+				if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
 				if (base.DidPlayerAnswerYes(yesNoDecision))
                 {
 					// Fetch top two cards. 
 					List<Card> revealedCards = new List<Card>();
 					coroutine = this.GameController.RevealCards(base.HeroTurnTakerController, HeroTurnTaker.Trash, 2, revealedCards, false, RevealedCardDisplay.None, null, this.GetCardSource(null));
-					if (base.UseUnityCoroutines)
-					{
-						yield return base.GameController.StartCoroutine(coroutine);
-					}
-					else
-					{
-						base.GameController.ExhaustCoroutine(coroutine);
-					}
+					if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
 					// Ask which to place on bottom. 
 					List<SelectCardDecision> storedResults = new List<SelectCardDecision>();
 					coroutine = this.GameController.SelectCardAndStoreResults(base.HeroTurnTakerController, SelectionType.MoveCardOnBottomOfDeck, revealedCards, storedResults, false, false, null, null, null, null, null, false, true, null);
-					if (base.UseUnityCoroutines)
-					{
-						yield return base.GameController.StartCoroutine(coroutine);
-					}
-					else
-					{
-						base.GameController.ExhaustCoroutine(coroutine);
-					}
+					if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
 					// Selected card should be stored to move to the bottom. 
 					Card selectedCard = this.GetSelectedCard(storedResults);
@@ -77,52 +57,28 @@ namespace Workshopping.Inquirer
 					// Move the other card to the bottom first.
 					revealedCards.Remove(selectedCard);
 					coroutine = this.GameController.MoveCard(base.HeroTurnTakerController, revealedCards.FirstOrDefault(), base.HeroTurnTaker.Deck, true);
-					if (base.UseUnityCoroutines)
-					{
-						yield return base.GameController.StartCoroutine(coroutine);
-					}
-					else
-					{
-						base.GameController.ExhaustCoroutine(coroutine);
-					}
+					if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
 					// Move the selected card to the new, 'actual' bottom. 
 					coroutine = this.GameController.MoveCard(base.HeroTurnTakerController, selectedCard, base.HeroTurnTaker.Deck, true);
-					if (base.UseUnityCoroutines)
-					{
-						yield return base.GameController.StartCoroutine(coroutine);
-					}
-					else
-					{
-						base.GameController.ExhaustCoroutine(coroutine);
-					}
+					if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
 				}
 				else
                 {
 					// No movement - destroy. 
                     coroutine = base.GameController.DestroyCard(base.HeroTurnTakerController, base.Card, false, null, null, null, null, null, null, null, null, base.GetCardSource(null));
-					if (base.UseUnityCoroutines)
-					{
-						yield return base.GameController.StartCoroutine(coroutine);
-					}
-					else
-					{
-						base.GameController.ExhaustCoroutine(coroutine);
-					}
+					if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
 				}
 			}
             else
             {
 				// Not enough cards - automatically destroy. 
+				// TODO: Add message if appropriate. 
 				coroutine = base.GameController.DestroyCard(base.HeroTurnTakerController, base.Card, false, null, null, null, null, null, null, null, null, base.GetCardSource(null));
-				if (base.UseUnityCoroutines)
-				{
-					yield return base.GameController.StartCoroutine(coroutine);
-				}
-				else
-				{
-					base.GameController.ExhaustCoroutine(coroutine);
-				}
+				if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
 			}
 
 		}

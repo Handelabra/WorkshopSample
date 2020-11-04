@@ -26,25 +26,11 @@ namespace Workshopping.Inquirer
 			// Cancel the destroy card action. 
 			IEnumerator coroutine;
 			coroutine = base.CancelAction(d, true, true, null, false);
-			if (base.UseUnityCoroutines)
-			{
-				yield return base.GameController.StartCoroutine(coroutine);
-			}
-			else
-			{
-				base.GameController.ExhaustCoroutine(coroutine);
-			}
+			if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
 			// Move the card to the bottom of your deck instead.
 			coroutine = base.GameController.MoveCard(base.TurnTakerController, d.CardToDestroy.Card, d.CardToDestroy.Card.Owner.Deck, true);
-			if (base.UseUnityCoroutines)
-			{
-				yield return base.GameController.StartCoroutine(coroutine);
-			}
-			else
-			{
-				base.GameController.ExhaustCoroutine(coroutine);
-			}
+			if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 		}
 
 		//      private IEnumerator DrawCardResponse(GameAction d)
@@ -67,14 +53,7 @@ namespace Workshopping.Inquirer
 
 			// Play 2 Distortion cards.
 			IEnumerator coroutine = base.SelectAndPlayCardsFromHand(base.HeroTurnTakerController, powerNumeral, false, new int?(0), new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
-			if (base.UseUnityCoroutines)
-			{
-				yield return base.GameController.StartCoroutine(coroutine);
-			}
-			else
-			{
-				base.GameController.ExhaustCoroutine(coroutine);
-			}
+			if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 		}
 	}
 }

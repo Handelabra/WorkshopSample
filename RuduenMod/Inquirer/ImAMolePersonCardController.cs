@@ -22,7 +22,7 @@ namespace Workshopping.Inquirer
                 TriggerTiming.Before, null, false, true, null, false, null, null, false, false);
 
             // Add trigger for end of turn damage. 
-            base.AddDealDamageAtEndOfTurnTrigger(base.TurnTaker, base.CharacterCard, (Card c) => true, TargetType.SelectTarget, 3, DamageType.Melee);
+            base.AddDealDamageAtEndOfTurnTrigger(base.TurnTaker, base.CharacterCard, (Card c) => true, TargetType.SelectTarget, 1, DamageType.Melee);
         }
     }
 }

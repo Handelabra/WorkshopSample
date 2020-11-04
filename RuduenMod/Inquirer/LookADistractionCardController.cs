@@ -1,8 +1,7 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
-using System.Collections.Generic;
+
 
 namespace Workshopping.Inquirer
 {
@@ -15,17 +14,14 @@ namespace Workshopping.Inquirer
             this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && !card.IsHero, "non-hero targets", false, false, null, null, false);
         }
 
-        protected override IEnumerator ActivateNextToEffect(Card nextTo)
+        public override IEnumerator Play()
         {
-            // Damage other targets.
-            IEnumerator coroutine = base.DealDamage(nextTo, (Card c) => !c.IsHero && c != nextTo, 2, DamageType.Melee);
-            if (base.UseUnityCoroutines)
+            Card nextTo = base.GetCardThisCardIsNextTo(true);
+            if (nextTo != null)
             {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
+                // Damage other targets.
+                IEnumerator coroutine = base.DealDamage(nextTo, (Card c) => !c.IsHero && c != nextTo, 2, DamageType.Melee);
+                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }
         }
 
@@ -36,14 +32,7 @@ namespace Workshopping.Inquirer
             if (nextTo != null && nextTo.IsInPlayAndHasGameText)
             {
                 IEnumerator coroutine = base.DealDamage(nextTo, base.CharacterCard, 1, DamageType.Melee);
-                if (base.UseUnityCoroutines)
-                {
-                    yield return base.GameController.StartCoroutine(coroutine);
-                }
-                else
-                {
-                    base.GameController.ExhaustCoroutine(coroutine);
-                }
+                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }
         }
     }

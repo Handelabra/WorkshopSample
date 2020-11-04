@@ -15,17 +15,14 @@ namespace Workshopping.Inquirer
             this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && card.IsHero, "hero targets", false, false, null, null, false);
         }
 
-        protected override IEnumerator ActivateNextToEffect(Card nextTo)
+        public override IEnumerator Play()
         {
-            // Heal. 
-            IEnumerator coroutine = base.GameController.GainHP(nextTo, 5);
-            if (base.UseUnityCoroutines)
+            Card nextTo = base.GetCardThisCardIsNextTo(true);
+            if (nextTo != null)
             {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
+                // Heal. 
+                IEnumerator coroutine = base.GameController.GainHP(nextTo, 5);
+                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }
         }
 
@@ -36,14 +33,7 @@ namespace Workshopping.Inquirer
             if (nextTo != null && nextTo.IsInPlayAndHasGameText)
             {
                 IEnumerator coroutine = base.DealDamage(nextTo, nextTo, 2, DamageType.Psychic, true, false, false, null, null, null, false, null);
-                if (base.UseUnityCoroutines)
-                {
-                    yield return base.GameController.StartCoroutine(coroutine);
-                }
-                else
-                {
-                    base.GameController.ExhaustCoroutine(coroutine);
-                }
+                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }
         }
     }

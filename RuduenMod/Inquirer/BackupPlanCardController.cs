@@ -12,49 +12,39 @@ namespace Workshopping.Inquirer
             : base(card, turnTakerController)
         {
         }
-		
-		public override IEnumerator UsePower(int index = 0)
-		{
+
+        public override IEnumerator UsePower(int index = 0)
+        {
             List<int> powerNumerals = new List<int>();
             powerNumerals.Add(base.GetPowerNumeral(0, 1));
             powerNumerals.Add(base.GetPowerNumeral(1, 1));
             powerNumerals.Add(base.GetPowerNumeral(2, 1));
 
-
             IEnumerator coroutine;
             // Deal Damage.
-            coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.CharacterCard), powerNumerals[2], DamageType.Melee, powerNumerals[1], false, 1);
-                        if (base.UseUnityCoroutines)
-            {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
-            }
+            coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.Card), powerNumerals[1], DamageType.Projectile, powerNumerals[0], false, powerNumerals[0], false, false, false, null, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            //coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.CharacterCard), powerNumerals[1], DamageType.Melee, powerNumerals[0], false, powerNumerals[1]);
 
             // Heal.
-            coroutine = base.GameController.GainHP(this.CharacterCard, powerNumerals[3]);
-            if (base.UseUnityCoroutines)
+            coroutine = base.GameController.GainHP(this.CharacterCard, powerNumerals[2]);
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
+
+            List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
+            // Discard card.
+            coroutine = base.GameController.SelectAndDiscardCard(base.HeroTurnTakerController, true, null, storedResults, SelectionType.DiscardCard);
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
+            if (base.DidDiscardCards(storedResults))
             {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
+                // If you do, draw a card.
+                coroutine = base.DrawCard(this.HeroTurnTaker, false, null, true);
+                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
             }
 
-            // Discard card.
-            coroutine = base.GameController.SelectAndDiscardCard(base.HeroTurnTakerController, true, null, null, SelectionType.DiscardCard);
-            if (base.UseUnityCoroutines)
-            {
-                yield return base.GameController.StartCoroutine(coroutine);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine);
-            }
 
         }
-	}
+    }
 }
