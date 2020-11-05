@@ -3,7 +3,7 @@ using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 
-namespace Workshopping.RuduenFanMods.BreachMage
+namespace Workshopping.BreachMage
 {
     public class BreachMageTurnTakerController : HeroTurnTakerController
     {

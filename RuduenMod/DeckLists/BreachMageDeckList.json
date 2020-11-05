@@ -15,12 +15,11 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "Destroy an Ongoing card."
+        "Activate a card's Cast, then destroy that card.",
+        "Destroy 2 of your Charge cards. If you do, any player draws 5 cards."
       ],
-      "icons": [
-        "HasPower"
-      ],
-      "hitpoints": 39,
+      "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
+      "hitpoints": 27,
       "nemesisIdentifiers": [
         "BreachMage"
       ],
@@ -36,26 +35,74 @@
       "complexity": 3
     },
     {
-      "identifier": "Spark",
-      "count": 4,
-      "title": "Spark",
-      "keywords": [
-        "ongoing"
+      "identifier": "OpenBreach",
+      "count": 2,
+      "title": "Open Breach",
+      "keywords": [ "Ongoing" ],
+      "body": [ "At the start of your turn, you may activate a card's Cast, then destroy that card.", "At the end of your turn, you may play 1 Spell card." ],
+      "icons": [ "StartAndEndOfTurnAction", "Destroy" ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "PotentBreach",
+      "count": 2,
+      "title": "Potent Breach",
+      "keywords": [ "Ongoing" ],
+      "body": [ "At the start of your turn, you may activate a card's Cast, then destroy that card. If that Cast deals damage, increase that damage by 1. " ],
+      "icons": [ "StartAndEndOfTurnAction", "Destroy" ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "ScryingBolt",
+      "count": 3,
+      "title": "Scrying Bolt",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals 1 Target 4 Lightning Damage. Reveal the top 2 cards of any deck. Put them back on top of the deck in any order."
+        }
       ],
-      "body": "At the start of your turn, you may return this card to your hand. If you do, {BreachMage} deals 1 Target 1 Fire Damage.",
-      "icons": [],
+      "icons": [ "DealDamageLightning", "Manipulate" ],
       "flavorText": "...."
     },
     {
-      "identifier": "Open Breach",
-      "count": 4,
-      "title": "Open Breach",
-      "keywords": [
-        "Ongoing"
+      "identifier": "Radiance",
+      "count": 3,
+      "title": "Radiance",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals 1 Target 4 Radiant Damage. Each player draws a card."
+        }
       ],
-      "body": "You may play an additional Spell card during your play phase.",
-      "icons": [],
-      "flavorText": "..."
+      "icons": [ "DealDamageRadiant", "DrawCardNow" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "SpectralEcho",
+      "count": 3,
+      "title": "Spectral Echo",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals 1 Target 3 Psychic Damage. You may destroy an Ongoing or Environment card."
+        }
+      ],
+      "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "MoltenHammer",
+      "count": 3,
+      "title": "Molten Hammer",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, you may destroy an Ongoing or Equipment card.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "DealDamageLightning", "DestroyOngoing", "DestroyEnvironment" ],
+      "flavorText": "...."
     }
   ]
 }

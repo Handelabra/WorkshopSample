@@ -38,7 +38,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BreachMage\BreachMageSpellSharedCardController.cs" />
+    <Compile Include="BreachMage\MoltenHammerCardController.cs" />
+    <Compile Include="BreachMage\OpenBreachCardController.cs" />
+    <Compile Include="BreachMage\SpectralEchoCardController.cs" />
     <Compile Include="BreachMage\ScryingBoltCardController.cs" />
+    <Compile Include="BreachMage\RadianceCardController.cs" />
     <Compile Include="Inquirer\TheRightQuestionsCardController.cs" />
     <Compile Include="Inquirer\IveFixedTheWoundCardController.cs" />
     <Compile Include="Inquirer\LookADistractionCardController.cs" />
@@ -57,9 +62,9 @@
     <Compile Include="Inquirer\TheLieTheyTellThemselvesCardController.cs" />
     <Compile Include="Inquirer\UndeniableFactsCardController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BreachMage\WorstCardEverCardController.cs" />
+    <Compile Include="BreachMage\PotentBreachCardController.cs" />
     <Compile Include="BreachMage\BreachMageCharacterCardController.cs" />
-    <Compile Include="BreachMage\BreachMageSpellSharedCardController.cs" />
+    <Compile Include="BreachMage\BreachMageEquipmentSharedCardController.cs" />
     <Compile Include="BreachMage\BreachMageTurnTakerController.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -125,7 +125,6 @@ namespace RuduenModTest
             QuickHPCheck(-1, 1);
             AssertNumberOfCardsInTrash(Inquirer, 1); // Discarded.
             QuickHandCheck(0); // Discard and draw for net 0 change.
-
         }
 
         [Test()]

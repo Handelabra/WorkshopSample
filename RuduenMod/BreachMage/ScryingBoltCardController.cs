@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Workshopping.RuduenFanMods.BreachMage
+namespace Workshopping.BreachMage
 {
     public class ScryingBoltCardController : BreachMageSpellSharedCardController
     {
@@ -18,14 +18,13 @@ namespace Workshopping.RuduenFanMods.BreachMage
         {
             IEnumerator coroutine;
             // Damage.
-            coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.Card), 4, DamageType.Lightning, 1, false, 1);
+            coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.CharacterCard), 4, DamageType.Lightning, new int?(1), false, new int?(1), false, false, false, null, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
             // Reveal the top 2 cards of 1 deck and rearranged. Based on Hyperactive Senses. 
             List<SelectLocationDecision> storedResults = new List<SelectLocationDecision>();
             coroutine = base.SelectDecks(this.DecisionMaker, 1, SelectionType.RevealCardsFromDeck, (Location l) => true, storedResults, false);
-            if (base.UseUnityCoroutines)
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
             // Fetch selected deck.
             Location deck = (from l in storedResults

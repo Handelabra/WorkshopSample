@@ -4,7 +4,7 @@ using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Workshopping.RuduenFanMods.BreachMage
+namespace Workshopping.BreachMage
 {
     public class BreachMageCharacterCardController : HeroCharacterCardController
     {
@@ -74,7 +74,10 @@ namespace Workshopping.RuduenFanMods.BreachMage
                 List<DestroyCardAction> storedResultsAction = new List<DestroyCardAction>();
                 // Charge ability attempt. 
                 // Destroy two of your charges. 
-                coroutine = base.GameController.SelectAndDestroyCards(base.HeroTurnTakerController, new LinqCardCriteria((Card c) => c.IsInPlay && c.DoKeywordsContain("charge"), "charge"), powerNumerals[0], false, null, null, storedResultsAction);
+                coroutine = base.GameController.SelectAndDestroyCards(base.HeroTurnTakerController,
+                    new LinqCardCriteria((Card c) => c.IsInPlay && c.Owner == base.HeroTurnTaker && c.DoKeywordsContain("charge"), "charge", true, false, null, null, false),
+                    powerNumerals[0], false, null, null, storedResultsAction, null, false, null, null, null, base.GetCardSource(null));
+                //coroutine = base.GameController.SelectAndDestroyCards(base.HeroTurnTakerController, new LinqCardCriteria((Card c) => c.IsInPlay && c.Owner == base.HeroTurnTaker && c.DoKeywordsContain("charge"), "charge"), powerNumerals[0], false, null, null, storedResultsAction);
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
                 if (base.GetNumberOfCardsDestroyed(storedResultsAction) == powerNumerals[0])
@@ -90,15 +93,16 @@ namespace Workshopping.RuduenFanMods.BreachMage
                 List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
                 // Use a Cast. 
-                coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults, false);
+                //coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults);
+                coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults, false, base.GetCardSource(null));
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
                 if (storedResults.Count > 0)
                 {
-                    // Destroy the Cast card.
-                    base.GameController.DestroyCard(base.HeroTurnTakerController, storedResults[0].SelectedCard);
+                    // Destroy the cast card.
+                    coroutine = base.GameController.DestroyCard(base.HeroTurnTakerController, storedResults[0].SelectedCard);
+                    if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
                 }
-
             }
         }
     }
