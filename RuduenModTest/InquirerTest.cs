@@ -7,11 +7,12 @@ using System.Linq;
 using System.Collections;
 using Handelabra.Sentinels.UnitTest;
 using Workshopping.Inquirer;
+using System.Collections.Generic;
 
 namespace RuduenModTest
 {
-    [TestFixture()]
-    public class Test : BaseTest
+    [TestFixture]
+    public class InquirerTest : BaseTest
     {
         protected HeroTurnTakerController Inquirer { get { return FindHero("Inquirer"); } }
 
@@ -52,19 +53,10 @@ namespace RuduenModTest
             Card distortion = PlayCard("YoureLookingPale");
             Card power = PlayCard("TheLieTheyTellThemselves");
 
-            //// TODO: CHECK HAND WHEN DISTORTION TEST WORKS!
-            //QuickHandStorage(Inquirer.ToHero());
-            //UsePower(power);
-            //QuickHandCheck(2);
-
-            //// TODO: Adjust logic to account for distortion destruction.
-
-            // Check enemy and destroy distortion for damage.
-            //var mdp = GetCardInPlay("MobileDefensePlatform");
-            //DecisionSelectTarget = mdp;
-            //QuickHPStorage(mdp);
-            //DestroyCard(distortion);
-            //QuickHPCheck(-1);
+            QuickHandStorage(Inquirer.ToHero());
+            UsePower(power);
+            QuickHandCheck(2);
+            AssertInTrash(distortion); // Distortion was destroyed. 
 
         }
 
@@ -79,7 +71,6 @@ namespace RuduenModTest
             Card distortion = PlayCard("YoureLookingPale");
             Card power = PlayCard("UndeniableFacts");
 
-            //// TODO: When distortions check functions, run it! 
         }
 
         [Test()]
@@ -113,6 +104,7 @@ namespace RuduenModTest
             QuickHPCheck(-2, 2); // Two total damage - 1 base, 1 buff. 2 Healing - 1 base, 1 buff.
         }
 
+
         [Test()]
         public void TestBackupPlan()
         {
@@ -137,7 +129,7 @@ namespace RuduenModTest
         }
 
         [Test()]
-        public void TestYoureLookingPale()
+        public void TestYoureLookingPaleInitial()
         {
             SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
             StartGame();
@@ -145,17 +137,141 @@ namespace RuduenModTest
             GoToPlayCardPhase(Inquirer);
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
-            DecisionSelectTarget = mdp;
+            DecisionNextToCard = mdp;
             QuickHPStorage(mdp);
 
-            // TODO: DetermineLocation works, but this seems to suppress the Play step in regression tests, so skip the distortions for now!
-            // Adding this.NextToCriteria in the constructor seems to cause the issue! 
-            //PlayCard("YoureLookingPale");
-            //PlayCard("LookADistraction");
+            PlayCard("YoureLookingPale");
+            QuickHPCheck(-5); // 5 damage
+        }
 
-            //GoToStartOfTurn(Inquirer);
-            //QuickHPCheck(-2); // 4 damage, healed 2.
 
+        [Test()]
+        public void TestYoureLookingPaleAfter()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionNextToCard = mdp;
+            QuickHPStorage(mdp);
+
+            PlayCard("YoureLookingPale");
+
+            GoToStartOfTurn(Inquirer);
+            QuickHPCheck(-3); // 5 damage, healed 2.
+        }
+
+        [Test()]
+        public void TestYoureOnOurSideInitial()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card bb = GetCardInPlay("BaronBladeCharacter");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionNextToCard = bb;
+            QuickHPStorage(mdp, Inquirer.CharacterCard);
+
+            PlayCard("YoureOnOurSide");
+            QuickHPCheck(-2, 0); // 2 damage to others. 
+
+        }
+
+
+        [Test()]
+        public void TestYoureOnOurSideAfter()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card bb = GetCardInPlay("BaronBladeCharacter");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionNextToCard = bb;
+            DecisionSelectTarget = mdp;
+            QuickHPStorage(mdp, Inquirer.CharacterCard);
+
+            PlayCard("YoureOnOurSide");
+
+            GoToStartOfTurn(Inquirer);
+            QuickHPCheck(-2, -1); // 2 damage to others, -1 to Inquirer
+        }
+
+
+        [Test()]
+        public void TestIveFixedTheWoundInitial()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            StartGame();
+
+            DealDamage(Inquirer, Inquirer, 10, DamageType.Melee);
+
+            GoToPlayCardPhase(Inquirer);
+
+            QuickHPStorage(Inquirer);
+            PlayCard("IveFixedTheWound");
+            QuickHPCheck(5); // 5 Healing
+        }
+
+
+        [Test()]
+        public void TestIveFixedTheWoundAfter()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            StartGame();
+
+            DealDamage(Inquirer, Inquirer, 10, DamageType.Melee);
+
+            GoToPlayCardPhase(Inquirer);
+
+            QuickHPStorage(Inquirer);
+            PlayCard("IveFixedTheWound");
+            GoToStartOfTurn(Inquirer);
+            QuickHPCheck(3); // 5 Healing, 2 Damage.
+        }
+
+        [Test()]
+        public void TestLookADistractionInitial()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card bb = GetCardInPlay("BaronBladeCharacter");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionNextToCard = bb;
+            QuickHPStorage(mdp, Inquirer.CharacterCard);
+
+            PlayCard("LookADistraction");
+            QuickHPCheck(-4, 0); // 4 damage to others. 
+
+        }
+
+
+        [Test()]
+        public void TestLookADistractionAfter()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card bb = GetCardInPlay("BaronBladeCharacter");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionNextToCard = bb;
+            DecisionSelectTarget = mdp;
+            QuickHPStorage(mdp, Inquirer.CharacterCard);
+
+            PlayCard("LookADistraction");
+
+            GoToStartOfTurn(Inquirer);
+            QuickHPCheck(-4, -1); // 4 damage to others, -1 to Inquirer
         }
 
         [Test()]
@@ -166,14 +282,30 @@ namespace RuduenModTest
 
             GoToPlayCardPhase(Inquirer);
 
+            Card form = GetCard("ImAMolePerson");
             Card safeCard = GetCardWithLittleEffect(Inquirer);
-            PutInHand(safeCard); // Add safe card for play. 
+
+            MoveCard(Inquirer, form, Inquirer.TurnTaker.Deck, true);
+            PutInHand(safeCard);
+
             QuickHandStorage(Inquirer);
-            DecisionSelectCardToPlay = safeCard;
+
+            List<Card> cards = new List<Card>();
+            cards.Add(form); // First search for Form.
+            cards.Add(safeCard); // Then play safe card.
+            DecisionSelectCards = ArrangeDecisionCards(cards);
 
             PlayCard("UntilYouMakeIt");
             QuickHandCheck(0); // Draw 1, Play 1, Net 0. 
-            AssertNumberOfCardsInPlay(Inquirer, 3); // Should now have character card, new form, and safe card in play.
+            AssertNumberOfCardsInPlay(Inquirer, 3); // Should now have character card, new form, and card in play, since safe cards are preferred.
+        }
+
+        private IEnumerable<Card> ArrangeDecisionCards(List<Card> cards)
+        {
+            foreach (Card card in cards)
+            {
+                yield return card;
+            }
         }
 
         [Test()]
@@ -197,42 +329,31 @@ namespace RuduenModTest
             QuickHandCheck(-1); // Fisticuffs source is ambiguous, so don't check hand - just a net of -1. 
 
         }
+        [Test()]
+        public void TestTheRightQuestions()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            StartGame();
 
+            Card ongoing = PlayCard("LivingForceField");
+            Card distortion = GetCard("YoureLookingPale");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
 
-        //[Test()]
-        //public void TestPunchingBag()
-        //{
-        //    SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            Inquirer.PutInHand(distortion);
 
-        //    StartGame();
+            GoToPlayCardPhase(Inquirer);
 
-        //    GoToUsePowerPhase(inquirer);
+            DecisionDestroyCard = ongoing;
+            DecisionSelectCardToPlay = distortion;
+            DecisionNextToCard = mdp;
 
-        //    // Punching Bag does 1 damage!
-        //    QuickHPStorage(inquirer);
-        //    PlayCard("PunchingBag");
-        //    QuickHPCheck(-1);
-        //}
+            QuickHPStorage(mdp);
 
-        //[Test()]
-        //public void TestInnatePower()
-        //{
-        //    SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            PlayCard("TheRightQuestions");
 
-        //    StartGame();
-
-        //    var mdp = GetCardInPlay("MobileDefensePlatform");
-
-        //    // Base power draws 3 cards! Deals 1 target 2 damage!
-        //    QuickHandStorage(inquirer.ToHero());
-        //    DecisionSelectTarget = mdp;
-        //    QuickHPStorage(mdp);
-
-        //    UsePower(inquirer.CharacterCard);
-
-        //    QuickHandCheck(3);
-        //    QuickHPCheck(-2);
-
-        //}
+            AssertInTrash(ongoing); // Destroyed Ongoing. 
+            AssertInHand(distortion);  // Played and returned distortion.
+            QuickHPCheck(-5); // All damage dealt, no destroy trigger hit.
+        }
     }
 }

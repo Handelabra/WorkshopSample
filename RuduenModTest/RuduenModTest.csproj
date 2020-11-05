@@ -39,6 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BreachMageTest.cs" />
     <Compile Include="InquirerTest.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="Setup.cs" />

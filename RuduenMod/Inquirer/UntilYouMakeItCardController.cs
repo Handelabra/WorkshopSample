@@ -25,8 +25,7 @@ namespace Workshopping.Inquirer
             // Search for form.
             coroutine = base.GameController.SelectCardFromLocationAndMoveIt(base.HeroTurnTakerController, base.TurnTaker.Deck, new LinqCardCriteria((Card c) => c.IsForm, () => "form", true, false, null, null, false), new MoveCardDestination[]
 			{
-				new MoveCardDestination(base.TurnTaker.PlayArea, false, false, false),
-				new MoveCardDestination(base.HeroTurnTaker.Hand, false, false, false)
+				new MoveCardDestination(base.TurnTaker.PlayArea, false, false, false)
 			}, true, true, true, false, null, false, false, null, false, false, null, null, base.GetCardSource(null));
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 

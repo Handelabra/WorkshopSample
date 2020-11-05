@@ -12,7 +12,7 @@ namespace Workshopping.Inquirer
         public YoureOnOurSideCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
-            this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && !card.IsHero, "non-hero targets", false, false, null, null, false);
+            this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && !c.IsHero, "non-hero targets", false, false, null, null, false);
         }
 
         public override IEnumerator Play()
@@ -20,9 +20,11 @@ namespace Workshopping.Inquirer
             Card nextTo = base.GetCardThisCardIsNextTo(true);
             if (nextTo != null)
             {
-                // Damage another target. 
-                IEnumerator coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, nextTo), 3, DamageType.Psychic, new int?(1), false, new int?(1), true, false, false, (Card c) => !c.IsHero && c != nextTo);
+
+                // Damage other targets.
+                IEnumerator coroutine = base.DealDamage(nextTo, (Card c) => !c.IsHero && c != nextTo, 2, DamageType.Melee);
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
             }
         }
 

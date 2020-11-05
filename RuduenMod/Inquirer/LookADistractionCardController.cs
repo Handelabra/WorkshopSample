@@ -11,7 +11,7 @@ namespace Workshopping.Inquirer
         public LookADistractionCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
-            this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && !card.IsHero, "non-hero targets", false, false, null, null, false);
+            this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && !c.IsHero, "non-hero targets", false, false, null, null, false);
         }
 
         public override IEnumerator Play()
@@ -19,8 +19,8 @@ namespace Workshopping.Inquirer
             Card nextTo = base.GetCardThisCardIsNextTo(true);
             if (nextTo != null)
             {
-                // Damage other targets.
-                IEnumerator coroutine = base.DealDamage(nextTo, (Card c) => !c.IsHero && c != nextTo, 2, DamageType.Melee);
+                // Damage another target. 
+                IEnumerator coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, nextTo), 4, DamageType.Melee, 1, false, 1, false, false, false, (Card c) => !c.IsHero && c != nextTo, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }
         }

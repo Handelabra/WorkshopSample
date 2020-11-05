@@ -2,6 +2,7 @@
 using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Workshopping.RuduenFanMods.BreachMage
 {
@@ -62,33 +63,42 @@ namespace Workshopping.RuduenFanMods.BreachMage
 
         public override IEnumerator UsePower(int index = 0)
         {
-            IEnumerator e;
-            //// Draw 3 cards!
-            //IEnumerator e = DrawCards(this.HeroTurnTakerController, 3);
-
-            //if (UseUnityCoroutines)
-            //{
-            //    yield return this.GameController.StartCoroutine(e);
-            //}
-            //else
-            //{
-            //    this.GameController.ExhaustCoroutine(e);
-            //}
-
-
-            //StatusEffect test = new StatusEffect()
-            //e = this.GameController.SelectAndDestroyCard(this.DecisionMaker, new CardCriteria())
-
-            // Deal 1 target 2 psychic damage
-            e = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 2, DamageType.Fire, 1, false, 1, cardSource:GetCardSource());
-
-            if (UseUnityCoroutines)
+            // Break down into two powers. 
+            IEnumerator coroutine;
+            if (index == 1)
             {
-                yield return this.GameController.StartCoroutine(e);
+                List<int> powerNumerals = new List<int>();
+                powerNumerals.Add(base.GetPowerNumeral(0, 2));
+                powerNumerals.Add(base.GetPowerNumeral(1, 5));
+
+                List<DestroyCardAction> storedResultsAction = new List<DestroyCardAction>();
+                // Charge ability attempt. 
+                // Destroy two of your charges. 
+                coroutine = base.GameController.SelectAndDestroyCards(base.HeroTurnTakerController, new LinqCardCriteria((Card c) => c.IsInPlay && c.DoKeywordsContain("charge"), "charge"), powerNumerals[0], false, null, null, storedResultsAction);
+                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
+                if (base.GetNumberOfCardsDestroyed(storedResultsAction) == powerNumerals[0])
+                {
+                    // If two were destroyed, someone draws 5. 
+                    coroutine = base.GameController.SelectHeroToDrawCards(base.HeroTurnTakerController, powerNumerals[1], false, false, null, false, null, new LinqTurnTakerCriteria((TurnTaker tt) => tt.IsHero && !tt.ToHero().IsIncapacitatedOrOutOfGame, "active heroes"), null, null, base.GetCardSource(null));
+                    if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                }
             }
             else
             {
-                this.GameController.ExhaustCoroutine(e);
+                // Stanard power. 
+                List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
+
+                // Use a Cast. 
+                coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults, false);
+                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+
+                if (storedResults.Count > 0)
+                {
+                    // Destroy the Cast card.
+                    base.GameController.DestroyCard(base.HeroTurnTakerController, storedResults[0].SelectedCard);
+                }
+
             }
         }
     }

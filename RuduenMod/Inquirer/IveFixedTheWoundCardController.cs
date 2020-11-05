@@ -12,7 +12,7 @@ namespace Workshopping.Inquirer
         public IveFixedTheWoundCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
-            this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && card.IsHero, "hero targets", false, false, null, null, false);
+            this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && c.IsHero, "hero targets", false, false, null, null, false);
         }
 
         public override IEnumerator Play()
@@ -32,7 +32,7 @@ namespace Workshopping.Inquirer
             Card nextTo = base.GetCardThisCardIsNextTo(true);
             if (nextTo != null && nextTo.IsInPlayAndHasGameText)
             {
-                IEnumerator coroutine = base.DealDamage(nextTo, nextTo, 2, DamageType.Psychic, true, false, false, null, null, null, false, null);
+                IEnumerator coroutine = base.DealDamage(nextTo, nextTo, 2, DamageType.Psychic, false, false, false, null, null, null, false, null);
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }
         }
