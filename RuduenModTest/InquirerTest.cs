@@ -344,6 +344,8 @@ namespace RuduenModTest
 
             DecisionDestroyCard = ongoing;
             DecisionSelectCardToPlay = distortion;
+            DecisionSelectCardsIndex = 4; // Most other decisions are set, but the fourth for the return must be the played distortion. 
+            DecisionSelectCard = distortion;
             DecisionNextToCard = mdp;
 
             QuickHPStorage(mdp);

@@ -39,11 +39,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreachMage\BreachMageSpellSharedCardController.cs" />
-    <Compile Include="BreachMage\MoltenHammerCardController.cs" />
+    <Compile Include="BreachMage\HammerCharmCardController.cs" />
     <Compile Include="BreachMage\OpenBreachCardController.cs" />
-    <Compile Include="BreachMage\SpectralEchoCardController.cs" />
+    <Compile Include="BreachMage\FlareCascadeCardController.cs" />
+    <Compile Include="BreachMage\MoltenWaveCardController.cs" />
+    <Compile Include="BreachMage\HauntingEchoCardController.cs" />
     <Compile Include="BreachMage\ScryingBoltCardController.cs" />
-    <Compile Include="BreachMage\RadianceCardController.cs" />
+    <Compile Include="BreachMage\ShineCardController.cs" />
     <Compile Include="Inquirer\TheRightQuestionsCardController.cs" />
     <Compile Include="Inquirer\IveFixedTheWoundCardController.cs" />
     <Compile Include="Inquirer\LookADistractionCardController.cs" />

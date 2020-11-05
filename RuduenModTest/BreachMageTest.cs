@@ -55,8 +55,8 @@ namespace RuduenModTest
             StartGame();
 
             List<Card> charges = new List<Card>();
-            charges.Add(PlayCard("MoltenHammer", 0));
-            charges.Add(PlayCard("MoltenHammer", 1));
+            charges.Add(PlayCard("HammerCharm", 0));
+            charges.Add(PlayCard("HammerCharm", 1));
 
             QuickHandStorage(BreachMage);
             UsePower(BreachMage.CharacterCard, 1); // Default Innate. Cast. 
@@ -123,13 +123,13 @@ namespace RuduenModTest
         }
 
         [Test()]
-        public void TestRadiance()
+        public void TestShine()
         {
             SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
 
             StartGame();
 
-            Card spell = PlayCard("Radiance");
+            Card spell = PlayCard("Shine");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
 
@@ -139,18 +139,16 @@ namespace RuduenModTest
             QuickHPCheck(-4); // Damage Dealt.
             AssertInTrash(spell); // Spell destroyed. 
             QuickHandCheck(1); // Card drawn.
-
-            // TODO: Add scrying test at some point! (Right now, more complex than it's worth.) 
         }
 
         [Test()]
-        public void TestSpectralEcho()
+        public void TestHauntingEcho()
         {
             SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
 
             StartGame();
 
-            Card spell = PlayCard("SpectralEcho");
+            Card spell = PlayCard("HauntingEcho");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             Card ongoing = PlayCard("LivingForceField");
             DecisionSelectTarget = mdp;
@@ -160,8 +158,68 @@ namespace RuduenModTest
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
             QuickHPCheck(-3); // Damage Dealt.
             AssertInTrash(ongoing, spell); // Ongoing & Spell destroyed. 
+        }
 
-            // TODO: Add scrying test at some point! (Right now, more complex than it's worth.) 
+        [Test()]
+        public void TestFlareCascade()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            Card spell = PlayCard("FlareCascade");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            QuickHPCheck(-3); // Damage Dealt.
+            AssertInTrash(spell); // Spell destroyed. 
+        }
+
+        [Test()]
+        public void TestFlareCascadeCharged()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            List<Card> charges = new List<Card>();
+            charges.Add(PlayCard("HammerCharm", 0));
+            charges.Add(PlayCard("HammerCharm", 1));
+
+            Card spell = PlayCard("FlareCascade");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionSelectTarget = mdp;
+            DecisionDestroyCards = charges.ToArray();
+            DecisionYesNo = true;
+
+            QuickHPStorage(mdp);
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            QuickHPCheck(-9); // Damage Dealt.
+            AssertInTrash(spell); // Spell destroyed. 
+            AssertInTrash(charges); // Charges used.
+        }
+
+
+        [Test()]
+        public void TestMoltenWave()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            Card spell = PlayCard("MoltenWave");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            Card bb = GetCardInPlay("BaronBladeCharacter");
+            DecisionSelectTarget = mdp;
+
+            DealDamage(mdp, mdp, 7, DamageType.Fire); // Set up MDP to be destroyed so AoE also hits BB.
+
+            QuickHPStorage(bb);
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            QuickHPCheck(-3); // Damage Dealt.
+            AssertInTrash(spell,mdp); // Spell destroyed, MDP destroyed via damage.
         }
     }
 }

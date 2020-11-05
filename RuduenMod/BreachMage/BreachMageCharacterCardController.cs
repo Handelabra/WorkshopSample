@@ -77,7 +77,6 @@ namespace Workshopping.BreachMage
                 coroutine = base.GameController.SelectAndDestroyCards(base.HeroTurnTakerController,
                     new LinqCardCriteria((Card c) => c.IsInPlay && c.Owner == base.HeroTurnTaker && c.DoKeywordsContain("charge"), "charge", true, false, null, null, false),
                     powerNumerals[0], false, null, null, storedResultsAction, null, false, null, null, null, base.GetCardSource(null));
-                //coroutine = base.GameController.SelectAndDestroyCards(base.HeroTurnTakerController, new LinqCardCriteria((Card c) => c.IsInPlay && c.Owner == base.HeroTurnTaker && c.DoKeywordsContain("charge"), "charge"), powerNumerals[0], false, null, null, storedResultsAction);
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
                 if (base.GetNumberOfCardsDestroyed(storedResultsAction) == powerNumerals[0])

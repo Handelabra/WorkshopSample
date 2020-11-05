@@ -11,7 +11,7 @@ namespace Workshopping.Inquirer
         public LookADistractionCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
-            this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && !c.IsHero, "non-hero targets", false, false, null, null, false);
+            this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget && !c.IsHero, "non-hero target", false, false, null, null, false);
         }
 
         public override IEnumerator Play()

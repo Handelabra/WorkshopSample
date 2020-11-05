@@ -8,8 +8,8 @@
     {
       "identifier": "BreachMageCharacter",
       "count": 1,
-      "title": "Mist",
-      "body": "Dagger Captain",
+      "title": "M.",
+      "body": "Blazewatcher",
       "backgroundColor": "fbf8f9",
       "foilBackgroundColor": "FEFEFE",
       "hitpointsColor": "C94742",
@@ -67,9 +67,9 @@
       "flavorText": "...."
     },
     {
-      "identifier": "Radiance",
+      "identifier": "Shine",
       "count": 3,
-      "title": "Radiance",
+      "title": "Shine",
       "keywords": [ "ongoing", "spell" ],
       "activatableAbilities": [
         {
@@ -81,7 +81,7 @@
       "flavorText": "...."
     },
     {
-      "identifier": "SpectralEcho",
+      "identifier": "HauntingEcho",
       "count": 3,
       "title": "Spectral Echo",
       "keywords": [ "ongoing", "spell" ],
@@ -95,9 +95,37 @@
       "flavorText": "...."
     },
     {
-      "identifier": "MoltenHammer",
+      "identifier": "FlareCascade",
       "count": 3,
-      "title": "Molten Hammer",
+      "title": "Flare Cascade",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals 1 Target 3 Fire Damage. You may destroy up to 3 of your Charge cards. For each card destroyed this way, Breach Mage deals 1 Target 3 Fire Damage."
+        }
+      ],
+      "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "MoltenWave",
+      "count": 3,
+      "title": "Monst",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals each non-Hero Target 3 Fire Damage."
+        }
+      ],
+      "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "HammerCharm",
+      "count": 3,
+      "title": "Hammer Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, you may destroy an Ongoing or Equipment card.",
       "powers": "Return this card to your hand.",
