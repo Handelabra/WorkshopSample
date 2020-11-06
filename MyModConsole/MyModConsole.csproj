@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -26,13 +29,13 @@
     <ExternalConsole>true</ExternalConsole>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
     <Reference Include="EngineCommon">
-      <HintPath>..\..\..\Library\Application Support\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels.app\Contents\Resources\Data\Managed\EngineCommon.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed\EngineCommon.dll</HintPath>
     </Reference>
     <Reference Include="SentinelsEngine">
-      <HintPath>..\..\..\Library\Application Support\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels.app\Contents\Resources\Data\Managed\SentinelsEngine.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed\SentinelsEngine.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="Troschuetz.Random">
       <HintPath>..\packages\Troschuetz.Random.5.0.1\lib\net472\Troschuetz.Random.dll</HintPath>
     </Reference>
