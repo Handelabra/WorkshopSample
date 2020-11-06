@@ -14,7 +14,7 @@
       "foilBackgroundColor": "FEFEFE",
       "hitpointsColor": "C94742",
       "character": true,
-      "powers": "Reveal the top 4 cards of the River deck. You may discard up to 4 cards. You may move a revealed card with a cost of your discarded cards' sum {spell} or less to your discard. Place any other revealed cards on top of your River deck in the same order. Draw until you have 3 cards.",
+      "powers": "Reveal the top 4 cards of the River deck. You may discard up to 4 cards. You may move a revealed card with a cost of your discarded cards' total {spell} or less to your discard. Place any other revealed cards on the bottom of your River deck in the same order. Draw until you have 3 cards.",
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
       "hitpoints": 27,
       "nemesisIdentifiers": [
@@ -34,7 +34,7 @@
     {
       "identifier": "Droplet",
       "count": 4,
-      "title": "Droplet",
+      "title": "Droplet (0)",
       "keywords": [ "one-shot" ],
       "body": [ "Deal 1 target 1 Cold Damage." ],
       "icons": [ "DealDamageCold" ],
@@ -44,7 +44,7 @@
     {
       "identifier": "Floodbank",
       "count": 1,
-      "title": "Floodbank",
+      "title": "Floodbank (0)",
       "keywords": [ "one-shot" ],
       "body": [ "Deal 1 target 2 Cold Damage. One target regains 2 HP." ],
       "icons": [ "DealDamageCold" ],
@@ -52,12 +52,31 @@
       "flavorText": "..."
     },
     {
+      "identifier": "CondensedOrb",
+      "count": 3,
+      "title": "CondensedOrb",
+      "keywords": [ "river", "one-shot" ],
+      "body": [ "{Cascade} gains 4 HP." ],
+      "magicNumbers": [ 3, 3, 3 ],
+      "icons": [ "DealDamageCold" ]
+    },
+    {
       "identifier": "StormSwell",
       "count": 3,
-      "title": "Storm Swell",
+      "title": "Storm Swell (4)",
       "keywords": [ "river", "one-shot" ],
-      "body": [ "Gain Cost: 4 {magic}.", "Deal 2 Targets 4 Cold Damage." ],
-      "icons": [ "DealDamageCold" ]
+      "body": [ "Deal 2 Targets 4 Cold Damage." ],
+      "icons": [ "DealDamageCold" ],
+      "magicNumbers": [ 2, 2, 2 ]
+    },
+    {
+      "identifier": "TheConstantFlow",
+      "count": 3,
+      "title": "Storm Swell (3)",
+      "keywords": [ "river", "one-shot" ],
+      "body": [ "You may play 2 cards." ],
+      "icons": [ "DealDamageCold" ],
+      "magicNumbers": [ 1, 1, 1 ]
     }
   ],
   "subdecks": [
@@ -67,6 +86,36 @@
       "kind": "Other",
       "reshufflesWhenEmpty": false,
       "cards": []
+    }
+  ],
+  "promoCards": [
+    {
+      "identifier": "CascadeCharacter",
+      "promoIdentifier":  "CascadeCostCharacter",
+      "count": 1,
+      "title": "Cascade",
+      "body": "Cost of Control",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": "Reveal the top 4 cards of the River deck. You may move a revealed card to your discard. {Cascade} deals themselves Psychic Damage equal to the Gain Cost. Place any other revealed cards on the bottom of your River deck in the same order. Discard your hand. Draw until you have 3 cards.",
+      "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Destroy an Ongoing card.",
+        "One Hero uses a power.",
+        "One Hero deals 1 target 2 Fire Damage."
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "Perhaps I can manage with a little more control.",
+        "OblivAeonFrontPageCharacter": "Here's hoping I can last enough to make things happen..."
+      },
+      "complexity": 1
     }
   ]
 }
