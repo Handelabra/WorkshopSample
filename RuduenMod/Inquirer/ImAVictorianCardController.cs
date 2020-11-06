@@ -1,6 +1,6 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,8 +21,9 @@ namespace Workshopping.Inquirer
             base.AddTrigger<DiscardCardAction>((DiscardCardAction d) => d.WasCardDiscarded && d.Origin.IsHand && d.Origin.OwnerTurnTaker == base.TurnTaker, new Func<DiscardCardAction, IEnumerator>(this.DiscardResponse), TriggerType.DiscardCard, TriggerTiming.After, ActionDescription.Unspecified);
 
             // Add trigger for healing.
-            base.AddEndOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, (PhaseChangeAction p) => base.GameController.GainHP(this.CharacterCard, 1),TriggerType.GainHP);
+            base.AddEndOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, (PhaseChangeAction p) => base.GameController.GainHP(this.CharacterCard, 1), TriggerType.GainHP);
         }
+
         private IEnumerator DiscardResponse(DiscardCardAction discardCard)
         {
             List<MoveCardAction> storedResults = new List<MoveCardAction>();

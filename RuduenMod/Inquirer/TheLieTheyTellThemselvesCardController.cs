@@ -40,8 +40,8 @@ namespace Workshopping.Inquirer
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
             // Destroy a distortion.
-            coroutine = base.GameController.SelectAndDestroyCard(this.DecisionMaker, 
-                new LinqCardCriteria((Card c) => c.IsInPlay && c.IsDistortion, "distortion"), 
+            coroutine = base.GameController.SelectAndDestroyCard(this.DecisionMaker,
+                new LinqCardCriteria((Card c) => c.IsInPlay && c.IsDistortion, "distortion"),
                 true);
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
         }

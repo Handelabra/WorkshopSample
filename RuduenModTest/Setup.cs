@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Handelabra.Sentinels.Engine.Model;
 using NUnit.Framework;
 using System.Reflection;
-using Handelabra.Sentinels.Engine.Model;
 using Workshopping.Inquirer;
-using Workshopping;
 
 namespace RuduenModTest
 {

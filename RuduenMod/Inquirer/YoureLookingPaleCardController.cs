@@ -26,7 +26,7 @@ namespace Workshopping.Inquirer
 
         protected override IEnumerator OnDestroyResponse(DestroyCardAction dc)
         {
-            // Heal. 
+            // Heal.
             Card nextTo = base.GetCardThisCardIsNextTo(true);
             if (nextTo != null && nextTo.IsInPlayAndHasGameText)
             {

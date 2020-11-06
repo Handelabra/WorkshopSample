@@ -1,5 +1,4 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,7 +63,7 @@ namespace Workshopping.BreachMage
 
         public override IEnumerator UsePower(int index = 0)
         {
-            // Break down into two powers. 
+            // Break down into two powers.
             IEnumerator coroutine;
             if (index == 1)
             {
@@ -73,8 +72,8 @@ namespace Workshopping.BreachMage
                 powerNumerals.Add(base.GetPowerNumeral(1, 5));
 
                 List<DestroyCardAction> storedResultsAction = new List<DestroyCardAction>();
-                // Charge ability attempt. 
-                // Destroy two of your charges. 
+                // Charge ability attempt.
+                // Destroy two of your charges.
                 coroutine = base.GameController.SelectAndDestroyCards(base.HeroTurnTakerController,
                     new LinqCardCriteria((Card c) => c.IsInPlay && c.Owner == base.HeroTurnTaker && c.DoKeywordsContain("charge"), "charge", true, false, null, null, false),
                     powerNumerals[0], false, null, null, storedResultsAction, null, false, null, null, null, base.GetCardSource(null));
@@ -82,17 +81,17 @@ namespace Workshopping.BreachMage
 
                 if (base.GetNumberOfCardsDestroyed(storedResultsAction) == powerNumerals[0])
                 {
-                    // If two were destroyed, someone draws 5. 
+                    // If two were destroyed, someone draws 5.
                     coroutine = base.GameController.SelectHeroToDrawCards(base.HeroTurnTakerController, powerNumerals[1], false, false, null, false, null, new LinqTurnTakerCriteria((TurnTaker tt) => tt.IsHero && !tt.ToHero().IsIncapacitatedOrOutOfGame, "active heroes"), null, null, base.GetCardSource(null));
                     if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
                 }
             }
             else
             {
-                // Stanard power. 
+                // Stanard power.
                 List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
-                // Use a Cast. 
+                // Use a Cast.
                 //coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults);
                 coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults, false, base.GetCardSource(null));
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }

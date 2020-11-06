@@ -1,5 +1,4 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Workshopping.BreachMage
             coroutine = this.DrawCards(this.HeroTurnTakerController, 2);
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
-            // Use a Cast. 
+            // Use a Cast.
             coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults, false, base.GetCardSource(null));
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 

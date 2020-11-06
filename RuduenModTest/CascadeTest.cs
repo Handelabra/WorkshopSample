@@ -1,13 +1,7 @@
-﻿using NUnit.Framework;
-using System;
-using Workshopping;
-using Handelabra.Sentinels.Engine.Model;
-using Handelabra.Sentinels.Engine.Controller;
-using System.Linq;
-using System.Collections;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.UnitTest;
-using System.Collections.Generic;
-using Workshopping.BreachMage;
+using NUnit.Framework;
+using System.Linq;
 using Workshopping.Cascade;
 
 namespace RuduenModTest
@@ -38,8 +32,8 @@ namespace RuduenModTest
 
             StartGame();
 
-            AssertNumberOfCardsInDeck(Cascade, 1); // Should start with 1 card in deck. 
-            AssertNumberOfCardsInHand(Cascade, 4); // And four cards in hand. 
+            AssertNumberOfCardsInDeck(Cascade, 1); // Should start with 1 card in deck.
+            AssertNumberOfCardsInHand(Cascade, 4); // And four cards in hand.
         }
 
         [Test()]
@@ -49,15 +43,14 @@ namespace RuduenModTest
 
             StartGame();
 
-            AssertNumberOfCardsInDeck(Cascade, 1); // Should start with 1 card in deck. 
+            AssertNumberOfCardsInDeck(Cascade, 1); // Should start with 1 card in deck.
 
-            UsePower(Cascade.CharacterCard, 0); // Default Innate. Cast. 
+            UsePower(Cascade.CharacterCard, 0); // Default Innate. Cast.
 
             AssertNumberOfCardsInTrash(Cascade, 1);
             DrawCard(Cascade, 40); // Attempt to draw all cards.
-            DiscardAllCards(Cascade); // Discard all cards. 
-            AssertNumberOfCardsInTrash(Cascade, 6); // Confirm new card is also in trash. 
+            DiscardAllCards(Cascade); // Discard all cards.
+            AssertNumberOfCardsInTrash(Cascade, 6); // Confirm new card is also in trash.
         }
-
     }
 }

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Handelabra.Sentinels.Engine.Controller;
+using Handelabra.Sentinels.Engine.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Handelabra.Sentinels.Engine.Controller;
-using Handelabra.Sentinels.Engine.Model;
 
 namespace Workshopping.Inquirer
 {
@@ -11,6 +10,7 @@ namespace Workshopping.Inquirer
     public class InquirerDistortionSharedCardController : CardController
     {
         protected LinqCardCriteria NextToCriteria { get; set; }
+
         public InquirerDistortionSharedCardController(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
         {
             this.NextToCriteria = new LinqCardCriteria((Card c) => c.IsTarget, "targets", false, false, null, null, false);
@@ -18,7 +18,7 @@ namespace Workshopping.Inquirer
 
         public override void AddTriggers()
         {
-            // Selfdestruct at start of turn. 
+            // Selfdestruct at start of turn.
             base.AddStartOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, new Func<PhaseChangeAction, IEnumerator>(base.DestroyThisCardResponse), TriggerType.DestroySelf, null, false);
 
             // For "next to" cards - adjust location.
@@ -35,12 +35,10 @@ namespace Workshopping.Inquirer
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
         }
 
-
         // Override on individual instances.
         protected virtual IEnumerator OnDestroyResponse(DestroyCardAction dc)
         {
             yield break;
         }
-
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Workshopping.BreachMage
 {
@@ -36,7 +34,7 @@ namespace Workshopping.BreachMage
                 coroutine = base.GameController.SendMessageAction(base.Card.Title + " has no deck or trash to search.", Priority.Medium, base.GetCardSource(null), null, true);
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }
-            // Play a card. 
+            // Play a card.
             coroutine = base.SelectAndPlayCardFromHand(base.HeroTurnTakerController, true, null, null, false, false, true, null);
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
         }

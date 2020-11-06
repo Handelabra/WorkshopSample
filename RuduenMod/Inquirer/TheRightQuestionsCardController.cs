@@ -1,5 +1,4 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,7 +32,6 @@ namespace Workshopping.Inquirer
             // Bounce one of your distortions.
             coroutine = base.GameController.SelectAndMoveCard(base.HeroTurnTakerController, (Card c) => c.IsDistortion && c.Owner == base.HeroTurnTaker, this.HeroTurnTaker.Hand);
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
-
         }
     }
 }

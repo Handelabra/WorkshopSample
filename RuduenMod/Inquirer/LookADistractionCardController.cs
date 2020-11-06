@@ -2,7 +2,6 @@
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 
-
 namespace Workshopping.Inquirer
 {
     // TODO: TEST!
@@ -19,7 +18,7 @@ namespace Workshopping.Inquirer
             Card nextTo = base.GetCardThisCardIsNextTo(true);
             if (nextTo != null)
             {
-                // Damage another target. 
+                // Damage another target.
                 IEnumerator coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, nextTo), 4, DamageType.Melee, 1, false, 1, false, false, false, (Card c) => !c.IsHero && c != nextTo, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }

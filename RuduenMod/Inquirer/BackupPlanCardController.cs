@@ -1,5 +1,4 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +29,6 @@ namespace Workshopping.Inquirer
             coroutine = base.GameController.GainHP(this.CharacterCard, powerNumerals[2]);
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
-
             List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
             // Discard card.
             coroutine = base.GameController.SelectAndDiscardCard(base.HeroTurnTakerController, true, null, storedResults, SelectionType.DiscardCard);
@@ -41,10 +39,7 @@ namespace Workshopping.Inquirer
                 // If you do, draw a card.
                 coroutine = base.DrawCard(this.HeroTurnTaker, false, null, true);
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
-
             }
-
-
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
-using System.Collections;
 
 namespace Workshopping.Inquirer
 {
@@ -18,10 +16,10 @@ namespace Workshopping.Inquirer
             // Add trigger for increasing healing.
             base.AddTrigger<GainHPAction>((GainHPAction g) => g.HpGainer == base.CharacterCard,
                 (GainHPAction g) => base.GameController.IncreaseHPGain(g, 1, base.GetCardSource(null)),
-                new TriggerType[] { TriggerType.IncreaseHPGain, TriggerType.ModifyHPGain }, 
+                new TriggerType[] { TriggerType.IncreaseHPGain, TriggerType.ModifyHPGain },
                 TriggerTiming.Before, null, false, true, null, false, null, null, false, false);
 
-            // Add trigger for end of turn damage. 
+            // Add trigger for end of turn damage.
             base.AddDealDamageAtEndOfTurnTrigger(base.TurnTaker, base.CharacterCard, (Card c) => true, TargetType.SelectTarget, 1, DamageType.Melee);
         }
     }

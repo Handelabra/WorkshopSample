@@ -1,6 +1,6 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -27,6 +27,7 @@ namespace Workshopping.Inquirer
                 TriggerType.UsePower
             }, null, false);
         }
+
         private IEnumerator DiscardToUsePowerResponse(PhaseChangeAction p)
         {
             List<DiscardCardAction> storedResults = new List<DiscardCardAction>();

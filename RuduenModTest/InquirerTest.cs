@@ -1,13 +1,10 @@
-﻿using NUnit.Framework;
-using System;
-using Workshopping;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
-using Handelabra.Sentinels.Engine.Controller;
-using System.Linq;
-using System.Collections;
 using Handelabra.Sentinels.UnitTest;
-using Workshopping.Inquirer;
+using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
+using Workshopping.Inquirer;
 
 namespace RuduenModTest
 {
@@ -56,8 +53,7 @@ namespace RuduenModTest
             QuickHandStorage(Inquirer.ToHero());
             UsePower(power);
             QuickHandCheck(2);
-            AssertInTrash(distortion); // Distortion was destroyed. 
-
+            AssertInTrash(distortion); // Distortion was destroyed.
         }
 
         [Test()]
@@ -70,7 +66,6 @@ namespace RuduenModTest
             // Put out example cards.
             Card distortion = PlayCard("YoureLookingPale");
             Card power = PlayCard("UndeniableFacts");
-
         }
 
         [Test()]
@@ -103,7 +98,6 @@ namespace RuduenModTest
 
             QuickHPCheck(-2, 2); // Two total damage - 1 base, 1 buff. 2 Healing - 1 base, 1 buff.
         }
-
 
         [Test()]
         public void TestBackupPlan()
@@ -143,7 +137,6 @@ namespace RuduenModTest
             QuickHPCheck(-5); // 5 damage
         }
 
-
         [Test()]
         public void TestYoureLookingPaleAfter()
         {
@@ -176,10 +169,8 @@ namespace RuduenModTest
             QuickHPStorage(mdp, Inquirer.CharacterCard);
 
             PlayCard("YoureOnOurSide");
-            QuickHPCheck(-2, 0); // 2 damage to others. 
-
+            QuickHPCheck(-2, 0); // 2 damage to others.
         }
-
 
         [Test()]
         public void TestYoureOnOurSideAfter()
@@ -201,7 +192,6 @@ namespace RuduenModTest
             QuickHPCheck(-2, -1); // 2 damage to others, -1 to Inquirer
         }
 
-
         [Test()]
         public void TestIveFixedTheWoundInitial()
         {
@@ -216,7 +206,6 @@ namespace RuduenModTest
             PlayCard("IveFixedTheWound");
             QuickHPCheck(5); // 5 Healing
         }
-
 
         [Test()]
         public void TestIveFixedTheWoundAfter()
@@ -248,10 +237,8 @@ namespace RuduenModTest
             QuickHPStorage(mdp, Inquirer.CharacterCard);
 
             PlayCard("LookADistraction");
-            QuickHPCheck(-4, 0); // 4 damage to others. 
-
+            QuickHPCheck(-4, 0); // 4 damage to others.
         }
-
 
         [Test()]
         public void TestLookADistractionAfter()
@@ -295,7 +282,7 @@ namespace RuduenModTest
             DecisionSelectCards = ArrangeDecisionCards(cards);
 
             PlayCard("UntilYouMakeIt");
-            QuickHandCheck(0); // Draw 1, Play 1, Net 0. 
+            QuickHandCheck(0); // Draw 1, Play 1, Net 0.
             AssertNumberOfCardsInPlay(Inquirer, 3); // Should now have character card, new form, and card in play, since safe cards are preferred.
         }
 
@@ -325,9 +312,9 @@ namespace RuduenModTest
 
             QuickHPCheck(-3, 2);
             AssertNumberOfCardsInTrash(Inquirer, 2); // Discarded and played card.
-            QuickHandCheck(-1); // Fisticuffs source is ambiguous, so don't check hand - just a net of -1. 
-
+            QuickHandCheck(-1); // Fisticuffs source is ambiguous, so don't check hand - just a net of -1.
         }
+
         [Test()]
         public void TestTheRightQuestions()
         {
@@ -344,7 +331,7 @@ namespace RuduenModTest
 
             DecisionDestroyCard = ongoing;
             DecisionSelectCardToPlay = distortion;
-            DecisionSelectCardsIndex = 4; // Most other decisions are set, but the fourth for the return must be the played distortion. 
+            DecisionSelectCardsIndex = 4; // Most other decisions are set, but the fourth for the return must be the played distortion.
             DecisionSelectCard = distortion;
             DecisionNextToCard = mdp;
 
@@ -352,7 +339,7 @@ namespace RuduenModTest
 
             PlayCard("TheRightQuestions");
 
-            AssertInTrash(ongoing); // Destroyed Ongoing. 
+            AssertInTrash(ongoing); // Destroyed Ongoing.
             AssertInHand(distortion);  // Played and returned distortion.
             QuickHPCheck(-5); // All damage dealt, no destroy trigger hit.
         }

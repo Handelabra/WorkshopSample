@@ -1,11 +1,9 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
-// TODO: TEST! 
+// TODO: TEST!
 
 namespace Workshopping.Cascade
 {
@@ -20,7 +18,7 @@ namespace Workshopping.Cascade
 
         public override IEnumerator UseIncapacitatedAbility(int index)
         {
-            // TODO: Implement Incapacitated Abilities. 
+            // TODO: Implement Incapacitated Abilities.
             switch (index)
             {
                 case 0:
@@ -70,7 +68,7 @@ namespace Workshopping.Cascade
             IEnumerator coroutine;
             List<DestroyCardAction> storedResults = new List<DestroyCardAction>();
 
-            // Initial test: Move top card of River deck to discard. 
+            // Initial test: Move top card of River deck to discard.
             coroutine = base.GameController.MoveCard(base.HeroTurnTakerController, RiverDeck.TopCard, base.HeroTurnTaker.Trash);
             if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }

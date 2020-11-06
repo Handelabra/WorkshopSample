@@ -1,26 +1,22 @@
-﻿using Handelabra.Sentinels.Engine.Model;
+﻿using Boomlagoon.JSON;
 using Handelabra.Sentinels.Engine.Controller;
-using Handelabra.Sentinels.Engine;
+using Handelabra.Sentinels.Engine.Model;
 using System;
 using System.Collections;
-using System.Linq;
 using System.Collections.Generic;
-using System.Reflection;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Xml.XPath;
 using Troschuetz.Random;
 using Troschuetz.Random.Generators;
-using Handelabra;
-using Boomlagoon.JSON;
-using System.Xml.XPath;
 
 namespace Handelabra.MyModConsole // this has to be this way to work around an EngineCommon issue, will be fixed soon.
 {
     // Loading a game in "friendly mode" throws an exception so we can get out of wherever we were.
-    class LoadGameException : Exception
+    internal class LoadGameException : Exception
     {
         public string GameName { get; private set; }
 
@@ -39,7 +35,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
         Fast
     };
 
-    class MainClass
+    internal class MainClass
     {
         public static string GameNameToLoad = null;
 
@@ -241,7 +237,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                             var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
                             var name = definition.Name;
                             Console.WriteLine((i + 1) + ": " + name);
-
                         }
 
                         Console.WriteLine("TIMCOSING: OblivAeon");
@@ -611,7 +606,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                             break;
                         }
                     }
-
                 }
             }
 
@@ -1224,21 +1218,23 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             }
         }
 
-        bool UserFriendly = false;
-        bool Verbose = false;
-        bool EnforceRules = false;
+        private bool UserFriendly = false;
+        private bool Verbose = false;
+        private bool EnforceRules = false;
 
-        GameController GameController { get; set; }
+        private GameController GameController { get; set; }
 
-        System.IO.StreamWriter FileOutput = null;
-        string OutputFileDate;
-        string OutputFileName;
-        string DataFileName;
+        private System.IO.StreamWriter FileOutput = null;
+        private string OutputFileDate;
+        private string OutputFileName;
+        private string DataFileName;
+
         // System.IO.StreamWriter CrashOutput = null;
-        static GameSpeed Speed = GameSpeed.Fast;
-        static bool CheatStops = false;
-        Card _lastCardPrinted = null;
-        const string UserDataFileName = "userdata.json";
+        private static GameSpeed Speed = GameSpeed.Fast;
+
+        private static bool CheatStops = false;
+        private Card _lastCardPrinted = null;
+        private const string UserDataFileName = "userdata.json";
 
         public void SetupGameController(Game game)
         {
@@ -1412,7 +1408,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             }
         }
 
-        IEnumerable<KeyValuePair<string, string>> HandleGetHeroCardsInBoxRequest(Func<string, bool> identifierCriteria, Func<string, bool> turnTakerCriteria)
+        private IEnumerable<KeyValuePair<string, string>> HandleGetHeroCardsInBoxRequest(Func<string, bool> identifierCriteria, Func<string, bool> turnTakerCriteria)
         {
             var result = new List<KeyValuePair<string, string>>();
 
@@ -2007,8 +2003,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             }
         }
 
-
-
         public void PrintMenu()
         {
             OutputToConsoleAndFileLine(
@@ -2063,7 +2057,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                 }
             }
         }
-
 
         public void DestroyCards(TurnTakerController taker, int numberOfCards)
         {
@@ -2160,7 +2153,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             PrintCardList(taker, hand, "Cards in your trash:", "There are no cards in your trash.");
         }
 
-
         public Card SelectACard(TurnTakerController taker, Location location, string introText, string noCardsText)
         {
             string input = "";
@@ -2236,7 +2228,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             return input.Substring(startIndex, input.Length - startIndex).ToInt(onFail: 1);
         }
 
-
         private IEnumerator WillEnterTurnPhase(TurnPhase turnPhase)
         {
             OutputToConsoleAndFileLine("WillEnterTurnPhase: " + turnPhase);
@@ -2248,7 +2239,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             OutputToConsoleAndFileLine("DidEnterTurnPhase: " + turnPhase);
             yield return 0;
         }
-
 
         private IEnumerator WillPerformAction(GameAction action)
         {
@@ -2458,7 +2448,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                         Console.WriteLine("Replay skipping decision: " + decision.ToStringForMultiplayerDebugging());
                         decision.Skip();
                     }
-
                     else if (answer.AutoDecided)
                     {
                         Console.WriteLine("Replay auto deciding decision: " + decision.ToStringForMultiplayerDebugging());
@@ -4235,7 +4224,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                     var select = decision as SelectCardDecision;
                     if (this.GameController.ActiveTurnPhase.IsPlayCard && (select.SelectionType == SelectionType.PlayCard || select.SelectionType == SelectionType.PutIntoPlay) && select.SelectedCard == null && actionCount.HasValue)
                     {
-                        // If we pass on playing a card, assume no more cards are to be played this phase.                        
+                        // If we pass on playing a card, assume no more cards are to be played this phase.
                         this.GameController.Game.ActiveTurnPhase.SkipPhase();
                     }
                 }
@@ -4244,7 +4233,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                     var usePower = decision as UsePowerDecision;
                     if (this.GameController.Game.ActiveTurnPhase.IsUsePower && usePower.SelectedPower == null)
                     {
-                        // If we pass on using a power, assume no more powers are to be used this phase.                        
+                        // If we pass on using a power, assume no more powers are to be used this phase.
                         this.GameController.Game.ActiveTurnPhase.SkipPhase();
                     }
                 }
@@ -4262,7 +4251,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                     var useAbility = decision as UseIncapacitatedAbilityDecision;
                     if (this.GameController.Game.ActiveTurnPhase.IsUseIncapacitatedAbility && useAbility.SelectedAbility == null)
                     {
-                        // If we pass on using an ability, assume no more abilities are to be used this phase.                        
+                        // If we pass on using an ability, assume no more abilities are to be used this phase.
                         this.GameController.Game.ActiveTurnPhase.SkipPhase();
                     }
                 }
@@ -5148,7 +5137,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                 }
             }
 
-
             if (input == "vp")
             {
                 inputHandled = true;
@@ -6012,7 +6000,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
         {
             while (e.MoveNext() && !QuitRequested)
             {
-
             }
         }
 
@@ -6020,7 +6007,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
         {
             while (e.MoveNext() && !QuitRequested)
             {
-
             }
 
             yield return null;
@@ -6192,6 +6178,4 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
         private IEnumerable<DecisionAnswerJournalEntry> _replayDecisionAnswers;
         private bool _replayingGame;
     }
-
-
 }

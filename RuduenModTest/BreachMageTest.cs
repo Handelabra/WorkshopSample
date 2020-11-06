@@ -1,12 +1,9 @@
-﻿using NUnit.Framework;
-using System;
-using Workshopping;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
-using Handelabra.Sentinels.Engine.Controller;
-using System.Linq;
-using System.Collections;
 using Handelabra.Sentinels.UnitTest;
+using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using Workshopping.BreachMage;
 
 namespace RuduenModTest
@@ -28,7 +25,7 @@ namespace RuduenModTest
             Assert.IsInstanceOf(typeof(BreachMageCharacterCardController), BreachMage.CharacterCardController);
 
             Assert.AreEqual(27, BreachMage.CharacterCard.HitPoints);
-            AssertNumberOfCardsInHand(BreachMage, 4); // Starting hand. 
+            AssertNumberOfCardsInHand(BreachMage, 4); // Starting hand.
             AssertNumberOfCardsInDeck(BreachMage, 36); // Starting deck.
         }
 
@@ -44,9 +41,9 @@ namespace RuduenModTest
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
-            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
             QuickHPCheck(-4); // Damage Dealt.
-            AssertInTrash(spell); // Spell destroyed. 
+            AssertInTrash(spell); // Spell destroyed.
         }
 
         [Test()]
@@ -61,9 +58,9 @@ namespace RuduenModTest
             charges.Add(PlayCard("HammerCharm", 1));
 
             QuickHandStorage(BreachMage);
-            UsePower(BreachMage.CharacterCard, 1); // Default Innate. Cast. 
+            UsePower(BreachMage.CharacterCard, 1); // Default Innate. Cast.
             QuickHandCheck(5); // 5 Cards Drawn.
-            AssertInTrash(charges); // All used charges in trash. 
+            AssertInTrash(charges); // All used charges in trash.
         }
 
         [Test()]
@@ -97,15 +94,14 @@ namespace RuduenModTest
             cards.Add(PutInDeck("ScryingBolt"));
 
             DecisionSelectCards = cards;
-            // Put the breach into play, then play a spell. (Both on top, so spell will be drawn for play.) 
+            // Put the breach into play, then play a spell. (Both on top, so spell will be drawn for play.)
 
             QuickHandStorage(BreachMage);
             PlayCard("FocusBreach");
             AssertInPlayArea(BreachMage, cards[0]);
             AssertInPlayArea(BreachMage, cards[1]);
-            QuickHandCheck(0); // One drawn, one played. 
+            QuickHandCheck(0); // One drawn, one played.
         }
-
 
         [Test()]
         public void TestOpenBreach()
@@ -115,17 +111,17 @@ namespace RuduenModTest
             StartGame();
 
             PlayCard("OpenBreach");
-            // Discard hand to make sure there's only one valid card. It's messy, but tracking for decision isn't working well. 
+            // Discard hand to make sure there's only one valid card. It's messy, but tracking for decision isn't working well.
             DiscardAllCards(BreachMage);
             Card spell = PutInHand("ScryingBolt");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
-            GoToEndOfTurn(BreachMage); // End of turn: Spell played. 
-            GoToStartOfTurn(BreachMage); // Start of turn: Spell cast. 
+            GoToEndOfTurn(BreachMage); // End of turn: Spell played.
+            GoToStartOfTurn(BreachMage); // Start of turn: Spell cast.
             QuickHPCheck(-4); // Damage Dealt. Base 4.
-            AssertInTrash(spell); // Spell destroyed. 
+            AssertInTrash(spell); // Spell destroyed.
         }
 
         [Test()]
@@ -142,8 +138,8 @@ namespace RuduenModTest
 
             QuickHPStorage(mdp);
             GoToStartOfTurn(BreachMage);
-            QuickHPCheck(-5); // Damage Dealt. Base 4, plus 1 additional. 
-            AssertInTrash(spell); // Spell destroyed. 
+            QuickHPCheck(-5); // Damage Dealt. Base 4, plus 1 additional.
+            AssertInTrash(spell); // Spell destroyed.
         }
 
         [Test()]
@@ -158,11 +154,11 @@ namespace RuduenModTest
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
-            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
             QuickHPCheck(-4); // Damage Dealt.
-            AssertInTrash(spell); // Spell destroyed. 
+            AssertInTrash(spell); // Spell destroyed.
 
-            // TODO: Add scrying test at some point! (Right now, more complex than it's worth.) 
+            // TODO: Add scrying test at some point! (Right now, more complex than it's worth.)
         }
 
         [Test()]
@@ -178,9 +174,9 @@ namespace RuduenModTest
 
             QuickHPStorage(mdp);
             QuickHandStorage(BreachMage);
-            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
             QuickHPCheck(-4); // Damage Dealt.
-            AssertInTrash(spell); // Spell destroyed. 
+            AssertInTrash(spell); // Spell destroyed.
             QuickHandCheck(1); // Card drawn.
         }
 
@@ -198,9 +194,9 @@ namespace RuduenModTest
             DecisionDestroyCard = ongoing;
 
             QuickHPStorage(mdp);
-            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
             QuickHPCheck(-3); // Damage Dealt.
-            AssertInTrash(ongoing, spell); // Ongoing & Spell destroyed. 
+            AssertInTrash(ongoing, spell); // Ongoing & Spell destroyed.
         }
 
         [Test()]
@@ -215,9 +211,9 @@ namespace RuduenModTest
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
-            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
             QuickHPCheck(-3); // Damage Dealt.
-            AssertInTrash(spell); // Spell destroyed. 
+            AssertInTrash(spell); // Spell destroyed.
         }
 
         [Test()]
@@ -238,12 +234,11 @@ namespace RuduenModTest
             DecisionYesNo = true;
 
             QuickHPStorage(mdp);
-            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
             QuickHPCheck(-9); // Damage Dealt.
-            AssertInTrash(spell); // Spell destroyed. 
+            AssertInTrash(spell); // Spell destroyed.
             AssertInTrash(charges); // Charges used.
         }
-
 
         [Test()]
         public void TestMoltenWave()
@@ -260,9 +255,9 @@ namespace RuduenModTest
             DealDamage(mdp, mdp, 7, DamageType.Fire); // Set up MDP to be destroyed so AoE also hits BB.
 
             QuickHPStorage(bb);
-            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
             QuickHPCheck(-3); // Damage Dealt.
-            AssertInTrash(spell,mdp); // Spell destroyed, MDP destroyed via damage.
+            AssertInTrash(spell, mdp); // Spell destroyed, MDP destroyed via damage.
         }
 
         [Test()]
@@ -277,7 +272,7 @@ namespace RuduenModTest
             DecisionDestroyCard = ongoing;
 
             PlayCard("HammerCharm");
-            AssertInTrash(ongoing); // Ongoing & Spell destroyed. 
+            AssertInTrash(ongoing); // Ongoing & Spell destroyed.
         }
 
         [Test()]
@@ -293,8 +288,8 @@ namespace RuduenModTest
 
             QuickHPStorage(mdp);
             PlayCard("StaffCharm");
-            QuickHPCheck(-6); // Damage Dealt. Base 4, plus 2 additional. 
-            AssertInTrash(spell); // Spell destroyed. 
+            QuickHPCheck(-6); // Damage Dealt. Base 4, plus 2 additional.
+            AssertInTrash(spell); // Spell destroyed.
         }
 
         [Test()]
@@ -311,7 +306,7 @@ namespace RuduenModTest
             QuickHPStorage(mdp);
             PlayCard("SpiralCharm");
             QuickHPCheck(-4); // Damage Dealt. Base 4.
-            AssertInPlayArea(BreachMage,spell); // Spell not destroyed.
+            AssertInPlayArea(BreachMage, spell); // Spell not destroyed.
         }
 
         [Test()]
@@ -327,7 +322,7 @@ namespace RuduenModTest
             QuickHandStorage(BreachMage);
             PlayCard(card);
             QuickHPCheck(-2); // Damage Dealt. Base 2.
-            QuickHandCheck(2); // Draw 2. 
+            QuickHandCheck(2); // Draw 2.
             AssertInPlayArea(BreachMage, card); // Charm still in play.
         }
     }
