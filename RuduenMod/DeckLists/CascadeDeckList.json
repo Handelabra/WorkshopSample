@@ -1,0 +1,72 @@
+﻿{
+  "name": "Cascade",
+  "kind": "Hero",
+  "initialCardIdentifiers": [
+    "CascadeCharacter"
+  ],
+  "cards": [
+    {
+      "identifier": "CascadeCharacter",
+      "count": 1,
+      "title": "Cascade",
+      "body": "Carried by the Stream",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": "Reveal the top 4 cards of the River deck. You may discard up to 4 cards. You may move a revealed card with a cost of your discarded cards' sum {spell} or less to your discard. Place any other revealed cards on top of your River deck in the same order. Draw until you have 3 cards.",
+      "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Destroy an Ongoing card.",
+        "One Hero uses a power.",
+        "One Hero deals 1 target 2 Fire Damage."
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "..."
+      },
+      "complexity": 3
+    },
+    {
+      "identifier": "Droplet",
+      "count": 4,
+      "title": "Droplet",
+      "keywords": [ "one-shot" ],
+      "body": [ "Deal 1 target 1 Cold Damage." ],
+      "icons": [ "DealDamageCold" ],
+      "magicNumbers": [ 1, 1, 1, 1 ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "Floodbank",
+      "count": 1,
+      "title": "Floodbank",
+      "keywords": [ "one-shot" ],
+      "body": [ "Deal 1 target 2 Cold Damage. One target regains 2 HP." ],
+      "icons": [ "DealDamageCold" ],
+      "magicNumbers": [ 0, 0, 0, 0 ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "StormSwell",
+      "count": 3,
+      "title": "Storm Swell",
+      "keywords": [ "river", "one-shot" ],
+      "body": [ "Gain Cost: 4 {magic}.", "Deal 2 Targets 4 Cold Damage." ],
+      "icons": [ "DealDamageCold" ]
+    }
+  ],
+  "subdecks": [
+    {
+      "identifier": "RiverDeck",
+      "name": "The River Deck",
+      "kind": "Other",
+      "reshufflesWhenEmpty": false,
+      "cards": []
+    }
+  ]
+}

@@ -7,17 +7,15 @@ using System.Linq;
 
 namespace Workshopping.BreachMage
 {
-    public class PotentBreachCardController : CardController
+    public class StaffCharmCardController : BreachMageSpellSharedCardController
     {
-        public PotentBreachCardController(Card card, TurnTakerController turnTakerController)
+        public StaffCharmCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
 
         public override void AddTriggers()
         {
-            base.AddStartOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, new Func<PhaseChangeAction, IEnumerator>(this.CastResponse), TriggerType.DestroyCard, null, false);
-
             // Add damage boost if the direct source of the damage trigger was this card..
             Func<DealDamageAction, bool> criteria = delegate (DealDamageAction dd)
             {
@@ -26,16 +24,16 @@ namespace Workshopping.BreachMage
                         where acs.Card != null
                         select acs.Card).Any((Card c) => c == this.Card);
             };
-            base.AddIncreaseDamageTrigger(criteria, 1, null, null, false);
+            base.AddIncreaseDamageTrigger(criteria, 2, null, null, false);
         }
 
-        protected IEnumerator CastResponse(PhaseChangeAction phaseChange)
+        public override IEnumerator Play()
         {
             IEnumerator coroutine;
             List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
             // Use a Cast. 
-            coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults, true, base.GetCardSource(null));
+            coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults, false, base.GetCardSource(null));
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
             if (storedResults.Count > 0)

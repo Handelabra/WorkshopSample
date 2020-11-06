@@ -33,7 +33,7 @@ namespace Workshopping.BreachMage
             if (storedResults.Count > 0)
             {
                 // Destroy the cast card.
-                coroutine = base.GameController.DestroyCard(base.HeroTurnTakerController, storedResults[0].SelectedCard);
+                coroutine = base.GameController.DestroyCard(base.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard);
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }
         }

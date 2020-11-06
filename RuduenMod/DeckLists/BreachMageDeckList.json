@@ -8,14 +8,14 @@
     {
       "identifier": "BreachMageCharacter",
       "count": 1,
-      "title": "M.",
-      "body": "Blazewatcher",
+      "title": "Breach Mage",
+      "body": "M. Blazewatcher",
       "backgroundColor": "fbf8f9",
       "foilBackgroundColor": "FEFEFE",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "Activate a card's Cast, then destroy that card.",
+        "Activate a card's Cast text, then destroy that card.",
         "Destroy 2 of your Charge cards. If you do, any player draws 5 cards."
       ],
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
@@ -35,21 +35,39 @@
       "complexity": 3
     },
     {
+      "identifier": "CycleOfMagic",
+      "count": 2,
+      "title": "Cycle of Magic",
+      "keywords": [ "one-shot", "breach" ],
+      "body": [ "Draw 2 cards. Activate a card's Cast text, then place that card on top of your deck." ],
+      "icons": [ "DrawCardNow", "Manipulate" ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "FocusBreach",
+      "count": 4,
+      "title": "FocusBreach",
+      "keywords": [ "one-shot" ],
+      "body": [ "Draw a card. Search your deck or trash for a Breach and put it into play. If you searched your deck, shuffle it. You may play a card. " ],
+      "icons": [ "DrawCardNow", "Search", "PlayCardNow" ],
+      "flavorText": "..."
+    },
+    {
       "identifier": "OpenBreach",
       "count": 2,
       "title": "Open Breach",
-      "keywords": [ "Ongoing" ],
-      "body": [ "At the start of your turn, you may activate a card's Cast, then destroy that card.", "At the end of your turn, you may play 1 Spell card." ],
-      "icons": [ "StartAndEndOfTurnAction", "Destroy" ],
+      "keywords": [ "ongoing", "breach" ],
+      "body": [ "At the start of your turn, you may activate a card's Cast text, then destroy that card.", "At the end of your turn, you may play 1 Spell card." ],
+      "icons": [ "StartAndEndOfTurnAction", "Destroy", "PlayCardNow" ],
       "flavorText": "..."
     },
     {
       "identifier": "PotentBreach",
       "count": 2,
       "title": "Potent Breach",
-      "keywords": [ "Ongoing" ],
-      "body": [ "At the start of your turn, you may activate a card's Cast, then destroy that card. If that Cast deals damage, increase that damage by 1. " ],
-      "icons": [ "StartAndEndOfTurnAction", "Destroy" ],
+      "keywords": [ "ongoing" ],
+      "body": [ "At the start of your turn, you may activate a card's Cast text, then destroy that card. If that Cast text deals damage, increase that damage by 1. " ],
+      "icons": [ "StartAndEndOfTurnAction", "Destroy", "IncreaseDamageDealt" ],
       "flavorText": "..."
     },
     {
@@ -129,7 +147,47 @@
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, you may destroy an Ongoing or Equipment card.",
       "powers": "Return this card to your hand.",
-      "icons": [ "DealDamageLightning", "DestroyOngoing", "DestroyEnvironment" ],
+      "icons": [ "DealDamageLightning", "DestroyOngoing", "DestroyEnvironment", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "StaffCharm",
+      "count": 3,
+      "title": "Staff Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, activate a card's Cast text, then destroy that card. If that Cast text deals damage, increase that damage by 2.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "Destroy", "IncreaseDamageDealt", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "SpiralCharm",
+      "count": 3,
+      "title": "Spiral Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, activate a card's Cast text.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "Destroy", "IncreaseDamageDealt", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "VigorCharm",
+      "count": 3,
+      "title": "Vigor Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, draw 3 cards and Breach Mage deals themselves 2 Psychic Damage.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "DrawCardNow", "DealDamagePsychic", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "AuraCharm",
+      "count": 3,
+      "title": "Aura Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, one Hero may use a power.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "UsePowerNow", "Manipulate" ],
       "flavorText": "...."
     }
   ]

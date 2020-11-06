@@ -39,7 +39,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreachMage\BreachMageSpellSharedCardController.cs" />
+    <Compile Include="BreachMage\FocusBreachCardController.cs" />
     <Compile Include="BreachMage\HammerCharmCardController.cs" />
+    <Compile Include="BreachMage\AuraCharmCardController.cs" />
+    <Compile Include="BreachMage\CycleOfMagicCardController.cs" />
+    <Compile Include="BreachMage\VigorCharmCardController.cs" />
+    <Compile Include="BreachMage\SpiralCharmCardController.cs" />
+    <Compile Include="BreachMage\StaffCharmCardController.cs" />
     <Compile Include="BreachMage\OpenBreachCardController.cs" />
     <Compile Include="BreachMage\FlareCascadeCardController.cs" />
     <Compile Include="BreachMage\MoltenWaveCardController.cs" />
@@ -68,12 +74,17 @@
     <Compile Include="BreachMage\BreachMageCharacterCardController.cs" />
     <Compile Include="BreachMage\BreachMageEquipmentSharedCardController.cs" />
     <Compile Include="BreachMage\BreachMageTurnTakerController.cs" />
+    <Compile Include="Cascade\CascadeCharacterCardController.cs" />
+    <Compile Include="Cascade\CascadeTurnTakerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\BreachMageDeckList.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\InquirerDeckList.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DeckLists\CascadeDeckList.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

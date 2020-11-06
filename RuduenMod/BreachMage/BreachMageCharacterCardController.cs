@@ -3,6 +3,7 @@ using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Workshopping.BreachMage
 {
@@ -99,7 +100,7 @@ namespace Workshopping.BreachMage
                 if (storedResults.Count > 0)
                 {
                     // Destroy the cast card.
-                    coroutine = base.GameController.DestroyCard(base.HeroTurnTakerController, storedResults[0].SelectedCard);
+                    coroutine = base.GameController.DestroyCard(base.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard);
                     if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
                 }
             }

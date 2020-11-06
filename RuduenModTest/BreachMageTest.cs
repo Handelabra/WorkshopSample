@@ -28,6 +28,8 @@ namespace RuduenModTest
             Assert.IsInstanceOf(typeof(BreachMageCharacterCardController), BreachMage.CharacterCardController);
 
             Assert.AreEqual(27, BreachMage.CharacterCard.HitPoints);
+            AssertNumberOfCardsInHand(BreachMage, 4); // Starting hand. 
+            AssertNumberOfCardsInDeck(BreachMage, 36); // Starting deck.
         }
 
         [Test()]
@@ -63,6 +65,47 @@ namespace RuduenModTest
             QuickHandCheck(5); // 5 Cards Drawn.
             AssertInTrash(charges); // All used charges in trash. 
         }
+
+        [Test()]
+        public void TestCycleOfMagic()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            Card spell = PlayCard("ScryingBolt");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            QuickHandStorage(BreachMage);
+            PlayCard("CycleOfMagic");
+            QuickHPCheck(-4); // Damage Dealt.
+            QuickHandCheck(2); // 2 Cards Drawn.
+            AssertInDeck(spell);
+        }
+
+        [Test()]
+        public void TestFocusBreach()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            List<Card> cards = new List<Card>();
+            cards.Add(PutInDeck("OpenBreach"));
+            cards.Add(PutInDeck("ScryingBolt"));
+
+            DecisionSelectCards = cards;
+            // Put the breach into play, then play a spell. (Both on top, so spell will be drawn for play.) 
+
+            QuickHandStorage(BreachMage);
+            PlayCard("FocusBreach");
+            AssertInPlayArea(BreachMage, cards[0]);
+            AssertInPlayArea(BreachMage, cards[1]);
+            QuickHandCheck(0); // One drawn, one played. 
+        }
+
 
         [Test()]
         public void TestOpenBreach()
@@ -220,6 +263,72 @@ namespace RuduenModTest
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast. 
             QuickHPCheck(-3); // Damage Dealt.
             AssertInTrash(spell,mdp); // Spell destroyed, MDP destroyed via damage.
+        }
+
+        [Test()]
+        public void TestHammerCharm()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            Card ongoing = PlayCard("LivingForceField");
+            DecisionDestroyCard = ongoing;
+
+            PlayCard("HammerCharm");
+            AssertInTrash(ongoing); // Ongoing & Spell destroyed. 
+        }
+
+        [Test()]
+        public void TestStaffCharm()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            Card spell = PlayCard("ScryingBolt");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            PlayCard("StaffCharm");
+            QuickHPCheck(-6); // Damage Dealt. Base 4, plus 2 additional. 
+            AssertInTrash(spell); // Spell destroyed. 
+        }
+
+        [Test()]
+        public void TestSpiralCharm()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            Card spell = PlayCard("ScryingBolt");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            PlayCard("SpiralCharm");
+            QuickHPCheck(-4); // Damage Dealt. Base 4.
+            AssertInPlayArea(BreachMage,spell); // Spell not destroyed.
+        }
+
+        [Test()]
+        public void TestVigorCharm()
+        {
+            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            Card card = PutInHand("VigorCharm");
+
+            QuickHPStorage(BreachMage);
+            QuickHandStorage(BreachMage);
+            PlayCard(card);
+            QuickHPCheck(-2); // Damage Dealt. Base 2.
+            QuickHandCheck(2); // Draw 2. 
+            AssertInPlayArea(BreachMage, card); // Charm still in play.
         }
     }
 }
