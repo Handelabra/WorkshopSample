@@ -53,9 +53,11 @@ namespace RuduenModTest
 
             StartGame();
 
-            List<Card> charges = new List<Card>();
-            charges.Add(PlayCard("HammerCharm", 0));
-            charges.Add(PlayCard("HammerCharm", 1));
+            List<Card> charges = new List<Card>
+            {
+                PlayCard("HammerCharm", 0),
+                PlayCard("HammerCharm", 1)
+            };
 
             QuickHandStorage(BreachMage);
             UsePower(BreachMage.CharacterCard, 1); // Default Innate. Cast.
@@ -89,9 +91,11 @@ namespace RuduenModTest
 
             StartGame();
 
-            List<Card> cards = new List<Card>();
-            cards.Add(PutInDeck("OpenBreach"));
-            cards.Add(PutInDeck("ScryingBolt"));
+            List<Card> cards = new List<Card>
+            {
+                PutInDeck("OpenBreach"),
+                PutInDeck("ScryingBolt")
+            };
 
             DecisionSelectCards = cards;
             // Put the breach into play, then play a spell. (Both on top, so spell will be drawn for play.)
@@ -223,9 +227,11 @@ namespace RuduenModTest
 
             StartGame();
 
-            List<Card> charges = new List<Card>();
-            charges.Add(PlayCard("HammerCharm", 0));
-            charges.Add(PlayCard("HammerCharm", 1));
+            List<Card> charges = new List<Card>
+            {
+                PlayCard("HammerCharm", 0),
+                PlayCard("HammerCharm", 1)
+            };
 
             Card spell = PlayCard("FlareCascade");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -266,8 +272,7 @@ namespace RuduenModTest
             SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
 
             StartGame();
-
-            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            GetCardInPlay("MobileDefensePlatform");
             Card ongoing = PlayCard("LivingForceField");
             DecisionDestroyCard = ongoing;
 

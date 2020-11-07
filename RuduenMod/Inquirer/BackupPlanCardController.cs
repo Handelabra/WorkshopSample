@@ -14,10 +14,12 @@ namespace Workshopping.Inquirer
 
         public override IEnumerator UsePower(int index = 0)
         {
-            List<int> powerNumerals = new List<int>();
-            powerNumerals.Add(base.GetPowerNumeral(0, 1));
-            powerNumerals.Add(base.GetPowerNumeral(1, 1));
-            powerNumerals.Add(base.GetPowerNumeral(2, 1));
+            List<int> powerNumerals = new List<int>
+            {
+                base.GetPowerNumeral(0, 1),
+                base.GetPowerNumeral(1, 1),
+                base.GetPowerNumeral(2, 1)
+            };
 
             IEnumerator coroutine;
             // Deal Damage.

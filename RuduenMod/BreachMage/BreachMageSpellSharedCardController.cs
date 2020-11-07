@@ -13,7 +13,7 @@ namespace Workshopping.BreachMage
 
         public override IEnumerator ActivateAbility(string abilityKey)
         {
-            IEnumerator coroutine = null;
+            IEnumerator coroutine;
             if (abilityKey == "cast")
             {
                 coroutine = this.ActivateCast();

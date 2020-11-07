@@ -64,8 +64,12 @@ namespace RuduenModTest
             GoToUsePowerPhase(Inquirer);
 
             // Put out example cards.
-            Card distortion = PlayCard("YoureLookingPale");
-            Card power = PlayCard("UndeniableFacts");
+            PlayCard("YoureLookingPale");
+            PlayCard("UndeniableFacts");
+
+            QuickHandStorage(Inquirer);
+            GoToStartOfTurn(Inquirer);
+            QuickHandCheck(1); // Draw 1 card.
         }
 
         [Test()]
@@ -276,9 +280,11 @@ namespace RuduenModTest
 
             QuickHandStorage(Inquirer);
 
-            List<Card> cards = new List<Card>();
-            cards.Add(form); // First search for Form.
-            cards.Add(safeCard); // Then play safe card.
+            List<Card> cards = new List<Card>
+            {
+                form, // First search for Form.
+                safeCard // Then play safe card.
+            };
             DecisionSelectCards = ArrangeDecisionCards(cards);
 
             PlayCard("UntilYouMakeIt");

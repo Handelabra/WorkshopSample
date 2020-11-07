@@ -2,7 +2,8 @@
   "name": "Cascade",
   "kind": "Hero",
   "initialCardIdentifiers": [
-    "CascadeCharacter"
+    "CascadeCharacter",
+    "Riverbank"
   ],
   "cards": [
     {
@@ -14,7 +15,7 @@
       "foilBackgroundColor": "FEFEFE",
       "hitpointsColor": "C94742",
       "character": true,
-      "powers": "Reveal the top 4 cards of the River deck. You may discard up to 4 cards. You may move a revealed card with a cost of your discarded cards' total {spell} or less to your discard. Place any other revealed cards on the bottom of your River deck in the same order. Draw until you have 3 cards.",
+      "powers": "You may discard up to 4 cards. You may move card with a cost of your discarded cards' total {spell} or less from the Riverbank to your discard, ignoring its Indestructable status. Draw until you have 3 cards.",
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
       "hitpoints": 27,
       "nemesisIdentifiers": [
@@ -32,51 +33,130 @@
       "complexity": 3
     },
     {
+      "identifier": "Riverbank",
+      "kind": "other",
+      "count": 1,
+      "isReal": false,
+      "title": "Riverbank",
+      "body": [
+        "At the start of the game, take all River cards in Cascade's deck and shuffle them together to create the River deck. Then, place the top 4 cards of the River deck under this card.",
+        "This card and all cards beneath this card are indestructible.",
+        "This card is not a hero, villain, or environment card.",
+        "After a card is moved from beneath this to somewhere other than the River deck, move all remaining cards beneath this to the bottom of the River deck and move the top four cards from River deck beneath this."
+      ],
+      "icons": [
+        "Indestructible"
+      ]
+    },
+    {
       "identifier": "Droplet",
       "count": 4,
-      "title": "Droplet (0)",
+      "title": "Droplet",
       "keywords": [ "one-shot" ],
-      "body": [ "Deal 1 target 1 Cold Damage." ],
+      "body": [ "Aqua Cost: 1", "{Cascade} deals 1 target 1 Cold Damage", "You may move all remaining cards beneath Riverbank to the bottom of the River deck, ignoring their indestructable status, and move the top four cards from River deck beneath Riverbank." ],
       "icons": [ "DealDamageCold" ],
       "magicNumbers": [ 1, 1, 1, 1 ],
-      "flavorText": "..."
+      "flavorText": "...",
+      "tokenPools": [
+        {
+          "identifier": "CascadeCostPool",
+          "name": "Cascade's Aqua Cost Pool",
+          "initialValue": 0,
+          "maximumValue": 1,
+          "color": "D1426D"
+        }
+      ]
     },
     {
       "identifier": "Floodbank",
       "count": 1,
-      "title": "Floodbank (0)",
+      "title": "Floodbank",
       "keywords": [ "one-shot" ],
-      "body": [ "Deal 1 target 2 Cold Damage. One target regains 2 HP." ],
+      "body": [ "Aqua Cost: 1", "{Cascade} deals 1 target 2 Cold Damage. {Cascade} regains 2 HP." ],
       "icons": [ "DealDamageCold" ],
       "magicNumbers": [ 0, 0, 0, 0 ],
-      "flavorText": "..."
+      "flavorText": "...",
+      "tokenPools": [
+        {
+          "identifier": "CascadeCostPool",
+          "name": "Cascade's Card Cost Pool",
+          "initialValue": 0,
+          "maximumValue": 1,
+          "color": "D1426D"
+        }
+      ]
     },
     {
       "identifier": "CondensedOrb",
-      "count": 3,
+      "count": 27,
       "title": "CondensedOrb",
       "keywords": [ "river", "one-shot" ],
-      "body": [ "{Cascade} gains 4 HP." ],
+      "body": [ "Aqua Cost: 5", "{Cascade} gains 4 HP." ],
       "magicNumbers": [ 3, 3, 3 ],
-      "icons": [ "DealDamageCold" ]
+      "icons": [ "DealDamageCold" ],
+      "tokenPools": [
+        {
+          "identifier": "CascadeCostPool",
+          "name": "Cascade's Card Cost Pool",
+          "initialValue": 0,
+          "maximumValue": 5,
+          "color": "D1426D"
+        }
+      ]
     },
     {
       "identifier": "StormSwell",
       "count": 3,
-      "title": "Storm Swell (4)",
+      "title": "Storm Swell",
       "keywords": [ "river", "one-shot" ],
-      "body": [ "Deal 2 Targets 4 Cold Damage." ],
+      "body": [ "Aqua Cost: 5", "Deal 2 Targets 4 Cold Damage." ],
       "icons": [ "DealDamageCold" ],
-      "magicNumbers": [ 2, 2, 2 ]
+      "magicNumbers": [ 2, 2, 2 ],
+      "tokenPools": [
+        {
+          "identifier": "CascadeCostPool",
+          "name": "Cascade's Card Cost Pool",
+          "initialValue": 0,
+          "maximumValue": 5,
+          "color": "D1426D"
+        }
+      ]
     },
     {
-      "identifier": "TheConstantFlow",
+      "identifier": "ConstantFlow",
       "count": 3,
-      "title": "Storm Swell (3)",
+      "title": "Constant Flow",
       "keywords": [ "river", "one-shot" ],
-      "body": [ "You may play 2 cards." ],
-      "icons": [ "DealDamageCold" ],
-      "magicNumbers": [ 1, 1, 1 ]
+      "body": [ "Aqua Cost: 3", "You may play 2 cards." ],
+      "icons": [ "PlayCardNow" ],
+      "magicNumbers": [ 1, 1, 1 ],
+      "tokenPools": [
+        {
+          "identifier": "CascadeCostPool",
+          "name": "Cascade's Card Cost Pool",
+          "initialValue": 0,
+          "maximumValue": 3,
+          "color": "D1426D"
+        }
+      ]
+    },
+    {
+      "identifier": "ShapeTheStream",
+      "count": 2,
+      "title": "Shape the Stream",
+      "keywords": [ "river", "one-shot" ],
+      "body": [ "Aqua Cost: 5", "You may move card from the Riverbank to your Trash, ignoring its Indestructable status. (You do not pay any Cost.)" ],
+      "icons": [ "Manipulate" ],
+      "magicNumbers": [ 2, 2, 2 ],
+      "tokenPools": [
+        {
+          "identifier": "CascadeCostPool",
+          "name": "Cascade's Card Cost Pool",
+          "initialValue": 0,
+          "maximumValue": 5,
+          "color": "D1426D"
+        }
+      ]
     }
   ],
   "subdecks": [
@@ -91,7 +171,7 @@
   "promoCards": [
     {
       "identifier": "CascadeCharacter",
-      "promoIdentifier":  "CascadeCostCharacter",
+      "promoIdentifier": "CascadeCostCharacter",
       "count": 1,
       "title": "Cascade",
       "body": "Cost of Control",

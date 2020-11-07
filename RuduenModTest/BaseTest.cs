@@ -129,124 +129,324 @@ namespace Handelabra.Sentinels.UnitTest
         protected int NumberOfDecisionsAnswered { get; private set; }
 
         // Turn taker controller helpers
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController adept { get { return FindHero("TheArgentAdept"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController az { get { return FindHero("AbsoluteZero"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController bench { get { return FindHero("Benchmark"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController bunker { get { return FindHero("Bunker"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController chrono { get { return FindHero("ChronoRanger"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController comodora { get { return FindHero("LaComodora"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController cosmic { get { return FindHero("CaptainCosmic"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController expatriette { get { return FindHero("Expatriette"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController fanatic { get { return FindHero("Fanatic"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController fixer { get { return FindHero("MrFixer"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController guise { get { return FindHero("Guise"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController haka { get { return FindHero("Haka"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController harpy { get { return FindHero("TheHarpy"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController knyfe { get { return FindHero("Knyfe"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController legacy { get { return FindHero("Legacy"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController luminary { get { return FindHero("Luminary"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController lifeline { get { return FindHero("Lifeline"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController mist { get { return FindHero("NightMist"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController naturalist { get { return FindHero("TheNaturalist"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController omnix { get { return FindHero("OmnitronX"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController parse { get { return FindHero("Parse"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController ra { get { return FindHero("Ra"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController scholar { get { return FindHero("TheScholar"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController sentinels { get { return FindHero("TheSentinels"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController setback { get { return FindHero("Setback"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController sky { get { return FindHero("SkyScraper"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController stunt { get { return FindHero("Stuntman"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController tachyon { get { return FindHero("Tachyon"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController thriya { get { return FindHero("AkashThriya"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController tempest { get { return FindHero("Tempest"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController unity { get { return FindHero("Unity"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController visionary { get { return FindHero("TheVisionary"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController voidMedico { get { return FindHero("VoidGuardDrMedico"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController voidMainstay { get { return FindHero("VoidGuardMainstay"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController voidIdealist { get { return FindHero("VoidGuardTheIdealist"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController voidWrithe { get { return FindHero("VoidGuardWrithe"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected HeroTurnTakerController wraith { get { return FindHero("TheWraith"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
         // The Sentinels
+#pragma warning disable IDE1006 // Naming Styles
         protected Card medico { get { return GetCard("DrMedicoCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
+#pragma warning disable IDE1006 // Naming Styles
         protected Card mainstay { get { return GetCard("MainstayCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card idealist { get { return GetCard("TheIdealistCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card writhe { get { return GetCard("WritheCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
         // Villains
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController akash { get { return FindVillain("AkashBhuta"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController ambuscade { get { return FindVillain("Ambuscade"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController apostate { get { return FindVillain("Apostate"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController baron { get { return FindVillain("BaronBlade"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController capitan { get { return FindVillain("LaCapitan"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController chairman { get { return FindVillain("TheChairman"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController choke { get { return FindVillain("Chokepoint"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController dawn { get { return FindVillain("CitizenDawn"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController deadline { get { return FindVillain("Deadline"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController dreamer { get { return FindVillain("TheDreamer"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController ennead { get { return FindVillain("TheEnnead"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController gloom { get { return FindVillain("GloomWeaver"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController infinitor { get { return FindVillain("Infinitor"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController iron { get { return FindVillain("IronLegacy"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController kismet { get { return FindVillain("Kismet"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController matriarch { get { return FindVillain("TheMatriarch"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController miss { get { return FindVillain("MissInformation"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController omnitron { get { return FindVillain("Omnitron"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController plague { get { return FindVillain("PlagueRat"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController progeny { get { return FindVillain("Progeny"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController spite { get { return FindVillain("Spite"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController voss { get { return FindVillain("GrandWarlordVoss"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController wager { get { return FindVillain("WagerMaster"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController warfang { get { return FindVillain("KaargraWarfang"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
         // Team villains
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController baronTeam { get { return FindVillainTeamMember("BaronBlade"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController ermineTeam { get { return FindVillainTeamMember("Ermine"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController frictionTeam { get { return FindVillainTeamMember("Friction"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController frightTeam { get { return FindVillainTeamMember("FrightTrain"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController proleTeam { get { return FindVillainTeamMember("Proletariat"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController ambuscadeTeam { get { return FindVillainTeamMember("Ambuscade"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController biomancerTeam { get { return FindVillainTeamMember("Biomancer"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController bugbearTeam { get { return FindVillainTeamMember("Bugbear"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController greazerTeam { get { return FindVillainTeamMember("Greazer"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController lacapitanTeam { get { return FindVillainTeamMember("LaCapitan"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController missinfoTeam { get { return FindVillainTeamMember("MissInformation"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController plagueratTeam { get { return FindVillainTeamMember("PlagueRat"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController sgtsteelTeam { get { return FindVillainTeamMember("SergeantSteel"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController operativeTeam { get { return FindVillainTeamMember("TheOperative"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController hammeranvilTeam { get { return FindVillainTeamMember("CitizensHammerAndAnvil"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
         // Citizens Hammer and Anvil
+#pragma warning disable IDE1006 // Naming Styles
         protected Card hammer { get { return GetCard("CitizenHammerTeamCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
+#pragma warning disable IDE1006 // Naming Styles
         protected Card anvil { get { return GetCard("CitizenAnvilTeamCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController env { get { return FindEnvironment(); } }
+#pragma warning restore IDE1006 // Naming Styles
 
         // OblivAeon mode
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController oblivaeon { get { return FindVillain("OblivAeon"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
+#pragma warning disable IDE1006 // Naming Styles
         protected BattleZone bzOne { get { return this.GameController.GetBattleZone("BattleZoneOne"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected BattleZone bzTwo { get { return this.GameController.GetBattleZone("BattleZoneTwo"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController envOne { get { return this.GameController.FindEnvironmentTurnTakerController(bzOne); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController envTwo { get { return this.GameController.FindEnvironmentTurnTakerController(bzTwo); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController scionOne { get { return this.GameController.FindTurnTakerController(bzOne.FindScion()); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected TurnTakerController scionTwo { get { return this.GameController.FindTurnTakerController(bzTwo.FindScion()); } }
+#pragma warning restore IDE1006 // Naming Styles
 
+#pragma warning disable IDE1006 // Naming Styles
         protected Card aeonScion { get { return GetCard("AeonMasterCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card borrScion { get { return GetCard("BorrTheUnstableCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card mindScion { get { return GetCard("DarkMindCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card empScion { get { return GetCard("EmpyreonCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card faultScion { get { return GetCard("FaultlessCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card nixScion { get { return GetCard("NixiousTheChosenCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card progScion { get { return GetCard("ProgenyScionCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card vossScion { get { return GetCard("RainekKelVossCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card sanctScion { get { return GetCard("SanctionCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning disable IDE1006 // Naming Styles
         protected Card voidScion { get { return GetCard("VoidsoulCharacter"); } }
+#pragma warning restore IDE1006 // Naming Styles
 
         protected List<TurnPhase> turnPhaseList = null;
 
@@ -460,7 +660,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected GameController SetupGameController(Game game)
         {
+#pragma warning disable IDE0017 // Simplify object initialization
             GameController gameController = new GameController(game);
+#pragma warning restore IDE0017 // Simplify object initialization
             gameController.StartCoroutine = StartCoroutine;
             gameController.ExhaustCoroutine = RunCoroutine;
             gameController.OnMakeDecisions -= this.MakeDecisions;
@@ -521,9 +723,13 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected T GetPersistentValueFromView<T>(string key)
         {
+#pragma warning disable IDE0034 // Simplify 'default' expression
             T result = default(T);
+#pragma warning restore IDE0034 // Simplify 'default' expression
 
+#pragma warning disable IDE0038 // Use pattern matching
             if (_savedViewData.ContainsKey(key) && _savedViewData[key] is T)
+#pragma warning restore IDE0038 // Use pattern matching
             {
                 result = (T)_savedViewData[key];
             }
@@ -1598,7 +1804,10 @@ namespace Handelabra.Sentinels.UnitTest
 
         #region Convenience Methods
 
+#pragma warning disable IDE0060 // Remove unused parameter
+
         protected void PutIntoPlay(TurnTakerController ttc, params string[] ids)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             PlayCards(ids, true);
         }
@@ -1722,7 +1931,10 @@ namespace Handelabra.Sentinels.UnitTest
             }
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
+
         protected void PutInTrash(Card[] cards, int index = 0)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             foreach (var card in cards)
             {
@@ -2471,7 +2683,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected IEnumerable<Card> DestroyCards(Func<Card, bool> criteria)
         {
+#pragma warning disable IDE0039 // Use local function
             Func<Card, bool> fullCriteria = c => c.IsInPlayAndHasGameText && criteria(c);
+#pragma warning restore IDE0039 // Use local function
             IEnumerable<Card> cards = FindCardsWhere(fullCriteria);
             cards.ForEach(card => DestroyCard(card));
             return cards;
@@ -2575,7 +2789,10 @@ namespace Handelabra.Sentinels.UnitTest
             this.RunCoroutine(this.GameController.DealDamageToTarget(new DamageSource(this.GameController, source), target, amount, type, isIrreducible, ignoreBattleZone: ignoreBattleZone, cardSource: new CardSource(this.GameController.FindCardController(source))));
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
+
         protected void DealDamage(Card source, TurnTakerController target, int amount, DamageType type, bool isIrreducible = false)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             DealDamage(source, target.CharacterCard, amount, type);
         }
@@ -3201,7 +3418,10 @@ namespace Handelabra.Sentinels.UnitTest
             }
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
+
         protected void AssertIsInPlay(string identifier, int minQuantity = 1, int maxQuantity = 100, string promoIdentifier = null)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             var cards = this.GameController.FindCardsWhere(card => card.IsInPlay && card.PromoIdentifierOrIdentifier == identifier, false);
             int count = cards.Count();
@@ -3814,7 +4034,10 @@ namespace Handelabra.Sentinels.UnitTest
             AssertOnTopOfDeck(FindTurnTakerController(owner), identifier);
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
+
         protected void AssertOnTopOfDeck(TurnTakerController ttc, string identifier, int offset = 0)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             Assert.AreEqual(identifier, ttc.TurnTaker.Deck.TopCard.Identifier, "Expected " + identifier + " to be on top of " + ttc.Name + "'s deck.");
         }
@@ -4036,7 +4259,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected TurnTakerController FindVillain(string identifier = null)
         {
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
             TurnTakerController result = null;
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
 
             if (identifier != null)
             {
@@ -4054,7 +4279,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected TurnTakerController FindVillainTeamMember(string identifier)
         {
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
             TurnTakerController result = null;
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
 
             if (identifier.Contains("Team"))
             {
@@ -4131,7 +4358,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected GameControllerDecisionEvent AssertNoDecision()
         {
+#pragma warning disable IDE0039 // Use local function
             GameControllerDecisionEvent decider = decision =>
+#pragma warning restore IDE0039 // Use local function
             {
                 return this.MakeDecisions(decision, failAfter: "No decisions were expected to be present, but there was a decision:\n" + decision.ToStringForMultiplayerDebugging());
             };
@@ -4142,7 +4371,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected GameControllerDecisionEvent AssertNoDecision(SelectionType selectionTypeThatShouldNotShowUp)
         {
+#pragma warning disable IDE0039 // Use local function
             GameControllerDecisionEvent decider = decision =>
+#pragma warning restore IDE0039 // Use local function
                 {
                     if (decision.SelectionType == selectionTypeThatShouldNotShowUp)
                     {
@@ -4160,7 +4391,9 @@ namespace Handelabra.Sentinels.UnitTest
         {
             int numberSoFar = 0;
 
+#pragma warning disable IDE0039 // Use local function
             GameControllerDecisionEvent decider = decisions =>
+#pragma warning restore IDE0039 // Use local function
             {
                 numberSoFar++;
                 Assert.LessOrEqual(numberSoFar, maxNumber, "There are more decisions than expected.");
@@ -4454,7 +4687,9 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 RemoveAssertNextMessage(oldReceiver);
             }
+#pragma warning disable IDE0039 // Use local function
             GameControllerMessageEvent receiver = (message) =>
+#pragma warning restore IDE0039 // Use local function
             {
                 RunCoroutine(this.ReceiveMessage(message));
                 Assert.AreEqual(expectedMessage, message.Message);
@@ -4473,7 +4708,9 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 RemoveAssertNextMessage(oldReceiver);
             }
+#pragma warning disable IDE0039 // Use local function
             GameControllerMessageEvent receiver = (message) =>
+#pragma warning restore IDE0039 // Use local function
                 {
                     RunCoroutine(this.ReceiveMessage(message));
                     Assert.IsTrue(message.Message.Contains(expectedMessage));
@@ -4494,7 +4731,9 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 RemoveAssertNextMessage(oldReceiver);
             }
+#pragma warning disable IDE0039 // Use local function
             GameControllerMessageEvent receiver = (message) =>
+#pragma warning restore IDE0039 // Use local function
             {
                 RunCoroutine(this.ReceiveMessage(message));
                 var expected = expectedMessages.ElementAtOrDefault(index);
@@ -4532,7 +4771,9 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 RemoveAssertNextMessage(oldReceiver);
             }
+#pragma warning disable IDE0039 // Use local function
             GameControllerMessageEvent receiver = (message) =>
+#pragma warning restore IDE0039 // Use local function
                 {
                     RunCoroutine(this.ReceiveMessage(message));
                     Assert.Fail("No message was expected, but there was one: '" + message.Message + "'");
@@ -4669,7 +4910,9 @@ namespace Handelabra.Sentinels.UnitTest
         protected void StackDeckAfterShuffle(TurnTakerController ttc, string[] identifiers, bool toBottom = false)
         {
             ITrigger trigger = null;
+#pragma warning disable IDE0039 // Use local function
             Func<ShuffleCardsAction, IEnumerator> StackDeckAndRemoveTriggerResponse = action =>
+#pragma warning restore IDE0039 // Use local function
             {
                 this.StackDeck(ttc, identifiers, toBottom);
                 this.GameController.RemoveTrigger(trigger);
@@ -4683,7 +4926,9 @@ namespace Handelabra.Sentinels.UnitTest
         protected void StackDeckAfterShuffle(TurnTakerController ttc, IEnumerable<Card> cards, bool toBottom = false)
         {
             ITrigger trigger = null;
+#pragma warning disable IDE0039 // Use local function
             Func<ShuffleCardsAction, IEnumerator> StackDeckAndRemoveTriggerResponse = action =>
+#pragma warning restore IDE0039 // Use local function
             {
                 this.StackDeck(ttc, cards, toBottom);
                 this.GameController.RemoveTrigger(trigger);
@@ -4722,7 +4967,9 @@ namespace Handelabra.Sentinels.UnitTest
             MoveCard(FindTurnTakerController(card.Owner), card, card.NativeDeck, toBottom);
         }
 
+#pragma warning disable IDE0044 // Add readonly modifier
         private Dictionary<Location, string[]> _stackAfterReshuffle = new Dictionary<Location, string[]>();
+#pragma warning restore IDE0044 // Add readonly modifier
 
         private IEnumerator StackCardsResponse(ShuffleCardsAction action)
         {
@@ -4770,7 +5017,9 @@ namespace Handelabra.Sentinels.UnitTest
         {
             Assert.AreEqual(cards.Count(), hpChanges.Count(), "AssertHPAtEndOfTurn: The number of cards provided and the number of expected results do not match up: " + cards.Count() + " and " + hpChanges.Count());
             int index = this.GameController.TurnTakerControllers.IndexOf(ttc).Value;
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
             TurnTakerController previousTTC = null;
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
             if (index > 0)
             {
                 previousTTC = this.GameController.TurnTakerControllers.ElementAt(index - 1);
@@ -4811,7 +5060,9 @@ namespace Handelabra.Sentinels.UnitTest
                 controller = this.GameController;
             }
 
+#pragma warning disable IDE0017 // Simplify object initialization
             BinaryFormatter formatter = new BinaryFormatter();
+#pragma warning restore IDE0017 // Simplify object initialization
             formatter.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
             FileStream stream = null;
             try
@@ -4849,7 +5100,9 @@ namespace Handelabra.Sentinels.UnitTest
         {
             if (File.Exists(path))
             {
+#pragma warning disable IDE0017 // Simplify object initialization
                 BinaryFormatter formatter = new BinaryFormatter();
+#pragma warning restore IDE0017 // Simplify object initialization
                 formatter.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
                 FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                 try
@@ -5401,7 +5654,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void SelectTurnTakerControllersForNextDecision(params TurnTakerController[] ttcs)
         {
+#pragma warning disable IDE0031 // Use null propagation
             var tts = ttcs.Select(ttc => ttc == null ? null : ttc.TurnTaker);
+#pragma warning restore IDE0031 // Use null propagation
             SelectTurnTakersForNextDecision(tts.ToArray());
         }
 
@@ -5451,7 +5706,9 @@ namespace Handelabra.Sentinels.UnitTest
         {
             this.DecisionNextSelectionType = type;
 
+#pragma warning disable IDE0039 // Use local function
             GameControllerDecisionEvent decider = decision =>
+#pragma warning restore IDE0039 // Use local function
             {
                 if (this.DecisionNextSelectionType.HasValue)
                 {
@@ -5471,7 +5728,9 @@ namespace Handelabra.Sentinels.UnitTest
         {
             bool expected = true;
 
+#pragma warning disable IDE0039 // Use local function
             GameControllerDecisionEvent decider = decision =>
+#pragma warning restore IDE0039 // Use local function
             {
                 if (expected)
                 {
@@ -5842,7 +6101,10 @@ namespace Handelabra.Sentinels.UnitTest
             }
         }
 
+#pragma warning disable IDE0051 // Remove unused private members
+
         private void PrintReplayDecisionAnswers()
+#pragma warning restore IDE0051 // Remove unused private members
         {
             Console.WriteLine(this.ReplayDecisionAnswers.Select(d => d.DecisionIdentifier).ToCommaList());
         }

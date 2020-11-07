@@ -67,9 +67,11 @@ namespace Workshopping.BreachMage
             IEnumerator coroutine;
             if (index == 1)
             {
-                List<int> powerNumerals = new List<int>();
-                powerNumerals.Add(base.GetPowerNumeral(0, 2));
-                powerNumerals.Add(base.GetPowerNumeral(1, 5));
+                List<int> powerNumerals = new List<int>
+                {
+                    base.GetPowerNumeral(0, 2),
+                    base.GetPowerNumeral(1, 5)
+                };
 
                 List<DestroyCardAction> storedResultsAction = new List<DestroyCardAction>();
                 // Charge ability attempt.

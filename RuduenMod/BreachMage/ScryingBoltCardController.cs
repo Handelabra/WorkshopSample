@@ -1,5 +1,4 @@
-﻿using System;
-using Handelabra.Sentinels.Engine.Controller;
+﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +20,7 @@ namespace Workshopping.BreachMage
             coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.CharacterCard), 4, DamageType.Lightning, new int?(1), false, new int?(1), false, false, false, null, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
 
-            // Reveal the top 2 cards of 1 deck and rearranged. Based on Hyperactive Senses. 
+            // Reveal the top 2 cards of 1 deck and rearranged. Based on Hyperactive Senses.
             List<SelectLocationDecision> storedResults = new List<SelectLocationDecision>();
             coroutine = base.SelectDecks(this.DecisionMaker, 1, SelectionType.RevealCardsFromDeck, (Location l) => true, storedResults, false);
             if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
@@ -38,8 +37,7 @@ namespace Workshopping.BreachMage
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
                 while (storedCards.Count<Card>() > 0 && !base.GameController.IsGameOver)
                 {
-
-                    // If there are cards remaining, select the top card to return. 
+                    // If there are cards remaining, select the top card to return.
                     List<SelectCardDecision> storedTop = new List<SelectCardDecision>();
                     coroutine = base.GameController.SelectCardAndStoreResults(this.DecisionMaker, SelectionType.MoveCardOnDeck, storedCards, storedTop, false, false, null, null, null, null, null, false, true, null);
                     if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
@@ -47,7 +45,7 @@ namespace Workshopping.BreachMage
                     Card topCard = base.GetSelectedCard(storedTop);
                     if (topCard != null)
                     {
-                        // Move other cards on top first, so the selected one is the 'top' card. 
+                        // Move other cards on top first, so the selected one is the 'top' card.
                         Card otherCard = (from c in storedCards
                                           where c.NativeDeck == topCard.NativeDeck && c != topCard
                                           select c).FirstOrDefault<Card>();
@@ -67,7 +65,7 @@ namespace Workshopping.BreachMage
                     topCard = null;
                     storedTop = null;
                 }
-                // Cleanup all revealed cards if there was some catastrophic failure. 
+                // Cleanup all revealed cards if there was some catastrophic failure.
                 coroutine = base.CleanupCardsAtLocations(new List<Location> { deck.OwnerTurnTaker.Revealed }, deck, false, true, false, false, false, true, storedCards);
                 if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
             }

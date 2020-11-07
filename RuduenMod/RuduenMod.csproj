@@ -52,6 +52,11 @@
     <Compile Include="BreachMage\HauntingEchoCardController.cs" />
     <Compile Include="BreachMage\ScryingBoltCardController.cs" />
     <Compile Include="BreachMage\ShineCardController.cs" />
+    <Compile Include="Cascade\CascadeRiverSharedCardController.cs" />
+    <Compile Include="Cascade\CondensedOrbCardController.cs" />
+    <Compile Include="Cascade\RiverbankCardController.cs" />
+    <Compile Include="Cascade\DropletCardController.cs" />
+    <Compile Include="Cascade\ShapeTheStreamCardController.cs" />
     <Compile Include="Inquirer\TheRightQuestionsCardController.cs" />
     <Compile Include="Inquirer\IveFixedTheWoundCardController.cs" />
     <Compile Include="Inquirer\LookADistractionCardController.cs" />

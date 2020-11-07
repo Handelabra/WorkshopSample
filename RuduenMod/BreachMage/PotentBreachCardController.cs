@@ -19,13 +19,13 @@ namespace Workshopping.BreachMage
             base.AddStartOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, new Func<PhaseChangeAction, IEnumerator>(this.CastResponse), TriggerType.DestroyCard, null, false);
 
             // Add damage boost if the direct source of the damage trigger was this card..
-            Func<DealDamageAction, bool> criteria = delegate (DealDamageAction dd)
+            bool criteria(DealDamageAction dd)
             {
                 // Increase damage if the direct trigger of the damage was this card.
                 return (from acs in dd.CardSource.AssociatedCardSources
                         where acs.Card != null
                         select acs.Card).Any((Card c) => c == this.Card);
-            };
+            }
             base.AddIncreaseDamageTrigger(criteria, 1, null, null, false);
         }
 

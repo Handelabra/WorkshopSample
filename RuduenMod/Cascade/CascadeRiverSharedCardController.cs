@@ -3,28 +3,48 @@ using Handelabra.Sentinels.Engine.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Workshopping.BreachMage
+namespace Workshopping.Cascade
 {
+    public interface ICascadeRiverSharedCardController
+    {
+        public Location RiverDeck();
+        public Card Riverbank();
+    }
     public class CascadeRiverSharedCardController : CardController
     {
+        // TO DO: If this doesn't work cleanly, remove the entire static variable! 
+
+        protected static Location _riverDeck;
+        protected static Card _riverbank;
         public CascadeRiverSharedCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
+            _riverbank = null;
+            _riverDeck = null;
         }
-
         public Location RiverDeck()
         {
-            return base.TurnTaker.FindSubDeck("RiverDeck");
-        }
 
-        public Location RiverDeckPlayArea()
+            if (CascadeRiverSharedCardController._riverDeck == null)
+            {
+                CascadeRiverSharedCardController._riverDeck = base.TurnTaker.FindSubDeck("RiverDeck");
+            }
+            return CascadeRiverSharedCardController._riverDeck;
+
+        }
+        public Card Riverbank()
         {
-
-            return base.TurnTaker.FindSubPlayArea("RiverDeck");
-
+            if (CascadeRiverSharedCardController._riverbank == null)
+            {
+                CascadeRiverSharedCardController._riverbank = base.FindCard("Riverbank", false);
+            }
+            return CascadeRiverSharedCardController._riverbank;
         }
 
+        public virtual int WaterCost()
+        {
+            return 1; // Default. 
+        }
     }
 }

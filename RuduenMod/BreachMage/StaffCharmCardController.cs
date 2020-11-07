@@ -1,6 +1,5 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +16,13 @@ namespace Workshopping.BreachMage
         public override void AddTriggers()
         {
             // Add damage boost if the direct source of the damage trigger was this card..
-            Func<DealDamageAction, bool> criteria = delegate (DealDamageAction dd)
+            bool criteria(DealDamageAction dd)
             {
                 // Increase damage if the direct trigger of the damage was this card.
                 return (from acs in dd.CardSource.AssociatedCardSources
                         where acs.Card != null
                         select acs.Card).Any((Card c) => c == this.Card);
-            };
+            }
             base.AddIncreaseDamageTrigger(criteria, 2, null, null, false);
         }
 

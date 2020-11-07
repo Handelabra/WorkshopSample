@@ -1,4 +1,5 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
+using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
 using System.Linq;
@@ -34,6 +35,8 @@ namespace RuduenModTest
 
             AssertNumberOfCardsInDeck(Cascade, 1); // Should start with 1 card in deck.
             AssertNumberOfCardsInHand(Cascade, 4); // And four cards in hand.
+            AssertNumberOfCardsAtLocation(GetCard("Riverbank").UnderLocation, 4); // And 4 cards in the Riverbank.
+            AssertNumberOfCardsAtLocation(Cascade.TurnTaker.FindSubDeck("RiverDeck"), 31); // And 31 cards in the River Deck.
         }
 
         [Test()]
@@ -44,13 +47,52 @@ namespace RuduenModTest
             StartGame();
 
             AssertNumberOfCardsInDeck(Cascade, 1); // Should start with 1 card in deck.
+            MoveCards(Cascade, (Card c) => c.Location == GetCard("Riverbank").UnderLocation, Cascade.TurnTaker.FindSubDeck("RiverDeck"), numberOfCards: 4, overrideIndestructible: true); // Move all cards back to the river deck just in case.
+            Card cardToBuy = MoveCard(Cascade, "ConstantFlow", GetCard("Riverbank").UnderLocation); // Move Storm Swell under so we definitely have something to purchase. (Cost 3.) 
+
+            DecisionMoveCard = cardToBuy;
+            DecisionYesNo = true;
 
             UsePower(Cascade.CharacterCard, 0); // Default Innate. Cast.
 
-            AssertNumberOfCardsInTrash(Cascade, 1);
-            DrawCard(Cascade, 40); // Attempt to draw all cards.
-            DiscardAllCards(Cascade); // Discard all cards.
-            AssertNumberOfCardsInTrash(Cascade, 6); // Confirm new card is also in trash.
+            AssertInTrash(cardToBuy); // Bought.
+        }
+
+        [Test()]
+        public void TestInnatePowerNoAffordable()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+
+            StartGame();
+
+            AssertNumberOfCardsInDeck(Cascade, 1); // Should start with 1 card in deck.
+            MoveCards(Cascade, (Card c) => c.Location == GetCard("Riverbank").UnderLocation, Cascade.TurnTaker.FindSubDeck("RiverDeck"), numberOfCards: 4, overrideIndestructible: true); // Move all cards back to the river deck just in case.
+            Card cardToBuy = MoveCard(Cascade, "StormSwell", GetCard("Riverbank").UnderLocation); // Move Storm Swell under so we definitely have something to purchase. (Cost 3.) 
+
+            DecisionMoveCard = cardToBuy;
+            DecisionYesNo = true;
+
+            UsePower(Cascade.CharacterCard, 0); // Default Innate. Cast.
+
+            AssertAtLocation(cardToBuy, GetCard("Riverbank").UnderLocation);
+        }
+
+
+        [Test()]
+        public void TestShapeTheStream()
+        {
+            // Most basic purchase equivalent! 
+            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+
+            StartGame();
+
+            AssertNumberOfCardsInDeck(Cascade, 1); // Should start with 1 card in deck.
+
+            PlayCard("ShapeTheStream"); // Play the card. 
+
+            AssertNumberOfCardsInTrash(Cascade, 2); // Shape the stream and gained card should now be in trash. 
+            AssertNumberOfCardsAtLocation(GetCard("Riverbank").UnderLocation, 4); // And 4 cards in the Riverbank.
+
         }
     }
 }
