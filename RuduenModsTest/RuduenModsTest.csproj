@@ -30,6 +30,15 @@
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.12.0\lib\net40\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RuduenModBreachMage">
+      <HintPath>..\RuduenMods\BreachMage\bin\Debug\RuduenModBreachMage.dll</HintPath>
+    </Reference>
+    <Reference Include="RuduenModCascade">
+      <HintPath>..\RuduenMods\Cascade\bin\Debug\RuduenModCascade.dll</HintPath>
+    </Reference>
+    <Reference Include="RuduenModInquirer">
+      <HintPath>..\RuduenMods\Inquirer\bin\Debug\RuduenModInquirer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="EngineCommon">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed\EngineCommon.dll</HintPath>
@@ -43,13 +52,6 @@
     <Compile Include="BreachMageTest.cs" />
     <Compile Include="InquirerTest.cs" />
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Setup.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RuduenMod\RuduenMod.csproj">
-      <Project>{44F8C838-553C-482C-B389-2B375B8590C9}</Project>
-      <Name>RuduenMod</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

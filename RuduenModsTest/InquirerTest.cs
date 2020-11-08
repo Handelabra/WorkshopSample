@@ -4,6 +4,7 @@ using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Workshopping.Inquirer;
 
 namespace RuduenModTest
@@ -11,6 +12,14 @@ namespace RuduenModTest
     [TestFixture]
     public class InquirerTest : BaseTest
     {
+        [OneTimeSetUp]
+        public void DoSetup()
+        {
+            // Tell the engine about our mod assembly so it can load up our code.
+            // It doesn't matter which type as long as it comes from the mod's assembly.
+            //var a = Assembly.GetAssembly(typeof(InquirerCharacterCardController)); // replace with your own type
+            ModHelper.AddAssembly("Workshopping", Assembly.GetAssembly(typeof(InquirerCharacterCardController))); // replace with your own namespace
+        }
         protected HeroTurnTakerController Inquirer { get { return FindHero("Inquirer"); } }
 
         [Test()]
