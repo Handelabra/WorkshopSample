@@ -56,6 +56,8 @@
     <Compile Include="Cascade\CondensedOrbCardController.cs" />
     <Compile Include="Cascade\StreamSurgeCardController.cs" />
     <Compile Include="Cascade\RiverWornStoneCardController.cs" />
+    <Compile Include="Cascade\DivergingWatersCardController.cs" />
+    <Compile Include="Cascade\RippledVisionsCardController.cs" />
     <Compile Include="Cascade\WaterlogCardController.cs" />
     <Compile Include="Cascade\RushingWatersCardController.cs" />
     <Compile Include="Cascade\FloodbankCardController.cs" />
@@ -95,6 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\CascadeDeckList.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="License - Handlabra" />
+    <None Include="License - Ruduen" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

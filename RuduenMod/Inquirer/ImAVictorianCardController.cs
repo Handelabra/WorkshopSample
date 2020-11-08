@@ -16,7 +16,7 @@ namespace Workshopping.Inquirer
 
         public override void AddTriggers()
         {
-            this.AddTriggers();
+            base.AddTriggers();
             // Add trigger for discard-to-discard.
             this.AddTrigger<DiscardCardAction>((DiscardCardAction d) => d.WasCardDiscarded && d.Origin.IsHand && d.Origin.OwnerTurnTaker == this.TurnTaker, new Func<DiscardCardAction, IEnumerator>(this.DiscardResponse), TriggerType.DiscardCard, TriggerTiming.After, ActionDescription.Unspecified);
 

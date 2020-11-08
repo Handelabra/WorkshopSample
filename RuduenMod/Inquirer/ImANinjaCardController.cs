@@ -16,7 +16,7 @@ namespace Workshopping.Inquirer
 
         public override void AddTriggers()
         {
-            this.AddTriggers();
+            base.AddTriggers();
             // Add trigger for increasing damage.
             this.AddIncreaseDamageTrigger((DealDamageAction dd) => dd.DamageSource.Card == this.CharacterCard, 1, null, null, false);
 

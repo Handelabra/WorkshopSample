@@ -307,6 +307,37 @@ namespace RuduenModTest
         }
 
         [Test()]
+        public void TestDivergingWaters()
+        {
+            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+
+            StartGame();
+
+            DiscardAllCards(Cascade); // Discard all cards so draw cards can pull an appropriate amount. 
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+            Card followUp = PutInHand("Floodbank");
+            Card waters = PutInHand("DivergingWaters");
+
+
+            DealDamage(Cascade, Cascade, 4, DamageType.Melee);
+
+            DecisionSelectTarget = mdp;
+            DecisionYesNo = true;
+            DecisionSelectCardToPlay = followUp;
+
+            QuickHPStorage(mdp, Cascade.CharacterCard);
+            QuickHandStorage(Cascade); 
+
+            PlayCard(waters); // Play the card. 
+
+            QuickHPCheck(-2, 2); // MDP took one hit, Cascade took one hit.
+            QuickHandCheck(1); // Two cards played/returned, 3 cards drawn. Net +1. 
+            AssertInTrash(followUp); // Used card in discard.
+            AssertAtLocation(waters, Cascade.TurnTaker.FindSubDeck("RiverDeck"), true); // Card returned to river. 
+
+        }
+
+        [Test()]
         public void TestShapeTheStream()
         {
             // Most basic purchase equivalent! 

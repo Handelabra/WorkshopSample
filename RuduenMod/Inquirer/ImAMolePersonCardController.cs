@@ -12,7 +12,7 @@ namespace Workshopping.Inquirer
 
         public override void AddTriggers()
         {
-            this.AddTriggers();
+            base.AddTriggers();
             // Add trigger for increasing healing.
             this.AddTrigger<GainHPAction>((GainHPAction g) => g.HpGainer == this.CharacterCard,
                 (GainHPAction g) => this.GameController.IncreaseHPGain(g, 1, this.GetCardSource(null)),
