@@ -16,19 +16,19 @@ namespace Workshopping.Inquirer
 
         public override void AddTriggers()
         {
-            base.AddTriggers();
+            this.AddTriggers();
             // Add trigger for discard-to-discard.
-            base.AddTrigger<DiscardCardAction>((DiscardCardAction d) => d.WasCardDiscarded && d.Origin.IsHand && d.Origin.OwnerTurnTaker == base.TurnTaker, new Func<DiscardCardAction, IEnumerator>(this.DiscardResponse), TriggerType.DiscardCard, TriggerTiming.After, ActionDescription.Unspecified);
+            this.AddTrigger<DiscardCardAction>((DiscardCardAction d) => d.WasCardDiscarded && d.Origin.IsHand && d.Origin.OwnerTurnTaker == this.TurnTaker, new Func<DiscardCardAction, IEnumerator>(this.DiscardResponse), TriggerType.DiscardCard, TriggerTiming.After, ActionDescription.Unspecified);
 
             // Add trigger for healing.
-            base.AddEndOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, (PhaseChangeAction p) => base.GameController.GainHP(this.CharacterCard, 1), TriggerType.GainHP);
+            this.AddEndOfTurnTrigger((TurnTaker tt) => tt == this.TurnTaker, (PhaseChangeAction p) => this.GameController.GainHP(this.CharacterCard, 1), TriggerType.GainHP);
         }
 
         private IEnumerator DiscardResponse(DiscardCardAction discardCard)
         {
             List<MoveCardAction> storedResults = new List<MoveCardAction>();
-            IEnumerator coroutine = base.GameController.DiscardTopCard(base.HeroTurnTaker.Deck, storedResults);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            IEnumerator coroutine = this.GameController.DiscardTopCard(this.HeroTurnTaker.Deck, storedResults);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

@@ -13,34 +13,34 @@ namespace Workshopping.Cascade
     {
         public RiverbankCardController(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
         {
-            base.SpecialStringMaker.ShowNumberOfCardsUnderCard(base.Card, () => true);
-            base.AddThisCardControllerToList(CardControllerListType.MakesIndestructible);
+            this.SpecialStringMaker.ShowNumberOfCardsUnderCard(this.Card, () => true);
+            this.AddThisCardControllerToList(CardControllerListType.MakesIndestructible);
         }
         public override void AddTriggers()
         {
-            base.AddTrigger<MoveCardAction>((MoveCardAction m) => m.CardToMove.DoKeywordsContain("river") && m.Origin == base.Riverbank().UnderLocation && m.Destination != base.RiverDeck(), new Func<MoveCardAction, IEnumerator>(this.RefillRiverbankResponse), TriggerType.MoveCard, TriggerTiming.After, ActionDescription.Unspecified, false, true, null, false, null, null, false, false);
+            this.AddTrigger<MoveCardAction>((MoveCardAction m) => m.CardToMove.DoKeywordsContain("river") && m.Origin == this.Riverbank().UnderLocation && m.Destination != this.RiverDeck(), new Func<MoveCardAction, IEnumerator>(this.RefillRiverbankResponse), TriggerType.MoveCard, TriggerTiming.After, ActionDescription.Unspecified, false, true, null, false, null, null, false, false);
         }
 
         public override bool AskIfCardIsIndestructible(Card card)
         {
-            return card == base.Card || card.Location == base.Card.UnderLocation;
+            return card == this.Card || card.Location == this.Card.UnderLocation;
         }
         private IEnumerator RefillRiverbankResponse(MoveCardAction m)
         {
             IEnumerator coroutine;
-            Card remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
 
+            Card remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
             // Move remaining riverbank cards. 
             while (remainingCard != null)
             {
-                coroutine = base.GameController.MoveCard(this.HeroTurnTakerController, remainingCard, RiverDeck(), evenIfIndestructible: true);
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                coroutine = this.GameController.MoveCard(this.HeroTurnTakerController, remainingCard, RiverDeck(), toBottom: true, evenIfIndestructible: true);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                 remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
             }
 
             // Then, move the top four to the riverbank. Normal empty deck logic should work if they aren't available.
-            coroutine = base.GameController.MoveCards(this.HeroTurnTakerController, RiverDeck().GetTopCards(4), Riverbank().UnderLocation);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.GameController.MoveCards(this.HeroTurnTakerController, RiverDeck().GetTopCards(4), Riverbank().UnderLocation);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

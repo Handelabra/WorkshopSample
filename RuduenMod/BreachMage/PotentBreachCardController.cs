@@ -16,7 +16,7 @@ namespace Workshopping.BreachMage
 
         public override void AddTriggers()
         {
-            base.AddStartOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, new Func<PhaseChangeAction, IEnumerator>(this.CastResponse), TriggerType.DestroyCard, null, false);
+            this.AddStartOfTurnTrigger((TurnTaker tt) => tt == this.TurnTaker, new Func<PhaseChangeAction, IEnumerator>(this.CastResponse), TriggerType.DestroyCard, null, false);
 
             // Add damage boost if the direct source of the damage trigger was this card..
             bool criteria(DealDamageAction dd)
@@ -26,7 +26,7 @@ namespace Workshopping.BreachMage
                         where acs.Card != null
                         select acs.Card).Any((Card c) => c == this.Card);
             }
-            base.AddIncreaseDamageTrigger(criteria, 1, null, null, false);
+            this.AddIncreaseDamageTrigger(criteria, 1, null, null, false);
         }
 
         protected IEnumerator CastResponse(PhaseChangeAction phaseChange)
@@ -35,14 +35,14 @@ namespace Workshopping.BreachMage
             List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
             // Use a Cast.
-            coroutine = base.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "cast", null, storedResults, true, base.GetCardSource(null));
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults, true, this.GetCardSource(null));
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             if (storedResults.Count > 0)
             {
                 // Destroy the cast card.
-                coroutine = base.GameController.DestroyCard(base.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard);
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                coroutine = this.GameController.DestroyCard(this.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
     }

@@ -19,11 +19,11 @@ namespace Workshopping.BreachMage
 
             // Draw 3 Cards.
             coroutine = this.DrawCards(this.HeroTurnTakerController, 3);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Deal self 2 damage.
             coroutine = this.DealDamage(this.CharacterCard, this.CharacterCard, 2, DamageType.Psychic, true, false, false, null, null, null, false, null);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

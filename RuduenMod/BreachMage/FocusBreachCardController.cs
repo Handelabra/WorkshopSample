@@ -19,24 +19,24 @@ namespace Workshopping.BreachMage
 
             // Draw a card.
             coroutine = this.DrawCard(this.HeroTurnTaker);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Search if appropriate.
-            if (base.TurnTaker.IsHero)
+            if (this.TurnTaker.IsHero)
             {
-                coroutine = base.SearchForCards(this.DecisionMaker, true, true, 1, 1,
+                coroutine = this.SearchForCards(this.DecisionMaker, true, true, 1, 1,
                     new LinqCardCriteria((Card c) => c.DoKeywordsContain("breach"), "breach", true, false, null, null, false)
                     , true, false, false, false, null, false, null, null);
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
             else
             {
-                coroutine = base.GameController.SendMessageAction(base.Card.Title + " has no deck or trash to search.", Priority.Medium, base.GetCardSource(null), null, true);
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                coroutine = this.GameController.SendMessageAction(this.Card.Title + " has no deck or trash to search.", Priority.Medium, this.GetCardSource(null), null, true);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
             // Play a card.
-            coroutine = base.SelectAndPlayCardFromHand(base.HeroTurnTakerController, true, null, null, false, false, true, null);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.SelectAndPlayCardFromHand(this.HeroTurnTakerController, true, null, null, false, false, true, null);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

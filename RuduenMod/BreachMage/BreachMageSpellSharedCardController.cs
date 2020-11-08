@@ -17,14 +17,14 @@ namespace Workshopping.BreachMage
             if (abilityKey == "cast")
             {
                 coroutine = this.ActivateCast();
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
 
         protected virtual IEnumerator ActivateCast()
         {
             IEnumerator coroutine = this.GameController.SendMessageAction("This spell isn't implemented properly yet. Blame Ruduen.", Priority.Medium, GetCardSource());
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

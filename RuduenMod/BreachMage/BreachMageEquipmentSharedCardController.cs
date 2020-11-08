@@ -14,8 +14,8 @@ namespace Workshopping.BreachMage
         public override IEnumerator UsePower(int index = 0)
         {
             // Return card to hand.
-            IEnumerator coroutine = base.GameController.MoveCard(base.TurnTakerController, base.Card, base.HeroTurnTaker.Hand);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            IEnumerator coroutine = this.GameController.MoveCard(this.TurnTakerController, this.Card, this.HeroTurnTaker.Hand);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

@@ -21,15 +21,13 @@ namespace Workshopping.Cascade
             _riverDeck = null;
         }
 
-        // TODO: Figure out why the spell value comparison breaks the check! 
-
         public override IEnumerator UsePower(int index = 0)
         {
             IEnumerator coroutine;
             List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
 
             // Initial test: Discard up to four cards.
-            coroutine = base.GameController.SelectAndDiscardCards(this.HeroTurnTakerController, 4, false, 0, storedResults);
+            coroutine = this.GameController.SelectAndDiscardCards(this.HeroTurnTakerController, 4, false, 0, storedResults);
             if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             int? spellValue = 0;
@@ -40,12 +38,17 @@ namespace Workshopping.Cascade
 
             // Select a card under the riverbank whose cost is less than the others.
             // Yes, this is messy, but it's still the cleanest way of mimicing the official SelectCardAndDoAction without access to the evenIfIndestructable flag. Battle Zones shouldn't be an issue. 
+            // Do null checks first for short circuiting purposes! 
             coroutine = this.GameController.SelectCardAndDoAction(
-                new SelectCardDecision(this.GameController, this.DecisionMaker, SelectionType.MoveCard, this.GameController.FindCardsWhere((Card c) => c.Location == this.Riverbank().UnderLocation && c.FindTokenPool("CascadeCostPool").MaximumValue <= spellValue)),
+                new SelectCardDecision(this.GameController, this.DecisionMaker, SelectionType.MoveCard, this.GameController.FindCardsWhere((Card c) => c.Location == this.Riverbank().UnderLocation && c.FindTokenPool("CascadeCostPool")!= null && c.FindTokenPool("CascadeCostPool").MaximumValue != null && c.FindTokenPool("CascadeCostPool").MaximumValue <= spellValue)),
                 (SelectCardDecision d) => this.GameController.MoveCard(this.DecisionMaker, d.SelectedCard, this.HeroTurnTaker.Trash, false, false, false, null, false, null, null, null, true, false, null, false, false, false, false, this.GetCardSource()),
                 false);
             if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
+
+            // Draw until you have 3 cards.
+            coroutine = this.DrawCardsUntilHandSizeReached(this.DecisionMaker, 3);
+            if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
         //public IEnumerator MoveCardTest(SelectCardDecision d)
@@ -117,7 +120,7 @@ namespace Workshopping.Cascade
         {
             if (CascadeCharacterCardController._riverDeck == null)
             {
-                CascadeCharacterCardController._riverDeck = base.TurnTaker.FindSubDeck("RiverDeck");
+                CascadeCharacterCardController._riverDeck = this.TurnTaker.FindSubDeck("RiverDeck");
             }
             return CascadeCharacterCardController._riverDeck;
 
@@ -127,7 +130,7 @@ namespace Workshopping.Cascade
         {
             if (CascadeCharacterCardController._riverbank == null)
             {
-                CascadeCharacterCardController._riverbank = base.FindCard("Riverbank", false);
+                CascadeCharacterCardController._riverbank = this.FindCard("Riverbank", false);
             }
             return CascadeCharacterCardController._riverbank;
         }

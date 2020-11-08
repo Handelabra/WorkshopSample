@@ -16,12 +16,12 @@ namespace Workshopping.Inquirer
 
         public override void AddTriggers()
         {
-            base.AddTriggers();
+            this.AddTriggers();
             // Add trigger for increasing damage.
-            base.AddIncreaseDamageTrigger((DealDamageAction dd) => dd.DamageSource.Card == base.CharacterCard, 1, null, null, false);
+            this.AddIncreaseDamageTrigger((DealDamageAction dd) => dd.DamageSource.Card == this.CharacterCard, 1, null, null, false);
 
             // Add trigger for discard-for-power.
-            base.AddEndOfTurnTrigger((TurnTaker tt) => tt == base.TurnTaker, new Func<PhaseChangeAction, IEnumerator>(this.DiscardToUsePowerResponse), new TriggerType[]
+            this.AddEndOfTurnTrigger((TurnTaker tt) => tt == this.TurnTaker, new Func<PhaseChangeAction, IEnumerator>(this.DiscardToUsePowerResponse), new TriggerType[]
             {
                 TriggerType.DiscardCard,
                 TriggerType.UsePower
@@ -33,12 +33,12 @@ namespace Workshopping.Inquirer
             List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
             IEnumerator coroutine;
 
-            coroutine = base.GameController.SelectAndDiscardCard(base.HeroTurnTakerController, true, null, storedResults, SelectionType.DiscardCard);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.GameController.SelectAndDiscardCard(this.HeroTurnTakerController, true, null, storedResults, SelectionType.DiscardCard);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            if (base.DidDiscardCards(storedResults, null, false))
+            if (this.DidDiscardCards(storedResults, null, false))
             {
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
     }

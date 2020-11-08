@@ -70,20 +70,20 @@ namespace Workshopping.Inquirer
             List<DestroyCardAction> storedResults = new List<DestroyCardAction>();
 
             // Draw a card.
-            coroutine = base.DrawCard(this.HeroTurnTaker, false, null, true);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.DrawCard(this.HeroTurnTaker, false, null, true);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // You may destroy one of your ongoings.
-            coroutine = base.GameController.SelectAndDestroyCard(base.HeroTurnTakerController,
-                new LinqCardCriteria((Card c) => c.IsOngoing && c.Owner == base.TurnTaker, "ongoing", true, false, null, null, false),
-                true, storedResults, null, base.GetCardSource(null));
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.GameController.SelectAndDestroyCard(this.HeroTurnTakerController,
+                new LinqCardCriteria((Card c) => c.IsOngoing && c.Owner == this.TurnTaker, "ongoing", true, false, null, null, false),
+                true, storedResults, null, this.GetCardSource(null));
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // If you do, play a card.
             if (storedResults.Count<DestroyCardAction>() >= 1)
             {
-                coroutine = base.SelectAndPlayCardFromHand(base.HeroTurnTakerController, true, null, null, false, false, false, null);
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                coroutine = this.SelectAndPlayCardFromHand(this.HeroTurnTakerController, true, null, null, false, false, false, null);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
             yield break;
         }

@@ -17,13 +17,13 @@ namespace Workshopping.BreachMage
         {
             IEnumerator coroutine;
             // Damage.
-            coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.CharacterCard), 4, DamageType.Lightning, new int?(1), false, new int?(1), false, false, false, null, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 4, DamageType.Lightning, new int?(1), false, new int?(1), false, false, false, null, null, null, null, null, false, null, null, false, null, this.GetCardSource(null));
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Reveal the top 2 cards of 1 deck and rearranged. Based on Hyperactive Senses.
             List<SelectLocationDecision> storedResults = new List<SelectLocationDecision>();
-            coroutine = base.SelectDecks(this.DecisionMaker, 1, SelectionType.RevealCardsFromDeck, (Location l) => true, storedResults, false);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.SelectDecks(this.DecisionMaker, 1, SelectionType.RevealCardsFromDeck, (Location l) => true, storedResults, false);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Fetch selected deck.
             Location deck = (from l in storedResults
@@ -33,16 +33,16 @@ namespace Workshopping.BreachMage
             {
                 // Reveal top 2 cards of deck.
                 List<Card> storedCards = new List<Card>();
-                coroutine = base.GameController.RevealCards(base.TurnTakerController, deck, 2, storedCards, false, RevealedCardDisplay.Message, null, base.GetCardSource(null));
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
-                while (storedCards.Count<Card>() > 0 && !base.GameController.IsGameOver)
+                coroutine = this.GameController.RevealCards(this.TurnTakerController, deck, 2, storedCards, false, RevealedCardDisplay.Message, null, this.GetCardSource(null));
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                while (storedCards.Count<Card>() > 0 && !this.GameController.IsGameOver)
                 {
                     // If there are cards remaining, select the top card to return.
                     List<SelectCardDecision> storedTop = new List<SelectCardDecision>();
-                    coroutine = base.GameController.SelectCardAndStoreResults(this.DecisionMaker, SelectionType.MoveCardOnDeck, storedCards, storedTop, false, false, null, null, null, null, null, false, true, null);
-                    if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                    coroutine = this.GameController.SelectCardAndStoreResults(this.DecisionMaker, SelectionType.MoveCardOnDeck, storedCards, storedTop, false, false, null, null, null, null, null, false, true, null);
+                    if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-                    Card topCard = base.GetSelectedCard(storedTop);
+                    Card topCard = this.GetSelectedCard(storedTop);
                     if (topCard != null)
                     {
                         // Move other cards on top first, so the selected one is the 'top' card.
@@ -51,14 +51,14 @@ namespace Workshopping.BreachMage
                                           select c).FirstOrDefault<Card>();
                         if (otherCard != null)
                         {
-                            coroutine = base.GameController.MoveCard(base.TurnTakerController, otherCard, otherCard.NativeDeck, false, false, true, null, false, null, null, null, false, false, null, false, false, false, false, base.GetCardSource(null));
-                            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                            coroutine = this.GameController.MoveCard(this.TurnTakerController, otherCard, otherCard.NativeDeck, false, false, true, null, false, null, null, null, false, false, null, false, false, false, false, this.GetCardSource(null));
+                            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                             storedCards.Remove(otherCard);
                         }
 
                         // Move actual top card.
-                        coroutine = base.GameController.MoveCard(base.TurnTakerController, topCard, topCard.NativeDeck, false, false, true, null, false, null, null, null, false, false, null, false, false, false, false, base.GetCardSource(null));
-                        if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                        coroutine = this.GameController.MoveCard(this.TurnTakerController, topCard, topCard.NativeDeck, false, false, true, null, false, null, null, null, false, false, null, false, false, false, false, this.GetCardSource(null));
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                         storedCards.Remove(topCard);
                         otherCard = null;
                     }
@@ -66,8 +66,8 @@ namespace Workshopping.BreachMage
                     storedTop = null;
                 }
                 // Cleanup all revealed cards if there was some catastrophic failure.
-                coroutine = base.CleanupCardsAtLocations(new List<Location> { deck.OwnerTurnTaker.Revealed }, deck, false, true, false, false, false, true, storedCards);
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                coroutine = this.CleanupCardsAtLocations(new List<Location> { deck.OwnerTurnTaker.Revealed }, deck, false, true, false, false, false, true, storedCards);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
     }

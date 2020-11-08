@@ -17,18 +17,22 @@ namespace Workshopping.Cascade
 
         protected static Location _riverDeck;
         protected static Card _riverbank;
+        protected static TurnTakerController _turnTakerController; 
         public CascadeRiverSharedCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
+            // Set these up on initialization, so Guise doesn't do bad things. 
+            _turnTakerController = TurnTakerController;
             _riverbank = null;
-            _riverDeck = null;
+            _riverDeck = null; 
         }
         public Location RiverDeck()
         {
 
             if (CascadeRiverSharedCardController._riverDeck == null)
             {
-                CascadeRiverSharedCardController._riverDeck = base.TurnTaker.FindSubDeck("RiverDeck");
+                // TODO: These must always find Cascade's river deck. Even if Guise is using things! 
+                CascadeRiverSharedCardController._riverDeck = _turnTakerController.TurnTaker.FindSubDeck("RiverDeck");
             }
             return CascadeRiverSharedCardController._riverDeck;
 
@@ -37,14 +41,9 @@ namespace Workshopping.Cascade
         {
             if (CascadeRiverSharedCardController._riverbank == null)
             {
-                CascadeRiverSharedCardController._riverbank = base.FindCard("Riverbank", false);
+                CascadeRiverSharedCardController._riverbank = _turnTakerController.TurnTaker.FindCard("Riverbank", false);
             }
             return CascadeRiverSharedCardController._riverbank;
-        }
-
-        public virtual int WaterCost()
-        {
-            return 1; // Default. 
         }
     }
 }

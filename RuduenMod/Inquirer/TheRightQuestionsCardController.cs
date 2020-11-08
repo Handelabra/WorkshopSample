@@ -19,19 +19,19 @@ namespace Workshopping.Inquirer
             List<DestroyCardAction> storedResultsAction = new List<DestroyCardAction>();
 
             // Destroy Ongoing/Environment.
-            coroutine = base.GameController.SelectAndDestroyCard(base.HeroTurnTakerController, new LinqCardCriteria((Card c) => c.IsOngoing || c.IsEnvironment, "ongoing or environment", true, false, null, null, false), false, storedResultsAction, null, base.GetCardSource(null));
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.GameController.SelectAndDestroyCard(this.HeroTurnTakerController, new LinqCardCriteria((Card c) => c.IsOngoing || c.IsEnvironment, "ongoing or environment", true, false, null, null, false), false, storedResultsAction, null, this.GetCardSource(null));
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            if (base.GetNumberOfCardsDestroyed(storedResultsAction) > 0)
+            if (this.GetNumberOfCardsDestroyed(storedResultsAction) > 0)
             {
                 // Play a distortion.
-                coroutine = base.SelectAndPlayCardsFromHand(base.HeroTurnTakerController, 1, false, 0, new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 1, false, 0, new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 
             // Bounce one of your distortions.
-            coroutine = base.GameController.SelectAndMoveCard(base.HeroTurnTakerController, (Card c) => c.IsDistortion && c.Owner == base.HeroTurnTaker, this.HeroTurnTaker.Hand);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.GameController.SelectAndMoveCard(this.HeroTurnTakerController, (Card c) => c.IsDistortion && c.Owner == this.HeroTurnTaker, this.HeroTurnTaker.Hand);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

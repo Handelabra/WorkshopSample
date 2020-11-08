@@ -15,23 +15,23 @@ namespace Workshopping.Inquirer
 
         public override IEnumerator Play()
         {
-            Card nextTo = base.GetCardThisCardIsNextTo(true);
+            Card nextTo = this.GetCardThisCardIsNextTo(true);
             if (nextTo != null)
             {
                 // Heal.
-                IEnumerator coroutine = base.GameController.GainHP(nextTo, 5);
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                IEnumerator coroutine = this.GameController.GainHP(nextTo, 5);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
 
         protected override IEnumerator OnDestroyResponse(DestroyCardAction dc)
         {
             // Damage target.
-            Card nextTo = base.GetCardThisCardIsNextTo(true);
+            Card nextTo = this.GetCardThisCardIsNextTo(true);
             if (nextTo != null && nextTo.IsInPlayAndHasGameText)
             {
-                IEnumerator coroutine = base.DealDamage(nextTo, nextTo, 2, DamageType.Psychic, false, false, false, null, null, null, false, null);
-                if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+                IEnumerator coroutine = this.DealDamage(nextTo, nextTo, 2, DamageType.Psychic, false, false, false, null, null, null, false, null);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
     }

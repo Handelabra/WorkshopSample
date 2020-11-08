@@ -15,8 +15,8 @@ namespace Workshopping.BreachMage
         {
             IEnumerator coroutine;
             // Damage.
-            coroutine = base.DealDamage(base.CharacterCard, (Card card) => !card.IsHero, 3, DamageType.Fire, false, false, null, null, null, false, null, null, false, false);
-            if (base.UseUnityCoroutines) { yield return base.GameController.StartCoroutine(coroutine); } else { base.GameController.ExhaustCoroutine(coroutine); }
+            coroutine = this.DealDamage(this.CharacterCard, (Card card) => !card.IsHero, 3, DamageType.Fire, false, false, null, null, null, false, null, null, false, false);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

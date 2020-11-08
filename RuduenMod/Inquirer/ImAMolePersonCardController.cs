@@ -12,15 +12,15 @@ namespace Workshopping.Inquirer
 
         public override void AddTriggers()
         {
-            base.AddTriggers();
+            this.AddTriggers();
             // Add trigger for increasing healing.
-            base.AddTrigger<GainHPAction>((GainHPAction g) => g.HpGainer == base.CharacterCard,
-                (GainHPAction g) => base.GameController.IncreaseHPGain(g, 1, base.GetCardSource(null)),
+            this.AddTrigger<GainHPAction>((GainHPAction g) => g.HpGainer == this.CharacterCard,
+                (GainHPAction g) => this.GameController.IncreaseHPGain(g, 1, this.GetCardSource(null)),
                 new TriggerType[] { TriggerType.IncreaseHPGain, TriggerType.ModifyHPGain },
                 TriggerTiming.Before, null, false, true, null, false, null, null, false, false);
 
             // Add trigger for end of turn damage.
-            base.AddDealDamageAtEndOfTurnTrigger(base.TurnTaker, base.CharacterCard, (Card c) => true, TargetType.SelectTarget, 1, DamageType.Melee);
+            this.AddDealDamageAtEndOfTurnTrigger(this.TurnTaker, this.CharacterCard, (Card c) => true, TargetType.SelectTarget, 1, DamageType.Melee);
         }
     }
 }

@@ -17,10 +17,5 @@ namespace Workshopping.Cascade
         {
             yield return null;
         }
-
-        public override int WaterCost()
-        {
-            return 1;
-        }
     }
 }
