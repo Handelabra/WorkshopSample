@@ -1,24 +1,15 @@
-# WorkshopSample
-Example project for developing a mod for Sentinels of the Multiverse
+# Ruduen's SotM Digital Fan Decks
+This is Ruduen's implementation of various Sentinels of the Multiplayers items. 
+
+This was originally branched from the Handlabra Sample Project, but primarily contains new creations and implementations. If you want to make new items, that will be a better starting point - this is meant to be a reference for anybody who wishes to use this work as a basis for further derivation, or would like to help address any issues once this is posted. 
 
 For more information please visit the Trello board: https://trello.com/b/vYBMImbg/sotm-workshop
 
-This project is a very rough template for starting work on making a mod with new hero, villain, and/or environment decks.
+# To Do
 
-Getting started:
+- Make an overarching pass to distinguish between hero actions (when a hero/character does something) and player actions (when a player does something), because Guise effects can blur the two, and theoretical situations where cards change hands can occur. 
 
-- Get a copy of the project (probably make your own repo or a fork or something)
-- Update the references for EngineCommon and SentinelsEngine to point to the DLLs in your own copy of the game:
-  - Windows: C:\Program Files\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed
-  - Mac: /Users/<USERNAME>/Library/Application Support/Steam/steamapps/common/Sentinels of the Multiverse/Sentinels.app/Contents/Resources/Data/Managed
-  - Linux: ~/.local/share/Steam/steamapps/common/Sentinels of the Multiverse/Sentinels_Data/Managed
-- You should then be be able to compile, run the unit tests, run the console program, etc.  
+# Licenses
 
-Making your mod:
-
-- Feel free to rename the project files, etc etc to whatever you like.
-- The Default Namespace setting in the main project (MyMod) must be a unique namespace for your mod. It must match the namespace of your code. (Currently only a single string with no dots is supported).
-- The namespace of your deck's code (card controllers, etc) should be YourNameSpace.DeckIdentifier
-- Update the Setup.cs in the test project to register your own class & namespace with the engine in the DoSetup method.
-
-More documentation and proper template project to come some day!
+New work by Ruduen. Available under CC BY 4.0. See "License - Ruduen" for details.
+Original work Copyright (c) 2020 Handelabra Games Inc. Available under MIT License. See "License - Handlabra" for details.
