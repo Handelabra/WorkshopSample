@@ -53,6 +53,10 @@
     <Compile Include="BreachMage\ScryingBoltCardController.cs" />
     <Compile Include="BreachMage\ShineCardController.cs" />
     <Compile Include="Cascade\CascadeRiverSharedCardController.cs" />
+    <Compile Include="Cascade\RisingWatersCardController.cs" />
+    <Compile Include="Cascade\PerpetualFlowCardController.cs" />
+    <Compile Include="Cascade\MeetingTheOceanCardController.cs" />
+    <Compile Include="Cascade\StormSwellCardController.cs" />
     <Compile Include="Cascade\CondensedOrbCardController.cs" />
     <Compile Include="Cascade\StreamSurgeCardController.cs" />
     <Compile Include="Cascade\RiverWornStoneCardController.cs" />

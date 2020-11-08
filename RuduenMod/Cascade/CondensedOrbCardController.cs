@@ -15,7 +15,8 @@ namespace Workshopping.Cascade
 
         public override IEnumerator Play()
         {
-            yield return null;
+            IEnumerator coroutine = this.GameController.SelectAndGainHP(this.HeroTurnTakerController, 3, false, null, 2);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

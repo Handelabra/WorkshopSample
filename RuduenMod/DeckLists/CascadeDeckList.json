@@ -42,7 +42,7 @@
         "At the start of the game, take all River cards in Cascade's deck and shuffle them together to create the River deck. Then, place the top 4 cards of the River deck under this card.",
         "This card and all cards beneath this card are indestructible.",
         "This card is not a hero, villain, or environment card.",
-        "After a card is moved from beneath this to somewhere other than the River deck, move all remaining cards beneath this to the bottom of the River deck and move the top four cards from River deck beneath this."
+        "After a card beneath this is played or moved to somewhere other than the River deck, move all remaining cards beneath this to the bottom of the River deck and move the top four cards from River deck beneath this."
       ],
       "icons": [
         "Indestructible","Manipulate"
@@ -200,7 +200,7 @@
       "count": 3,
       "title": "CondensedOrb",
       "keywords": [ "river", "one-shot" ],
-      "body": [ "Aqua Cost: 5", "2 Hero Targets gain 3 HP." ],
+      "body": [ "Aqua Cost: 5", "2 Targets gain 3 HP." ],
       "magicNumbers": [ 3, 3, 3 ],
       "icons": [ "GainHP" ],
       "tokenPools": [
@@ -218,7 +218,7 @@
       "count": 3,
       "title": "Storm Swell",
       "keywords": [ "river", "one-shot" ],
-      "body": [ "Aqua Cost: 5", "{Cascade} deals 2 Targets 4 Cold Damage." ],
+      "body": [ "Aqua Cost: 5", "{Cascade} deals up to 2 Targets 4 Cold Damage." ],
       "icons": [ "DealDamageCold" ],
       "magicNumbers": [ 2, 2, 2 ],
       "tokenPools": [
@@ -268,9 +268,9 @@
       ]
     },
     {
-      "identifier": "Perpetual Flow",
+      "identifier": "PerpetualFlow",
       "count": 3,
-      "title": "Shape the Stream",
+      "title": "Perpetual Flow",
       "keywords": [ "river", "one-shot" ],
       "body": [ "Aqua Cost: 7", "Play 1 card from the Riverbank. (It is treated as your card afterward.) " ],
       "icons": [ "PlayCardNow", "Manipulate" ],
@@ -290,7 +290,7 @@
       "count": 3,
       "title": "Meeting The Ocean",
       "keywords": [ "river", "ongoing" ],
-      "power": [ "Discard up to 3 cards. For each card discarded this way, {Cascade} deals 1 target Cold Damage equal to the total {spell} of the cards discarded this way." ],
+      "powers": [ "Discard up to 3 cards. For each card discarded this way, {Cascade} deals 1 target Cold Damage equal to the total {spell} of the cards discarded this way." ],
       "body": [ "Aqua Cost: 7" ],
       "icons": [ "DealDamageCold", "Discard" ],
       "magicNumbers": [ 4, 4, 4 ],

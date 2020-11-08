@@ -18,17 +18,29 @@ namespace Workshopping.Cascade
         }
         public override void AddTriggers()
         {
-            this.AddTrigger<MoveCardAction>((MoveCardAction m) => m.CardToMove.DoKeywordsContain("river") && m.Origin == this.Riverbank().UnderLocation && m.Destination != this.RiverDeck(), new Func<MoveCardAction, IEnumerator>(this.RefillRiverbankResponse), TriggerType.MoveCard, TriggerTiming.After, ActionDescription.Unspecified, false, true, null, false, null, null, false, false);
+            this.AddTrigger<MoveCardAction>((MoveCardAction m) => m.Origin == this.Riverbank().UnderLocation && m.Destination != this.RiverDeck(), new Func<MoveCardAction, IEnumerator>(this.RefillRiverbankResponse), TriggerType.MoveCard, TriggerTiming.After);
+            this.AddTrigger<PlayCardAction>((PlayCardAction p) => p.Origin == this.Riverbank().UnderLocation, new Func<PlayCardAction, IEnumerator>(this.RefillRiverbankResponse), TriggerType.PlayCard, TriggerTiming.After);
         }
 
         public override bool AskIfCardIsIndestructible(Card card)
         {
             return card == this.Card || card.Location == this.Card.UnderLocation;
         }
+
+        private IEnumerator RefillRiverbankResponse(PlayCardAction p)
+        {
+            IEnumerator coroutine = RefillRiverbankResponseHelper();
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+        }
         private IEnumerator RefillRiverbankResponse(MoveCardAction m)
         {
-            IEnumerator coroutine;
+            IEnumerator coroutine = RefillRiverbankResponseHelper();
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+        }
 
+        private IEnumerator RefillRiverbankResponseHelper()
+        {
+            IEnumerator coroutine;
             Card remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
             // Move remaining riverbank cards. 
             while (remainingCard != null)

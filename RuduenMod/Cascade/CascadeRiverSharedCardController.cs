@@ -11,7 +11,7 @@ namespace Workshopping.Cascade
         public Location RiverDeck();
         public Card Riverbank();
     }
-    public class CascadeRiverSharedCardController : CardController
+    public abstract class CascadeRiverSharedCardController : CardController
     {
         // TO DO: If this doesn't work cleanly, remove the entire static variable! 
 
