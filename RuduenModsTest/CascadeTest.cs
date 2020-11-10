@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using Workshopping.Cascade;
 
-namespace RuduenModTest
+namespace RuduenModsTest
 {
     [TestFixture]
     public class CascadeMageTest : BaseTest

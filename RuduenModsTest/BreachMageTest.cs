@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Workshopping.BreachMage;
 
-namespace RuduenModTest
+namespace RuduenModsTest
 {
     [TestFixture]
     public class BreachMageTest : BaseTest

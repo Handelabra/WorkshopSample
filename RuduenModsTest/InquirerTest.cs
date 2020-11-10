@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Workshopping.Inquirer;
 
-namespace RuduenModTest
+namespace RuduenModsTest
 {
     [TestFixture]
     public class InquirerTest : BaseTest
