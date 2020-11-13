@@ -50,14 +50,17 @@
     <Compile Include="TheBaddies\TheBaddiesCharacterCardController.cs" />
     <Compile Include="TheBaddies\TheBaddiesTurnTakerController.cs" />
     <Compile Include="TheBaddies\FireEverythingCardController.cs" />
+    <Compile Include="DevStream\DroppedFrameCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
     <EmbeddedResource Include="DeckLists\TheBaddiesDeckList.json" />
+    <EmbeddedResource Include="DeckLists\DevStreamDeckList.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Folder Include="TheBaddies\" />
+    <Folder Include="DevStream\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

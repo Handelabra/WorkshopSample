@@ -20,7 +20,7 @@ namespace MyModTest
         [Test()]
         public void TestModWorks()
         {
-            SetupGameController("Workshopping.TheBaddies", "Workshopping.MigrantCoder", "Megalopolis");
+            SetupGameController("Workshopping.TheBaddies", "Workshopping.MigrantCoder", "Workshopping.DevStream");
 
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
@@ -32,14 +32,25 @@ namespace MyModTest
             Assert.IsInstanceOf(typeof(MigrantCoderTurnTakerController), migrant);
             Assert.IsInstanceOf(typeof(MigrantCoderCharacterCardController), migrant.CharacterCardController);
 
+            Assert.IsNotNull(env);
+
             Assert.AreEqual(40, baddies.CharacterCard.HitPoints);
             Assert.AreEqual(39, migrant.CharacterCard.HitPoints);
+            QuickHPStorage(baddies, migrant);
 
             // Always deals 5 psychic!
             PlayTopCard(baddies);
 
-            Assert.AreEqual(35, baddies.CharacterCard.HitPoints);
-            Assert.AreEqual(33, migrant.CharacterCard.HitPoints); // Nemesis!
+            QuickHPCheck(-5, -6); // Nemesis!
+
+            PlayTopCard(env);
+
+            // Deals 1 damage
+            QuickHPCheck(-1, -1);
+
+            // Heals 1 at the start of the environment turn
+            GoToStartOfTurn(env);
+            QuickHPCheck(1, 1);
         }
 
         [Test()]
