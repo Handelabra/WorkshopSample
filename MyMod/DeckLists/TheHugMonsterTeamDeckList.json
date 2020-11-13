@@ -1,0 +1,70 @@
+﻿{
+  "name": "The Hug Monster",
+  "kind": "VillainTeam",
+  "initialCardIdentifiers": [
+    "TheHugMonsterTeamCharacter"
+  ],
+  "cards": [
+    {
+      "identifier": "TheHugMonsterTeamCharacter",
+      "count": 1,
+      "title": "The Hug Monster",
+      "keywords": [
+        "villain"
+      ],
+      "icons": [
+        "StartOfTurnAction",
+        "LoseTheGame"
+      ],
+      "advancedIcons": [
+        "EndOfTurnAction",
+        "Discard"
+      ],
+      "body": "Unstoppable Hugging",
+      "backgroundColor": "D99FC5",
+      "foilBackgroundColor": "CD96C0",
+      "character": true,
+      "hitpoints": 25,
+      "nemesisIdentifiers": [
+        "TheWraith"
+      ],
+      "setup": [
+        "At the start of the game, {TheHugMonsterTeam} enters play “Unstoppable Hugging“ side up.",
+        "The Villain Deck is shuffled."
+      ],
+      "gameplay": [
+        "Nothing specific, really."
+      ],
+      "advanced": "It's all the same!",
+      "flippedShowHitpoints": false,
+      "flippedBody": "Incapacitated",
+      "flippedKeywords": [
+
+      ],
+      "flippedGameplay": [
+        "At the start of {TheHugMonsterTeam}'s turn, you feel sad that you no longer get hugs."
+      ],
+      "flippedIcons": [
+        "StartOfTurnAction",
+        "GainHP"
+      ],
+      "difficulty": 1,
+      "openingLines": {
+        "default": "Bring it in!"
+      }
+    },
+    {
+      "identifier": "WarmEmbrace",
+      "count": 20,
+      "title": "Warm Embrace",
+      "keywords": [
+        "ongoing"
+      ],
+      "body": "At the end of each turn, {TheHugMonsterTeam} deals each hero target 1 Melee damage and 1 Fire damage.",
+      "icons": [
+
+      ],
+      "flavorText": "There, there."
+    }
+  ]
+}

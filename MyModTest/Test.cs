@@ -15,6 +15,7 @@ namespace MyModTest
     public class Test : BaseTest
     {
         protected TurnTakerController baddies { get { return FindVillain("TheBaddies"); } }
+        protected TurnTakerController hug { get { return FindVillain("TheHugMonsterTeam"); } }
         protected HeroTurnTakerController migrant { get { return FindHero("MigrantCoder"); } }
 
         [Test()]
@@ -86,6 +87,26 @@ namespace MyModTest
 
             QuickHandCheck(3);
             QuickHPCheck(-2);
+
+        }
+
+        [Test()]
+        public void TestHugMonster()
+        {
+            SetupGameController("Workshopping.TheHugMonsterTeam", "Workshopping.MigrantCoder", "BugbearTeam", "Legacy", "GreazerTeam", "TheWraith", "Megalopolis");
+
+            StartGame();
+
+            var warm = PlayTopCard(hug);
+
+            QuickHPStorage(hug, migrant, bugbearTeam, legacy, greazerTeam, wraith);
+            GoToEndOfTurn(hug);
+            QuickHPCheck(0, -2, 0, -2, 0, -4);
+
+            GoToPlayCardPhase(migrant);
+            DestroyCard(warm);
+            GoToEndOfTurn(migrant);
+            QuickHPCheckZero();
 
         }
     }
