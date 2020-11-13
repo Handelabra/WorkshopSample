@@ -1,0 +1,71 @@
+﻿{
+  "name": "The Baddies",
+  "kind": "Villain",
+  "initialCardIdentifiers": [
+    "TheBaddiesCharacter"
+  ],
+  "cards": [
+    {
+      "identifier": "TheBaddiesCharacter",
+      "count": 1,
+      "title": "The Baddies",
+      "keywords": [
+        "villain"
+      ],
+      "icons": [
+        "StartOfTurnAction",
+        "LoseTheGame"
+      ],
+      "advancedIcons": [
+        "EndOfTurnAction",
+        "Discard"
+      ],
+      "body": "Are we tho?",
+      "backgroundColor": "D99FC5",
+      "foilBackgroundColor": "CD96C0",
+      "character": true,
+      "hitpoints": 40,
+      "nemesisIdentifiers": [
+        "Legacy"
+      ],
+      "setup": [
+        "At the start of the game, {TheBaddies} enters play “Are we tho?“ side up.",
+        "The Villain Deck is shuffled."
+      ],
+      "gameplay": [
+        "Nothing specific, really."
+      ],
+      "advanced": "It's all the same!",
+      "flippedHitpoints": 30,
+      "flippedBody": "How did you get here?",
+      "flippedGameplay": [
+        "Nothing even else!"
+      ],
+      "flippedAdvanced": "Nope!",
+      "flippedIcons": [
+        "EndOfTurnAction",
+        "DealDamageEnergy"
+      ],
+      "flippedAdvancedIcons": [
+        "ReduceDamageTaken"
+      ],
+      "difficulty": 1,
+      "openingLines": {
+        "default": "I'm bad! I'm bad! You know it, you know."
+      }
+    },
+    {
+      "identifier": "FireEverything",
+      "count": 25,
+      "title": "Fire Everything!",
+      "keywords": [
+        "one-shot"
+      ],
+      "body": "{TheBaddies} deals each target 5 Psychic damage.",
+      "icons": [
+
+      ],
+      "flavorText": "The pain!"
+    }
+  ]
+}

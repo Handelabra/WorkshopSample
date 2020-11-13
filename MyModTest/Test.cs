@@ -7,26 +7,39 @@ using Handelabra.Sentinels.Engine.Controller;
 using System.Linq;
 using System.Collections;
 using Handelabra.Sentinels.UnitTest;
+using Workshopping.TheBaddies;
 
 namespace MyModTest
 {
     [TestFixture()]
     public class Test : BaseTest
     {
+        protected TurnTakerController baddies { get { return FindVillain("TheBaddies"); } }
         protected HeroTurnTakerController migrant { get { return FindHero("MigrantCoder"); } }
 
         [Test()]
         public void TestModWorks()
         {
-            SetupGameController("BaronBlade", "Workshopping.MigrantCoder", "Megalopolis");
+            SetupGameController("Workshopping.TheBaddies", "Workshopping.MigrantCoder", "Megalopolis");
 
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
+
+            Assert.IsNotNull(baddies);
+            Assert.IsInstanceOf(typeof(TheBaddiesTurnTakerController), baddies);
+            Assert.IsInstanceOf(typeof(TheBaddiesCharacterCardController), baddies.CharacterCardController);
 
             Assert.IsNotNull(migrant);
             Assert.IsInstanceOf(typeof(MigrantCoderTurnTakerController), migrant);
             Assert.IsInstanceOf(typeof(MigrantCoderCharacterCardController), migrant.CharacterCardController);
 
+            Assert.AreEqual(40, baddies.CharacterCard.HitPoints);
             Assert.AreEqual(39, migrant.CharacterCard.HitPoints);
+
+            // Always deals 5 psychic!
+            PlayTopCard(baddies);
+
+            Assert.AreEqual(35, baddies.CharacterCard.HitPoints);
+            Assert.AreEqual(33, migrant.CharacterCard.HitPoints); // Nemesis!
         }
 
         [Test()]

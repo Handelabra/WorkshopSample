@@ -47,10 +47,17 @@
     <Compile Include="MigrantCoder\MigrantCoderCharacterCardController.cs" />
     <Compile Include="MigrantCoder\PunchingBagCardController.cs" />
     <Compile Include="MigrantCoder\MigrantCoderTurnTakerController.cs" />
+    <Compile Include="TheBaddies\TheBaddiesCharacterCardController.cs" />
+    <Compile Include="TheBaddies\TheBaddiesTurnTakerController.cs" />
+    <Compile Include="TheBaddies\FireEverythingCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
+    <EmbeddedResource Include="DeckLists\TheBaddiesDeckList.json" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="TheBaddies\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
