@@ -53,6 +53,7 @@
     <Compile Include="DevStream\DroppedFrameCardController.cs" />
     <Compile Include="TheHugMonsterTeam\TheHugMonsterTeamCharacterCardController.cs" />
     <Compile Include="TheHugMonsterTeam\WarmEmbraceCardController.cs" />
+    <Compile Include="MigrantCoder\MigrantCoderLockdownCharacterCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />

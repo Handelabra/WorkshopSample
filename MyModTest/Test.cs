@@ -109,5 +109,21 @@ namespace MyModTest
             QuickHPCheckZero();
 
         }
+
+        [Test()]
+        public void TestMigrantCoderLockdown()
+        {
+            SetupGameController("BaronBlade", "Workshopping.MigrantCoder/MigrantCoderLockdown", "Megalopolis");
+
+            StartGame();
+
+            GoToUsePowerPhase(migrant);
+
+            // Use power to reduce damage by 1
+            QuickHPStorage(migrant);
+            UsePower(migrant);
+            PlayCard("PunchingBag");
+            QuickHPCheck(0);
+        }
     }
 }

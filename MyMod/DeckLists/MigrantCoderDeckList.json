@@ -60,5 +60,44 @@
       ],
       "flavorText": "Ouch!"
     }
+  ],
+  "promoCards": [
+    {
+      "identifier": "MigrantCoderCharacter",
+      "promoIdentifier": "MigrantCoderLockdownCharacter",
+      "count": 1,
+      "title": "Migrant Coder",
+      "promoTitle": "Migrant Coder: Lockdown",
+      "body": "Social Distance",
+      "icons": [
+        "HasPower",
+        "MakeDamageIrreducible"
+      ],
+      "backgroundColor": "7B7E7C",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "character": true,
+      "powers": [
+        "Reduce damage dealt to {MigrantCoder} by 1 until the start of your next turn."
+      ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "Bunker"
+      ],
+      "incapacitatedAbilities": [
+        "One Hero may use a Power.",
+        "Destroy an Environment card.",
+        "Destroy a target with 1 HP."
+      ],
+      "flippedIcons": [
+        "UsePowerNow",
+        "DestroyEnvironment",
+        "DestroyTarget"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "Wear a mask! Honestly!"
+      }
+    }
   ]
 }
