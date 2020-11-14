@@ -38,7 +38,7 @@ namespace Workshopping.Cascade
 				if (card.MagicNumber != null)
                 {
 					// Damage based on moved card's magic number.
-					coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.Card), (int) card.MagicNumber, DamageType.Infernal, 1, false, 1, false, false, false, null, null, null, null, null, false, null, null, false, null, this.GetCardSource(null));
+					coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.Card), (int) card.MagicNumber, DamageType.Cold, 1, false, 1, false, false, false, null, null, null, null, null, false, null, null, false, null, this.GetCardSource(null));
 					if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 				}
 			}

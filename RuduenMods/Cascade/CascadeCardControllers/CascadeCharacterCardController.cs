@@ -25,8 +25,8 @@ namespace Workshopping.Cascade
             IEnumerator coroutine;
             List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
 
-            // Initial test: Discard up to four cards.
-            coroutine = this.GameController.SelectAndDiscardCards(this.HeroTurnTakerController, 4, false, 0, storedResults);
+            // Initial test: Discard up to three cards.
+            coroutine = this.GameController.SelectAndDiscardCards(this.DecisionMaker, 3, false, 0, storedResults);
             if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             int? spellValue = 0;
@@ -45,8 +45,8 @@ namespace Workshopping.Cascade
             if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
 
-            // Draw until you have 3 cards.
-            coroutine = this.DrawCardsUntilHandSizeReached(this.DecisionMaker, 3);
+            // Draw until you have 4 cards.
+            coroutine = this.DrawCardsUntilHandSizeReached(this.DecisionMaker, 4);
             if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 

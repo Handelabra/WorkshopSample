@@ -42,16 +42,20 @@ namespace Workshopping.Cascade
         {
             IEnumerator coroutine;
             Card remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
-            // Move remaining riverbank cards. 
-            while (remainingCard != null)
-            {
-                coroutine = this.GameController.MoveCard(this.HeroTurnTakerController, remainingCard, RiverDeck(), toBottom: true, evenIfIndestructible: true);
-                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-                remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
-            }
+            //// Move remaining riverbank cards. 
+            //// Removed during physical revamp to make the process simpler. 
+            //while (remainingCard != null)
+            //{
+            //    coroutine = this.GameController.MoveCard(this.HeroTurnTakerController, remainingCard, RiverDeck(), toBottom: true, evenIfIndestructible: true);
+            //    if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+            //    remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
+            //}
 
-            // Then, move the top four to the riverbank. Normal empty deck logic should work if they aren't available.
-            coroutine = this.GameController.MoveCards(this.HeroTurnTakerController, RiverDeck().GetTopCards(4), Riverbank().UnderLocation);
+            // Confirm number of cards to move. 
+            int cardsToMove = 4 - Riverbank().UnderLocation.Cards.Count();
+
+            // Then, move the top card to the riverbank. Normal empty deck logic should work if they aren't available.
+            coroutine = this.GameController.MoveCards(this.HeroTurnTakerController, RiverDeck().GetTopCards(cardsToMove), Riverbank().UnderLocation);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
