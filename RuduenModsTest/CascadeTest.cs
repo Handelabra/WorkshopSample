@@ -177,7 +177,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestFloodbank()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "Workshopping.Cascade", "Legacy", "Megalopolis");
 
             StartGame();
 
@@ -187,9 +187,11 @@ namespace RuduenModsTest
             DecisionSelectTarget = mdp;
             DecisionSelectTargetFriendly = Cascade.CharacterCard;
 
+            PlayCard("InspiringPresence"); // Use to boost damage by 1 to make sure character card is source. 
+
             QuickHPStorage(mdp, Cascade.CharacterCard);
             PlayCard("Floodbank"); // Play the card. 
-            QuickHPCheck(-2, 2);
+            QuickHPCheck(-3, 2);
 
         }
 
@@ -258,7 +260,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestRiverWornStone()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "Workshopping.Cascade", "Legacy", "Megalopolis");
 
             StartGame();
 
@@ -272,10 +274,12 @@ namespace RuduenModsTest
             DecisionSelectTarget = mdp;
             DecisionSelectCard = cost;
 
+            PlayCard("InspiringPresence"); // Use to boost damage by 1 to make sure character card is source. 
+
             QuickHPStorage(mdp);
 
             UsePower(power, 0);
-            QuickHPCheck(-1); // 1 damage for cost. 
+            QuickHPCheck(-2); // 1 damage for cost, 1 for boost.
             AssertAtLocation(cost, Cascade.TurnTaker.FindSubDeck("RiverDeck")); // Card was moved into the river deck.
             // Discard all cards to clear things for additional tests.
             DiscardAllCards(Cascade);
@@ -349,7 +353,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestRippledVisions()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "Workshopping.Cascade", "Legacy", "Megalopolis");
 
             StartGame();
 
@@ -358,11 +362,13 @@ namespace RuduenModsTest
 
             Card mdp = FindCardInPlay("MobileDefensePlatform");
 
+            PlayCard("InspiringPresence"); // Use to boost damage by 1 to make sure character card is source. 
+
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
             PlayCard("RippledVisions");
-            QuickHPCheck(-1); // 1 damage for cost. 
+            QuickHPCheck(-2); // 1 damage for cost, 1 for boost.
             AssertAtLocation(revealed, Cascade.TurnTaker.FindSubDeck("RiverDeck"));
         }
 
@@ -560,14 +566,12 @@ namespace RuduenModsTest
 
             PlayCard("InspiringPresence"); // Increase damage by 1 to check for null rather than 0. 
 
-            GoToUsePowerPhase(Cascade);
-
             QuickHPStorage(mdp);
             QuickHandStorage(Cascade);
 
             PlayCard("MeetingTheOcean");
             UsePower("MeetingTheOcean");
-            QuickHPCheck(-7); // Instance of 3 and 4. 
+            QuickHPCheck(-7); // Instance of 2 and 3, increased to 3 and 4.
             QuickHandCheck(-3); // Confirm all cards used.
         }
 

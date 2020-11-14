@@ -31,7 +31,7 @@ namespace Workshopping.Cascade
             {
                 if (discardCardAction.IsSuccessful && discardCardAction.CardToDiscard.MagicNumber != null)
                 {
-                    coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(base.GameController, base.Card), (int) discardCardAction.CardToDiscard.MagicNumber, DamageType.Cold, powerNumerals[1], false, powerNumerals[1], false, false, false, null, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
+                    coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), (int) discardCardAction.CardToDiscard.MagicNumber, DamageType.Cold, powerNumerals[1], false, powerNumerals[1], false, false, false, null, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
                     if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                 }
             }

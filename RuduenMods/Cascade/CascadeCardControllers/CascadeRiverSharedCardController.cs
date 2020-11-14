@@ -26,6 +26,11 @@ namespace Workshopping.Cascade
             _riverbank = null;
             _riverDeck = null; 
         }
+
+        public override Location GetTrashDestination()
+        {
+            return this.Card.Owner.Trash; // All cards should go into the main deck during trashing, not river deck.
+        }
         public Location RiverDeck()
         {
 
