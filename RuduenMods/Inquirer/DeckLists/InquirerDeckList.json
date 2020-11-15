@@ -257,5 +257,80 @@
         }
       ]
     }
+  ],
+  "promoCards": [
+    {
+      "identifier": "InquirerCharacter",
+      "promoIdentifier": "InquirerHardFactsCharacter",
+      "count": 1,
+      "title": "Inquirer",
+      "promoTitle": "Hard Facts Inquirer",
+      "icons": [
+        "HasPower",
+        "PlayCardNow",
+        "DealDamagePsychic"
+      ],
+      "backgroundColor": "F0EC5E",
+      "foilBackgroundColor": "FED440",
+      "character": true,
+      "powers": [
+        "You may play an Ongoing card. Until the start of your next turn, non-target Distortions have a maximum HP of 3. Each Distortion deals 1 Target 1 Psychic Damage."
+      ],
+      "hitpoints": 31,
+      "nemesisIdentifiers": [
+        "Inquirer"
+      ],
+      "incapacitatedAbilities": [
+        "One player may draw a card.",
+        "Each Hero regains 1 HP.",
+        "Select a Hero. Reduce the next damage dealt to that hero by 2."
+      ],
+      "flippedIcons": [
+        "DrawCardNow",
+        "GainHP",
+        "ReduceDamageTaken"
+      ],
+      "complexity": 3,
+      "openingLines": {
+        "default": "..."
+      }
+    },
+    {
+      "identifier": "InquirerCharacter",
+      "promoIdentifier": "InquirerLiesOnLiesCharacter",
+      "count": 1,
+      "title": "Inquirer",
+      "promoTitle": "Lies on Lies Inquirer",
+      "icons": [
+        "HasPower",
+        "DealDamageRadiant",
+        "PlayCardNow",
+        "UsePowerNow"
+      ],
+      "backgroundColor": "D98A47",
+      "foilBackgroundColor": "FED440",
+      "character": true,
+      "powers": [
+        "Select a Distortion and put it on top of its deck. Play the top card of your deck."
+      ],
+      "hitpoints": 24,
+      "nemesisIdentifiers": [
+        "Inquirer"
+      ],
+      "incapacitatedAbilities": [
+        "One player may draw a card.",
+        "One hero may use a power.",
+        "Discard the top card of each deck."
+      ],
+      "flippedIcons": [
+        "DrawCardNow",
+        "UsePowerNow",
+        "Discard"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "..."
+      }
+    }
   ]
 }

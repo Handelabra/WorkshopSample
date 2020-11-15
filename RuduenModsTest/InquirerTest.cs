@@ -49,6 +49,128 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestLiesOnLiesInnatePower()
+        {
+            IEnumerable<string> setupItems = new List<string>()
+            {
+                "BaronBlade", "Workshopping.Inquirer", "Megalopolis"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>();
+            promos.Add("InquirerCharacter", "InquirerLiesOnLiesCharacter");
+            SetupGameController(setupItems, false, promos);
+
+
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionNextToCard = mdp;
+
+            Card distortion = PlayCard("YoureLookingPale"); // 5 Damage.
+
+            UsePower(Inquirer);
+
+            // Only one card to return, and should destroy the thing, since movement is not destruction.
+            AssertInTrash(mdp);
+            AssertInPlayArea(baron,distortion); // Distortion handling logic should leave it in play near BB. 
+        }
+
+        [Test()]
+        public void TestHardFactsInnatePower()
+        {
+            IEnumerable<string> setupItems = new List<string>()
+            {
+                "BaronBlade", "Workshopping.Inquirer", "Megalopolis"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>();
+            promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
+            SetupGameController(setupItems, false, promos);
+
+
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            Card distortion = PutInHand("YoureLookingPale"); 
+
+            DecisionNextToCard = mdp;
+            DecisionSelectCardToPlay = distortion;
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+
+            UsePower(Inquirer); // 5 damage from play, 1 more from distortion attack. 
+
+            QuickHPCheck(-6);
+        }
+
+        [Test()]
+        public void TestHardFactsInnatePowerImbuedVitalityFirst()
+        {
+            IEnumerable<string> setupItems = new List<string>()
+            {
+                "BaronBlade", "Workshopping.Inquirer", "RealmOfDiscord"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>();
+            promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
+            SetupGameController(setupItems, false, promos);
+
+
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card vitality = PlayCard("ImbuedVitality");
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            Card distortion = PutInHand("YoureLookingPale");
+
+            DecisionNextToCard = mdp;
+            DecisionSelectCards = new List<Card>() { distortion, mdp, distortion, mdp, mdp };
+
+            QuickHPStorage(mdp);
+
+            UsePower(Inquirer); // 5 damage from play, 2 more from 2 distortion attacks.
+
+            QuickHPCheck(-7);
+            AssertMaximumHitPoints(distortion, 6); // Ongoing affect re-applies over one-time effect.
+
+            GoToStartOfTurn(Inquirer);
+            AssertMaximumHitPoints(distortion, 6); // Return to Imbued Vitality. 
+        }
+
+        [Test()]
+        public void TestHardFactsInnatePowerImbuedVitalitySecond()
+        {
+            IEnumerable<string> setupItems = new List<string>()
+            {
+                "BaronBlade", "Workshopping.Inquirer", "RealmOfDiscord"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>();
+            promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
+            SetupGameController(setupItems, false, promos);
+
+
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card distortion = PutInHand("YoureLookingPale");
+
+            UsePower(Inquirer); // Card played, power used. HP at 3. 
+            PlayCard("ImbuedVitality"); // Card destroyed, but HP updated to 6.
+            PlayCard(distortion); // Replay card.
+
+            AssertMaximumHitPoints(distortion, 6); // This effect came later and should be more relevant.
+
+            DestroyCard("ImbuedVitality"); // Destroy, HP should return to 3. 
+
+            AssertNotTarget(distortion); // No longer a target. This isn't great - I'd expect it to go back to 3, but there's little to do outside of debugging Handlabra code. 
+        }
+
+        [Test()]
         public void TestTheLieTheyTellThemselves()
         {
             SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");

@@ -38,6 +38,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InquirerCardControllers\InquirerHardFactsCharacterCardController.cs" />
+    <Compile Include="InquirerCardControllers\InquirerLiesOnLiesCharacterCardController.cs" />
     <Compile Include="InquirerCardControllers\TheRightQuestionsCardController.cs" />
     <Compile Include="InquirerCardControllers\IveFixedTheWoundCardController.cs" />
     <Compile Include="InquirerCardControllers\LookADistractionCardController.cs" />

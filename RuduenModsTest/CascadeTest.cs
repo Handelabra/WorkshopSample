@@ -227,35 +227,35 @@ namespace RuduenModsTest
             AssertInTrash(ongoing); // Ongoing destroyed.
         }
 
-        [Test()]
-        public void TestStreamSurge()
-        {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+        //[Test()]
+        //public void TestStreamSurge()
+        //{
+        //    SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
 
-            StartGame();
+        //    StartGame();
 
-            List<Card> targets = new List<Card>
-            {
-                FindCardInPlay("MobileDefensePlatform"),
-                FindCardInPlay("BaronBladeCharacter"),
-                Cascade.CharacterCard,
-                FindCardInPlay("BaronBladeCharacter")
-            };
-            Card followUp = PutInHand("Floodbank");
-            DealDamage(Cascade, Cascade, 4, DamageType.Melee);
-            DealDamage(Cascade, targets[0], 9, DamageType.Melee);
+        //    List<Card> targets = new List<Card>
+        //    {
+        //        FindCardInPlay("MobileDefensePlatform"),
+        //        FindCardInPlay("BaronBladeCharacter"),
+        //        Cascade.CharacterCard,
+        //        FindCardInPlay("BaronBladeCharacter")
+        //    };
+        //    Card followUp = PutInHand("Floodbank");
+        //    DealDamage(Cascade, Cascade, 4, DamageType.Melee);
+        //    DealDamage(Cascade, targets[0], 9, DamageType.Melee);
 
-            DecisionSelectTargets = targets.ToArray();
-            DecisionYesNo = true;
-            DecisionSelectCardToPlay = followUp;
+        //    DecisionSelectTargets = targets.ToArray();
+        //    DecisionYesNo = true;
+        //    DecisionSelectCardToPlay = followUp;
 
-            QuickHPStorage(targets[1], Cascade.CharacterCard);
-            PlayCard("StreamSurge"); // Play the card. 
-            AssertNumberOfCardsInTrash(Cascade, 2); // Constant flow and other played cards in trash.
-            AssertInTrash(targets[0]); // MDP Destroyed. 
-            QuickHPCheck(-3, 1); // Blade took 3 hits total. Cascade damaged 1, healed 2. 
+        //    QuickHPStorage(targets[1], Cascade.CharacterCard);
+        //    PlayCard("StreamSurge"); // Play the card. 
+        //    AssertNumberOfCardsInTrash(Cascade, 2); // Constant flow and other played cards in trash.
+        //    AssertInTrash(targets[0]); // MDP Destroyed. 
+        //    QuickHPCheck(-3, 1); // Blade took 3 hits total. Cascade damaged 1, healed 2. 
 
-        }
+        //}
 
         [Test()]
         public void TestRiverWornStone()
@@ -319,36 +319,36 @@ namespace RuduenModsTest
             AssertAtLocation(cost, Cascade.TurnTaker.FindSubDeck("RiverDeck")); // Card was moved into the river deck, necessitating the core 'Dang it Guise' case. 
         }
 
-        [Test()]
-        public void TestDivergingWaters()
-        {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+        //[Test()]
+        //public void TestDivergingWaters()
+        //{
+        //    SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
 
-            StartGame();
+        //    StartGame();
 
-            DiscardAllCards(Cascade); // Discard all cards so draw cards can pull an appropriate amount. 
-            Card mdp = FindCardInPlay("MobileDefensePlatform");
-            Card followUp = PutInHand("Floodbank");
-            Card waters = PutInHand("DivergingWaters");
+        //    DiscardAllCards(Cascade); // Discard all cards so draw cards can pull an appropriate amount. 
+        //    Card mdp = FindCardInPlay("MobileDefensePlatform");
+        //    Card followUp = PutInHand("Floodbank");
+        //    Card waters = PutInHand("DivergingWaters");
 
 
-            DealDamage(Cascade, Cascade, 4, DamageType.Melee);
+        //    DealDamage(Cascade, Cascade, 4, DamageType.Melee);
 
-            DecisionSelectTarget = mdp;
-            DecisionYesNo = true;
-            DecisionSelectCardToPlay = followUp;
+        //    DecisionSelectTarget = mdp;
+        //    DecisionYesNo = true;
+        //    DecisionSelectCardToPlay = followUp;
 
-            QuickHPStorage(mdp, Cascade.CharacterCard);
-            QuickHandStorage(Cascade);
+        //    QuickHPStorage(mdp, Cascade.CharacterCard);
+        //    QuickHandStorage(Cascade);
 
-            PlayCard(waters); // Play the card. 
+        //    PlayCard(waters); // Play the card. 
 
-            QuickHPCheck(-2, 2); // MDP took one hit, Cascade took one hit.
-            QuickHandCheck(1); // Two cards played/returned, 3 cards drawn. Net +1. 
-            AssertInTrash(followUp); // Used card in discard.
-            AssertAtLocation(waters, Cascade.TurnTaker.FindSubDeck("RiverDeck"), true); // Card returned to river. 
+        //    QuickHPCheck(-2, 2); // MDP took one hit, Cascade took one hit.
+        //    QuickHandCheck(1); // Two cards played/returned, 3 cards drawn. Net +1. 
+        //    AssertInTrash(followUp); // Used card in discard.
+        //    AssertAtLocation(waters, Cascade.TurnTaker.FindSubDeck("RiverDeck"), true); // Card returned to river. 
 
-        }
+        //}
 
         [Test()]
         public void TestRippledVisions()
@@ -440,40 +440,40 @@ namespace RuduenModsTest
             QuickHPCheck(-4); // BB 4 damage.
         }
 
-        [Test()]
-        public void TestShapeTheStream()
-        {
-            // Most basic purchase equivalent! 
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+        //[Test()]
+        //public void TestShapeTheStream()
+        //{
+        //    // Most basic purchase equivalent! 
+        //    SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
 
-            StartGame();
+        //    StartGame();
 
-            AssertNumberOfCardsInDeck(Cascade, 2); // Should start with 2 card in deck.
+        //    AssertNumberOfCardsInDeck(Cascade, 2); // Should start with 2 card in deck.
 
-            PlayCard("ShapeTheStream"); // Play the card. 
+        //    PlayCard("ShapeTheStream"); // Play the card. 
 
-            AssertNumberOfCardsInTrash(Cascade, 2); // Shape the stream and gained card should now be in trash. 
-            AssertNumberOfCardsAtLocation(GetCard("Riverbank").UnderLocation, 4); // And 4 cards in the Riverbank.
-        }
+        //    AssertNumberOfCardsInTrash(Cascade, 2); // Shape the stream and gained card should now be in trash. 
+        //    AssertNumberOfCardsAtLocation(GetCard("Riverbank").UnderLocation, 4); // And 4 cards in the Riverbank.
+        //}
 
-        [Test()]
-        public void TestShapeTheStreamGuiseDangIt()
-        {
-            // Most basic purchase equivalent! 
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Megalopolis");
+        //[Test()]
+        //public void TestShapeTheStreamGuiseDangIt()
+        //{
+        //    // Most basic purchase equivalent! 
+        //    SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Megalopolis");
 
-            StartGame();
+        //    StartGame();
 
-            AssertNumberOfCardsInDeck(Cascade, 2); // Should start with 2 card in deck.
-            Card retcon = MoveCard(Cascade, "Retcon", GetCard("Riverbank").UnderLocation); // Move Retcon into riverbank.
+        //    AssertNumberOfCardsInDeck(Cascade, 2); // Should start with 2 card in deck.
+        //    Card retcon = MoveCard(Cascade, "Retcon", GetCard("Riverbank").UnderLocation); // Move Retcon into riverbank.
 
-            DecisionMoveCard = retcon;
+        //    DecisionMoveCard = retcon;
 
-            PlayCard("ShapeTheStream"); // Play the card. 
+        //    PlayCard("ShapeTheStream"); // Play the card. 
 
-            AssertInTrash(Cascade, retcon); // Someone else's card is now in your trash. You monster. 
-            AssertNumberOfCardsAtLocation(GetCard("Riverbank").UnderLocation, 4); // And Riverbank has been reset. 
-        }
+        //    AssertInTrash(Cascade, retcon); // Someone else's card is now in your trash. You monster. 
+        //    AssertNumberOfCardsAtLocation(GetCard("Riverbank").UnderLocation, 4); // And Riverbank has been reset. 
+        //}
 
         // TODO: More in-depth tests for what happens when you play pre-existing cards. Apparently we have Guise + Toolbox to go off of and Akash's seeds - probably just 
         // goes to the original owner, which is fine.
@@ -556,7 +556,7 @@ namespace RuduenModsTest
 
             DiscardAllCards(Cascade);
             
-            PutInHand(Cascade, new List<string>() { "ShapeTheStream", "RisingWaters", "Retcon" }.ToArray());
+            PutInHand(Cascade, new List<string>() { "Waterlog", "RisingWaters", "Retcon" }.ToArray());
 
             // Pull 2, 3, and NA cards for testing. 
             Card mdp = FindCardInPlay("MobileDefensePlatform");
