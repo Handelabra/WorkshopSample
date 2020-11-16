@@ -32,7 +32,7 @@
       "openingLines": {
         "default": "..."
       },
-      "complexity": 3
+      "complexity": 2
     },
     {
       "identifier": "CycleOfMagic",
@@ -189,6 +189,38 @@
       "powers": "Return this card to your hand.",
       "icons": [ "UsePowerNow", "Manipulate" ],
       "flavorText": "...."
+    }
+  ],
+  "promoCards": [
+    {
+      "identifier": "BreachMageCharacter",
+      "promoIdentifier": "BreachMageTwincasterCharacter",
+      "count": 1,
+      "title": "Breach Mage",
+      "body": "J. Twincaster",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": [
+        "{Breach Mage} deals 1 Target 2 Fire Damage.",
+        "Destroy 2 of your Charge cards. If you do, select a card and activate its Cast text twice, then destroy that card."
+      ],
+      "icons": [ "HasPower", "DealDamageFire", "Destroy" ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Destroy an Ongoing card.",
+        "One Hero uses a power.",
+        "One Hero deals 1 target 2 Fire Damage."
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "..."
+      },
+      "complexity": 3
     }
   ]
 }

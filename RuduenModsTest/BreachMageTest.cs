@@ -73,6 +73,57 @@ namespace RuduenModsTest
             QuickHandCheck(5); // 5 Cards Drawn.
             AssertInTrash(charges); // All used charges in trash.
         }
+        [Test()]
+        public void TestTwincasterInnatePower()
+        {
+            List<string> identifiers = new List<string>()
+            {
+                "BaronBlade", "Workshopping.BreachMage", "Megalopolis"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>();
+            promos.Add("BreachMageCharacter", "BreachMageTwincasterCharacter");
+
+            SetupGameController(identifiers, false, promos);
+            
+            StartGame();
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
+            QuickHPCheck(-2); // Damage Dealt.
+        }
+
+        [Test()]
+        public void TestTwincasterInnatePowerB()
+        {
+            List<string> identifiers = new List<string>()
+            {
+                "BaronBlade", "Workshopping.BreachMage", "Megalopolis"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>();
+            promos.Add("BreachMageCharacter", "BreachMageTwincasterCharacter");
+
+            SetupGameController(identifiers, false, promos);
+
+
+            StartGame();
+
+            List<Card> usedCards = new List<Card>()
+            {
+                PlayCard("HammerCharm", 0),
+                PlayCard("HammerCharm", 1),
+                PlayCard("ScryingBolt")
+            };
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            UsePower(BreachMage.CharacterCard, 1); 
+            QuickHPCheck(-8); // Damage Dealt twice.
+            AssertInTrash(usedCards); // All used charges in trash.
+        }
 
         [Test()]
         public void TestCycleOfMagic()
