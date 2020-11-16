@@ -1,9 +1,6 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Workshopping.Cascade;
 
 namespace Workshopping.Cascade
 {
@@ -32,7 +29,7 @@ namespace Workshopping.Cascade
 
         public override bool DoNotMoveOneShotToTrash
         {
-            // TODO: Based on Benchmark, but potentially change to always true if appropriate. 
+            // TODO: Based on Benchmark, but potentially change to always true if appropriate.
             get { return this.Card.IsInLocation(this.RiverDeck()); }
         }
     }

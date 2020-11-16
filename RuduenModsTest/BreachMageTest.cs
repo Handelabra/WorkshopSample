@@ -20,6 +20,7 @@ namespace RuduenModsTest
             //var a = Assembly.GetAssembly(typeof(InquirerCharacterCardController)); // replace with your own type
             ModHelper.AddAssembly("Workshopping", Assembly.GetAssembly(typeof(BreachMageCharacterCardController))); // replace with your own namespace
         }
+
         protected HeroTurnTakerController BreachMage { get { return FindHero("BreachMage"); } }
 
         [Test()]
@@ -73,6 +74,7 @@ namespace RuduenModsTest
             QuickHandCheck(5); // 5 Cards Drawn.
             AssertInTrash(charges); // All used charges in trash.
         }
+
         [Test()]
         public void TestTwincasterInnatePower()
         {
@@ -84,7 +86,7 @@ namespace RuduenModsTest
             promos.Add("BreachMageCharacter", "BreachMageTwincasterCharacter");
 
             SetupGameController(identifiers, false, promos);
-            
+
             StartGame();
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -107,7 +109,6 @@ namespace RuduenModsTest
 
             SetupGameController(identifiers, false, promos);
 
-
             StartGame();
 
             List<Card> usedCards = new List<Card>()
@@ -120,7 +121,7 @@ namespace RuduenModsTest
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
-            UsePower(BreachMage.CharacterCard, 1); 
+            UsePower(BreachMage.CharacterCard, 1);
             QuickHPCheck(-8); // Damage Dealt twice.
             AssertInTrash(usedCards); // All used charges in trash.
         }

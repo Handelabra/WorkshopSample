@@ -2,9 +2,7 @@
 using Handelabra.Sentinels.Engine.Model;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Workshopping.Cascade;
 
 namespace Workshopping.Cascade
 {
@@ -16,6 +14,7 @@ namespace Workshopping.Cascade
             this.SpecialStringMaker.ShowNumberOfCardsUnderCard(this.Card, () => true);
             this.AddThisCardControllerToList(CardControllerListType.MakesIndestructible);
         }
+
         public override void AddTriggers()
         {
             this.AddTrigger<MoveCardAction>((MoveCardAction m) => m.Origin == this.Riverbank().UnderLocation && m.Destination != this.RiverDeck(), new Func<MoveCardAction, IEnumerator>(this.RefillRiverbankResponse), TriggerType.MoveCard, TriggerTiming.After);
@@ -32,6 +31,7 @@ namespace Workshopping.Cascade
             IEnumerator coroutine = RefillRiverbankResponseHelper();
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
+
         private IEnumerator RefillRiverbankResponse(MoveCardAction m)
         {
             IEnumerator coroutine = RefillRiverbankResponseHelper();
@@ -42,8 +42,8 @@ namespace Workshopping.Cascade
         {
             IEnumerator coroutine;
             Card remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
-            //// Move remaining riverbank cards. 
-            //// Removed during physical revamp to make the process simpler. 
+            //// Move remaining riverbank cards.
+            //// Removed during physical revamp to make the process simpler.
             //while (remainingCard != null)
             //{
             //    coroutine = this.GameController.MoveCard(this.HeroTurnTakerController, remainingCard, RiverDeck(), toBottom: true, evenIfIndestructible: true);
@@ -51,7 +51,7 @@ namespace Workshopping.Cascade
             //    remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
             //}
 
-            // Confirm number of cards to move. 
+            // Confirm number of cards to move.
             int cardsToMove = 4 - Riverbank().UnderLocation.Cards.Count();
 
             // Then, move the top card to the riverbank. Normal empty deck logic should work if they aren't available.

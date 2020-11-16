@@ -36,14 +36,13 @@ namespace Workshopping.Cascade
             }
 
             // Select a card under the riverbank whose cost is less than the others.
-            // Yes, this is messy, but it's still the cleanest way of mimicing the official SelectCardAndDoAction without access to the evenIfIndestructable flag. Battle Zones shouldn't be an issue. 
-            // Do null checks first for short circuiting purposes! 
+            // Yes, this is messy, but it's still the cleanest way of mimicing the official SelectCardAndDoAction without access to the evenIfIndestructable flag. Battle Zones shouldn't be an issue.
+            // Do null checks first for short circuiting purposes!
             coroutine = this.GameController.SelectCardAndDoAction(
-                new SelectCardDecision(this.GameController, this.DecisionMaker, SelectionType.MoveCard, this.GameController.FindCardsWhere((Card c) => c.Location == this.Riverbank().UnderLocation && c.FindTokenPool("CascadeCostPool")!= null && c.FindTokenPool("CascadeCostPool").MaximumValue != null && c.FindTokenPool("CascadeCostPool").MaximumValue <= spellValue)),
+                new SelectCardDecision(this.GameController, this.DecisionMaker, SelectionType.MoveCard, this.GameController.FindCardsWhere((Card c) => c.Location == this.Riverbank().UnderLocation && c.FindTokenPool("CascadeCostPool") != null && c.FindTokenPool("CascadeCostPool").MaximumValue != null && c.FindTokenPool("CascadeCostPool").MaximumValue <= spellValue)),
                 (SelectCardDecision d) => this.GameController.MoveCard(this.DecisionMaker, d.SelectedCard, this.HeroTurnTaker.Trash, false, false, false, null, false, null, null, null, true, false, null, false, false, false, false, this.GetCardSource()),
                 false);
             if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
 
             // Draw until you have 4 cards.
             coroutine = this.DrawCardsUntilHandSizeReached(this.DecisionMaker, 4);
@@ -122,7 +121,6 @@ namespace Workshopping.Cascade
                 CascadeCharacterCardController._riverDeck = this.TurnTaker.FindSubDeck("RiverDeck");
             }
             return CascadeCharacterCardController._riverDeck;
-
         }
 
         public Card Riverbank()
@@ -133,6 +131,5 @@ namespace Workshopping.Cascade
             }
             return CascadeCharacterCardController._riverbank;
         }
-
     }
 }

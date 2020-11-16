@@ -73,7 +73,7 @@ namespace Workshopping.Inquirer
             coroutine = this.GameController.SelectCardAndStoreResults(this.HeroTurnTakerController, SelectionType.MoveCardOnDeck, new LinqCardCriteria((Card c) => c.IsInPlay && !c.IsOneShot && c.IsDistortion && this.GameController.IsCardVisibleToCardSource(c, this.GetCardSource(null)), "distortion cards in play", false, false, null, null, false), storedResults, false, false, null, true, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Move based on decision. 
+            // Move based on decision.
             SelectCardDecision selectCardDecision = storedResults.FirstOrDefault();
             if (selectCardDecision != null && selectCardDecision.SelectedCard != null)
             {

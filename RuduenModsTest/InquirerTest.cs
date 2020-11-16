@@ -20,6 +20,7 @@ namespace RuduenModsTest
             //var a = Assembly.GetAssembly(typeof(InquirerCharacterCardController)); // replace with your own type
             ModHelper.AddAssembly("Workshopping", Assembly.GetAssembly(typeof(InquirerCharacterCardController))); // replace with your own namespace
         }
+
         protected HeroTurnTakerController Inquirer { get { return FindHero("Inquirer"); } }
 
         [Test()]
@@ -59,7 +60,6 @@ namespace RuduenModsTest
             promos.Add("InquirerCharacter", "InquirerLiesOnLiesCharacter");
             SetupGameController(setupItems, false, promos);
 
-
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -73,7 +73,7 @@ namespace RuduenModsTest
 
             // Only one card to return, and should destroy the thing, since movement is not destruction.
             AssertInTrash(mdp);
-            AssertInPlayArea(baron,distortion); // Distortion handling logic should leave it in play near BB. 
+            AssertInPlayArea(baron, distortion); // Distortion handling logic should leave it in play near BB.
         }
 
         [Test()]
@@ -87,13 +87,12 @@ namespace RuduenModsTest
             promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
             SetupGameController(setupItems, false, promos);
 
-
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
-            Card distortion = PutInHand("YoureLookingPale"); 
+            Card distortion = PutInHand("YoureLookingPale");
 
             DecisionNextToCard = mdp;
             DecisionSelectCardToPlay = distortion;
@@ -101,7 +100,7 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
 
-            UsePower(Inquirer); // 5 damage from play, 1 more from distortion attack. 
+            UsePower(Inquirer); // 5 damage from play, 1 more from distortion attack.
 
             QuickHPCheck(-6);
         }
@@ -116,7 +115,6 @@ namespace RuduenModsTest
             Dictionary<string, string> promos = new Dictionary<string, string>();
             promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
             SetupGameController(setupItems, false, promos);
-
 
             StartGame();
 
@@ -138,7 +136,7 @@ namespace RuduenModsTest
             AssertMaximumHitPoints(distortion, 6); // Ongoing affect re-applies over one-time effect.
 
             GoToStartOfTurn(Inquirer);
-            AssertMaximumHitPoints(distortion, 6); // Return to Imbued Vitality. 
+            AssertMaximumHitPoints(distortion, 6); // Return to Imbued Vitality.
         }
 
         [Test()]
@@ -152,22 +150,21 @@ namespace RuduenModsTest
             promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
             SetupGameController(setupItems, false, promos);
 
-
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
 
             Card distortion = PutInHand("YoureLookingPale");
 
-            UsePower(Inquirer); // Card played, power used. HP at 3. 
+            UsePower(Inquirer); // Card played, power used. HP at 3.
             PlayCard("ImbuedVitality"); // Card destroyed, but HP updated to 6.
             PlayCard(distortion); // Replay card.
 
             AssertMaximumHitPoints(distortion, 6); // This effect came later and should be more relevant.
 
-            DestroyCard("ImbuedVitality"); // Destroy, HP should return to 3. 
+            DestroyCard("ImbuedVitality"); // Destroy, HP should return to 3.
 
-            AssertNotTarget(distortion); // No longer a target. This isn't great - I'd expect it to go back to 3, but there's little to do outside of debugging Handlabra code. 
+            AssertNotTarget(distortion); // No longer a target. This isn't great - I'd expect it to go back to 3, but there's little to do outside of debugging Handlabra code.
         }
 
         [Test()]

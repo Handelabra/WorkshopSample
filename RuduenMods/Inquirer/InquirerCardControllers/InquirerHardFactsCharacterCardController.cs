@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Handelabra.Sentinels.Engine.Controller;
+using Handelabra.Sentinels.Engine.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Handelabra.Sentinels.Engine.Controller;
-using Handelabra.Sentinels.Engine.Model;
 
 namespace Workshopping.Inquirer
 {
     public class InquirerHardFactsCharacterCardController : HeroCharacterCardController
     {
-
         private List<Card> actedDistortions;
+
         public InquirerHardFactsCharacterCardController(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
         {
             this.actedDistortions = new List<Card>();
@@ -21,15 +21,15 @@ namespace Workshopping.Inquirer
             List<int> numerals = new List<int>(){
                             this.GetPowerNumeral(0, 3),  // Max HP
                             this.GetPowerNumeral(1, 1),  // Number of Targets
-                            this.GetPowerNumeral(2, 1)   // Damage. 
+                            this.GetPowerNumeral(2, 1)   // Damage.
             };
 
-            // You may play an ongoing. 
+            // You may play an ongoing.
             IEnumerator coroutine;
             coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 1, false, 0, new LinqCardCriteria((Card c) => c.IsOngoing, "ongoing", true));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Make distortions HP targets. (Note that this does not apply to pre-existing targets - this is a quirk of how the engine currently applies those effects.) 
+            // Make distortions HP targets. (Note that this does not apply to pre-existing targets - this is a quirk of how the engine currently applies those effects.)
             MakeTargetStatusEffect makeTargetStatusEffect = new MakeTargetStatusEffect(numerals[0], false);
             makeTargetStatusEffect.CardsToMakeTargets.HasAnyOfTheseKeywords = new List<string>() { "distortion" };
             makeTargetStatusEffect.UntilStartOfNextTurn(this.TurnTaker);
@@ -88,6 +88,5 @@ namespace Workshopping.Inquirer
             }
             yield break;
         }
-
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace Workshopping.Cascade
 {
@@ -38,7 +37,6 @@ namespace Workshopping.Cascade
         //IEnumerable<Card> riverCards = this.GameController.FindCardsWhere((Card c) => c.DoKeywordsContain("river") && c.Owner == this.TurnTaker);
         //// Find all river cards and shuffle them into the river deck.
         //coroutine = this.GameController.ShuffleCardsIntoLocation(this, riverCards, this.TurnTaker.FindSubDeck("RiverDeck"));
-
 
         // Old logic for river V2
         //// At the start of game, move all River cards into River deck. (This best preserves the 'identity' of the cards.)

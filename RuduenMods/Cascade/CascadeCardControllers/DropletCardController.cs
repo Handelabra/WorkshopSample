@@ -1,9 +1,7 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Workshopping.Cascade;
 
 namespace Workshopping.Cascade
 {
@@ -22,11 +20,10 @@ namespace Workshopping.Cascade
             coroutine = this.GameController.GainHP(this.DecisionMaker, (Card card) => card.IsHeroCharacterCard, 1, null, false, null, null, null, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Yes/No question to determine reset-move! 
+            // Yes/No question to determine reset-move!
             YesNoAmountDecision yesNoDecision = new YesNoAmountDecision(this.GameController, this.HeroTurnTakerController, SelectionType.MoveCard, Riverbank().UnderLocation.Cards.Count());
             coroutine = this.GameController.MakeDecisionAction(yesNoDecision);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
 
             if (this.DidPlayerAnswerYes(yesNoDecision))
             {

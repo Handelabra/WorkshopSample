@@ -2,8 +2,6 @@
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Workshopping.Cascade;
 
 namespace Workshopping.Cascade
 {
@@ -17,7 +15,7 @@ namespace Workshopping.Cascade
 
         public override IEnumerator UsePower(int index = 0)
         {
-            List<int> powerNumerals = new List<int>() { 
+            List<int> powerNumerals = new List<int>() {
                 this.GetPowerNumeral(0, 3),
                 this.GetPowerNumeral(1, 1),
             };
@@ -31,7 +29,7 @@ namespace Workshopping.Cascade
             {
                 if (discardCardAction.IsSuccessful && discardCardAction.CardToDiscard.MagicNumber != null)
                 {
-                    coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), (int) discardCardAction.CardToDiscard.MagicNumber, DamageType.Cold, powerNumerals[1], false, powerNumerals[1], false, false, false, null, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
+                    coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), (int)discardCardAction.CardToDiscard.MagicNumber, DamageType.Cold, powerNumerals[1], false, powerNumerals[1], false, false, false, null, null, null, null, null, false, null, null, false, null, base.GetCardSource(null));
                     if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                 }
             }

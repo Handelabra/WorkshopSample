@@ -36,7 +36,7 @@ namespace Workshopping.BreachMage
 
                 if (this.GetNumberOfCardsDestroyed(storedResultsAction) == powerNumerals[0])
                 {
-                    // If two were destroyed, select use a spell twice. 
+                    // If two were destroyed, select use a spell twice.
                     List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
                     // Use a Cast.
