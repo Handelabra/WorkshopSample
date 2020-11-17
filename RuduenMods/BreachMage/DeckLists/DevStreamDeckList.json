@@ -1,0 +1,29 @@
+﻿{
+  "name": "Dev Stream",
+  "kind": "Environment",
+  "backgroundColor": "FB5455",
+  "difficulty": 3,
+  "cards": [
+    {
+      "identifier": "DroppedFrame",
+      "count": 15,
+      "title": "Dropped Frame",
+      "body": [
+        "When this card enters play, deal each target 1 Lightning damage.",
+        "At the start of the Environment turn, each target regains 1 HP."
+      ],
+      "icons": [
+        "StartAndEndOfTurnAction",
+        "DealDamageProjectile",
+        "GainHP"
+      ],
+      "flavorQuotes": [
+        {
+          "identifier": "MigrantCoder",
+          "text": "Get it together, internet!"
+        }
+      ],
+      "flavorText": "Get it together, internet!"
+    }
+  ]
+}

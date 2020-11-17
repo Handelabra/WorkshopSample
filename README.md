@@ -1,13 +1,13 @@
 # Ruduen's SotM Digital Fan Decks
-This is Ruduen's implementation of various Sentinels of the Multiplayers items. 
+This is Ruduen's implementation of various Sentinels of the Multiplayers items.
 
-This was originally branched from the Handlabra Sample Project, but primarily contains new creations and implementations. If you want to make new items, that will be a better starting point - this is meant to be a reference for anybody who wishes to use this work as a basis for further derivation, or would like to help address any issues once this is posted. 
+This was originally branched from the Handlabra Sample Project, but primarily contains new creations and implementations. If you want to make new items, that will be a better starting point - this is meant to be a reference for anybody who wishes to use this work as a basis for further derivation, or would like to help address any issues once this is posted.
 
 For more information please visit the Trello board: https://trello.com/b/vYBMImbg/sotm-workshop
 
 # To Do
 
-- Make an overarching pass to distinguish between hero actions (when a hero/character does something) and player actions (when a player does something), because Guise effects can blur the two, and theoretical situations where cards change hands can occur. 
+- Make an overarching pass to distinguish between hero actions (when a hero/character does something) and player actions (when a player does something), because Guise effects can blur the two, and theoretical situations where cards change hands can occur.
 
 # Licenses
 
