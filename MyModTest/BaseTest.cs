@@ -20,8 +20,8 @@ namespace Handelabra.Sentinels.UnitTest
         protected Card DecisionSelectTarget { get; set; }
         protected Card DecisionSelectCard { get; set; }
         protected SelectionType? DecisionDoNotSelectCard { get; set; }
-        protected bool DecisionDoNotSelectFunction  { get; set; }
-        protected IEnumerable<Card> DecisionSelectCards { get ; set; }
+        protected bool DecisionDoNotSelectFunction { get; set; }
+        protected IEnumerable<Card> DecisionSelectCards { get; set; }
         protected int DecisionSelectCardsIndex { get; set; }
         protected Card DecisionSelectCardToPlay { get; set; }
         protected Card[] DecisionSelectTargets { get; set; }
@@ -44,7 +44,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected MoveCardDestination DecisionMoveCardDestination { get; set; }
         protected int DecisionPowerIndex { get; set; }
         protected Card DecisionDiscardCard { get; set; }
-		protected Card DecisionMoveCard { get; set; }
+        protected Card DecisionMoveCard { get; set; }
         protected Card DecisionDestroyCard { get; set; }
         protected Card[] DecisionDestroyCards { get; set; }
         protected int DecisionDestroyCardsIndex { get; set; }
@@ -60,9 +60,9 @@ namespace Handelabra.Sentinels.UnitTest
         protected SelectionType? DecisionNextSelectionType { get; set; }
         protected Card[] DecisionRedirectTargets { get; set; }
         protected int DecisionRedirectTargetsIndex { get; set; }
-        protected Card DecisionSelectPower { get; set;} 
-        protected int DecisionSelectPowerIndex { get; set;} 
-        protected Card[] DecisionSelectPowers { get; set;} 
+        protected Card DecisionSelectPower { get; set; }
+        protected int DecisionSelectPowerIndex { get; set; }
+        protected Card[] DecisionSelectPowers { get; set; }
         protected int DecisionSelectPowersIndex { get; set; }
         protected LocationChoice DecisionSelectLocation { get; set; }
         protected bool DecisionDoNotSelectLocation { get; set; } // Used to pass a null value to a SelectLocationDecision
@@ -83,10 +83,10 @@ namespace Handelabra.Sentinels.UnitTest
         protected bool AllowGameOverDuringGoToPhase { get; set; }
         protected IEnumerable<DecisionAnswerJournalEntry> ReplayDecisionAnswers { get; set; }
         protected bool ReplayingGame { get; set; }
-		protected Card DecisionUnincapacitateHero { get; set; }
-		protected IEnumerable<LocationChoice> DecisionSelectLocations { get; set; }
-		protected int DecisionSelectLocationsIndex { get; set; }
-		protected bool DecisionAutoDecideIfAble { get; set; }
+        protected Card DecisionUnincapacitateHero { get; set; }
+        protected IEnumerable<LocationChoice> DecisionSelectLocations { get; set; }
+        protected int DecisionSelectLocationsIndex { get; set; }
+        protected bool DecisionAutoDecideIfAble { get; set; }
         protected TurnPhase DecisionSelectTurnPhase { get; set; }
         protected string[] DecisionSelectFromBoxIdentifiers { get; set; }
         protected string DecisionSelectFromBoxTurnTakerIdentifier { get; set; }
@@ -111,7 +111,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         private Dictionary<Card, int> _quickHPStorage;
         private Dictionary<HeroTurnTakerController, int> _quickHandStorage;
-		private Dictionary<TurnTakerController, Card> _quickTopCardStorage;
+        private Dictionary<TurnTakerController, Card> _quickTopCardStorage;
         private Dictionary<TokenPool, int> _quickTokenPoolStorage;
         private Dictionary<Location, int> _quickShuffleStorage;
 
@@ -127,44 +127,44 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected int NumberOfDecisionsAnswered { get; private set; }
 
-		// Turn taker controller helpers
-		protected HeroTurnTakerController adept { get { return FindHero("TheArgentAdept"); } }
-		protected HeroTurnTakerController az { get { return FindHero("AbsoluteZero"); } }
+        // Turn taker controller helpers
+        protected HeroTurnTakerController adept { get { return FindHero("TheArgentAdept"); } }
+        protected HeroTurnTakerController az { get { return FindHero("AbsoluteZero"); } }
         protected HeroTurnTakerController bench { get { return FindHero("Benchmark"); } }
-		protected HeroTurnTakerController bunker { get { return FindHero("Bunker"); } }
+        protected HeroTurnTakerController bunker { get { return FindHero("Bunker"); } }
         protected HeroTurnTakerController chrono { get { return FindHero("ChronoRanger"); } }
         protected HeroTurnTakerController comodora { get { return FindHero("LaComodora"); } }
-		protected HeroTurnTakerController cosmic { get { return FindHero("CaptainCosmic"); } }
-		protected HeroTurnTakerController expatriette { get { return FindHero("Expatriette"); } }
-		protected HeroTurnTakerController fanatic { get { return FindHero("Fanatic"); } }
-		protected HeroTurnTakerController fixer { get { return FindHero("MrFixer"); } }
-		protected HeroTurnTakerController guise { get { return FindHero("Guise"); } }
-		protected HeroTurnTakerController haka { get { return FindHero("Haka"); } }
+        protected HeroTurnTakerController cosmic { get { return FindHero("CaptainCosmic"); } }
+        protected HeroTurnTakerController expatriette { get { return FindHero("Expatriette"); } }
+        protected HeroTurnTakerController fanatic { get { return FindHero("Fanatic"); } }
+        protected HeroTurnTakerController fixer { get { return FindHero("MrFixer"); } }
+        protected HeroTurnTakerController guise { get { return FindHero("Guise"); } }
+        protected HeroTurnTakerController haka { get { return FindHero("Haka"); } }
         protected HeroTurnTakerController harpy { get { return FindHero("TheHarpy"); } }
-		protected HeroTurnTakerController knyfe { get { return FindHero("Knyfe"); } }
-		protected HeroTurnTakerController legacy { get { return FindHero("Legacy"); } }
+        protected HeroTurnTakerController knyfe { get { return FindHero("Knyfe"); } }
+        protected HeroTurnTakerController legacy { get { return FindHero("Legacy"); } }
         protected HeroTurnTakerController luminary { get { return FindHero("Luminary"); } }
         protected HeroTurnTakerController lifeline { get { return FindHero("Lifeline"); } }
-		protected HeroTurnTakerController mist { get { return FindHero("NightMist"); } }
-		protected HeroTurnTakerController naturalist { get { return FindHero("TheNaturalist"); } }
-		protected HeroTurnTakerController omnix { get { return FindHero("OmnitronX"); } }
-		protected HeroTurnTakerController parse { get { return FindHero("Parse"); } }
-		protected HeroTurnTakerController ra { get { return FindHero("Ra"); } }
-		protected HeroTurnTakerController scholar { get { return FindHero("TheScholar"); } }
-		protected HeroTurnTakerController sentinels { get { return FindHero("TheSentinels"); } }
-		protected HeroTurnTakerController setback { get { return FindHero("Setback"); } }
-		protected HeroTurnTakerController sky { get { return FindHero("SkyScraper"); } }
+        protected HeroTurnTakerController mist { get { return FindHero("NightMist"); } }
+        protected HeroTurnTakerController naturalist { get { return FindHero("TheNaturalist"); } }
+        protected HeroTurnTakerController omnix { get { return FindHero("OmnitronX"); } }
+        protected HeroTurnTakerController parse { get { return FindHero("Parse"); } }
+        protected HeroTurnTakerController ra { get { return FindHero("Ra"); } }
+        protected HeroTurnTakerController scholar { get { return FindHero("TheScholar"); } }
+        protected HeroTurnTakerController sentinels { get { return FindHero("TheSentinels"); } }
+        protected HeroTurnTakerController setback { get { return FindHero("Setback"); } }
+        protected HeroTurnTakerController sky { get { return FindHero("SkyScraper"); } }
         protected HeroTurnTakerController stunt { get { return FindHero("Stuntman"); } }
         protected HeroTurnTakerController tachyon { get { return FindHero("Tachyon"); } }
         protected HeroTurnTakerController thriya { get { return FindHero("AkashThriya"); } }
-		protected HeroTurnTakerController tempest { get { return FindHero("Tempest"); } }
-		protected HeroTurnTakerController unity { get { return FindHero("Unity"); } }
-		protected HeroTurnTakerController visionary { get { return FindHero("TheVisionary"); } }
+        protected HeroTurnTakerController tempest { get { return FindHero("Tempest"); } }
+        protected HeroTurnTakerController unity { get { return FindHero("Unity"); } }
+        protected HeroTurnTakerController visionary { get { return FindHero("TheVisionary"); } }
         protected HeroTurnTakerController voidMedico { get { return FindHero("VoidGuardDrMedico"); } }
         protected HeroTurnTakerController voidMainstay { get { return FindHero("VoidGuardMainstay"); } }
         protected HeroTurnTakerController voidIdealist { get { return FindHero("VoidGuardTheIdealist"); } }
         protected HeroTurnTakerController voidWrithe { get { return FindHero("VoidGuardWrithe"); } }
-		protected HeroTurnTakerController wraith { get { return FindHero("TheWraith"); } }
+        protected HeroTurnTakerController wraith { get { return FindHero("TheWraith"); } }
 
         // The Sentinels
         protected Card medico { get { return GetCard("DrMedicoCharacter"); } }
@@ -172,38 +172,38 @@ namespace Handelabra.Sentinels.UnitTest
         protected Card idealist { get { return GetCard("TheIdealistCharacter"); } }
         protected Card writhe { get { return GetCard("WritheCharacter"); } }
 
-		// Villains
-		protected TurnTakerController akash { get { return FindVillain("AkashBhuta"); } }
-		protected TurnTakerController ambuscade { get { return FindVillain("Ambuscade"); } }
-		protected TurnTakerController apostate { get { return FindVillain("Apostate"); } }
-		protected TurnTakerController baron { get { return FindVillain("BaronBlade"); } }
-		protected TurnTakerController capitan { get { return FindVillain("LaCapitan"); } }
-		protected TurnTakerController chairman { get { return FindVillain("TheChairman"); } }
-		protected TurnTakerController choke { get { return FindVillain("Chokepoint"); } }
-		protected TurnTakerController dawn { get { return FindVillain("CitizenDawn"); } }
-		protected TurnTakerController deadline { get { return FindVillain("Deadline"); } }
-		protected TurnTakerController dreamer { get { return FindVillain("TheDreamer"); } }
-		protected TurnTakerController ennead { get { return FindVillain("TheEnnead"); } }
-		protected TurnTakerController gloom { get { return FindVillain("GloomWeaver"); } }
-		protected TurnTakerController infinitor { get { return FindVillain("Infinitor"); } }
-		protected TurnTakerController iron { get { return FindVillain("IronLegacy"); } }
-		protected TurnTakerController kismet { get { return FindVillain("Kismet"); } }
-		protected TurnTakerController matriarch { get { return FindVillain("TheMatriarch"); } }
-		protected TurnTakerController miss { get { return FindVillain("MissInformation"); } }
-		protected TurnTakerController omnitron { get { return FindVillain("Omnitron"); } }
-		protected TurnTakerController plague { get { return FindVillain("PlagueRat"); } }
-		protected TurnTakerController progeny { get { return FindVillain("Progeny"); } }
-		protected TurnTakerController spite { get { return FindVillain("Spite"); } }
-		protected TurnTakerController voss { get { return FindVillain("GrandWarlordVoss"); } }
-		protected TurnTakerController wager { get { return FindVillain("WagerMaster"); } }
-		protected TurnTakerController warfang { get { return FindVillain("KaargraWarfang"); } }
+        // Villains
+        protected TurnTakerController akash { get { return FindVillain("AkashBhuta"); } }
+        protected TurnTakerController ambuscade { get { return FindVillain("Ambuscade"); } }
+        protected TurnTakerController apostate { get { return FindVillain("Apostate"); } }
+        protected TurnTakerController baron { get { return FindVillain("BaronBlade"); } }
+        protected TurnTakerController capitan { get { return FindVillain("LaCapitan"); } }
+        protected TurnTakerController chairman { get { return FindVillain("TheChairman"); } }
+        protected TurnTakerController choke { get { return FindVillain("Chokepoint"); } }
+        protected TurnTakerController dawn { get { return FindVillain("CitizenDawn"); } }
+        protected TurnTakerController deadline { get { return FindVillain("Deadline"); } }
+        protected TurnTakerController dreamer { get { return FindVillain("TheDreamer"); } }
+        protected TurnTakerController ennead { get { return FindVillain("TheEnnead"); } }
+        protected TurnTakerController gloom { get { return FindVillain("GloomWeaver"); } }
+        protected TurnTakerController infinitor { get { return FindVillain("Infinitor"); } }
+        protected TurnTakerController iron { get { return FindVillain("IronLegacy"); } }
+        protected TurnTakerController kismet { get { return FindVillain("Kismet"); } }
+        protected TurnTakerController matriarch { get { return FindVillain("TheMatriarch"); } }
+        protected TurnTakerController miss { get { return FindVillain("MissInformation"); } }
+        protected TurnTakerController omnitron { get { return FindVillain("Omnitron"); } }
+        protected TurnTakerController plague { get { return FindVillain("PlagueRat"); } }
+        protected TurnTakerController progeny { get { return FindVillain("Progeny"); } }
+        protected TurnTakerController spite { get { return FindVillain("Spite"); } }
+        protected TurnTakerController voss { get { return FindVillain("GrandWarlordVoss"); } }
+        protected TurnTakerController wager { get { return FindVillain("WagerMaster"); } }
+        protected TurnTakerController warfang { get { return FindVillain("KaargraWarfang"); } }
 
-		// Team villains
-		protected TurnTakerController baronTeam { get { return FindVillainTeamMember("BaronBlade"); } }
-		protected TurnTakerController ermineTeam { get { return FindVillainTeamMember("Ermine"); } }
-		protected TurnTakerController frictionTeam { get { return FindVillainTeamMember("Friction"); } }
-		protected TurnTakerController frightTeam { get { return FindVillainTeamMember("FrightTrain"); } }
-		protected TurnTakerController proleTeam { get { return FindVillainTeamMember("Proletariat"); } }
+        // Team villains
+        protected TurnTakerController baronTeam { get { return FindVillainTeamMember("BaronBlade"); } }
+        protected TurnTakerController ermineTeam { get { return FindVillainTeamMember("Ermine"); } }
+        protected TurnTakerController frictionTeam { get { return FindVillainTeamMember("Friction"); } }
+        protected TurnTakerController frightTeam { get { return FindVillainTeamMember("FrightTrain"); } }
+        protected TurnTakerController proleTeam { get { return FindVillainTeamMember("Proletariat"); } }
         protected TurnTakerController ambuscadeTeam { get { return FindVillainTeamMember("Ambuscade"); } }
         protected TurnTakerController biomancerTeam { get { return FindVillainTeamMember("Biomancer"); } }
         protected TurnTakerController bugbearTeam { get { return FindVillainTeamMember("Bugbear"); } }
@@ -219,7 +219,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected Card hammer { get { return GetCard("CitizenHammerTeamCharacter"); } }
         protected Card anvil { get { return GetCard("CitizenAnvilTeamCharacter"); } }
 
-		protected TurnTakerController env { get { return FindEnvironment(); } }
+        protected TurnTakerController env { get { return FindEnvironment(); } }
 
         // OblivAeon mode
         protected TurnTakerController oblivaeon { get { return FindVillain("OblivAeon"); } }
@@ -235,9 +235,9 @@ namespace Handelabra.Sentinels.UnitTest
         protected Card mindScion { get { return GetCard("DarkMindCharacter"); } }
         protected Card empScion { get { return GetCard("EmpyreonCharacter"); } }
         protected Card faultScion { get { return GetCard("FaultlessCharacter"); } }
-        protected Card nixScion { get { return GetCard("NixiousTheChosenCharacter");} }
+        protected Card nixScion { get { return GetCard("NixiousTheChosenCharacter"); } }
         protected Card progScion { get { return GetCard("ProgenyScionCharacter"); } }
-        protected Card vossScion { get { return GetCard("RainekKelVossCharacter");} }
+        protected Card vossScion { get { return GetCard("RainekKelVossCharacter"); } }
         protected Card sanctScion { get { return GetCard("SanctionCharacter"); } }
         protected Card voidScion { get { return GetCard("VoidsoulCharacter"); } }
 
@@ -246,7 +246,7 @@ namespace Handelabra.Sentinels.UnitTest
         private int _coroutineCount;
         private static int _totalCoroutineCount;
 
-        [SetUp] 
+        [SetUp]
         public void Init()
         {
             // Reset log settings for each test
@@ -419,10 +419,10 @@ namespace Handelabra.Sentinels.UnitTest
                 }
             }
 
-			Game game = new Game(identifiers, advanced, promoIdentifiers, randomSeed, 
+            Game game = new Game(identifiers, advanced, promoIdentifiers, randomSeed,
                                  advancedIdentifiers: advancedIdentifiers,
-                                 isChallenge:challenge,
-                                 challengeIdentifiers:challengeIdentifiers,
+                                 isChallenge: challenge,
+                                 challengeIdentifiers: challengeIdentifiers,
                                  shieldIdentifier: shieldIdentifier,
                                  scionIdentifiers: scionIdentifiers);
             Console.WriteLine("Created game with random seed: {0}", game.RandomSeed);
@@ -432,7 +432,7 @@ namespace Handelabra.Sentinels.UnitTest
                 Console.WriteLine("##teamcity[testMetadata name='seed' value='{0}']", game.RandomSeed);
             }
 
-			this.GameController = SetupGameController(game);
+            this.GameController = SetupGameController(game);
             return this.GameController;
         }
 
@@ -459,7 +459,7 @@ namespace Handelabra.Sentinels.UnitTest
             gameController.OnMakeDecisions -= this.MakeDecisions;
             gameController.OnMakeDecisions += this.MakeDecisions;
             gameController.OnSendMessage += this.ReceiveMessage;
-			gameController.OnWillPerformAction += this.WillPerformAction;
+            gameController.OnWillPerformAction += this.WillPerformAction;
             gameController.OnWillApplyActionChanges += this.WillApplyActionChanges;
             gameController.OnDidPerformAction += this.DidPerformAction;
             gameController.OnSetPersistentValueInView += SetPersistentValueInView;
@@ -500,7 +500,7 @@ namespace Handelabra.Sentinels.UnitTest
             return result;
         }
 
-        protected object GetPersistentValueFromView (string key, Type type)
+        protected object GetPersistentValueFromView(string key, Type type)
         {
             object result = null;
 
@@ -525,9 +525,9 @@ namespace Handelabra.Sentinels.UnitTest
         }
 
 
-        protected void SetPersistentValueInView (string key, object value)
+        protected void SetPersistentValueInView(string key, object value)
         {
-			_savedViewData[key] = value;
+            _savedViewData[key] = value;
         }
 
         protected void RunCoroutine(IEnumerator e)
@@ -553,11 +553,11 @@ namespace Handelabra.Sentinels.UnitTest
         // You can override this, or just set the properties that it will use to make decisions.
         protected virtual IEnumerator MakeDecisions(IDecision decision)
         {
-			// Make sure we are not allowing fast coroutines!
-			if (this.GameController.PeekFastCoroutines())
-			{
-				Assert.Fail("MakeDecisions was forcing fast coroutines!");
-			}
+            // Make sure we are not allowing fast coroutines!
+            if (this.GameController.PeekFastCoroutines())
+            {
+                Assert.Fail("MakeDecisions was forcing fast coroutines!");
+            }
 
             Console.WriteLine("MakeDecisions: " + decision.ToStringForMultiplayerDebugging());
 
@@ -611,7 +611,7 @@ namespace Handelabra.Sentinels.UnitTest
 
             if (!decision.Completed)
             {
-				if (this.DecisionAutoDecide.HasValue && decision.SelectionType == this.DecisionAutoDecide)
+                if (this.DecisionAutoDecide.HasValue && decision.SelectionType == this.DecisionAutoDecide)
                 {
                     if (decision.AllowAutoDecide)
                     {
@@ -620,17 +620,17 @@ namespace Handelabra.Sentinels.UnitTest
                     }
                     else
                     {
-						Assert.Fail("Test wanted to auto-decide for this decision, but the decision does not allow it: " + decision);
+                        Assert.Fail("Test wanted to auto-decide for this decision, but the decision does not allow it: " + decision);
                     }
                 }
-				else if (this.DecisionAutoDecideIfAble)
-				{
-					if (decision.AllowAutoDecide)
-					{
-						Console.WriteLine("Auto-deciding for decision: " + decision.SelectionType);
-						decision.AutoDecide();
-					}
-				}
+                else if (this.DecisionAutoDecideIfAble)
+                {
+                    if (decision.AllowAutoDecide)
+                    {
+                        Console.WriteLine("Auto-deciding for decision: " + decision.SelectionType);
+                        decision.AutoDecide();
+                    }
+                }
 
                 if (_assertDecisionOptional != null && decision.SelectionType == _assertDecisionOptional)
                 {
@@ -749,7 +749,7 @@ namespace Handelabra.Sentinels.UnitTest
                             }
 
                             Console.WriteLine(cardSource + who + ", Make a SelectCardDecision of type " + selectCardDecision.SelectionType + secondary + offset + ": [" + choices + auto + skip + "]" + dealDamageInfo + ")");
-                            
+
                             if (selectCardDecision.IsOptional && this.DecisionDoNotSelectCard == selectCardDecision.SelectionType)
                             {
                                 selectCardDecision.FinishedSelecting = true;
@@ -1455,7 +1455,7 @@ namespace Handelabra.Sentinels.UnitTest
                     SelectWordDecision selectWord = decision as SelectWordDecision;
                     Console.WriteLine("Make a SelectWordDecision: [" + selectWord.Choices.ToCommaList() + "]");
 
-                    if(this.DecisionSelectWords != null)
+                    if (this.DecisionSelectWords != null)
                     {
                         var word = this.DecisionSelectWords[this.DecisionSelectWordsIndex];
                         if (!selectWord.Choices.Contains(word))
@@ -1565,7 +1565,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         public IEnumerator ReceiveMessage(MessageAction message)
         {
-			string msg = message.Message;
+            string msg = message.Message;
             if (message.AssociatedCards != null)
             {
                 msg += " [ " + message.AssociatedCards.Select(m => m.Title).ToCommaList() + " ]";
@@ -1582,22 +1582,22 @@ namespace Handelabra.Sentinels.UnitTest
                     Assert.Fail("Attempted to show null CardSource for message: " + msg);
                 }
             }
-			if (message is StatusEffectMessageAction) 
-			{
-				if ((message as StatusEffectMessageAction).State == StatusEffectMessageAction.StatusEffectState.Removing) 
-				{
-					msg = "Expiring: " + msg;
-				}
-			}
+            if (message is StatusEffectMessageAction)
+            {
+                if ((message as StatusEffectMessageAction).State == StatusEffectMessageAction.StatusEffectState.Removing)
+                {
+                    msg = "Expiring: " + msg;
+                }
+            }
             Console.WriteLine("Message: " + msg);
             yield return null;
         }
 
         #region Convenience Methods
 
-        protected void PutIntoPlay(TurnTakerController ttc, params string[] ids)
+        protected IEnumerable<Card> PutIntoPlay(TurnTakerController ttc, params string[] ids)
         {
-            PlayCards(ids, true);
+            return PlayCards(ids, true);
         }
 
         protected Card PutIntoPlay(string cardIdentifier)
@@ -1628,9 +1628,9 @@ namespace Handelabra.Sentinels.UnitTest
             return PutInHand(GetCard(identifier));
         }
 
-        protected void PutInHand(IEnumerable<Card> cards)
+        protected IEnumerable<Card> PutInHand(IEnumerable<Card> cards)
         {
-            cards.ForEach(c => PutInHand(c));
+            return cards.Select(c => PutInHand(c)).ToArray();
         }
 
         protected Card PutInHand(Card card)
@@ -1659,13 +1659,15 @@ namespace Handelabra.Sentinels.UnitTest
                 PutInHand(httc, card);
             }
         }
-       
-        protected void PutInHand(HeroTurnTakerController httc, string[] identifiers)
+
+        protected IEnumerable<Card> PutInHand(HeroTurnTakerController httc, string[] identifiers)
         {
-            foreach (string id in identifiers)
+            Card[] result = new Card[identifiers.Length];
+            for (int i = 0; i < identifiers.Length; i++)
             {
-                PutInHand(httc, id);
+                result[i] = PutInHand(httc, identifiers[i]);
             }
+            return result;
         }
 
         protected Card PutInTrash(string identifier, int index = 0)
@@ -1675,23 +1677,24 @@ namespace Handelabra.Sentinels.UnitTest
             return card;
         }
 
-        protected void PutInTrash(params string[] identifiers)
+        protected IEnumerable<Card> PutInTrash(params string[] identifiers)
         {
-            identifiers.ForEach(s => PutInTrash(s));
+            return identifiers.Select(s => PutInTrash(s)).ToArray();
         }
 
-		protected void PutInTrash(IEnumerable<Card> cards)
-		{
-			cards.ForEach (c => PutInTrash (c));
-		}
-
-        protected void PutInTrash(TurnTakerController ttc, Func<Card, bool> cardCriteria)
+        protected void PutInTrash(IEnumerable<Card> cards)
         {
-            var cards = FindCardsWhere(c => c.Owner == ttc.TurnTaker && cardCriteria(c));
+            cards.ForEach(c => PutInTrash(c));
+        }
+
+        protected IEnumerable<Card> PutInTrash(TurnTakerController ttc, Func<Card, bool> cardCriteria)
+        {
+            var cards = FindCardsWhere(c => c.Owner == ttc.TurnTaker && cardCriteria(c)).ToArray();
             foreach (Card card in cards)
             {
                 PutInTrash(card);
             }
+            return cards;
         }
 
         protected void PutInTrash(TurnTakerController ttc, IEnumerable<Card> cards)
@@ -1711,12 +1714,9 @@ namespace Handelabra.Sentinels.UnitTest
             MoveCard(ttc, card, ttc.TurnTaker.Trash);
         }
 
-        protected void PutInTrash(string[] identifiers, int index = 0)
+        protected IEnumerable<Card> PutInTrash(string[] identifiers, int index = 0)
         {
-            foreach (var id in identifiers)
-            {
-                PutInTrash(id, index);
-            }
+            return identifiers.Select(id => PutInTrash(id, index)).ToArray();
         }
 
         protected void PutInTrash(Card[] cards, int index = 0)
@@ -1928,7 +1928,7 @@ namespace Handelabra.Sentinels.UnitTest
             }
             else if (amount > card.HitPoints.Value)
             {
-                 GainHP(card, amount - card.HitPoints.Value);
+                GainHP(card, amount - card.HitPoints.Value);
             }
             return amount;
         }
@@ -1945,7 +1945,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 changeHP.GainHP(changeHP, diff);
             }
-            Console.WriteLine("Set HP of "+changeHP.Title + " to match "+fixedHP.Title +" at " +changeHP.HitPoints.Value +".");
+            Console.WriteLine("Set HP of " + changeHP.Title + " to match " + fixedHP.Title + " at " + changeHP.HitPoints.Value + ".");
         }
 
         protected int GetHitPoints(TurnTakerController ttc)
@@ -2045,10 +2045,10 @@ namespace Handelabra.Sentinels.UnitTest
             return ttc.TurnTaker.Deck.Cards.ElementAt(ttc.TurnTaker.Deck.Cards.Count() - offset - 1);
         }
 
-		protected IEnumerable<Card> GetTopCardsOfDeck(TurnTakerController ttc, int numberOfCards)
-		{
-			return ttc.TurnTaker.Deck.GetTopCards(numberOfCards);
-		}
+        protected IEnumerable<Card> GetTopCardsOfDeck(TurnTakerController ttc, int numberOfCards)
+        {
+            return ttc.TurnTaker.Deck.GetTopCards(numberOfCards);
+        }
 
         protected Card GetBottomCardOfDeck(TurnTakerController ttc, int offset = 0)
         {
@@ -2279,7 +2279,7 @@ namespace Handelabra.Sentinels.UnitTest
             return cardsToPlay;
         }
 
-        protected void PlayCardFromHand(HeroTurnTakerController hero, string identifier)
+        protected Card PlayCardFromHand(HeroTurnTakerController hero, string identifier)
         {
             var card = hero.HeroTurnTaker.Hand.Cards.Where(c => c.Identifier == identifier).FirstOrDefault();
             if (card != null)
@@ -2290,6 +2290,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 Assert.Fail("Could not find card in " + hero.Name + "'s hand: " + identifier);
             }
+            return card;
         }
 
         protected Card MoveIntoPlay(TurnTakerController ttc, Card card, TurnTaker whosePlayArea, CardSource cardSource = null)
@@ -2351,22 +2352,23 @@ namespace Handelabra.Sentinels.UnitTest
             }
         }
 
-        protected void MoveCards(TurnTakerController ttc, Func<Card, bool> cardCriteria, Location location, bool toBottom = false, int? numberOfCards = null, bool overrideIndestructible = false, bool playIfPlayArea = true)
+        protected IEnumerable<Card> MoveCards(TurnTakerController ttc, Func<Card, bool> cardCriteria, Location location, bool toBottom = false, int? numberOfCards = null, bool overrideIndestructible = false, bool playIfPlayArea = true)
         {
             var cards = FindCardsWhere(cardCriteria);
             if (numberOfCards.HasValue)
             {
                 cards = cards.Take(numberOfCards.Value);
             }
-            MoveCards(ttc, cards, location, toBottom, playIfPlayArea, overrideIndestructible: overrideIndestructible);
+            var array = cards.ToArray();
+            MoveCards(ttc, array, location, toBottom, playIfPlayArea, overrideIndestructible: overrideIndestructible);
+            return array;
         }
 
-        protected void MoveCards(TurnTakerController ttc, IEnumerable<string> identifiers, Location location, bool toBottom = false)
+        protected IEnumerable<Card> MoveCards(TurnTakerController ttc, IEnumerable<string> identifiers, Location location, bool toBottom = false)
         {
-            for (int i = identifiers.Count() - 1; i >= 0; i--)
-            {
-                MoveCard(ttc, GetCard(identifiers.ElementAt(i)), location, toBottom);
-            }
+            var cards = identifiers.Select(id => GetCard(id)).ToArray();
+            cards.ForEach(card => MoveCard(ttc, card, location, toBottom));
+            return cards;
         }
 
         protected void MoveAllCards(TurnTakerController ttc, Location source, Location destination, bool playIfPlayArea = true, int leaveSomeCards = 0)
@@ -2403,7 +2405,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected Card PlayTopCard(TurnTakerController ttc, Location location, Location overridePlayLocation = null)
         {
             List<Card> card = new List<Card>();
-            RunCoroutine(this.GameController.PlayTopCardOfLocation(ttc, location, overridePlayLocation: overridePlayLocation, playedCards:card));
+            RunCoroutine(this.GameController.PlayTopCardOfLocation(ttc, location, overridePlayLocation: overridePlayLocation, playedCards: card));
             return card.FirstOrDefault();
         }
 
@@ -2417,11 +2419,11 @@ namespace Handelabra.Sentinels.UnitTest
             RunCoroutine(this.GameController.ShuffleLocation(location, null));
         }
 
-		protected IEnumerable<Card> DiscardTopCards(TurnTaker tt, int amount)
+        protected IEnumerable<Card> DiscardTopCards(TurnTaker tt, int amount)
         {
-			var cards = tt.Deck.GetTopCards (amount);
+            var cards = tt.Deck.GetTopCards(amount);
             RunCoroutine(this.GameController.DiscardTopCards(null, tt.Deck, amount));
-			return cards;
+            return cards;
         }
 
         protected void DiscardTopCards(Location location, int amount)
@@ -2429,7 +2431,7 @@ namespace Handelabra.Sentinels.UnitTest
             RunCoroutine(this.GameController.DiscardTopCards(null, location, amount));
         }
 
-		protected IEnumerable<Card> DiscardTopCards(TurnTakerController ttc, int amount)
+        protected IEnumerable<Card> DiscardTopCards(TurnTakerController ttc, int amount)
         {
             return DiscardTopCards(ttc.TurnTaker, amount);
         }
@@ -2496,7 +2498,7 @@ namespace Handelabra.Sentinels.UnitTest
             UsePower(hero.CharacterCard, powerIndex);
         }
 
-        protected void UsePower(string identifier, int powerIndex = 0)
+        protected Card UsePower(string identifier, int powerIndex = 0)
         {
             var powerCard = FindCardInPlay(identifier);
             if (powerCard != null)
@@ -2507,6 +2509,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 Assert.Fail("Attempted to use a power from a card not in play");
             }
+            return powerCard;
         }
 
         protected void UsePower(Card card, int powerIndex = 0)
@@ -2596,13 +2599,13 @@ namespace Handelabra.Sentinels.UnitTest
         {
             if (card.HitPoints.HasValue && card.MaximumHitPoints.HasValue && card.MaximumHitPoints.Value > card.HitPoints.Value)
             {
-                 GainHP(card, card.MaximumHitPoints.Value - card.HitPoints.Value);
+                GainHP(card, card.MaximumHitPoints.Value - card.HitPoints.Value);
             }
         }
 
         protected void GainHP(TurnTakerController ttc, int amount)
         {
-             GainHP(ttc.CharacterCard, amount);
+            GainHP(ttc.CharacterCard, amount);
         }
 
         protected void FlipCard(CardController card)
@@ -2620,15 +2623,15 @@ namespace Handelabra.Sentinels.UnitTest
             this.RunCoroutine(this.GameController.FlipCard(ttc.CharacterCardController));
         }
 
-		protected void FlipCards(params Card[] cards)
-		{
-			cards.ForEach (c => FlipCard (c));
-		}
+        protected void FlipCards(params Card[] cards)
+        {
+            cards.ForEach(c => FlipCard(c));
+        }
 
-		protected void FlipCards(IEnumerable<Card> cards)
-		{
-			cards.ForEach (c => FlipCard (c));
-		}
+        protected void FlipCards(IEnumerable<Card> cards)
+        {
+            cards.ForEach(c => FlipCard(c));
+        }
 
         protected void ReplaceOnMakeDecisions(GameControllerDecisionEvent decider)
         {
@@ -2693,7 +2696,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     string sourceTitle = preview.DamageSource == null ? "UNKNOWN" : preview.DamageSource.TitleOrName;
                     string targetTitle = preview.Target == null ? "UNKNOWN" : preview.Target.Title;
-                    string type = preview.DamageType.HasValue ? ""+preview.DamageType.Value : "UNKNOWN";
+                    string type = preview.DamageType.HasValue ? "" + preview.DamageType.Value : "UNKNOWN";
                     Console.WriteLine("Final Result: {0} deals {1} {2} damage to {3}.", sourceTitle, displayAmount, type, targetTitle);
                 }
                 else
@@ -2713,7 +2716,7 @@ namespace Handelabra.Sentinels.UnitTest
                                 cardsource = cardsource + " (" + action.CardSource.Card.Definition.Body.FirstOrDefault() + ")";
                             }
 
-                            if (action.CardSource.Card.Identifier == "UhYeahImThatGuy" && action.CardSource.AssociatedCardSources.Count() > 0) 
+                            if (action.CardSource.Card.Identifier == "UhYeahImThatGuy" && action.CardSource.AssociatedCardSources.Count() > 0)
                             {
                                 // Find out which card I'm That Guy is copying.
                                 cardsource += " (copying " + action.CardSource.AssociatedCardSources.Select(cs => cs.Card.Title).ToCommaList() + ")";
@@ -2879,8 +2882,8 @@ namespace Handelabra.Sentinels.UnitTest
         {
             if (card.HitPoints.HasValue)
             {
-				var actual = card.HitPoints.Value;
-				Assert.AreEqual(expected, actual, "The HP of {0} is incorrect.", card.Identifier);
+                var actual = card.HitPoints.Value;
+                Assert.AreEqual(expected, actual, "The HP of {0} is incorrect.", card.Identifier);
             }
             else
             {
@@ -2950,30 +2953,30 @@ namespace Handelabra.Sentinels.UnitTest
         protected void QuickHPStorage(params Card[] cards)
         {
             _quickHPStorage = new Dictionary<Card, int>();
-			Card previous = null;
+            Card previous = null;
             foreach (var card in cards)
             {
                 //Log.Debug("Storing card HP: " + card.Identifier + ", " + card.HitPoints.Value);
-				if (card != null) 
-				{
-					if (card.HitPoints.HasValue) 
-					{
-						_quickHPStorage.Add (card, card.HitPoints.Value);
-					}
-					else
-					{
-						_quickHPStorage.Add (card, 0);
-					}	
-					previous = card;
-				}
-				else if (previous != null)
-				{
-					Assert.Fail ("Card after " + previous.Title + " in QuickHPStorage is null.");
-				}
-				else
-				{
-					Assert.Fail("First card in QuickHPStorage is null.");
-				}
+                if (card != null)
+                {
+                    if (card.HitPoints.HasValue)
+                    {
+                        _quickHPStorage.Add(card, card.HitPoints.Value);
+                    }
+                    else
+                    {
+                        _quickHPStorage.Add(card, 0);
+                    }
+                    previous = card;
+                }
+                else if (previous != null)
+                {
+                    Assert.Fail("Card after " + previous.Title + " in QuickHPStorage is null.");
+                }
+                else
+                {
+                    Assert.Fail("First card in QuickHPStorage is null.");
+                }
             }
         }
 
@@ -2988,25 +2991,25 @@ namespace Handelabra.Sentinels.UnitTest
             }
         }
 
-		protected void QuickTopCardStorage(params TurnTakerController[] ttcs)
-		{
-			_quickTopCardStorage = new Dictionary<TurnTakerController, Card>();
-			foreach (var ttc in ttcs)
-			{
-				_quickTopCardStorage.Add(ttc, ttc.TurnTaker.Deck.TopCard);
-			}
-		}
+        protected void QuickTopCardStorage(params TurnTakerController[] ttcs)
+        {
+            _quickTopCardStorage = new Dictionary<TurnTakerController, Card>();
+            foreach (var ttc in ttcs)
+            {
+                _quickTopCardStorage.Add(ttc, ttc.TurnTaker.Deck.TopCard);
+            }
+        }
 
-		protected void QuickTopCardCheck(Func<TurnTakerController, Location> expectedLocations)
-		{
-			foreach (var pair in _quickTopCardStorage) 
-			{
-				var ttc = pair.Key;
-				var location = pair.Value.Location;
+        protected void QuickTopCardCheck(Func<TurnTakerController, Location> expectedLocations)
+        {
+            foreach (var pair in _quickTopCardStorage)
+            {
+                var ttc = pair.Key;
+                var location = pair.Value.Location;
 
-				Assert.AreEqual (expectedLocations (ttc), location, "Top card of " + ttc.Name + "'s deck was expected to be at " + expectedLocations (ttc) + " but was at " + location + ".");
-			}
-		}
+                Assert.AreEqual(expectedLocations(ttc), location, "Top card of " + ttc.Name + "'s deck was expected to be at " + expectedLocations(ttc) + " but was at " + location + ".");
+            }
+        }
 
         protected void QuickTokenPoolStorage(params TokenPool[] tokenPools)
         {
@@ -3114,7 +3117,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void GainAndStoreHP(Card card, ref int cardHP, int change)
         {
-             GainHP(card, change);
+            GainHP(card, change);
             StoreHP(card, ref cardHP);
         }
 
@@ -3133,38 +3136,38 @@ namespace Handelabra.Sentinels.UnitTest
             Assert.IsTrue(card.Location.IsRevealed, card.Title + " is not revealed.");
         }
 
-		protected void AssertNoGameText(Card card)
-		{
-			Assert.IsFalse(card.HasGameText, card.Title + " should not have game text.");
-		}
+        protected void AssertNoGameText(Card card)
+        {
+            Assert.IsFalse(card.HasGameText, card.Title + " should not have game text.");
+        }
 
-		protected void AssertPlayIndex(Card card, int? playIndex)
-		{
-			string expectedValue = playIndex.HasValue ? "" + playIndex.Value : "null";
-			string actualValue = card.PlayIndex.HasValue ? "" + card.PlayIndex.Value : "null";
+        protected void AssertPlayIndex(Card card, int? playIndex)
+        {
+            string expectedValue = playIndex.HasValue ? "" + playIndex.Value : "null";
+            string actualValue = card.PlayIndex.HasValue ? "" + card.PlayIndex.Value : "null";
 
-			Assert.AreEqual(playIndex, card.PlayIndex, "A play index of " + expectedValue + " was expected, but it was " + actualValue);
-		}
+            Assert.AreEqual(playIndex, card.PlayIndex, "A play index of " + expectedValue + " was expected, but it was " + actualValue);
+        }
 
-		protected void AssertHasGameText(Card card)
-		{
-			Assert.IsTrue(card.HasGameText, card.Title + " should have game text.");
-		}
+        protected void AssertHasGameText(Card card)
+        {
+            Assert.IsTrue(card.HasGameText, card.Title + " should have game text.");
+        }
 
-		protected void AssertCardHasKeyword(Card card, string keyword, bool isAdditional)
-		{
+        protected void AssertCardHasKeyword(Card card, string keyword, bool isAdditional)
+        {
             Assert.IsTrue(this.GameController.DoesCardContainKeyword(card, keyword), "{0} should have keyword: {1}", card.Identifier, keyword);
             if (isAdditional)
             {
                 Assert.IsTrue(this.GameController.GetAdditionalKeywords(card).Contains(keyword), "{0} should have additional keyword: {1}", card.Identifier, keyword);
             }
-		}
+        }
 
-		protected void AssertCardNoKeyword(Card card, string keyword)
-		{
+        protected void AssertCardNoKeyword(Card card, string keyword)
+        {
             Assert.IsFalse(this.GameController.DoesCardContainKeyword(card, keyword), "{0} should not have keyword: {1}", card.Identifier, keyword);
             Assert.IsFalse(this.GameController.GetAdditionalKeywords(card).Contains(keyword), "{0} should not have additional keyword: {1}", card.Identifier, keyword);
-		}
+        }
 
         protected void AssertIsInPlay(params Card[] cards)
         {
@@ -3308,10 +3311,10 @@ namespace Handelabra.Sentinels.UnitTest
             cards.ForEach(c => AssertInTrash(c));
         }
 
-		protected void AssertInTrash(IEnumerable<Card> cards)
-		{
-			cards.ForEach(c => AssertInTrash(c));
-		}
+        protected void AssertInTrash(IEnumerable<Card> cards)
+        {
+            cards.ForEach(c => AssertInTrash(c));
+        }
 
         protected void AssertInTrash(params string[] identifiers)
         {
@@ -3521,10 +3524,10 @@ namespace Handelabra.Sentinels.UnitTest
             Assert.IsTrue(card.IsFlipped, card.Title + " should be flipped.");
         }
 
-		protected void AssertNotIncapacitatedOrOutOfGame(TurnTakerController ttc)
-		{
-			Assert.IsFalse (ttc.IsIncapacitatedOrOutOfGame, ttc.Name + " is not supposed to be considered incapacitated or out of game.");
-		}
+        protected void AssertNotIncapacitatedOrOutOfGame(TurnTakerController ttc)
+        {
+            Assert.IsFalse(ttc.IsIncapacitatedOrOutOfGame, ttc.Name + " is not supposed to be considered incapacitated or out of game.");
+        }
 
         protected void AssertFlipped(params Card[] cards)
         {
@@ -3660,13 +3663,13 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInHand(HeroTurnTakerController hero, Card card)
         {
-            Assert.IsTrue(hero.HeroTurnTaker.Hand.Cards.Contains(card), "Expected " + card.Title + " to be in " +hero.Name +"'s hand, but it was in "+ card.Location.GetFriendlyName());
+            Assert.IsTrue(hero.HeroTurnTaker.Hand.Cards.Contains(card), "Expected " + card.Title + " to be in " + hero.Name + "'s hand, but it was in " + card.Location.GetFriendlyName());
         }
 
-		protected void AssertInHand(params Card[] cards)
-		{
-			cards.ForEach (c => AssertInHand (c));
-		}
+        protected void AssertInHand(params Card[] cards)
+        {
+            cards.ForEach(c => AssertInHand(c));
+        }
 
         protected void AssertInHand(Card card)
         {
@@ -3727,7 +3730,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInDeck(TurnTakerController ttc, Card card)
         {
-            Assert.IsTrue(ttc.TurnTaker.Deck.Cards.Contains(card), card.Title + " was supposed to be in " + ttc.Name + "'s deck, but was in "+ card.Location.GetFriendlyName() + ".");
+            Assert.IsTrue(ttc.TurnTaker.Deck.Cards.Contains(card), card.Title + " was supposed to be in " + ttc.Name + "'s deck, but was in " + card.Location.GetFriendlyName() + ".");
         }
 
         protected void AssertInDeck(Card card)
@@ -3755,7 +3758,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInDeckOrHand(HeroTurnTakerController httc, Card card)
         {
-            Assert.IsTrue(httc.TurnTaker.Deck.Cards.Contains(card) || httc.HeroTurnTaker.Hand.Cards.Contains(card), card.Title + " was supposed to be in " + httc.Name + "'s deck or hand, but was in "+ card.Location.GetFriendlyName() + ".");
+            Assert.IsTrue(httc.TurnTaker.Deck.Cards.Contains(card) || httc.HeroTurnTaker.Hand.Cards.Contains(card), card.Title + " was supposed to be in " + httc.Name + "'s deck or hand, but was in " + card.Location.GetFriendlyName() + ".");
         }
 
         protected void AssertInDeck(TurnTakerController ttc, IEnumerable<Card> cards)
@@ -3775,11 +3778,11 @@ namespace Handelabra.Sentinels.UnitTest
         {
             if (offset == 0)
             {
-                Assert.IsTrue(ttc.TurnTaker.Deck.TopCard == card, "Expected " + card.Title + " to be on top of " +ttc.Name + "'s deck, but it was " + ttc.TurnTaker.Deck.TopCard.Title +".");
+                Assert.IsTrue(ttc.TurnTaker.Deck.TopCard == card, "Expected " + card.Title + " to be on top of " + ttc.Name + "'s deck, but it was " + ttc.TurnTaker.Deck.TopCard.Title + ".");
             }
             else
             {
-                Assert.IsTrue(ttc.TurnTaker.Deck.Cards.ElementAt(ttc.TurnTaker.Deck.Cards.Count() - 1 - offset) == card, "Expected " + card.Title + " to be offset " + offset + " on top of " +ttc.Name + "'s deck, but it was " + ttc.TurnTaker.Deck.TopCard.Title +".");
+                Assert.IsTrue(ttc.TurnTaker.Deck.Cards.ElementAt(ttc.TurnTaker.Deck.Cards.Count() - 1 - offset) == card, "Expected " + card.Title + " to be offset " + offset + " on top of " + ttc.Name + "'s deck, but it was " + ttc.TurnTaker.Deck.TopCard.Title + ".");
             }
         }
 
@@ -3813,7 +3816,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertOnTopOfDeck(TurnTakerController ttc, string identifier, int offset = 0)
         {
-            Assert.AreEqual(identifier, ttc.TurnTaker.Deck.TopCard.Identifier, "Expected " + identifier + " to be on top of " + ttc.Name +"'s deck.");
+            Assert.AreEqual(identifier, ttc.TurnTaker.Deck.TopCard.Identifier, "Expected " + identifier + " to be on top of " + ttc.Name + "'s deck.");
         }
 
         protected void AssertOnBottomOfDeck(Card card, int offset = 0)
@@ -3834,12 +3837,12 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertOnBottomOfTrash(TurnTakerController ttc, Card card)
         {
-            Assert.IsTrue(ttc.TurnTaker.Trash.BottomCard == card, "Expected " + card.Identifier + " to be on bottom of " + ttc.Name +"'s trash.");
+            Assert.IsTrue(ttc.TurnTaker.Trash.BottomCard == card, "Expected " + card.Identifier + " to be on bottom of " + ttc.Name + "'s trash.");
         }
 
         protected void AssertOnBottomOfDeck(TurnTakerController ttc, Card card, int offset = 0)
         {
-			Assert.IsTrue(ttc.TurnTaker.Deck.GetBottomCards(offset + 1).LastOrDefault() == card, "Expected " + card.Identifier + " to be on bottom of " + ttc.Name +"'s deck.");
+            Assert.IsTrue(ttc.TurnTaker.Deck.GetBottomCards(offset + 1).LastOrDefault() == card, "Expected " + card.Identifier + " to be on bottom of " + ttc.Name + "'s deck.");
         }
 
         protected void AssertOnBottomOfDeck(TurnTakerController ttc, string identifier)
@@ -3968,20 +3971,20 @@ namespace Handelabra.Sentinels.UnitTest
             this.GameController.RemoveTriggers(t => t.CardSource.Card == card, includingOutOfPlay);
         }
 
-		protected void RemoveCardTriggers(params Card[] cards)
-		{
-			cards.ForEach(c => RemoveCardTriggers(c));
-		}
+        protected void RemoveCardTriggers(params Card[] cards)
+        {
+            cards.ForEach(c => RemoveCardTriggers(c));
+        }
 
-		protected void RemoveCardTriggers(params TurnTakerController[] ttc)
-		{
-			ttc.ForEach (tt => RemoveCardTriggers (tt.CharacterCard));
-		}
+        protected void RemoveCardTriggers(params TurnTakerController[] ttc)
+        {
+            ttc.ForEach(tt => RemoveCardTriggers(tt.CharacterCard));
+        }
 
-		protected void RemoveVillainCards()
-		{
-			DestroyCards (c => c.IsVillain && !c.IsCharacter);
-		}
+        protected void RemoveVillainCards()
+        {
+            DestroyCards(c => c.IsVillain && !c.IsCharacter);
+        }
 
         protected void RemoveCardTriggers(IEnumerable<Card> cards)
         {
@@ -4016,15 +4019,15 @@ namespace Handelabra.Sentinels.UnitTest
                 if (!initial.IsInPlayAndHasGameText)
                 {
                     PlayCard(initial);
-                } 
+                }
             }
             MoveCards(ennead, c => !identifiers.Contains(c.Identifier) && c.IsVillain && c.IsInPlayAndHasGameText && c.IsTarget, GetCard("TheShrineOfTheEnnead").UnderLocation);
         }
 
-		protected Card FindCardInPlay(string identifier, int index = 0)
-		{
-			return FindCardsWhere (c => c.IsInPlay && c.Identifier == identifier).ElementAt (index);
-		}
+        protected Card FindCardInPlay(string identifier, int index = 0)
+        {
+            return FindCardsWhere(c => c.IsInPlay && c.Identifier == identifier).ElementAt(index);
+        }
 
 
         protected Card FindCardInPlay(string identifier)
@@ -4034,25 +4037,25 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected TurnTakerController FindVillain(string identifier = null)
         {
-			TurnTakerController result = null;
+            TurnTakerController result = null;
 
-			if (identifier != null)
-			{
-				result = this.GameController.FindTurnTakerController(identifier);
-			}
-			else
-			{
-				result = this.GameController.FindVillainTurnTakerControllers(false).FirstOrDefault();
-			}
+            if (identifier != null)
+            {
+                result = this.GameController.FindTurnTakerController(identifier);
+            }
+            else
+            {
+                result = this.GameController.FindVillainTurnTakerControllers(false).FirstOrDefault();
+            }
 
-			Assert.IsNotNull(result, "FindVillain could not find {0} in the game.", identifier);
+            Assert.IsNotNull(result, "FindVillain could not find {0} in the game.", identifier);
 
-			return result;
+            return result;
         }
 
         protected TurnTakerController FindVillainTeamMember(string identifier)
         {
-			TurnTakerController result = null;
+            TurnTakerController result = null;
 
             if (identifier.Contains("Team"))
             {
@@ -4063,21 +4066,21 @@ namespace Handelabra.Sentinels.UnitTest
                 result = this.GameController.FindTurnTakerController(identifier + "Team");
             }
 
-			Assert.IsNotNull(result, "FindVillainTeamMember could not find {0} in the game.", identifier);
+            Assert.IsNotNull(result, "FindVillainTeamMember could not find {0} in the game.", identifier);
 
-			return result;
+            return result;
         }
 
         protected TurnTakerController FindEnvironment(BattleZone bz = null)
         {
-			TurnTakerController result = this.GameController.FindEnvironmentTurnTakerController(bz);
-			Assert.IsNotNull(result, "FindEnvironment could not find an environment in the game.");
-			return result;
+            TurnTakerController result = this.GameController.FindEnvironmentTurnTakerController(bz);
+            Assert.IsNotNull(result, "FindEnvironment could not find an environment in the game.");
+            return result;
         }
 
         protected HeroTurnTakerController FindHero(string identifier = null, bool assertIfMissing = true)
         {
-			HeroTurnTakerController result = null;
+            HeroTurnTakerController result = null;
 
             if (identifier == null)
             {
@@ -4092,12 +4095,12 @@ namespace Handelabra.Sentinels.UnitTest
                 }
             }
 
-			if (identifier != null && assertIfMissing)
-			{
-				Assert.IsNotNull(result, "FindHero could not find {0} in the game.", identifier);
-			}
+            if (identifier != null && assertIfMissing)
+            {
+                Assert.IsNotNull(result, "FindHero could not find {0} in the game.", identifier);
+            }
 
-			return result;
+            return result;
         }
 
         protected TokenPool FindTokenPool(string cardIdentifier, string poolIdentifier)
@@ -4186,9 +4189,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertCannotPlayCards(TurnTakerController ttc)
         {
-			Assert.IsFalse(this.GameController.CanPerformAction<PlayCardAction>(ttc, null), ttc.Name + " should not be able to play cards.");
+            Assert.IsFalse(this.GameController.CanPerformAction<PlayCardAction>(ttc, null), ttc.Name + " should not be able to play cards.");
             var keeper = ttc.TurnTaker.GetAllCards().Where(c => !c.IsCharacter && c.IsKeeper).FirstOrDefault();
-			Console.WriteLine("Checking to make sure {0} cannot play cards by playing {1} from {2}", ttc.Name, keeper.Identifier, keeper.Location.GetFriendlyName());
+            Console.WriteLine("Checking to make sure {0} cannot play cards by playing {1} from {2}", ttc.Name, keeper.Identifier, keeper.Location.GetFriendlyName());
             PlayCard(keeper);
             AssertNotInPlay(keeper);
         }
@@ -4276,8 +4279,8 @@ namespace Handelabra.Sentinels.UnitTest
         }
 
         public void PrintCardsInPlayWithGameText(Func<Card, bool> cardCriteria = null)
-		{
-            Func<Card, bool>  fullCriteria = c => c.IsInPlayAndHasGameText;
+        {
+            Func<Card, bool> fullCriteria = c => c.IsInPlayAndHasGameText;
             if (cardCriteria != null)
             {
                 fullCriteria = c => c.IsInPlayAndHasGameText && cardCriteria(c);
@@ -4293,8 +4296,8 @@ namespace Handelabra.Sentinels.UnitTest
                 }
                 result += ", ";
             }
-			Console.WriteLine ("***---> CARDS IN PLAY: " + result);
-		}
+            Console.WriteLine("***---> CARDS IN PLAY: " + result);
+        }
 
         public void PrintTargetsInPlay()
         {
@@ -4354,12 +4357,12 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void PrintStatusEffectStrings()
         {
-			Console.WriteLine ("----Status Effects In Play----");
+            Console.WriteLine("----Status Effects In Play----");
             foreach (var sec in this.GameController.StatusEffectControllers)
             {
                 Console.WriteLine(sec.StatusEffect.ToString());
             }
-			Console.WriteLine ("---- End List ----");
+            Console.WriteLine("---- End List ----");
         }
 
         protected void AssertStatusEffectsContains(string statusEffect)
@@ -4383,19 +4386,19 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertEffectsListSpecialStringsContains(string specialString)
         {
             var strings = this.GameController.GetSpecialStringsForEffectsList().Select(ss => ss.GeneratedString());
-            Assert.IsTrue (strings.Any(ss => ss.Contains(specialString)), "Effects list was expected to contain string \"" + specialString + "\".");
+            Assert.IsTrue(strings.Any(ss => ss.Contains(specialString)), "Effects list was expected to contain string \"" + specialString + "\".");
         }
 
         protected void AssertEffectsListSpecialStringsContains(Card card, int stringNumber, string specialString)
         {
             var strings = this.GameController.GetSpecialStringsForEffectsList();
-            Assert.IsTrue (strings.Where(ss => ss.CardSource.Card == card).ElementAt(stringNumber).GeneratedString().Contains (specialString), "["+card.Title+"]: Was expected to contain string \"" + specialString + "\" but string was: \"" + strings.Where(ss => ss.CardSource.Card == card).ElementAt(stringNumber).GeneratedString() + "\".");
+            Assert.IsTrue(strings.Where(ss => ss.CardSource.Card == card).ElementAt(stringNumber).GeneratedString().Contains(specialString), "[" + card.Title + "]: Was expected to contain string \"" + specialString + "\" but string was: \"" + strings.Where(ss => ss.CardSource.Card == card).ElementAt(stringNumber).GeneratedString() + "\".");
         }
 
         protected void AssertEffectsListSpecialStringsContains(string identifier, int stringNumber, string specialString)
         {
             var output = this.GameController.GetSpecialStringsForEffectsList().Where(ss => ss.CardSource.Card.Identifier == identifier).ElementAt(stringNumber).GeneratedString();
-            Assert.IsTrue (output.Contains (specialString), "["+identifier+"]: Was expected to contain string \"" + specialString + "\" but string was: \"" + output + "\".");
+            Assert.IsTrue(output.Contains(specialString), "[" + identifier + "]: Was expected to contain string \"" + specialString + "\" but string was: \"" + output + "\".");
         }
 
         protected void AssertCardSpecialString(Card card, int stringNumber, string specialString)
@@ -4405,7 +4408,7 @@ namespace Handelabra.Sentinels.UnitTest
             Assert.NotNull(special, "{0} does not have a special string at index {1}", card.Identifier, stringNumber);
             string output = special.GeneratedString();
             Console.WriteLine("Special String: " + output);
-            Assert.AreEqual (specialString, output, "[" + card.Identifier + "]: Special string was expected to be: \"" + specialString + "\" but was \"" + output + "\".");
+            Assert.AreEqual(specialString, output, "[" + card.Identifier + "]: Special string was expected to be: \"" + specialString + "\" but was \"" + output + "\".");
         }
 
         protected void AssertCardSpecialString(IEnumerable<Card> cards, int stringNumber, string specialString)
@@ -4452,7 +4455,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 RemoveAssertNextMessage(oldReceiver);
             }
-            GameControllerMessageEvent receiver = (message) => 
+            GameControllerMessageEvent receiver = (message) =>
             {
                 RunCoroutine(this.ReceiveMessage(message));
                 Assert.AreEqual(expectedMessage, message.Message);
@@ -4471,7 +4474,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 RemoveAssertNextMessage(oldReceiver);
             }
-            GameControllerMessageEvent receiver = (message) => 
+            GameControllerMessageEvent receiver = (message) =>
                 {
                     RunCoroutine(this.ReceiveMessage(message));
                     Assert.IsTrue(message.Message.Contains(expectedMessage));
@@ -4492,7 +4495,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 RemoveAssertNextMessage(oldReceiver);
             }
-            GameControllerMessageEvent receiver = (message) => 
+            GameControllerMessageEvent receiver = (message) =>
             {
                 RunCoroutine(this.ReceiveMessage(message));
                 var expected = expectedMessages.ElementAtOrDefault(index);
@@ -4504,7 +4507,7 @@ namespace Handelabra.Sentinels.UnitTest
                 {
                     Assert.Fail("There are more messages than expected.");
                 }
-                
+
                 index += 1;
 
                 if (index == expectedMessages.Count())
@@ -4530,7 +4533,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 RemoveAssertNextMessage(oldReceiver);
             }
-            GameControllerMessageEvent receiver = (message) => 
+            GameControllerMessageEvent receiver = (message) =>
                 {
                     RunCoroutine(this.ReceiveMessage(message));
                     Assert.Fail("No message was expected, but there was one: '" + message.Message + "'");
@@ -4586,12 +4589,12 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNextToCard(Card card, Card cardThatItShouldBeNextTo)
         {
-            Assert.AreEqual( cardThatItShouldBeNextTo.NextToLocation, card.Location);
+            Assert.AreEqual(cardThatItShouldBeNextTo.NextToLocation, card.Location);
         }
 
         protected void AssertBelowCard(Card card, Card cardThatItShouldBeBelow)
         {
-			Assert.AreEqual(cardThatItShouldBeBelow.BelowLocation, card.Location, "{0} should be below {1} but it is not.", card.Identifier, cardThatItShouldBeBelow.Identifier);
+            Assert.AreEqual(cardThatItShouldBeBelow.BelowLocation, card.Location, "{0} should be below {1} but it is not.", card.Identifier, cardThatItShouldBeBelow.Identifier);
         }
 
         protected void AssertNotBelowCard(Card card, Card cardThatItShouldNotBeBelow)
@@ -4694,13 +4697,13 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected Card StackDeck(TurnTakerController ttc, string identifier, bool toBottom = false)
         {
-            return StackDeck(ttc, new string[] {identifier}, toBottom).FirstOrDefault();
+            return StackDeck(ttc, new string[] { identifier }, toBottom).FirstOrDefault();
         }
 
-		protected void StackDeck(params string[] identifiers)
-		{
-			identifiers.ForEach(s => StackDeck(s));
-		}
+        protected IEnumerable<Card> StackDeck(params string[] identifiers)
+        {
+            return identifiers.Select(s => StackDeck(s)).ToArray();
+        }
 
         protected Card StackDeck(string identifier, bool toBottom = false, int index = 0)
         {
@@ -4745,7 +4748,7 @@ namespace Handelabra.Sentinels.UnitTest
                 DealDamage(card, testTarget, 3, DamageType.Radiant);
                 int expectedDifference = 3 + modification;
                 AssertAndStoreHP(testTarget, ref targetHP, -expectedDifference);
-                 GainHP(testTarget, expectedDifference);
+                GainHP(testTarget, expectedDifference);
             }
         }
 
@@ -4760,7 +4763,7 @@ namespace Handelabra.Sentinels.UnitTest
                 DealDamage(testSource, target, 3, DamageType.Radiant);
                 int expectedDifference = 3 + modification;
                 AssertAndStoreHP(target, ref targetHP, -expectedDifference);
-                 GainHP(target, expectedDifference);
+                GainHP(target, expectedDifference);
             }
         }
 
@@ -4812,7 +4815,7 @@ namespace Handelabra.Sentinels.UnitTest
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
             FileStream stream = null;
-            try 
+            try
             {
                 AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
                 var path = Path.Combine(Path.GetTempPath(), name.Trim() + ".dat");
@@ -4825,16 +4828,16 @@ namespace Handelabra.Sentinels.UnitTest
                     Console.WriteLine("Successfully saved game to " + path);
                 }
             }
-            catch (SerializationException e) 
+            catch (SerializationException e)
             {
                 Assert.Inconclusive("Failed to serialize. Reason: " + e.Message);
-                
+
             }
             catch (IOException e)
             {
                 Assert.Inconclusive("Failed to create file. Reason: " + e.Message);
             }
-            finally 
+            finally
             {
                 AppDomain.CurrentDomain.AssemblyResolve -= OnAssemblyResolve;
                 if (stream != null)
@@ -4908,7 +4911,7 @@ namespace Handelabra.Sentinels.UnitTest
                     path = Path.Combine(Path.GetTempPath(), name.Trim());
                 }
 
-                game = LoadGamePath(path); 
+                game = LoadGamePath(path);
 
                 if (game != null)
                 {
@@ -4937,7 +4940,7 @@ namespace Handelabra.Sentinels.UnitTest
                 name += ".dat";
 
                 var dllpath = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-                var path = Path.GetDirectoryName(dllpath.Replace("file://", "")).Replace("\\D:", "D:").Replace("\\C:","C:");
+                var path = Path.GetDirectoryName(dllpath.Replace("file://", "")).Replace("\\D:", "D:").Replace("\\C:", "C:");
                 path = Path.Combine(path, "..", "..", "DataFiles", name);
                 var savedGame = LoadGamePath(path);
 
@@ -5005,16 +5008,16 @@ namespace Handelabra.Sentinels.UnitTest
             return game;
         }
 
-        private static System.Reflection.Assembly OnAssemblyResolve( System.Object sender, System.ResolveEventArgs reArgs )
+        private static System.Reflection.Assembly OnAssemblyResolve(System.Object sender, System.ResolveEventArgs reArgs)
         {
             Console.WriteLine("OnAssemblyResolve: " + reArgs.Name);
-            foreach( System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies() ) 
+            foreach (System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies())
             {
                 System.Reflection.AssemblyName assemblyName = assembly.GetName();
-                if( reArgs.Name.StartsWith(assemblyName.Name) ) 
+                if (reArgs.Name.StartsWith(assemblyName.Name))
                 {
                     Console.WriteLine("Returning " + assembly);
-                    return( assembly );
+                    return (assembly);
                 }
             }
 
@@ -5093,19 +5096,19 @@ namespace Handelabra.Sentinels.UnitTest
             RunCoroutine(this.GameController.ShuffleTrashIntoDeck(ttc, overrideDeck: location));
         }
 
-		private IEnumerator WillPerformAction(GameAction gameAction)
-		{
-			// The test should fail if a DealDamageAction is about to occur before a previous one has resolved.
-			var running = this.GameController.UnresolvedActions.Where(ga => ga is DealDamageAction).FirstOrDefault();
+        private IEnumerator WillPerformAction(GameAction gameAction)
+        {
+            // The test should fail if a DealDamageAction is about to occur before a previous one has resolved.
+            var running = this.GameController.UnresolvedActions.Where(ga => ga is DealDamageAction).FirstOrDefault();
             if (gameAction is MakeDecisionAction && this.GameController.PretendMode && this.GameController.PeekFastCoroutines())
             {
                 Assert.Fail("Tried to make a decision with FastCoroutines in Pretend mode");
             }
 
-			if (running != null && !(running as DealDamageAction).IsResolved && gameAction is DealDamageAction && running != gameAction)
-			{
-				Log.Warning("DealDamageAction A tried to be performed before DealDamageAction B was finished:\nA: "+gameAction+"\nB: " + running);
-			}
+            if (running != null && !(running as DealDamageAction).IsResolved && gameAction is DealDamageAction && running != gameAction)
+            {
+                Log.Warning("DealDamageAction A tried to be performed before DealDamageAction B was finished:\nA: " + gameAction + "\nB: " + running);
+            }
 
             yield return null;
         }
@@ -5122,7 +5125,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         private IEnumerator DidPerformAction(GameAction gameAction)
         {
-            if (this.GameController.FindCardsWhere (c => c.Identifier == "UhYeahImThatGuy" && c.IsInPlayAndHasGameText).FirstOrDefault () != null) 
+            if (this.GameController.FindCardsWhere(c => c.Identifier == "UhYeahImThatGuy" && c.IsInPlayAndHasGameText).FirstOrDefault() != null)
             {
                 // When I'm That Guy is in play, it should have a Destroy Trigger.
                 // AssertTriggersWhere(t => t.CardSource != null && t.CardSource.Card.Identifier == "UhYeahImThatGuy");
@@ -5227,7 +5230,7 @@ namespace Handelabra.Sentinels.UnitTest
                         else
                         {
                             Log.Warning("Decision sources were null or of an unsupported type.");
-                        } 
+                        }
                     }
                     else
                     {
@@ -5266,16 +5269,16 @@ namespace Handelabra.Sentinels.UnitTest
 
         public void AssertPromoCardNotUnlockableInThisGame(IEnumerable<string> setup, string promoIdentifier, Dictionary<string, string> promosInGame = null, bool isAdvanced = false)
         {
-			if (DeckDefinition.AvailablePromos.Contains(promoIdentifier))
-			{
-				SetupGameController(setup, promoIdentifiers: promosInGame, advanced: isAdvanced);
-				MakePromoCardNotUnlocked(promoIdentifier);
+            if (DeckDefinition.AvailablePromos.Contains(promoIdentifier))
+            {
+                SetupGameController(setup, promoIdentifiers: promosInGame, advanced: isAdvanced);
+                MakePromoCardNotUnlocked(promoIdentifier);
 
-				StartGame();
+                StartGame();
 
-				AssertPromoCardNotUnlocked(promoIdentifier);
-				AssertPromoCardIsNotUnlockableThisGame(promoIdentifier);
-			}
+                AssertPromoCardNotUnlocked(promoIdentifier);
+                AssertPromoCardIsNotUnlockableThisGame(promoIdentifier);
+            }
         }
 
         public void AssertPromoCardNotUnlockableInTheseGames(IEnumerable<IEnumerable<string>> setups, string promoIdentifier)
@@ -5285,16 +5288,16 @@ namespace Handelabra.Sentinels.UnitTest
 
         public void AssertPromoCardUnlockableInThisGame(IEnumerable<string> setup, string promoIdentifier)
         {
-			if (DeckDefinition.AvailablePromos.Contains(promoIdentifier))
-			{
-				SetupGameController(setup);
-				MakePromoCardNotUnlocked(promoIdentifier);
+            if (DeckDefinition.AvailablePromos.Contains(promoIdentifier))
+            {
+                SetupGameController(setup);
+                MakePromoCardNotUnlocked(promoIdentifier);
 
-				StartGame();
+                StartGame();
 
-				AssertPromoCardNotUnlocked(promoIdentifier);
-				AssertPromoCardIsUnlockableThisGame(promoIdentifier);
-			}
+                AssertPromoCardNotUnlocked(promoIdentifier);
+                AssertPromoCardIsUnlockableThisGame(promoIdentifier);
+            }
         }
 
         public void AssertPromoCardUnlockableInTheseGames(IEnumerable<IEnumerable<string>> setup, string promoIdentifier)
@@ -5458,7 +5461,7 @@ namespace Handelabra.Sentinels.UnitTest
                         "The next decision type was expected to be " + type + " but was " + decision.SelectionType);
                     this.DecisionNextSelectionType = null;
                 }
-                
+
                 return this.MakeDecisions(decision);
             };
 
@@ -5494,20 +5497,20 @@ namespace Handelabra.Sentinels.UnitTest
             Assert.IsTrue(card.Location.Name == LocationName.OutOfGame, card.Title + " was not out of game.");
         }
 
-		protected void AssertOutOfGame(params Card[] cards)
-		{
-			cards.ForEach (c => AssertOutOfGame (c));
-		}
+        protected void AssertOutOfGame(params Card[] cards)
+        {
+            cards.ForEach(c => AssertOutOfGame(c));
+        }
 
-		protected void AssertNotOutOfGame(Card card)
-		{
-			Assert.IsTrue(card.Location.Name != LocationName.OutOfGame, card.Title + " was out of game.");
-		}
+        protected void AssertNotOutOfGame(Card card)
+        {
+            Assert.IsTrue(card.Location.Name != LocationName.OutOfGame, card.Title + " was out of game.");
+        }
 
-		protected void AssertOutOfGame(IEnumerable<Card> cards)
-		{
-			cards.ForEach (c => AssertOutOfGame (c));
-		}
+        protected void AssertOutOfGame(IEnumerable<Card> cards)
+        {
+            cards.ForEach(c => AssertOutOfGame(c));
+        }
 
         protected void AssertInTheBox(Card card)
         {
@@ -5541,10 +5544,10 @@ namespace Handelabra.Sentinels.UnitTest
             Assert.IsTrue(triggers.Count() > 0, "Triggers were not found that matched criteria when none were expected: " + triggers.ToCommaList());
         }
 
-		protected void AssertNotOutOfGame(IEnumerable<Card> cards)
-		{
-			cards.ForEach (c => AssertNotOutOfGame (c));
-		}
+        protected void AssertNotOutOfGame(IEnumerable<Card> cards)
+        {
+            cards.ForEach(c => AssertNotOutOfGame(c));
+        }
 
         protected Card GetCardWithLittleEffect(HeroTurnTakerController hero)
         {
@@ -5553,7 +5556,7 @@ namespace Handelabra.Sentinels.UnitTest
             if (safeCard == null)
             {
                 // Otherwise, try an equipment card.
-				safeCard = hero.HeroTurnTaker.GetAllCards().Where(c => !c.IsInPlay && this.GameController.DoesCardContainKeyword(c, CardDefinition.KEYWORD_EQUIPMENT) && !this.GameController.IsLimitedAndInPlay(c)).FirstOrDefault();
+                safeCard = hero.HeroTurnTaker.GetAllCards().Where(c => !c.IsInPlay && this.GameController.DoesCardContainKeyword(c, CardDefinition.KEYWORD_EQUIPMENT) && !this.GameController.IsLimitedAndInPlay(c)).FirstOrDefault();
             }
             return safeCard;
         }
@@ -5808,7 +5811,7 @@ namespace Handelabra.Sentinels.UnitTest
             if (ttc.IsHero)
             {
                 var storedResults = new List<PlayCardAction>();
-                RunCoroutine(this.GameController.SelectAndPlayCardFromHand(ttc.ToHero(), true, storedResults:storedResults));
+                RunCoroutine(this.GameController.SelectAndPlayCardFromHand(ttc.ToHero(), true, storedResults: storedResults));
                 skipped = (storedResults.Count == 0);
             }
             else
@@ -5821,7 +5824,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected void SelectAndUsePower(HeroTurnTakerController httc, out bool skipped)
         {
             var storedResults = new List<UsePowerDecision>();
-            RunCoroutine(this.GameController.SelectAndUsePower(httc, true, storedResults:storedResults));
+            RunCoroutine(this.GameController.SelectAndUsePower(httc, true, storedResults: storedResults));
             skipped = (storedResults.Any(d => d.Skipped));
         }
 
@@ -5875,45 +5878,45 @@ namespace Handelabra.Sentinels.UnitTest
             RunCoroutine(this.GameController.SelectAndPlayCardFromHand(hero, true));
         }
 
-		protected bool IsEquipment(Card card)
-		{
-			return this.GameController.DoesCardContainKeyword(card, CardDefinition.KEYWORD_EQUIPMENT);
-		}
+        protected bool IsEquipment(Card card)
+        {
+            return this.GameController.DoesCardContainKeyword(card, CardDefinition.KEYWORD_EQUIPMENT);
+        }
 
         protected bool IsMechanicalGolem(Card card)
         {
             return this.GameController.DoesCardContainKeyword(card, CardDefinition.KEYWORD_MECHANICAL_GOLEM);
         }
 
-		protected static string PWAAUnlockedKey()
-		{
-			return GameController.PromoCardHasBeenUnlockedKey(PrimeWardensArgentAdeptCharacterPromoCardUnlockController.PrimeWardensArgentAdeptCharacterIdentifier);
-		}
+        protected static string PWAAUnlockedKey()
+        {
+            return GameController.PromoCardHasBeenUnlockedKey(PrimeWardensArgentAdeptCharacterPromoCardUnlockController.PrimeWardensArgentAdeptCharacterIdentifier);
+        }
 
         protected IEnumerator DoNothing()
         {
             yield return null;
         }
 
-		protected Card SetupDynamicSiphonSmokeBomb(Card cardWithDynamicSiphon, int siphonHP = 100)
-		{
-			// Make Dynamic Siphon the highest HP target, and damage to it is irreducible.
-			PlayCard("SmokeBombs");
+        protected Card SetupDynamicSiphonSmokeBomb(Card cardWithDynamicSiphon, int siphonHP = 100)
+        {
+            // Make Dynamic Siphon the highest HP target, and damage to it is irreducible.
+            PlayCard("SmokeBombs");
 
-			var previousNextTo = DecisionNextToCard;
-			DecisionNextToCard = cardWithDynamicSiphon;
-			var siphon = PlayCard("DynamicSiphon");
-			DecisionNextToCard = previousNextTo;
+            var previousNextTo = DecisionNextToCard;
+            DecisionNextToCard = cardWithDynamicSiphon;
+            var siphon = PlayCard("DynamicSiphon");
+            DecisionNextToCard = previousNextTo;
 
-			siphon.SetMaximumHP(siphonHP, true);
+            siphon.SetMaximumHP(siphonHP, true);
 
-			MakeDamageIrreducibleStatusEffect effect = new MakeDamageIrreducibleStatusEffect();
-			effect.TargetCriteria.IsSpecificCard = siphon;
-			effect.UntilCardLeavesPlay(siphon);
-			RunCoroutine(this.GameController.AddStatusEffect(effect, false, new CardSource(FindCardController(siphon))));
+            MakeDamageIrreducibleStatusEffect effect = new MakeDamageIrreducibleStatusEffect();
+            effect.TargetCriteria.IsSpecificCard = siphon;
+            effect.UntilCardLeavesPlay(siphon);
+            RunCoroutine(this.GameController.AddStatusEffect(effect, false, new CardSource(FindCardController(siphon))));
 
-			return siphon;
-		}
+            return siphon;
+        }
 
         protected void AssertFaceUp(Card card)
         {
