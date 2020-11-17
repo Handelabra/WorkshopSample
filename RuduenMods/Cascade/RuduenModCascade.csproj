@@ -50,7 +50,7 @@
     <Compile Include="CascadeCardControllers\RippledVisionsCardController.cs" />
     <Compile Include="CascadeCardControllers\WaterlogCardController.cs" />
     <Compile Include="CascadeCardControllers\RushingWatersCardController.cs" />
-    <Compile Include="CascadeCardControllers\FloodbankCardController.cs" />
+    <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
     <Compile Include="CascadeCardControllers\RiverbankCardController.cs" />
     <Compile Include="CascadeCardControllers\DropletCardController.cs" />
     <Compile Include="CascadeCardControllers\ShapeTheStreamCardController.cs" />

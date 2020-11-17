@@ -176,7 +176,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestFloodbank()
+        public void TestWaterSurge()
         {
             SetupGameController("BaronBlade", "Workshopping.Cascade", "Legacy", "Megalopolis");
 
@@ -191,7 +191,7 @@ namespace RuduenModsTest
             PlayCard("InspiringPresence"); // Use to boost damage by 1 to make sure character card is source.
 
             QuickHPStorage(mdp, Cascade.CharacterCard);
-            PlayCard("Floodbank"); // Play the card.
+            PlayCard("WaterSurge"); // Play the card.
             QuickHPCheck(-3, 2);
         }
 
@@ -240,7 +240,7 @@ namespace RuduenModsTest
         //        Cascade.CharacterCard,
         //        FindCardInPlay("BaronBladeCharacter")
         //    };
-        //    Card followUp = PutInHand("Floodbank");
+        //    Card followUp = PutInHand("WaterSurge");
         //    DealDamage(Cascade, Cascade, 4, DamageType.Melee);
         //    DealDamage(Cascade, targets[0], 9, DamageType.Melee);
 
@@ -267,7 +267,7 @@ namespace RuduenModsTest
             MoveCard(Cascade, GetCard("RiverWornStone", 1), Cascade.HeroTurnTaker.Trash); // Move spare copy to the trash so draw 2 has two cards.
 
             Card power = PlayCard("RiverWornStone"); // Play the card.
-            Card cost = PutInHand("Floodbank");
+            Card cost = PutInHand("WaterSurge");
             Card mdp = FindCardInPlay("MobileDefensePlatform");
 
             DecisionSelectTarget = mdp;
@@ -327,7 +327,7 @@ namespace RuduenModsTest
 
         //    DiscardAllCards(Cascade); // Discard all cards so draw cards can pull an appropriate amount.
         //    Card mdp = FindCardInPlay("MobileDefensePlatform");
-        //    Card followUp = PutInHand("Floodbank");
+        //    Card followUp = PutInHand("WaterSurge");
         //    Card waters = PutInHand("DivergingWaters");
 
         //    DealDamage(Cascade, Cascade, 4, DamageType.Melee);

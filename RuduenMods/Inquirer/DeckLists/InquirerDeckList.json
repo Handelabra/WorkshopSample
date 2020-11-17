@@ -281,9 +281,9 @@
         "Inquirer"
       ],
       "incapacitatedAbilities": [
-        "One player may draw a card.",
-        "Each Hero regains 1 HP.",
-        "Select a Hero. Reduce the next damage dealt to that hero by 2."
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
       ],
       "flippedIcons": [
         "DrawCardNow",
@@ -318,9 +318,9 @@
         "Inquirer"
       ],
       "incapacitatedAbilities": [
-        "One player may draw a card.",
-        "One hero may use a power.",
-        "Discard the top card of each deck."
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
       ],
       "flippedIcons": [
         "DrawCardNow",

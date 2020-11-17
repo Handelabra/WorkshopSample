@@ -82,8 +82,10 @@ namespace RuduenModsTest
             {
                 "BaronBlade", "Workshopping.BreachMage", "Megalopolis"
             };
-            Dictionary<string, string> promos = new Dictionary<string, string>();
-            promos.Add("BreachMageCharacter", "BreachMageTwincasterCharacter");
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "BreachMageCharacter", "BreachMageTwincasterCharacter" }
+            };
 
             SetupGameController(identifiers, false, promos);
 
@@ -104,8 +106,10 @@ namespace RuduenModsTest
             {
                 "BaronBlade", "Workshopping.BreachMage", "Megalopolis"
             };
-            Dictionary<string, string> promos = new Dictionary<string, string>();
-            promos.Add("BreachMageCharacter", "BreachMageTwincasterCharacter");
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "BreachMageCharacter", "BreachMageTwincasterCharacter" }
+            };
 
             SetupGameController(identifiers, false, promos);
 
@@ -155,11 +159,11 @@ namespace RuduenModsTest
             List<Card> cards = new List<Card>
             {
                 PutInDeck("OpenBreach"),
-                PutInDeck("ScryingBolt")
+                PutInHand("ScryingBolt")
             };
 
             DecisionSelectCards = cards;
-            // Put the breach into play, then play a spell. (Both on top, so spell will be drawn for play.)
+            // Put the breach into play, then play the spell as a safe play.
 
             QuickHandStorage(BreachMage);
             PlayCard("FocusBreach");

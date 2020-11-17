@@ -4,9 +4,9 @@ using System.Collections;
 
 namespace Workshopping.Cascade
 {
-    public class FloodbankCardController : CascadeRiverSharedCardController
+    public class WaterSurgeCardController : CascadeRiverSharedCardController
     {
-        public FloodbankCardController(Card card, TurnTakerController turnTakerController)
+        public WaterSurgeCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }

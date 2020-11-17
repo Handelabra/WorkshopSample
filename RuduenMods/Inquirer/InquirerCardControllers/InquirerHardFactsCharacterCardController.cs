@@ -9,7 +9,7 @@ namespace Workshopping.Inquirer
 {
     public class InquirerHardFactsCharacterCardController : HeroCharacterCardController
     {
-        private List<Card> actedDistortions;
+        private readonly List<Card> actedDistortions;
 
         public InquirerHardFactsCharacterCardController(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
         {

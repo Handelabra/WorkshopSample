@@ -56,8 +56,10 @@ namespace RuduenModsTest
             {
                 "BaronBlade", "Workshopping.Inquirer", "Megalopolis"
             };
-            Dictionary<string, string> promos = new Dictionary<string, string>();
-            promos.Add("InquirerCharacter", "InquirerLiesOnLiesCharacter");
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "InquirerCharacter", "InquirerLiesOnLiesCharacter" }
+            };
             SetupGameController(setupItems, false, promos);
 
             StartGame();
@@ -83,8 +85,10 @@ namespace RuduenModsTest
             {
                 "BaronBlade", "Workshopping.Inquirer", "Megalopolis"
             };
-            Dictionary<string, string> promos = new Dictionary<string, string>();
-            promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "InquirerCharacter", "InquirerHardFactsCharacter" }
+            };
             SetupGameController(setupItems, false, promos);
 
             StartGame();
@@ -112,15 +116,17 @@ namespace RuduenModsTest
             {
                 "BaronBlade", "Workshopping.Inquirer", "RealmOfDiscord"
             };
-            Dictionary<string, string> promos = new Dictionary<string, string>();
-            promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "InquirerCharacter", "InquirerHardFactsCharacter" }
+            };
             SetupGameController(setupItems, false, promos);
 
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
 
-            Card vitality = PlayCard("ImbuedVitality");
+            PlayCard("ImbuedVitality");
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             Card distortion = PutInHand("YoureLookingPale");
@@ -146,8 +152,10 @@ namespace RuduenModsTest
             {
                 "BaronBlade", "Workshopping.Inquirer", "RealmOfDiscord"
             };
-            Dictionary<string, string> promos = new Dictionary<string, string>();
-            promos.Add("InquirerCharacter", "InquirerHardFactsCharacter");
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "InquirerCharacter", "InquirerHardFactsCharacter" }
+            };
             SetupGameController(setupItems, false, promos);
 
             StartGame();

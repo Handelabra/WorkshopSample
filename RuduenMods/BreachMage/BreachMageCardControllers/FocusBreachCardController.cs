@@ -17,10 +17,6 @@ namespace Workshopping.BreachMage
             IEnumerator coroutine;
             List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
-            // Draw a card.
-            coroutine = this.DrawCard(this.HeroTurnTaker);
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
             // Search if appropriate.
             if (this.TurnTaker.IsHero)
             {
@@ -34,8 +30,13 @@ namespace Workshopping.BreachMage
                 coroutine = this.GameController.SendMessageAction(this.Card.Title + " has no deck or trash to search.", Priority.Medium, this.GetCardSource(null), null, true);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
+
+            // Draw a card.
+            coroutine = this.DrawCard(this.HeroTurnTaker);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
             // Play a card.
-            coroutine = this.SelectAndPlayCardFromHand(this.HeroTurnTakerController, true, null, null, false, false, true, null);
+            coroutine = this.SelectAndPlayCardFromHand(this.HeroTurnTakerController, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

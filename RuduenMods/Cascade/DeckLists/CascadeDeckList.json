@@ -72,9 +72,9 @@
       "bgImage": "image_bg_1.png"
     },
     {
-      "identifier": "Floodbank",
+      "identifier": "WaterSurge",
       "count": 3,
-      "title": "Floodbank",
+      "title": "Water Surge",
       "keywords": [ "aqua cost: 1", "one-shot" ],
       "body": [ "{Cascade} deals 1 target 2 Cold Damage. {Cascade} regains 1 HP." ],
       "icons": [ "DealDamageCold", "GainHP" ],
@@ -364,9 +364,9 @@
         "BreachMage"
       ],
       "incapacitatedAbilities": [
-        "Destroy an Ongoing card.",
-        "One Hero uses a power.",
-        "One Hero deals 1 target 2 Fire Damage."
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
       ],
       "flippedIcons": [],
       "openingLines": {
@@ -392,9 +392,9 @@
         "BreachMage"
       ],
       "incapacitatedAbilities": [
-        "Destroy an Ongoing card.",
-        "One Hero uses a power.",
-        "One Hero deals 1 target 2 Fire Damage."
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
       ],
       "flippedIcons": [],
       "openingLines": {
@@ -420,9 +420,9 @@
         "BreachMage"
       ],
       "incapacitatedAbilities": [
-        "Destroy an Ongoing card.",
-        "One Hero uses a power.",
-        "One Hero deals 1 target 2 Fire Damage."
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
       ],
       "flippedIcons": [],
       "openingLines": {

@@ -6,8 +6,8 @@
   ],
   "cards": [
     {
-      "identifier": "BreachMageCharacter",
       "count": 1,
+      "identifier": "BreachMageCharacter",
       "title": "Breach Mage",
       "body": "M. Blazewatcher",
       "backgroundColor": "fbf8f9",
@@ -38,7 +38,7 @@
       "identifier": "CycleOfMagic",
       "count": 2,
       "title": "Cycle of Magic",
-      "keywords": [ "one-shot", "breach" ],
+      "keywords": [ "one-shot" ],
       "body": [ "Draw 2 cards. Activate a card's Cast text, then place that card on top of your deck." ],
       "icons": [ "DrawCardNow", "Manipulate" ],
       "flavorText": "..."
@@ -48,7 +48,7 @@
       "count": 4,
       "title": "FocusBreach",
       "keywords": [ "one-shot" ],
-      "body": [ "Draw a card. Search your deck or trash for a Breach and put it into play. If you searched your deck, shuffle it. You may play a card. " ],
+      "body": [ "Search your deck or trash for a Breach card and put it into play. If you searched your deck, shuffle it. Draw a card. You may play a card. " ],
       "icons": [ "DrawCardNow", "Search", "PlayCardNow" ],
       "flavorText": "..."
     },
@@ -56,7 +56,7 @@
       "identifier": "OpenBreach",
       "count": 2,
       "title": "Open Breach",
-      "keywords": [ "ongoing", "breach" ],
+      "keywords": [ "breach" ],
       "body": [ "At the start of your turn, you may activate a card's Cast text, then destroy that card.", "At the end of your turn, you may play 1 Spell card." ],
       "icons": [ "StartAndEndOfTurnAction", "Destroy", "PlayCardNow" ],
       "flavorText": "..."
@@ -65,7 +65,7 @@
       "identifier": "PotentBreach",
       "count": 2,
       "title": "Potent Breach",
-      "keywords": [ "ongoing" ],
+      "keywords": [ "breach" ],
       "body": [ "At the start of your turn, you may activate a card's Cast text, then destroy that card. If that Cast text deals damage, increase that damage by 1. " ],
       "icons": [ "StartAndEndOfTurnAction", "Destroy", "IncreaseDamageDealt" ],
       "flavorText": "..."
@@ -212,9 +212,9 @@
         "BreachMage"
       ],
       "incapacitatedAbilities": [
-        "Destroy an Ongoing card.",
-        "One Hero uses a power.",
-        "One Hero deals 1 target 2 Fire Damage."
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
       ],
       "flippedIcons": [],
       "openingLines": {
