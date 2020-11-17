@@ -1249,10 +1249,6 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
         private string OutputFileName;
         private string DataFileName;
 
-        System.IO.StreamWriter FileOutput = null;
-        string OutputFileDate;
-        string OutputFileName;
-        string DataFileName;
         static GameSpeed Speed = GameSpeed.Fast;
         static bool CheatStops = false;
         Card _lastCardPrinted = null;
