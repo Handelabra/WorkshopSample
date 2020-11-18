@@ -8,7 +8,7 @@ This project is a very rough template for starting work on making a mod with new
 Getting started:
 
 - Get a copy of the project (probably make your own repo or a fork or something)
-- Update the references for EngineCommon and SentinelsEngine to point to the DLLs in your own copy of the game:
+- If necessary, update the references for EngineCommon and SentinelsEngine to point to the DLLs in your own copy of the game. Double-click on MyMod->MyMod->References, choose the .Net Assembly tab, and browse to the desired files.
   - Windows: C:\Program Files\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed
   - Mac: /Users/<USERNAME>/Library/Application Support/Steam/steamapps/common/Sentinels of the Multiverse/Sentinels.app/Contents/Resources/Data/Managed
   - Linux: ~/.local/share/Steam/steamapps/common/Sentinels of the Multiverse/Sentinels_Data/Managed
