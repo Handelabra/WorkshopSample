@@ -54,18 +54,21 @@
     <Compile Include="TheHugMonsterTeam\TheHugMonsterTeamCharacterCardController.cs" />
     <Compile Include="TheHugMonsterTeam\WarmEmbraceCardController.cs" />
     <Compile Include="MigrantCoder\MigrantCoderLockdownCharacterCardController.cs" />
+    <Compile Include="Bunker\WaywardBunkerCharacterCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
     <EmbeddedResource Include="DeckLists\TheBaddiesDeckList.json" />
     <EmbeddedResource Include="DeckLists\DevStreamDeckList.json" />
     <EmbeddedResource Include="DeckLists\TheHugMonsterTeamDeckList.json" />
+    <EmbeddedResource Include="DeckLists\PromoCardList.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Folder Include="TheBaddies\" />
     <Folder Include="DevStream\" />
     <Folder Include="TheHugMonsterTeam\" />
+    <Folder Include="Bunker\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -409,13 +409,16 @@ namespace Handelabra.Sentinels.UnitTest
                 foreach (var shortcut in promoShortcuts)
                 {
                     var shortcutSplit = shortcut.Split('/');
-                    identifiers = identifiers.Replace(s => s == shortcut, s => shortcutSplit.ElementAt(0));
-                    var character = shortcutSplit.ElementAt(1);
+                    var turnTaker = shortcutSplit[0];
+                    identifiers = identifiers.Replace(s => s == shortcut, s => turnTaker);
+                    var character = shortcutSplit[1];
                     if (!character.Contains("Character"))
                     {
                         character += "Character";
                     }
-                    promoIdentifiers.Add(shortcutSplit.ElementAt(0), character);
+                    promoIdentifiers.Add(turnTaker, character);
+
+                    Console.WriteLine("Using promo shortcut: {0} = {1}", turnTaker, character);
                 }
             }
 

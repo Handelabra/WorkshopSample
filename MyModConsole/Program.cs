@@ -1261,6 +1261,8 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             this.OutputFileName = string.Format("output-{0}.txt", this.OutputFileDate);
             this.DataFileName = string.Format("output-{0}.dat", this.OutputFileDate);
             Log.DebugDelegate += OutputToConsoleAndFileLine;
+            Log.WarningDelegate += OutputToConsoleAndFileLine;
+            Log.ErrorDelegate += OutputToConsoleAndFileLine;
         }
 
         public void ReplayGameController(Game existingGame)
@@ -1452,6 +1454,8 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             GameController = null;
             this.OutputFileName = null;
             Log.DebugDelegate -= OutputToConsoleAndFileLine;
+            Log.WarningDelegate -= OutputToConsoleAndFileLine;
+            Log.ErrorDelegate -= OutputToConsoleAndFileLine;
         }
 
         public bool RunLoop(bool continuingGame = false)

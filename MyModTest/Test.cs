@@ -125,5 +125,24 @@ namespace MyModTest
             PlayCard("PunchingBag");
             QuickHPCheck(0);
         }
+
+        [Test()]
+        public void TestBunkerVariant()
+        {
+            SetupGameController("BaronBlade", "Bunker/Workshopping.WaywardBunkerCharacter", "Megalopolis");
+
+            StartGame();
+
+            Assert.IsTrue(bunker.CharacterCard.IsPromoCard);
+            Assert.AreEqual("WaywardBunkerCharacter", bunker.CharacterCard.PromoIdentifierOrIdentifier);
+            Assert.AreEqual(30, bunker.CharacterCard.MaximumHitPoints);
+
+            GoToUsePowerPhase(bunker);
+
+            // Use the power, it draws 2 cards not 1!
+            QuickHandStorage(bunker);
+            UsePower(bunker);
+            QuickHandCheck(2);
+        }
     }
 }

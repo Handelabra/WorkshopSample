@@ -1,0 +1,44 @@
+﻿{
+  "Bunker": [
+
+    {
+      "identifier": "BunkerCharacter",
+      "promoIdentifier": "WaywardBunkerCharacter",
+      "count": 1,
+      "title": "Bunker",
+      "promoTitle": "Wayward Bunker",
+      "body": "Go Your Own Way",
+      "icons": [
+        "HasPower",
+        "Manipulate",
+        "PlayCardNow"
+      ],
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "character": true,
+      "powers": [
+        "Draw 2 cards! Ho ho ho!"
+      ],
+      "hitpoints": 30,
+      "nemesisIdentifiers": [
+        "Bunker"
+      ],
+      "incapacitatedAbilities": [
+        "One player may draw a card.",
+        "Select a hero. Until the start of your turn, reduce damage dealt to that hero by 1.",
+        "One environment target deals 1 target 2 fire damage."
+      ],
+      "flippedIcons": [
+        "DrawCardNow",
+        "ReduceDamageTaken",
+        "DealDamageFire"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "You can't tell me what to do!"
+      }
+    }
+
+  ]
+}
