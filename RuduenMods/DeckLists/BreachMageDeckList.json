@@ -39,7 +39,10 @@
       "count": 2,
       "title": "Cycle of Magic",
       "keywords": [ "one-shot" ],
-      "body": [ "Draw 2 cards. Activate a card's [u]Cast[/u] text, then place that card on top of your deck." ],
+      "body": [
+        "Draw 2 cards.",
+        "Activate a card's [u]Cast[/u] text, then place that card on top of your deck."
+      ],
       "icons": [ "DrawCardNow", "Manipulate" ],
       "flavorText": "..."
     },
@@ -82,7 +85,7 @@
       "activatableAbilities": [
         {
           "name": "cast",
-          "text": "Breach Mage deals 1 Target 4 Lightning Damage. Reveal the top 2 cards of any deck. Put them back on top of the deck in any order."
+          "text": "{BreachMage} deals 1 Target 4 Lightning Damage. Reveal the top 2 cards of any deck. Put them back on top of the deck in any order."
         }
       ],
       "icons": [ "DealDamageLightning", "Manipulate" ],
@@ -96,7 +99,7 @@
       "activatableAbilities": [
         {
           "name": "cast",
-          "text": "Breach Mage deals 1 Target 4 Radiant Damage. Each player draws a card."
+          "text": "{BreachMage} deals 1 Target 4 Radiant Damage. Each player draws a card."
         }
       ],
       "icons": [ "DealDamageRadiant", "DrawCardNow" ],
@@ -110,7 +113,7 @@
       "activatableAbilities": [
         {
           "name": "cast",
-          "text": "Breach Mage deals 1 Target 3 Psychic Damage. You may destroy an Ongoing or Environment card."
+          "text": "{BreachMage} deals 1 Target 3 Psychic Damage. You may destroy an Ongoing or Environment card."
         }
       ],
       "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
@@ -124,7 +127,7 @@
       "activatableAbilities": [
         {
           "name": "cast",
-          "text": "Breach Mage deals 1 Target 3 Fire Damage. You may destroy up to 3 of your Charge cards. For each card destroyed this way, Breach Mage deals 1 Target 3 Fire Damage."
+          "text": "{BreachMage} deals 1 Target 3 Fire Damage. You may destroy up to 3 of your Charge cards. For each card destroyed this way, {BreachMage} deals 1 Target 3 Fire Damage."
         }
       ],
       "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
@@ -138,7 +141,7 @@
       "activatableAbilities": [
         {
           "name": "cast",
-          "text": "Breach Mage deals each non-Hero Target 3 Fire Damage."
+          "text": "{BreachMage} deals each non-Hero Target 3 Fire Damage."
         }
       ],
       "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
@@ -179,7 +182,7 @@
       "count": 3,
       "title": "Vigor Charm",
       "keywords": [ "equipment", "charge" ],
-      "body": "When you play this, draw 3 cards and Breach Mage deals themselves 2 Psychic Damage.",
+      "body": "When you play this, draw 3 cards and {BreachMage} deals themselves 2 Psychic Damage.",
       "powers": "Return this card to your hand.",
       "icons": [ "DrawCardNow", "DealDamagePsychic", "Manipulate" ],
       "flavorText": "...."
@@ -207,7 +210,7 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "{Breach Mage} deals 1 Target 2 Fire Damage.",
+        "{BreachMage} deals 1 Target 2 Fire Damage.",
         "Destroy 2 of your Charge cards. If you do, select a card and activate its [u]Cast[/u] text twice, then destroy that card."
       ],
       "icons": [ "HasPower", "DealDamageFire", "Destroy" ],

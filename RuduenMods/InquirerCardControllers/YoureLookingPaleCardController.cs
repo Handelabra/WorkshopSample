@@ -19,7 +19,7 @@ namespace RuduenWorkshop.Inquirer
             if (nextTo != null)
             {
                 // Damage.
-                IEnumerator coroutine = this.DealDamage(nextTo, nextTo, 4, DamageType.Psychic, true, false, false, null, null, null, false, null);
+                IEnumerator coroutine = this.DealDamage(nextTo, nextTo, 4, DamageType.Psychic, cardSource: this.GetCardSource(null));
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }

@@ -23,7 +23,7 @@ namespace RuduenWorkshop.Inquirer
         {
             // Pick any target
             List<SelectCardDecision> storedResults = new List<SelectCardDecision>();
-            IEnumerator coroutine = this.GameController.SelectCardAndStoreResults(this.DecisionMaker, SelectionType.SelectTarget, new LinqCardCriteria((Card c) => c.IsInPlayAndHasGameText && c.IsTarget, "targets", false, false, null, null, false), storedResults, false, false, null, true, this.GetCardSource(null));
+            IEnumerator coroutine = this.GameController.SelectCardAndStoreResults(this.DecisionMaker, SelectionType.SelectTarget, new LinqCardCriteria((Card c) => c.IsInPlayAndHasGameText && c.IsTarget && !c.IsHero, "targets", false, false, null, null, false), storedResults, false, false, null, true, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             Card selectedCard = this.GetSelectedCard(storedResults);
 
