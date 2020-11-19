@@ -5,7 +5,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Workshopping.BreachMage;
+using RuduenWorkshop.BreachMage;
 
 namespace RuduenModsTest
 {
@@ -18,7 +18,7 @@ namespace RuduenModsTest
             // Tell the engine about our mod assembly so it can load up our code.
             // It doesn't matter which type as long as it comes from the mod's assembly.
             //var a = Assembly.GetAssembly(typeof(InquirerCharacterCardController)); // replace with your own type
-            ModHelper.AddAssembly("Workshopping", Assembly.GetAssembly(typeof(BreachMageCharacterCardController))); // replace with your own namespace
+            ModHelper.AddAssembly("RuduenWorkshop", Assembly.GetAssembly(typeof(BreachMageCharacterCardController))); // replace with your own namespace
         }
 
         protected HeroTurnTakerController BreachMage { get { return FindHero("BreachMage"); } }
@@ -26,7 +26,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestModWorks()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
@@ -42,7 +42,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestInnatePower()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -59,7 +59,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestInnatePowerB()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -80,7 +80,7 @@ namespace RuduenModsTest
         {
             List<string> identifiers = new List<string>()
             {
-                "BaronBlade", "Workshopping.BreachMage", "Megalopolis"
+                "BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
@@ -104,7 +104,7 @@ namespace RuduenModsTest
         {
             List<string> identifiers = new List<string>()
             {
-                "BaronBlade", "Workshopping.BreachMage", "Megalopolis"
+                "BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
@@ -133,7 +133,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestCycleOfMagic()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -152,7 +152,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestFocusBreach()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -175,7 +175,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestOpenBreach()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -196,7 +196,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestPotentBreach()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -214,7 +214,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestScryingBolt()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -233,7 +233,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestShine()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -252,7 +252,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestHauntingEcho()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -271,7 +271,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestFlareCascade()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -288,7 +288,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestFlareCascadeCharged()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -314,7 +314,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestMoltenWave()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -334,7 +334,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestHammerCharm()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
             GetCardInPlay("MobileDefensePlatform");
@@ -348,7 +348,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestStaffCharm()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -365,7 +365,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestSpiralCharm()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
@@ -382,7 +382,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestVigorCharm()
         {
-            SetupGameController("BaronBlade", "Workshopping.BreachMage", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 

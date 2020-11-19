@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RuduenWorkshop</RootNamespace>
+    <AssemblyName>RuduenMod</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EngineCommon, Version=1.0.6479.23224, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed\EngineCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="SentinelsEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed\SentinelsEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BreachMageCardControllers\BreachMageTwincasterCharacterCardController.cs" />
+    <Compile Include="BreachMageCardControllers\BreachMageSpellSharedCardController.cs" />
+    <Compile Include="BreachMageCardControllers\FocusBreachCardController.cs" />
+    <Compile Include="BreachMageCardControllers\HammerCharmCardController.cs" />
+    <Compile Include="BreachMageCardControllers\AuraCharmCardController.cs" />
+    <Compile Include="BreachMageCardControllers\CycleOfMagicCardController.cs" />
+    <Compile Include="BreachMageCardControllers\VigorCharmCardController.cs" />
+    <Compile Include="BreachMageCardControllers\SpiralCharmCardController.cs" />
+    <Compile Include="BreachMageCardControllers\StaffCharmCardController.cs" />
+    <Compile Include="BreachMageCardControllers\OpenBreachCardController.cs" />
+    <Compile Include="BreachMageCardControllers\FlareCascadeCardController.cs" />
+    <Compile Include="BreachMageCardControllers\MoltenWaveCardController.cs" />
+    <Compile Include="BreachMageCardControllers\HauntingEchoCardController.cs" />
+    <Compile Include="BreachMageCardControllers\ScryingBoltCardController.cs" />
+    <Compile Include="BreachMageCardControllers\ShineCardController.cs" />
+    <Compile Include="BreachMageCardControllers\PotentBreachCardController.cs" />
+    <Compile Include="BreachMageCardControllers\BreachMageCharacterCardController.cs" />
+    <Compile Include="BreachMageCardControllers\BreachMageEquipmentSharedCardController.cs" />
+    <Compile Include="BreachMageCardControllers\BreachMageTurnTakerController.cs" />
+    <Compile Include="InquirerCardControllers\BackupPlanCardController.cs" />
+    <Compile Include="InquirerCardControllers\FisticuffsCardController.cs" />
+    <Compile Include="InquirerCardControllers\ImAMolePersonCardController.cs" />
+    <Compile Include="InquirerCardControllers\ImANinjaCardController.cs" />
+    <Compile Include="InquirerCardControllers\ImAVictorianCardController.cs" />
+    <Compile Include="InquirerCardControllers\InquirerCharacterCardController.cs" />
+    <Compile Include="InquirerCardControllers\InquirerDistortionSharedCardController.cs" />
+    <Compile Include="InquirerCardControllers\InquirerFormSharedCardController.cs" />
+    <Compile Include="InquirerCardControllers\InquirerHardFactsCharacterCardController.cs" />
+    <Compile Include="InquirerCardControllers\InquirerLiesOnLiesCharacterCardController.cs" />
+    <Compile Include="InquirerCardControllers\InquirerTurnTakerController.cs" />
+    <Compile Include="InquirerCardControllers\IveFixedTheWoundCardController.cs" />
+    <Compile Include="InquirerCardControllers\LookADistractionCardController.cs" />
+    <Compile Include="InquirerCardControllers\TheLieTheyTellThemselvesCardController.cs" />
+    <Compile Include="InquirerCardControllers\TheRightQuestionsCardController.cs" />
+    <Compile Include="InquirerCardControllers\UndeniableFactsCardController.cs" />
+    <Compile Include="InquirerCardControllers\UntilYouMakeItCardController.cs" />
+    <Compile Include="InquirerCardControllers\YoureLookingPaleCardController.cs" />
+    <Compile Include="InquirerCardControllers\YoureOnOurSideCardController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DeckLists\BreachMageDeckList.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DeckLists\InquirerDeckList.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="manifest.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

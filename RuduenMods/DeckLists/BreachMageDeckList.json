@@ -1,0 +1,230 @@
+﻿{
+  "name": "Breach Mage",
+  "kind": "Hero",
+  "initialCardIdentifiers": [
+    "BreachMageCharacter"
+  ],
+  "cards": [
+    {
+      "count": 1,
+      "identifier": "BreachMageCharacter",
+      "title": "Breach Mage",
+      "body": "M. Blazewatcher",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": [
+        "Activate a card's [u]Cast[/u] text, then destroy that card.",
+        "Destroy 2 of your Charge cards. If you do, any player draws 5 cards."
+      ],
+      "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Destroy an Ongoing card.",
+        "One Hero uses a power.",
+        "One Hero deals 1 target 2 Fire Damage."
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "..."
+      },
+      "complexity": 2
+    },
+    {
+      "identifier": "CycleOfMagic",
+      "count": 2,
+      "title": "Cycle of Magic",
+      "keywords": [ "one-shot" ],
+      "body": [ "Draw 2 cards. Activate a card's [u]Cast[/u] text, then place that card on top of your deck." ],
+      "icons": [ "DrawCardNow", "Manipulate" ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "FocusBreach",
+      "count": 4,
+      "title": "Focus Breach",
+      "keywords": [ "one-shot" ],
+      "body": [
+        "Search your deck or trash for a Breach card and put it into play. If you searched your deck, shuffle it.",
+        "Draw a card.",
+        "You may play a card. "
+      ],
+      "icons": [ "DrawCardNow", "Search", "PlayCardNow" ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "OpenBreach",
+      "count": 2,
+      "title": "Open Breach",
+      "keywords": [ "breach" ],
+      "body": [ "At the start of your turn, you may activate a card's [u]Cast[/u] text, then destroy that card.", "At the end of your turn, you may play 1 Spell card." ],
+      "icons": [ "StartAndEndOfTurnAction", "Destroy", "PlayCardNow" ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "PotentBreach",
+      "count": 2,
+      "title": "Potent Breach",
+      "keywords": [ "breach" ],
+      "body": [ "At the start of your turn, you may activate a card's [u]Cast[/u] text, then destroy that card. If that [u]Cast[/u] text deals damage, increase that damage by 1. " ],
+      "icons": [ "StartAndEndOfTurnAction", "Destroy", "IncreaseDamageDealt" ],
+      "flavorText": "..."
+    },
+    {
+      "identifier": "ScryingBolt",
+      "count": 3,
+      "title": "Scrying Bolt",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals 1 Target 4 Lightning Damage. Reveal the top 2 cards of any deck. Put them back on top of the deck in any order."
+        }
+      ],
+      "icons": [ "DealDamageLightning", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "Shine",
+      "count": 3,
+      "title": "Shine",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals 1 Target 4 Radiant Damage. Each player draws a card."
+        }
+      ],
+      "icons": [ "DealDamageRadiant", "DrawCardNow" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "HauntingEcho",
+      "count": 3,
+      "title": "Spectral Echo",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals 1 Target 3 Psychic Damage. You may destroy an Ongoing or Environment card."
+        }
+      ],
+      "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "FlareCascade",
+      "count": 3,
+      "title": "Flare Cascade",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals 1 Target 3 Fire Damage. You may destroy up to 3 of your Charge cards. For each card destroyed this way, Breach Mage deals 1 Target 3 Fire Damage."
+        }
+      ],
+      "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "MoltenWave",
+      "count": 3,
+      "title": "Molten Wave",
+      "keywords": [ "ongoing", "spell" ],
+      "activatableAbilities": [
+        {
+          "name": "cast",
+          "text": "Breach Mage deals each non-Hero Target 3 Fire Damage."
+        }
+      ],
+      "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "HammerCharm",
+      "count": 3,
+      "title": "Hammer Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, you may destroy an Ongoing or Equipment card.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "DealDamageLightning", "DestroyOngoing", "DestroyEnvironment", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "StaffCharm",
+      "count": 3,
+      "title": "Staff Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, activate a card's [u]Cast[/u] text, then destroy that card. If that [u]Cast[/u] text deals damage, increase that damage by 2.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "Destroy", "IncreaseDamageDealt", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "SpiralCharm",
+      "count": 3,
+      "title": "Spiral Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, activate a card's [u]Cast[/u] text.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "Destroy", "IncreaseDamageDealt", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "VigorCharm",
+      "count": 3,
+      "title": "Vigor Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, draw 3 cards and Breach Mage deals themselves 2 Psychic Damage.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "DrawCardNow", "DealDamagePsychic", "Manipulate" ],
+      "flavorText": "...."
+    },
+    {
+      "identifier": "AuraCharm",
+      "count": 3,
+      "title": "Aura Charm",
+      "keywords": [ "equipment", "charge" ],
+      "body": "When you play this, one Hero may use a power.",
+      "powers": "Return this card to your hand.",
+      "icons": [ "UsePowerNow", "Manipulate" ],
+      "flavorText": "...."
+    }
+  ],
+  "promoCards": [
+    {
+      "identifier": "BreachMageCharacter",
+      "promoIdentifier": "BreachMageTwincasterCharacter",
+      "count": 1,
+      "title": "Breach Mage",
+      "body": "J. Twincaster",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": [
+        "{Breach Mage} deals 1 Target 2 Fire Damage.",
+        "Destroy 2 of your Charge cards. If you do, select a card and activate its [u]Cast[/u] text twice, then destroy that card."
+      ],
+      "icons": [ "HasPower", "DealDamageFire", "Destroy" ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "..."
+      },
+      "complexity": 3
+    }
+  ]
+}

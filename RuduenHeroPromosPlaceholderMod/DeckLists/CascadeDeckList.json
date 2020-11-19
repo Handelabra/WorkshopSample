@@ -1,0 +1,435 @@
+﻿{
+  "name": "Cascade",
+  "kind": "Hero",
+  "initialCardIdentifiers": [
+    "CascadeCharacter",
+    "Riverbank"
+  ],
+  "cards": [
+    {
+      "count": 1,
+      "identifier": "CascadeCharacter",
+      "title": "Cascade",
+      "body": "Carried by the Stream",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": [ "You may discard up to 3 cards. You may move a card with an Aqua Cost of your discarded cards' total {spell} or less from the Riverbank to your discard, ignoring its Indestructable status. Draw until you have 4 cards." ],
+      "icons": [ "HasPower", "Manipulate", "DrawCardNow" ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Destroy an Ongoing card.",
+        "One Hero uses a power.",
+        "One Hero deals 1 target 2 Fire Damage."
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "..."
+      },
+      "complexity": 3,
+      "tempImage": "⛹"
+    },
+    {
+      "identifier": "Riverbank",
+      "kind": "other",
+      "count": 1,
+      "isReal": false,
+      "title": "Riverbank",
+      "body": [
+        "At the start of the game, take all River cards in {Cascade}'s deck and shuffle them together to create the River deck. Then, place the top 4 cards of the River deck under this card.",
+        "This card and all cards beneath this card are indestructible.",
+        "This card is not a hero, villain, or environment card.",
+        "After a card beneath this is played or moved to somewhere other than the River deck, move the top card from the River deck beneath this until there are 4 cards beneath this."
+      ],
+      "icons": [
+        "Indestructible",
+        "Manipulate"
+      ]
+    },
+    {
+      "identifier": "Droplet",
+      "count": 3,
+      "title": "Droplet",
+      "keywords": [ "aqua cost: 1", "one-shot" ],
+      "body": [ "Each Hero regains 1 HP.", "You may move all cards beneath Riverbank to the bottom of the River deck in the same order, ignoring their indestructable status, and move the top four cards from the River deck beneath Riverbank." ],
+      "icons": [ "DealDamageProjectile", "Manipulate" ],
+      "magicNumbers": [ 1, 1, 1, 1 ],
+      "flavorText": "...",
+      "tokenPools": [
+        {
+          "identifier": "CascadeCostPool",
+          "name": "Cascade's Card Cost Pool",
+          "initialValue": 0,
+          "maximumValue": 1,
+          "color": "D1426D"
+        }
+      ],
+      "tempImage": "$",
+      "bgImage": "image_bg_1.png"
+    },
+    {
+      "identifier": "WaterSurge",
+      "count": 3,
+      "title": "Water Surge",
+      "keywords": [ "aqua cost: 1", "one-shot" ],
+      "body": [ "{Cascade} deals 1 target 2 Cold Damage. {Cascade} regains 1 HP." ],
+      "icons": [ "DealDamageCold", "GainHP" ],
+      "magicNumbers": [ 1, 1, 1, 1 ],
+      "flavorText": "...",
+      "tokenPools": [
+        {
+          "identifier": "CascadeCostPool",
+          "name": "Cascade's Card Cost Pool",
+          "initialValue": 0,
+          "maximumValue": 1,
+          "color": "D1426D"
+        }
+      ],
+      "tempImage": "⛱",
+      "bgImage": "image_bg_2.png"
+    }
+  ],
+  "subdecks": [
+    {
+      "identifier": "RiverDeck",
+      "name": "The River Deck",
+      "kind": "Other",
+      "reshufflesWhenEmpty": false,
+      "cards": [
+        {
+          "identifier": "RushingWaters",
+          "count": 4,
+          "title": "Rushing Waters",
+          "keywords": [ "aqua cost: 2", "river", "one-shot" ],
+          "body": [ "You may play 2 cards." ],
+          "icons": [ "PlayCardNow" ],
+          "magicNumbers": [ 2, 2, 2, 2 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 2,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "➁",
+          "bgImage": "image_bg_3.png"
+        },
+        {
+          "identifier": "Waterlog",
+          "count": 4,
+          "title": "Waterlog",
+          "keywords": [ "aqua cost: 2", "river", "one-shot" ],
+          "body": [ "Destroy an Ongoing or Environment card." ],
+          "icons": [ "DestroyOngoing", "DestroyEnvironment" ],
+          "magicNumbers": [ 2, 2, 2, 2 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 2,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "🌴",
+          "bgImage": "image_bg_4.png"
+        },
+        {
+          "identifier": "RiverWornStone",
+          "count": 3,
+          "title": "River-Worn Stone",
+          "keywords": [ "aqua cost: 3", "river", "equipment", "limited" ],
+          "powers": [ "Move a card from your hand to the bottom of the River deck. {Cascade} deals 1 Target that card's {spell} Projectile Damage." ],
+          "body": [ "You may draw an additional card during your Draw Phase." ],
+          "icons": [ "DrawCardNow", "HasPower", "DealProjectileDamage", "Manipulate" ],
+          "magicNumbers": [ 2, 2, 2, 2 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 3,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "💎",
+          "bgImage": "image_bg_6.png"
+        },
+        {
+          "identifier": "RippledVisions",
+          "count": 4,
+          "title": "Rippled Visions",
+          "keywords": [ "aqua cost: 3", "river", "one-shot" ],
+          "body": [ "Reveal the top card of the River deck. Place it on the top or bottom of the River deck. {Cascade} deals 1 target that card's {spell} Cold Damage." ],
+          "magicNumbers": [ 3, 3, 3, 3 ],
+          "icons": [ "Manipulate", "DealDamageCold" ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 3,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "🔮",
+          "bgImage": "image_bg_8.png"
+        },
+        {
+          "identifier": "CondensedOrb",
+          "count": 4,
+          "title": "CondensedOrb",
+          "keywords": [ "aqua cost: 4", "river", "one-shot" ],
+          "body": [ "2 Targets gain 3 HP." ],
+          "magicNumbers": [ 3, 3, 3, 3 ],
+          "icons": [ "GainHP" ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 4,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "🔵",
+          "bgImage": "image_bg_9.png"
+        },
+        {
+          "identifier": "StormSwell",
+          "count": 4,
+          "title": "Storm Swell",
+          "keywords": [ "aqua cost: 4", "river", "one-shot" ],
+          "body": [ "{Cascade} deals up to 2 Targets 4 Cold Damage." ],
+          "icons": [ "DealDamageCold" ],
+          "magicNumbers": [ 2, 2, 2, 2 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 4,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "🌊",
+          "bgImage": "image_bg_10.png"
+        },
+        {
+          "identifier": "RisingWaters",
+          "count": 3,
+          "title": "Rising Waters",
+          "keywords": [ "aqua cost: 5", "river", "ongoing", "limited" ],
+          "body": [ "Increase Damage dealt by Hero Targets by 1.", "At the start of your turn, destroy an Ongoing card." ],
+          "icons": [ "Increase", "DestroyOngoing" ],
+          "magicNumbers": [ 3, 3, 3, 3 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 5,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "🤽",
+          "bgImage": "image_bg_12.png"
+        },
+        {
+          "identifier": "PerpetualFlow",
+          "count": 4,
+          "title": "Perpetual Flow",
+          "keywords": [ "aqua cost: 6", "river", "one-shot" ],
+          "body": [ "Play 1 card from the Riverbank. (It is treated as your card afterward.) " ],
+          "icons": [ "PlayCardNow", "Manipulate" ],
+          "magicNumbers": [ 4, 4, 4, 4 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 6,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "🌈",
+          "bgImage": "image_bg_13.png"
+        },
+        {
+          "identifier": "MeetingTheOcean",
+          "count": 4,
+          "title": "Meeting The Ocean",
+          "keywords": [ "aqua cost: 6", "river", "ongoing" ],
+          "powers": [ "Discard up to 3 cards. For each card discarded this way, {Cascade} deals 1 target Cold Damage equal to the total {spell} of the cards discarded this way." ],
+          "icons": [ "DealDamageCold", "Discard" ],
+          "magicNumbers": [ 4, 4, 4, 4 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 6,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "🏊",
+          "bgImage": "image_bg_14.png"
+        }
+      ],
+      "unusedCards": [
+        {
+          "identifier": "StreamSurge",
+          "count": 3,
+          "title": "Stream Surge",
+          "keywords": [ "aqua cost: 3", "river", "one-shot" ],
+          "body": [ "{Cascade} deals up to 3 targets 1 Projectile Damage. You may play a card." ],
+          "icons": [ "DealDamageProjectil", "PlayCardNow" ],
+          "magicNumbers": [ 2, 2, 2 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 3,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "☔",
+          "bgImage": "image_bg_5.png"
+        },
+        {
+          "identifier": "DivergingWaters",
+          "count": 3,
+          "title": "Diverging Waters",
+          "keywords": [ "aqua cost: 3", "river", "one-shot" ],
+          "body": [ "Draw 3 Cards. Play a Card. Move this card to the bottom of the River deck." ],
+          "icons": [ "DrawCardNow", "PlayCardNow", "Manipulate" ],
+          "magicNumbers": [ 2, 2, 2 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 3,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "⛹",
+          "bgImage": "image_bg_7.png"
+        },
+        {
+          "identifier": "ShapeTheStream",
+          "count": 3,
+          "title": "Shape the Stream",
+          "keywords": [ "aqua cost: 5", "river", "one-shot" ],
+          "body": [ "You may move a card from the Riverbank to your Trash, ignoring its Indestructable status. (You do not pay any Aqua Cost.)" ],
+          "icons": [ "Manipulate" ],
+          "magicNumbers": [ 2, 2, 2 ],
+          "tokenPools": [
+            {
+              "identifier": "CascadeCostPool",
+              "name": "Cascade's Card Cost Pool",
+              "initialValue": 0,
+              "maximumValue": 5,
+              "color": "D1426D"
+            }
+          ],
+          "tempImage": "⛵",
+          "bgImage": "image_bg_11.png"
+        }
+      ]
+    }
+  ],
+  "dummyPromoCards": [
+    {
+      "identifier": "CascadeCharacter",
+      "promoIdentifier": "CascadeControlledCharacter",
+      "count": 1,
+      "title": "Cascade",
+      "body": "Controlled Rise",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": "Discard up to 2 cards with {spell} of 2 or more. For each card discarded this way, move 1 card from under Riverbank to the bottom of the River deck, ignoring its indestructible status. Move the card under the Riverbank with the lowest Gain Cost to your Trash, ignoring its indestructible status.",
+      "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "Perhaps I can manage with a little more control.",
+        "OblivAeonFrontPageCharacter": "Here's hoping I can last enough to make things happen..."
+      },
+      "complexity": 3
+    },
+    {
+      "identifier": "CascadeCharacter",
+      "promoIdentifier": "CascadeEssenceCharacter",
+      "count": 1,
+      "title": "Cascade",
+      "body": "Essense Flow",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": "Move 1 card from your hand to the bottom of the River deck. Select a card under Riverbank with an Aqua Cost of up to 2 higher than the moved card and move it to your Trash. Draw until you have 3 cards.",
+      "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
+      "hitpoints": 27,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "Perhaps I can manage with a little more control.",
+        "OblivAeonFrontPageCharacter": "Here's hoping I can last enough to make things happen..."
+      },
+      "complexity": 3
+    },
+    {
+      "identifier": "CascadeCharacter",
+      "promoIdentifier": "CascadeBloodCharacter",
+      "count": 1,
+      "title": "Cascade",
+      "body": "Blood in the Water",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": "Play 1 card from the Riverbank. (It is treated as your card afterward.) {Cascade} deals themselves Infernal Damage equal to the played card's Aqua Cost. Discard your hand. Draw 2 Cards.",
+      "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
+      "hitpoints": 32,
+      "nemesisIdentifiers": [
+        "BreachMage"
+      ],
+      "incapacitatedAbilities": [
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "Perhaps I can manage with a little more control.",
+        "OblivAeonFrontPageCharacter": "Here's hoping I can last enough to make things happen..."
+      },
+      "complexity": 3
+    }
+  ]
+}

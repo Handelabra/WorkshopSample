@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{14A986B3-2B6E-4347-87E4-174DBC4C81CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RuduenWorkshop</RootNamespace>
+    <AssemblyName>RuduenModHeroPromos</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EngineCommon, Version=1.0.6479.23224, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed\EngineCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="SentinelsEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed\SentinelsEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CascadeCardControllers\CascadeCharacterCardController.cs" />
+    <Compile Include="CascadeCardControllers\CascadeRiverSharedCardController.cs" />
+    <Compile Include="CascadeCardControllers\CascadeTurnTakerController.cs" />
+    <Compile Include="CascadeCardControllers\CondensedOrbCardController.cs" />
+    <Compile Include="CascadeCardControllers\DivergingWatersCardController.cs" />
+    <Compile Include="CascadeCardControllers\DropletCardController.cs" />
+    <Compile Include="CascadeCardControllers\MeetingTheOceanCardController.cs" />
+    <Compile Include="CascadeCardControllers\PerpetualFlowCardController.cs" />
+    <Compile Include="CascadeCardControllers\RippledVisionsCardController.cs" />
+    <Compile Include="CascadeCardControllers\RisingWatersCardController.cs" />
+    <Compile Include="CascadeCardControllers\RiverbankCardController.cs" />
+    <Compile Include="CascadeCardControllers\RiverWornStoneCardController.cs" />
+    <Compile Include="CascadeCardControllers\RushingWatersCardController.cs" />
+    <Compile Include="CascadeCardControllers\ShapeTheStreamCardController.cs" />
+    <Compile Include="CascadeCardControllers\StormSwellCardController.cs" />
+    <Compile Include="CascadeCardControllers\StreamSurgeCardController.cs" />
+    <Compile Include="CascadeCardControllers\WaterlogCardController.cs" />
+    <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\ExpatrietteQuickshotCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\HeroPromosCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\HeroPromosTurnTakerController.cs" />
+    <Compile Include="HeroPromoCardControllers\PlaceholderOngoingCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\PlaceholderEquipmentCardController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DeckLists\HeroPromosDeckList.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DeckLists\CascadeDeckList.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

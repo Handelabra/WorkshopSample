@@ -5,7 +5,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Workshopping.Cascade;
+using RuduenWorkshop.Cascade;
 
 namespace RuduenModsTest
 {
@@ -18,7 +18,7 @@ namespace RuduenModsTest
             // Tell the engine about our mod assembly so it can load up our code.
             // It doesn't matter which type as long as it comes from the mod's assembly.
             //var a = Assembly.GetAssembly(typeof(InquirerCharacterCardController)); // replace with your own type
-            ModHelper.AddAssembly("Workshopping", Assembly.GetAssembly(typeof(CascadeCharacterCardController))); // replace with your own namespace
+            ModHelper.AddAssembly("RuduenWorkshop", Assembly.GetAssembly(typeof(CascadeCharacterCardController))); // replace with your own namespace
         }
 
         protected HeroTurnTakerController Cascade { get { return FindHero("Cascade"); } }
@@ -26,7 +26,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestModWorks()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
@@ -40,7 +40,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestSetupWorks()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -53,7 +53,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestInnatePower()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -72,7 +72,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestInnatePowerNoAffordable()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -92,7 +92,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestInnatePowerGuiseDangIt()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Guise", "Megalopolis");
 
             StartGame();
 
@@ -117,7 +117,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestInnatePowerGuiseDangItAgain()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Guise", "Megalopolis");
 
             StartGame();
 
@@ -138,7 +138,7 @@ namespace RuduenModsTest
         public void TestDropletWithMove()
         {
             // Most basic purchase equivalent!
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -159,7 +159,7 @@ namespace RuduenModsTest
         public void TestDropletNoMove()
         {
             // Most basic purchase equivalent!
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -178,7 +178,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestWaterSurge()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Legacy", "Megalopolis");
 
             StartGame();
 
@@ -198,7 +198,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestRushingWaters()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -215,7 +215,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestWaterlog()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -229,7 +229,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestStreamSurge()
         //{
-        //    SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
         //    StartGame();
 
@@ -259,7 +259,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestRiverWornStone()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Legacy", "Megalopolis");
 
             StartGame();
 
@@ -292,7 +292,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestRiverWornStoneGuiseDangIt()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Guise", "Megalopolis");
 
             StartGame();
 
@@ -321,7 +321,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestDivergingWaters()
         //{
-        //    SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
         //    StartGame();
 
@@ -351,7 +351,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestRippledVisions()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Legacy", "Megalopolis");
 
             StartGame();
 
@@ -373,7 +373,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestRippledVisionsGuiseDangIt()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Guise", "Legacy", "Megalopolis");
 
             StartGame();
 
@@ -395,7 +395,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestCondensedOrb()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -416,7 +416,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestStormSwell()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -438,7 +438,7 @@ namespace RuduenModsTest
         //public void TestShapeTheStream()
         //{
         //    // Most basic purchase equivalent!
-        //    SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
         //    StartGame();
 
@@ -454,7 +454,7 @@ namespace RuduenModsTest
         //public void TestShapeTheStreamGuiseDangIt()
         //{
         //    // Most basic purchase equivalent!
-        //    SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Guise", "Megalopolis");
 
         //    StartGame();
 
@@ -475,7 +475,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestRisingWaters()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -496,7 +496,7 @@ namespace RuduenModsTest
         public void TestPerpetualFlow()
         {
             // Most basic purchase equivalent!
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Megalopolis");
 
             StartGame();
 
@@ -517,7 +517,7 @@ namespace RuduenModsTest
         public void TestPerpetualFlowGuiseDangIt()
         {
             // Most basic purchase equivalent!
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Guise", "Megalopolis");
 
             StartGame();
             Card destroy = PlayCard("LivingForceField");
@@ -541,7 +541,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestMeetingTheOcean()
         {
-            SetupGameController("BaronBlade", "Workshopping.Cascade", "Guise", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Cascade", "Guise", "Legacy", "Megalopolis");
 
             StartGame();
 

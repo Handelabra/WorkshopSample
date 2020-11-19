@@ -5,7 +5,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Workshopping.Inquirer;
+using RuduenWorkshop.Inquirer;
 
 namespace RuduenModsTest
 {
@@ -18,7 +18,7 @@ namespace RuduenModsTest
             // Tell the engine about our mod assembly so it can load up our code.
             // It doesn't matter which type as long as it comes from the mod's assembly.
             //var a = Assembly.GetAssembly(typeof(InquirerCharacterCardController)); // replace with your own type
-            ModHelper.AddAssembly("Workshopping", Assembly.GetAssembly(typeof(InquirerCharacterCardController))); // replace with your own namespace
+            ModHelper.AddAssembly("RuduenWorkshop", Assembly.GetAssembly(typeof(InquirerCharacterCardController))); // replace with your own namespace
         }
 
         protected HeroTurnTakerController Inquirer { get { return FindHero("Inquirer"); } }
@@ -26,7 +26,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestModWorks()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
 
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
@@ -40,7 +40,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestInnatePower()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
 
             StartGame();
 
@@ -54,7 +54,7 @@ namespace RuduenModsTest
         {
             IEnumerable<string> setupItems = new List<string>()
             {
-                "BaronBlade", "Workshopping.Inquirer", "Megalopolis"
+                "BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
@@ -69,7 +69,8 @@ namespace RuduenModsTest
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionNextToCard = mdp;
 
-            Card distortion = PlayCard("YoureLookingPale"); // 5 Damage.
+            DealDamage(Inquirer, mdp, 2, DamageType.Melee); // 2 Damage for Setup.
+            Card distortion = PlayCard("YoureLookingPale"); // 4 Damage.
 
             UsePower(Inquirer);
 
@@ -83,7 +84,7 @@ namespace RuduenModsTest
         {
             IEnumerable<string> setupItems = new List<string>()
             {
-                "BaronBlade", "Workshopping.Inquirer", "Megalopolis"
+                "BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
@@ -104,9 +105,9 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
 
-            UsePower(Inquirer); // 5 damage from play, 1 more from distortion attack.
+            UsePower(Inquirer); // 4 damage from play, 1 more from distortion attack.
 
-            QuickHPCheck(-6);
+            QuickHPCheck(-5);
         }
 
         [Test()]
@@ -114,7 +115,7 @@ namespace RuduenModsTest
         {
             IEnumerable<string> setupItems = new List<string>()
             {
-                "BaronBlade", "Workshopping.Inquirer", "RealmOfDiscord"
+                "BaronBlade", "RuduenWorkshop.Inquirer", "RealmOfDiscord"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
@@ -136,9 +137,9 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
 
-            UsePower(Inquirer); // 5 damage from play, 2 more from 2 distortion attacks.
+            UsePower(Inquirer); // 4 damage from play, 2 more from 2 distortion attacks.
 
-            QuickHPCheck(-7);
+            QuickHPCheck(-6);
             AssertMaximumHitPoints(distortion, 6); // Ongoing affect re-applies over one-time effect.
 
             GoToStartOfTurn(Inquirer);
@@ -150,7 +151,7 @@ namespace RuduenModsTest
         {
             IEnumerable<string> setupItems = new List<string>()
             {
-                "BaronBlade", "Workshopping.Inquirer", "RealmOfDiscord"
+                "BaronBlade", "RuduenWorkshop.Inquirer", "RealmOfDiscord"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
@@ -178,7 +179,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestTheLieTheyTellThemselves()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
             GoToUsePowerPhase(Inquirer);
 
@@ -195,7 +196,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestUndeniableFacts()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
             GoToUsePowerPhase(Inquirer);
 
@@ -211,7 +212,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestForms()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -242,7 +243,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestBackupPlan()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -264,7 +265,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestYoureLookingPaleInitial()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -274,13 +275,13 @@ namespace RuduenModsTest
             QuickHPStorage(mdp);
 
             PlayCard("YoureLookingPale");
-            QuickHPCheck(-5); // 5 damage
+            QuickHPCheck(-4); // 4 damage
         }
 
         [Test()]
         public void TestYoureLookingPaleAfter()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -292,13 +293,13 @@ namespace RuduenModsTest
             PlayCard("YoureLookingPale");
 
             GoToStartOfTurn(Inquirer);
-            QuickHPCheck(-3); // 5 damage, healed 2.
+            QuickHPCheck(-2); // 4 damage, healed 2.
         }
 
         [Test()]
         public void TestYoureOnOurSideInitial()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -315,7 +316,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestYoureOnOurSideAfter()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -335,7 +336,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestIveFixedTheWoundInitial()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             DealDamage(Inquirer, Inquirer, 10, DamageType.Melee);
@@ -350,7 +351,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestIveFixedTheWoundAfter()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             DealDamage(Inquirer, Inquirer, 10, DamageType.Melee);
@@ -366,7 +367,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestLookADistractionInitial()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -377,13 +378,13 @@ namespace RuduenModsTest
             QuickHPStorage(mdp, Inquirer.CharacterCard);
 
             PlayCard("LookADistraction");
-            QuickHPCheck(-4, 0); // 4 damage to others.
+            QuickHPCheck(-3, 0); // 3 damage to others.
         }
 
         [Test()]
         public void TestLookADistractionAfter()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -397,13 +398,13 @@ namespace RuduenModsTest
             PlayCard("LookADistraction");
 
             GoToStartOfTurn(Inquirer);
-            QuickHPCheck(-4, -1); // 4 damage to others, -1 to Inquirer
+            QuickHPCheck(-3, -1); // 3 damage to others, -1 to Inquirer
         }
 
         [Test()]
         public void TestUntilYouMakeIt()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -439,7 +440,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestFisticuffs()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             GoToPlayCardPhase(Inquirer);
@@ -460,7 +461,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestTheRightQuestions()
         {
-            SetupGameController("BaronBlade", "Workshopping.Inquirer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
 
             Card ongoing = PlayCard("LivingForceField");
@@ -483,7 +484,7 @@ namespace RuduenModsTest
 
             AssertInTrash(ongoing); // Destroyed Ongoing.
             AssertInHand(distortion);  // Played and returned distortion.
-            QuickHPCheck(-5); // All damage dealt, no destroy trigger hit.
+            QuickHPCheck(-4); // All damage dealt, no destroy trigger hit.
         }
     }
 }
