@@ -3,6 +3,8 @@ This is Ruduen's implementation of various Sentinels of the Multiplayers items.
 
 This was originally branched from the Handlabra Sample Project, but primarily contains new creations and implementations. If you want to make new items, that will be a better starting point - this is meant to be a reference for anybody who wishes to use this work as a basis for further derivation, or would like to help address any issues once this is posted.
 
+I've set up a Discord to discuss this project - any thoughts, comments, and feedback would be appreciated! To join, use the following invite: https://discord.gg/VjD6pvgQnw
+
 For more information please visit the Trello board: https://trello.com/b/vYBMImbg/sotm-workshop
 
 # To Do
