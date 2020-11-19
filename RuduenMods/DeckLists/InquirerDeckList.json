@@ -213,8 +213,8 @@
       "title": "Until you Make It",
       "keywords": [ "one-shot" ],
       "body": [
-        "Draw 1 card.",
         "Search your deck or trash for a Form card and put it into play. If you searched your deck, shuffle it.",
+        "Draw 1 card.",
         "Play 1 Card. "
       ],
       "icons": [ "DrawCardNow", "Search", "PlayCardNow" ],

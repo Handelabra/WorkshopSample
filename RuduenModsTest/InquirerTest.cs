@@ -231,8 +231,10 @@ namespace RuduenModsTest
             DecisionDoNotSelectCard = SelectionType.DestroyCard;
 
             AssertNumberOfCardsInTrash(Inquirer, 0);
+            QuickHandStorage(Inquirer);
             GoToEndOfTurn(Inquirer);
-            AssertNumberOfCardsInTrash(Inquirer, 2); // Discards a card, but do not play as a result.
+            QuickHandCheck(0); // 1 Discarded, 1 Drawn
+            AssertNumberOfCardsInTrash(Inquirer, 2); // Discards a card, activate the base power, draw a card, do not destroy to play.
 
             GoToStartOfTurn(Inquirer);
             AssertNumberOfCardsInTrash(Inquirer, 2); // One successful shuffle, two failed shuffles.

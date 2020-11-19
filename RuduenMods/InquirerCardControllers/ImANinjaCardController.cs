@@ -38,6 +38,8 @@ namespace RuduenWorkshop.Inquirer
 
             if (this.DidDiscardCards(storedResults, null, false))
             {
+                // Select and use a power.
+                coroutine = this.GameController.SelectAndUsePower(this.DecisionMaker, false);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }

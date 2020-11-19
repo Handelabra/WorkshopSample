@@ -15,15 +15,16 @@ namespace RuduenWorkshop.Inquirer
         public override IEnumerator Play()
         {
             IEnumerator coroutine;
-            // Draw card.
-            coroutine = this.DrawCard(null, false, null, true);
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Search for form.
             coroutine = this.GameController.SelectCardFromLocationAndMoveIt(this.HeroTurnTakerController, this.TurnTaker.Deck, new LinqCardCriteria((Card c) => c.IsForm, () => "form", true, false, null, null, false), new MoveCardDestination[]
             {
                 new MoveCardDestination(this.TurnTaker.PlayArea, false, false, false)
             }, true, true, true, false, null, false, false, null, false, false, null, null, this.GetCardSource(null));
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+            // Draw card.
+            coroutine = this.DrawCard(null, false, null, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Play card.
