@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuduenModCascade", "RuduenM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuduenModBreachMage", "RuduenMods\BreachMage\RuduenModBreachMage.csproj", "{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuduenModHeroPromosPlaceholder", "RuduenMods\HeroPromosPlaceholder\RuduenModHeroPromosPlaceholder.csproj", "{14A986B3-2B6E-4347-87E4-174DBC4C81CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A986B3-2B6E-4347-87E4-174DBC4C81CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A986B3-2B6E-4347-87E4-174DBC4C81CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A986B3-2B6E-4347-87E4-174DBC4C81CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A986B3-2B6E-4347-87E4-174DBC4C81CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

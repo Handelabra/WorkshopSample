@@ -1,0 +1,107 @@
+﻿{
+  "name": "Hero Promos",
+  "kind": "Hero",
+  "initialCardIdentifiers": [
+    "HeroPromosCharacter"
+  ],
+  "cards": [
+    {
+      "identifier": "HeroPromosCharacter",
+      "count": 1,
+      "title": "Hero Promos Collection",
+      "body": "For Testing",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": [
+        "Do a thing!"
+      ],
+      "icons": [
+        "HasPower",
+        "DrawCardNow",
+        "PlayCardNow"
+      ],
+      "hitpoints": 100,
+      "nemesisIdentifiers": [],
+      "incapacitatedAbilities": [
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "I'm just here for the kicks."
+      },
+      "complexity": 3
+    },
+    {
+      "identifier": "ExpatrietteQuickshot",
+      "count": 1,
+      "title": "Expatriette - Quickshot",
+      "keywords": [ "ongoing" ],
+      "powers": "Discard the top card of your deck. If it is an Equipment card, you may play it and use a power.",
+      "icons": [],
+      "flavorQuotes": [
+        {
+          "flavorReference": "...",
+          "text": "..."
+        }
+      ]
+    },
+    {
+      "identifier": "MrFixerFlowingStrike",
+      "count": 1,
+      "title": "Mr. Fixer - Flowing Strike",
+      "keywords": [ "ongoing" ],
+      "powers": "{MrFixer} deals 1 Target and himself 1 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way.",
+      "icons": [],
+      "flavorQuotes": [
+        {
+          "flavorReference": "...",
+          "text": "..."
+        }
+      ]
+    },
+    {
+      "identifier": "TheHarpyArcaneFlock",
+      "count": 1,
+      "title": "The Harpy - Arcane Flock",
+      "keywords": [ "ongoing" ],
+      "powers": "If there is at least one {avian}, add or remove one {avian}. (Currently not implementable due to private token maximum setting.)",
+      "icons": [],
+      "flavorQuotes": [
+        {
+          "flavorReference": "...",
+          "text": "..."
+        }
+      ]
+    },
+    {
+      "identifier": "PlaceholderEquipment",
+      "count": 10,
+      "title": "Placeholder Equipment",
+      "keywords": [ "equipment", "tool" ],
+      "icons": [],
+      "flavorQuotes": [
+        {
+          "flavorReference": "...",
+          "text": "..."
+        }
+      ]
+    },
+    {
+      "identifier": "PlaceholderOngoing",
+      "count": 10,
+      "title": "Placeholder Ongoing",
+      "keywords": [ "ongoing", "style" ],
+      "icons": [],
+      "flavorQuotes": [
+        {
+          "flavorReference": "...",
+          "text": "..."
+        }
+      ]
+    }
+  ]
+}

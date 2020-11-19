@@ -36,6 +36,9 @@
     <Reference Include="RuduenModCascade">
       <HintPath>..\RuduenMods\Cascade\bin\Debug\RuduenModCascade.dll</HintPath>
     </Reference>
+    <Reference Include="RuduenModHeroPromos">
+      <HintPath>..\RuduenMods\HeroPromosPlaceholder\bin\Debug\RuduenModHeroPromos.dll</HintPath>
+    </Reference>
     <Reference Include="RuduenModInquirer">
       <HintPath>..\RuduenMods\Inquirer\bin\Debug\RuduenModInquirer.dll</HintPath>
     </Reference>
@@ -50,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CascadeTest.cs" />
     <Compile Include="BreachMageTest.cs" />
+    <Compile Include="HeroPromosTest.cs" />
     <Compile Include="InquirerTest.cs" />
     <Compile Include="BaseTest.cs" />
   </ItemGroup>
