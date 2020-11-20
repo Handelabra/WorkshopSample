@@ -2,10 +2,10 @@
 using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
+using RuduenWorkshop.BreachMage;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using RuduenWorkshop.BreachMage;
 
 namespace RuduenModsTest
 {
@@ -39,8 +39,25 @@ namespace RuduenModsTest
             AssertNumberOfCardsInDeck(BreachMage, 36); // Starting deck.
         }
 
+        //[Test()]
+        //public void TestInnatePower()
+        //{
+        //    SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
+
+        //    StartGame();
+
+        //    Card spell = PlayCard("ScryingBolt");
+        //    Card mdp = GetCardInPlay("MobileDefensePlatform");
+        //    DecisionSelectTarget = mdp;
+
+        //    QuickHPStorage(mdp);
+        //    UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
+        //    QuickHPCheck(-4); // Damage Dealt.
+        //    AssertInTrash(spell); // Spell destroyed.
+        //}
+
         [Test()]
-        public void TestInnatePower()
+        public void TestInnatePowerDraw()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
@@ -48,13 +65,39 @@ namespace RuduenModsTest
 
             Card spell = PlayCard("ScryingBolt");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
-            DecisionSelectTarget = mdp;
 
+            DecisionSelectTarget = mdp;
+            DecisionSelectFunction = 0;
+
+            QuickHandStorage(BreachMage);
             QuickHPStorage(mdp);
-            UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
-            QuickHPCheck(-4); // Damage Dealt.
-            AssertInTrash(spell); // Spell destroyed.
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate.
+            QuickHandCheck(1); // Drawn card.
+            QuickHPCheck(0); // No Damage Dealt.
+            AssertIsInPlay(spell); // Spell unused.
         }
+
+        [Test()]
+        public void TestInnatePowerCast()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
+
+            StartGame();
+
+            Card spell = PlayCard("ScryingBolt");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTarget = mdp;
+            DecisionSelectFunction = 1;
+
+            QuickHandStorage(BreachMage);
+            QuickHPStorage(mdp);
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate.
+            QuickHandCheck(0); // No drawn card.
+            QuickHPCheck(-4); // Damage Dealt.
+            AssertInTrash(spell); // Spell  used.
+        }
+
 
         [Test()]
         public void TestInnatePowerB()
@@ -70,7 +113,7 @@ namespace RuduenModsTest
             };
 
             QuickHandStorage(BreachMage);
-            UsePower(BreachMage.CharacterCard, 1); // Default Innate. Cast.
+            UsePower(BreachMage.CharacterCard, 1); // Charge innate.
             QuickHandCheck(5); // 5 Cards Drawn.
             AssertInTrash(charges); // All used charges in trash.
         }
@@ -93,6 +136,7 @@ namespace RuduenModsTest
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
+            DecisionSelectFunction = 1;
 
             QuickHPStorage(mdp);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
@@ -221,6 +265,7 @@ namespace RuduenModsTest
             Card spell = PlayCard("ScryingBolt");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
+            DecisionSelectFunction = 1;
 
             QuickHPStorage(mdp);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
@@ -240,6 +285,7 @@ namespace RuduenModsTest
             Card spell = PlayCard("Shine");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
+            DecisionSelectFunction = 1;
 
             QuickHPStorage(mdp);
             QuickHandStorage(BreachMage);
@@ -261,6 +307,8 @@ namespace RuduenModsTest
             Card ongoing = PlayCard("LivingForceField");
             DecisionSelectTarget = mdp;
             DecisionDestroyCard = ongoing;
+            DecisionSelectFunction = 1;
+
 
             QuickHPStorage(mdp);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
@@ -278,6 +326,7 @@ namespace RuduenModsTest
             Card spell = PlayCard("FlareCascade");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
+            DecisionSelectFunction = 1;
 
             QuickHPStorage(mdp);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
@@ -303,6 +352,7 @@ namespace RuduenModsTest
             DecisionSelectTarget = mdp;
             DecisionDestroyCards = charges.ToArray();
             DecisionYesNo = true;
+            DecisionSelectFunction = 1;
 
             QuickHPStorage(mdp);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
@@ -322,6 +372,7 @@ namespace RuduenModsTest
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             Card bb = GetCardInPlay("BaronBladeCharacter");
             DecisionSelectTarget = mdp;
+            DecisionSelectFunction = 1;
 
             DealDamage(mdp, mdp, 7, DamageType.Fire); // Set up MDP to be destroyed so AoE also hits BB.
 

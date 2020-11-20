@@ -23,7 +23,7 @@ namespace RuduenWorkshop.Inquirer
             this.AddStartOfTurnTrigger((TurnTaker tt) => tt == this.TurnTaker, new Func<PhaseChangeAction, IEnumerator>(this.DestroyThisCardResponse), TriggerType.DestroySelf, null, false);
 
             // For "next to" cards - adjust location.
-            this.AddIfTheCardThatThisCardIsNextToLeavesPlayMoveItToTheirPlayAreaTrigger(true, true);
+            this.AddIfTheCardThatThisCardIsNextToLeavesPlayMoveItToTheirPlayAreaTrigger(false, true);
 
             // Common On Destroy trigger.
             this.AddWhenDestroyedTrigger(new Func<DestroyCardAction, IEnumerator>(this.OnDestroyResponse), TriggerType.DestroySelf);

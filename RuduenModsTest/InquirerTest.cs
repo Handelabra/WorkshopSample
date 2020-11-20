@@ -2,10 +2,10 @@
 using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
+using RuduenWorkshop.Inquirer;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using RuduenWorkshop.Inquirer;
 
 namespace RuduenModsTest
 {
@@ -174,6 +174,39 @@ namespace RuduenModsTest
             DestroyCard("ImbuedVitality"); // Destroy, HP should return to 3.
 
             AssertNotTarget(distortion); // No longer a target. This isn't great - I'd expect it to go back to 3, but there's little to do outside of debugging Handlabra code.
+        }
+
+        [Test()]
+        public void TestHardFactsInnatePowerDestroysTarget()
+        {
+            IEnumerable<string> setupItems = new List<string>()
+            {
+                "BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "InquirerCharacter", "InquirerHardFactsCharacter" }
+            };
+            SetupGameController(setupItems, false, promos);
+
+            StartGame();
+
+            GoToPlayCardPhase(Inquirer);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            Card distortion = PutInHand("YoureLookingPale");
+
+            DealDamage(Inquirer, mdp, 5, DamageType.Melee);
+
+            DecisionNextToCard = mdp;
+            DecisionSelectCardToPlay = distortion;
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+
+            UsePower(Inquirer); // 4 damage from play, 1 more from distortion attack.
+
+            AssertInTrash(mdp);
         }
 
         [Test()]

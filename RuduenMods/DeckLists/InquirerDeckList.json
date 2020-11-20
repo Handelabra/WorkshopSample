@@ -10,8 +10,8 @@
       "count": 1,
       "title": "Inquirer",
       "body": "Fast-Talker",
-      "backgroundColor": "fbf8f9",
-      "foilBackgroundColor": "FEFEFE",
+      "backgroundColor": "7FFFD4",
+      "foilBackgroundColor": "7FFFD4",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
@@ -267,54 +267,19 @@
       "promoIdentifier": "InquirerHardFactsCharacter",
       "count": 1,
       "title": "Inquirer",
-      "promoTitle": "Hard Facts Inquirer",
+      "body": "Hard Facts",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+
+      "powers": [
+        "You may play an Ongoing card. Until the start of your next turn, non-target Distortions have a maximum HP of 3. Each Distortion deals 1 Target 1 Psychic Damage."
+      ],
       "icons": [
         "HasPower",
         "PlayCardNow",
         "DealDamagePsychic"
-      ],
-      "backgroundColor": "F0EC5E",
-      "foilBackgroundColor": "FED440",
-      "character": true,
-      "powers": [
-        "You may play an Ongoing card. Until the start of your next turn, non-target Distortions have a maximum HP of 3. Each Distortion deals 1 Target 1 Psychic Damage."
-      ],
-      "hitpoints": 31,
-      "nemesisIdentifiers": [
-        "Inquirer"
-      ],
-      "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
-      ],
-      "flippedIcons": [
-        "DrawCardNow",
-        "GainHP",
-        "ReduceDamageTaken"
-      ],
-      "complexity": 3,
-      "openingLines": {
-        "default": "..."
-      }
-    },
-    {
-      "identifier": "InquirerCharacter",
-      "promoIdentifier": "InquirerLiesOnLiesCharacter",
-      "count": 1,
-      "title": "Inquirer",
-      "promoTitle": "Lies on Lies Inquirer",
-      "icons": [
-        "HasPower",
-        "DealDamageRadiant",
-        "PlayCardNow",
-        "UsePowerNow"
-      ],
-      "backgroundColor": "D98A47",
-      "foilBackgroundColor": "FED440",
-      "character": true,
-      "powers": [
-        "Select a Distortion and put it on top of its deck. Play the top card of your deck."
       ],
       "hitpoints": 24,
       "nemesisIdentifiers": [
@@ -325,15 +290,40 @@
         "Still Do Nothing.",
         "What do you want? I'm working on it!"
       ],
-      "flippedIcons": [
-        "DrawCardNow",
-        "UsePowerNow",
-        "Discard"
-      ],
-      "complexity": 2,
+      "flippedIcons": [],
       "openingLines": {
         "default": "..."
-      }
+      },
+      "complexity": 3
+    },
+    {
+      "identifier": "InquirerCharacter",
+      "promoIdentifier": "InquirerLiesOnLiesCharacter",
+      "count": 1,
+      "title": "Inquirer",
+      "body": "Lies on Lies",
+      "backgroundColor": "fbf8f9",
+      "foilBackgroundColor": "FEFEFE",
+      "hitpointsColor": "C94742",
+      "character": true,
+      "powers": [
+        "Select a Distortion and put it on top of its deck. Play the top card of your deck."
+      ],
+      "icons": [ "HasPower", "DealDamageFire", "Destroy" ],
+      "hitpoints": 24,
+      "nemesisIdentifiers": [
+        "Inquirer"
+      ],
+      "incapacitatedAbilities": [
+        "Do Nothing",
+        "Still Do Nothing.",
+        "What do you want? I'm working on it!"
+      ],
+      "flippedIcons": [],
+      "openingLines": {
+        "default": "..."
+      },
+      "complexity": 3
     }
   ]
 }

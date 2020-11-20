@@ -1,8 +1,5 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RuduenWorkshop.HeroPromos
 {
@@ -18,7 +15,7 @@ namespace RuduenWorkshop.HeroPromos
         //    TokenPool avianPool = base.Card.FindTokenPool(TokenPool.AvianControlPool);
         //    TokenPool arcanaPool = base.Card.FindTokenPool(TokenPool.ArcanaControlPool);
 
-            
+
         //        if (avianPool == null || !base.TurnTaker.IsHero)
         //        {
         //            TurnTaker turnTaker = this.FindTurnTakersWhere((TurnTaker tt) => tt.Identifier == "TheHarpy", false).FirstOrDefault<TurnTaker>();

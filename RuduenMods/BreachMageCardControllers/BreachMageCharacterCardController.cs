@@ -90,20 +90,33 @@ namespace RuduenWorkshop.BreachMage
             }
             else
             {
-                // Stanard power.
-                List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
+                // Selection: Draw or use a cast and destroy. 
 
-                // Use a Cast.
-                //coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults);
-                coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults, false, this.GetCardSource(null));
+                List<Function> list = new List<Function>();
+                list.Add(new Function(this.HeroTurnTakerController, "Draw a card", SelectionType.DrawCard, () => this.DrawCard(this.HeroTurnTaker), this.CanDrawCards(this.HeroTurnTakerController), this.TurnTaker.Name + " cannot activate any Cast effects, so they must draw a card.", null));
+                list.Add(new Function(this.HeroTurnTakerController, "Activate a card's Cast effect and destroy that card", SelectionType.ActivateAbility, () => this.CastAndDestroySpell(this.HeroTurnTakerController), this.GameController.GetActivatableAbilitiesInPlay(this.HeroTurnTakerController, "cast", false).Count() > 0, this.TurnTaker.Name + " cannot draw any cards, so they must activate a card's Cast effect and destroy that card.", null));
+                SelectFunctionDecision selectFunction = new SelectFunctionDecision(this.GameController, this.HeroTurnTakerController, list, false, null, this.TurnTaker.Name + " cannot draw any cards nor activate any Cast effects, so" + this.Card.Title + " has no effect.", null, this.GetCardSource(null));
+                coroutine = this.GameController.SelectAndPerformFunction(selectFunction, null, null);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+            }
+        }
 
-                if (storedResults.Count > 0)
-                {
-                    // Destroy the cast card.
-                    coroutine = this.GameController.DestroyCard(this.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard);
-                    if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-                }
+        public IEnumerator CastAndDestroySpell(HeroTurnTakerController heroTurnTakerController)
+        {
+            IEnumerator coroutine;
+            // Stanard power.
+            List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
+
+            // Use a Cast.
+            //coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults);
+            coroutine = this.GameController.SelectAndActivateAbility(heroTurnTakerController, "cast", null, storedResults, false, this.GetCardSource(null));
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+            if (storedResults.Count > 0)
+            {
+                // Destroy the cast card.
+                coroutine = this.GameController.DestroyCard(this.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
     }

@@ -2,10 +2,9 @@
 using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
-using System.Collections.Generic;
+using RuduenWorkshop.HeroPromos;
 using System.Linq;
 using System.Reflection;
-using RuduenWorkshop.HeroPromos;
 
 namespace RuduenModsTest
 {
@@ -156,7 +155,7 @@ namespace RuduenModsTest
             PutInTrash(HeroPromos.HeroTurnTaker.Deck.Cards.Where((Card c) => c.IsTool || c.IsStyle)); // Move all tools and styles to trash.
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             Card power = PlayCard("MrFixerFlowingStrike");
-            
+
 
             DecisionSelectTarget = mdp;
 

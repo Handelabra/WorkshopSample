@@ -2,10 +2,10 @@
 using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
+using RuduenWorkshop.Cascade;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using RuduenWorkshop.Cascade;
 
 namespace RuduenModsTest
 {

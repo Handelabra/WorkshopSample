@@ -10,12 +10,12 @@
       "identifier": "BreachMageCharacter",
       "title": "Breach Mage",
       "body": "M. Blazewatcher",
-      "backgroundColor": "fbf8f9",
-      "foilBackgroundColor": "FEFEFE",
+      "backgroundColor": "FAFA00",
+      "foilBackgroundColor": "FAFA00",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "Activate a card's [u]Cast[/u] text, then destroy that card.",
+        "Draw a card or activate a card's [u]Cast[/u] text, then destroy that card.",
         "Destroy 2 of your Charge cards. If you do, any player draws 5 cards."
       ],
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
@@ -73,7 +73,10 @@
       "count": 2,
       "title": "Potent Breach",
       "keywords": [ "breach" ],
-      "body": [ "At the start of your turn, you may activate a card's [u]Cast[/u] text, then destroy that card. If that [u]Cast[/u] text deals damage, increase that damage by 1. " ],
+      "body": [
+        "At the start of your turn, you may activate a card's [u]Cast[/u] text, then destroy that card.",
+        "If that [u]Cast[/u] text deals damage, increase that damage by 1. "
+      ],
       "icons": [ "StartAndEndOfTurnAction", "Destroy", "IncreaseDamageDealt" ],
       "flavorText": "..."
     },

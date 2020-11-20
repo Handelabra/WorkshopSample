@@ -36,18 +36,10 @@ namespace RuduenWorkshop.Inquirer
             coroutine = this.AddStatusEffect(makeTargetStatusEffect, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            int powerNumeral2 = base.GetPowerNumeral(1, 4);
-            int damageAmount = base.GetPowerNumeral(2, 2);
             SelectCardsDecision selectCardsDecision = new SelectCardsDecision(base.GameController, this.DecisionMaker, (Card c) => c.IsInPlay && c.IsDistortion, SelectionType.CardToDealDamage, null, false, null, true, true, false, new Func<int>(this.NumDistortionsToDamage), null, null, null, base.GetCardSource(null));
-            IEnumerator coroutine2 = base.GameController.SelectCardsAndDoAction(selectCardsDecision, (SelectCardDecision sc) => this.DistortionDamageResponse(sc, numerals[1], numerals[2]), null, null, base.GetCardSource(null), null, false, null);
-            if (base.UseUnityCoroutines)
-            {
-                yield return base.GameController.StartCoroutine(coroutine2);
-            }
-            else
-            {
-                base.GameController.ExhaustCoroutine(coroutine2);
-            }
+            coroutine = base.GameController.SelectCardsAndDoAction(selectCardsDecision, (SelectCardDecision sc) => this.DistortionDamageResponse(sc, numerals[1], numerals[2]), null, null, base.GetCardSource(null), null, false, null);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
             this.actedDistortions.Clear();
         }
 
@@ -65,7 +57,7 @@ namespace RuduenWorkshop.Inquirer
         {
             Card selectedCard = sc.SelectedCard;
             this.actedDistortions.Add(selectedCard);
-            IEnumerator coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, selectedCard), (Card c) => new int?(damageAmount), DamageType.Psychic, () => numberOfTargets, false, new int?(numberOfTargets));
+            IEnumerator coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, selectedCard), (Card c) => new int?(damageAmount), DamageType.Psychic, () => numberOfTargets, false, new int?(numberOfTargets), cardSource: this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
