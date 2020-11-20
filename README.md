@@ -15,5 +15,6 @@ For more information please visit the Trello board: https://trello.com/b/vYBMImb
 
 # Licenses
 
-New work by Ruduen. Available under CC BY 4.0. See "License - Ruduen" for details.
-Original work Copyright (c) 2020 Handelabra Games Inc. Available under MIT License. See "License - Handlabra" for details.
+- New work by Ruduen. Available under CC BY 4.0. See "License - Ruduen" for details.
+- Original work Copyright © 2020 Handelabra Games Inc. Available under MIT License. See "License - Handlabra" for details.
+- Breach Mage concept based on Aeon's End, Copyright © 2016 Lone Oak Games. Used with (tentative) permission. 
