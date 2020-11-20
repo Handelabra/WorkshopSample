@@ -61,21 +61,29 @@ namespace RuduenWorkshop.Inquirer
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
+        // TODO: Replace with something more unique!
         public override IEnumerator UseIncapacitatedAbility(int index)
         {
+            IEnumerator coroutine;
             switch (index)
             {
                 case 0:
                     {
-                        yield break;
+                        coroutine = this.SelectHeroToPlayCard(this.DecisionMaker);
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                        break;
                     }
                 case 1:
                     {
-                        yield break;
+                        coroutine = base.GameController.SelectHeroToUsePower(this.DecisionMaker, cardSource: this.GetCardSource(null));
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                        break;
                     }
                 case 2:
                     {
-                        yield break;
+                        coroutine = base.GameController.SelectHeroToDrawCard(this.DecisionMaker, cardSource: this.GetCardSource(null));
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                        break;
                     }
             }
             yield break;

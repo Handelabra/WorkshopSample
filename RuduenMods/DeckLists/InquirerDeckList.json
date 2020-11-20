@@ -27,11 +27,15 @@
         "Inquirer"
       ],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
-      "flippedIcons": [],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
       "openingLines": {
         "default": "You have no idea what you're getting into, do you?",
         "ApostateCharacter": "Let's see who really understands the truths of the world."
@@ -287,11 +291,15 @@
         "Inquirer"
       ],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
-      "flippedIcons": [],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
       "openingLines": {
         "default": "..."
       },
@@ -316,11 +324,15 @@
         "Inquirer"
       ],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
-      "flippedIcons": [],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
       "openingLines": {
         "default": "..."
       },

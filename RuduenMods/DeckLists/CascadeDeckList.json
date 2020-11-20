@@ -12,21 +12,25 @@
       "title": "Cascade",
       "body": "Carried by the Stream",
       "backgroundColor": "fbf8f9",
-      "foilBackgroundColor": "FEFEFE",
+      "foilBackgroundColor": "fbf8f9",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [ "You may discard up to 3 cards. You may move a card with an Aqua Cost of your discarded cards' total {magic} or less from the Riverbank to your discard, ignoring its Indestructable status. Draw until you have 4 cards." ],
       "icons": [ "HasPower", "Manipulate", "DrawCardNow" ],
       "hitpoints": 27,
       "nemesisIdentifiers": [
-        "BreachMage"
+        "Cascade"
       ],
       "incapacitatedAbilities": [
-        "Destroy an Ongoing card.",
-        "One Hero uses a power.",
-        "One Hero deals 1 target 2 Fire Damage."
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
-      "flippedIcons": [],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
       "openingLines": {
         "default": "..."
       },
@@ -152,7 +156,7 @@
       "keywords": [ "river", "equipment", "limited" ],
       "powers": [ "Move a card from your hand to the bottom of the River deck. {Cascade} deals 1 Target that card's {magic} Projectile Damage." ],
       "body": [
-        "Aqua Cost: 2",
+        "Aqua Cost: 3",
         "You may draw an additional card during your Draw Phase."
       ],
       "icons": [ "DrawCardNow", "HasPower", "DealProjectileDamage", "Manipulate" ],
@@ -195,7 +199,7 @@
     {
       "identifier": "CondensedOrb",
       "count": 4,
-      "title": "CondensedOrb",
+      "title": "Condensed Orb",
       "keywords": [ "river", "one-shot" ],
       "body": [
         "Aqua Cost: 4",
@@ -291,9 +295,10 @@
       "title": "Meeting The Ocean",
       "keywords": [ "river", "ongoing" ],
       "powers": [
-        "Aqua Cost: 6",
+
         "Discard up to 3 cards. For each card discarded this way, {Cascade} deals 1 target Cold Damage equal to that card's {magic}."
       ],
+      "body": "Aqua Cost: 6",
       "icons": [ "DealDamageCold", "Discard" ],
       "magicNumbers": [ 4, 4, 4, 4 ],
       "tokenPools": [
@@ -390,21 +395,25 @@
       "title": "Cascade",
       "body": "Controlled Rise",
       "backgroundColor": "fbf8f9",
-      "foilBackgroundColor": "FEFEFE",
+      "foilBackgroundColor": "fbf8f9",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": "Discard up to 2 cards with {magic} of 2 or more. For each card discarded this way, move 1 card from under Riverbank to the bottom of the River deck, ignoring its indestructible status. Move the card under the Riverbank with the lowest Gain Cost to your Trash, ignoring its indestructible status.",
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
       "hitpoints": 27,
       "nemesisIdentifiers": [
-        "BreachMage"
+        "Cascade"
       ],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
-      "flippedIcons": [],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
       "openingLines": {
         "default": "Perhaps I can manage with a little more control.",
         "OblivAeonFrontPageCharacter": "Here's hoping I can last enough to make things happen..."
@@ -418,21 +427,25 @@
       "title": "Cascade",
       "body": "Essense Flow",
       "backgroundColor": "fbf8f9",
-      "foilBackgroundColor": "FEFEFE",
+      "foilBackgroundColor": "fbf8f9",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": "Move 1 card from your hand to the bottom of the River deck. Select a card under Riverbank with an Aqua Cost of up to 2 higher than the moved card and move it to your Trash. Draw until you have 3 cards.",
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
       "hitpoints": 27,
       "nemesisIdentifiers": [
-        "BreachMage"
+        "Cascade"
       ],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
-      "flippedIcons": [],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
       "openingLines": {
         "default": "Perhaps I can manage with a little more control.",
         "OblivAeonFrontPageCharacter": "Here's hoping I can last enough to make things happen..."
@@ -446,21 +459,25 @@
       "title": "Cascade",
       "body": "Blood in the Water",
       "backgroundColor": "fbf8f9",
-      "foilBackgroundColor": "FEFEFE",
+      "foilBackgroundColor": "fbf8f9",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": "Play 1 card from the Riverbank. (It is treated as your card afterward.) {Cascade} deals themselves Infernal Damage equal to the played card's Aqua Cost. Discard your hand. Draw 2 Cards.",
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
       "hitpoints": 32,
       "nemesisIdentifiers": [
-        "BreachMage"
+        "Cascade"
       ],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
-      "flippedIcons": [],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
       "openingLines": {
         "default": "Perhaps I can manage with a little more control.",
         "OblivAeonFrontPageCharacter": "Here's hoping I can last enough to make things happen..."

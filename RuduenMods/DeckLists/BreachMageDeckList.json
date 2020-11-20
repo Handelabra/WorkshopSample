@@ -24,11 +24,15 @@
         "BreachMage"
       ],
       "incapacitatedAbilities": [
-        "Destroy an Ongoing card.",
-        "One Hero uses a power.",
-        "One Hero deals 1 target 2 Fire Damage."
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
-      "flippedIcons": [],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
       "openingLines": {
         "default": "..."
       },
@@ -155,7 +159,7 @@
       "count": 3,
       "title": "Hammer Charm",
       "keywords": [ "equipment", "charge" ],
-      "body": "When you play this, you may destroy an Ongoing or Equipment card.",
+      "body": "When you play this, you may destroy an Ongoing or Environment card.",
       "icons": [ "DealDamageLightning", "DestroyOngoing", "DestroyEnvironment", "Manipulate" ],
       "flavorText": "...."
     },
@@ -203,8 +207,8 @@
       "count": 1,
       "title": "Breach Mage",
       "body": "J. Twincaster",
-      "backgroundColor": "fbf8f9",
-      "foilBackgroundColor": "FEFEFE",
+      "backgroundColor": "FAFA00",
+      "foilBackgroundColor": "FAFA00",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
@@ -217,9 +221,14 @@
         "BreachMage"
       ],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
       ],
       "flippedIcons": [],
       "openingLines": {
@@ -233,8 +242,8 @@
       "count": 1,
       "title": "Breach Mage",
       "body": "R. Chargecaster",
-      "backgroundColor": "fbf8f9",
-      "foilBackgroundColor": "FEFEFE",
+      "backgroundColor": "FAFA00",
+      "foilBackgroundColor": "FAFA00",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
@@ -247,9 +256,14 @@
         "BreachMage"
       ],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
       ],
       "flippedIcons": [],
       "openingLines": {

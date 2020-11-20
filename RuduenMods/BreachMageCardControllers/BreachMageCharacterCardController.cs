@@ -15,53 +15,6 @@ namespace RuduenWorkshop.BreachMage
             : base(card, turnTakerController)
         {
         }
-
-        public override IEnumerator UseIncapacitatedAbility(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    {
-                        var message = this.GameController.SendMessageAction("This is the first thing that does nothing.", Priority.Medium, GetCardSource());
-                        if (UseUnityCoroutines)
-                        {
-                            yield return this.GameController.StartCoroutine(message);
-                        }
-                        else
-                        {
-                            this.GameController.ExhaustCoroutine(message);
-                        }
-                        break;
-                    }
-                case 1:
-                    {
-                        var message = this.GameController.SendMessageAction("This is the second thing that does nothing.", Priority.Medium, GetCardSource());
-                        if (UseUnityCoroutines)
-                        {
-                            yield return this.GameController.StartCoroutine(message);
-                        }
-                        else
-                        {
-                            this.GameController.ExhaustCoroutine(message);
-                        }
-                        break;
-                    }
-                case 2:
-                    {
-                        var message = this.GameController.SendMessageAction("Tricked you! Also does nothing.", Priority.Medium, GetCardSource());
-                        if (UseUnityCoroutines)
-                        {
-                            yield return this.GameController.StartCoroutine(message);
-                        }
-                        else
-                        {
-                            this.GameController.ExhaustCoroutine(message);
-                        }
-                        break;
-                    }
-            }
-        }
-
         public override IEnumerator UsePower(int index = 0)
         {
             // Break down into two powers.
@@ -102,6 +55,34 @@ namespace RuduenWorkshop.BreachMage
                 coroutine = this.GameController.SelectAndPerformFunction(selectFunction, null, null);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
+        }
+
+        // TODO: Replace with something more unique!
+        public override IEnumerator UseIncapacitatedAbility(int index)
+        {
+            IEnumerator coroutine;
+            switch (index)
+            {
+                case 0:
+                    {
+                        coroutine = this.SelectHeroToPlayCard(this.DecisionMaker);
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                        break;
+                    }
+                case 1:
+                    {
+                        coroutine = base.GameController.SelectHeroToUsePower(this.DecisionMaker, cardSource: this.GetCardSource(null));
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                        break;
+                    }
+                case 2:
+                    {
+                        coroutine = base.GameController.SelectHeroToDrawCard(this.DecisionMaker, cardSource: this.GetCardSource(null));
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                        break;
+                    }
+            }
+            yield break;
         }
 
         public IEnumerator CastAndDestroySpell(HeroTurnTakerController heroTurnTakerController)

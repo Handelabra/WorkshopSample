@@ -67,53 +67,34 @@ namespace RuduenWorkshop.Cascade
         //    }
         //    return false;
         //}
+
+        // TODO: Replace with something more unique!
         public override IEnumerator UseIncapacitatedAbility(int index)
         {
-            // TODO: Implement Incapacitated Abilities.
+            IEnumerator coroutine;
             switch (index)
             {
                 case 0:
                     {
-                        var message = this.GameController.SendMessageAction("This is the first thing that does nothing.", Priority.Medium, GetCardSource());
-                        if (UseUnityCoroutines)
-                        {
-                            yield return this.GameController.StartCoroutine(message);
-                        }
-                        else
-                        {
-                            this.GameController.ExhaustCoroutine(message);
-                        }
+                        coroutine = this.SelectHeroToPlayCard(this.DecisionMaker);
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                         break;
                     }
                 case 1:
                     {
-                        var message = this.GameController.SendMessageAction("This is the second thing that does nothing.", Priority.Medium, GetCardSource());
-                        if (UseUnityCoroutines)
-                        {
-                            yield return this.GameController.StartCoroutine(message);
-                        }
-                        else
-                        {
-                            this.GameController.ExhaustCoroutine(message);
-                        }
+                        coroutine = base.GameController.SelectHeroToUsePower(this.DecisionMaker, cardSource: this.GetCardSource(null));
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                         break;
                     }
                 case 2:
                     {
-                        var message = this.GameController.SendMessageAction("Tricked you! Also does nothing.", Priority.Medium, GetCardSource());
-                        if (UseUnityCoroutines)
-                        {
-                            yield return this.GameController.StartCoroutine(message);
-                        }
-                        else
-                        {
-                            this.GameController.ExhaustCoroutine(message);
-                        }
+                        coroutine = base.GameController.SelectHeroToDrawCard(this.DecisionMaker, cardSource: this.GetCardSource(null));
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                         break;
                     }
             }
+            yield break;
         }
-
         public Location RiverDeck()
         {
             if (CascadeCharacterCardController._riverDeck == null)

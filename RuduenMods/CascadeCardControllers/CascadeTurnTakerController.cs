@@ -36,9 +36,9 @@ namespace RuduenWorkshop.Cascade
 
                 // Then move enough replacements to get starting cards to hand. Don't draw to avoid animation. This is the start of game, so it just loops. It's messy, but it works for now!
                 // TODO: Seriously, is there a better option?
-                while (this.HeroTurnTaker.NumberOfCardsInHand < handSize)
+                if (this.HeroTurnTaker.NumberOfCardsInHand < handSize)
                 {
-                    coroutine = this.GameController.MoveCard(this, this.HeroTurnTaker.Deck.TopCard, this.HeroTurnTaker.Hand);
+                    coroutine = this.GameController.MoveCards(this, this.HeroTurnTaker.Deck, this.HeroTurnTaker.Hand, handSize - NumberOfCardsInHand);
                     if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                 }
             }
