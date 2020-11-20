@@ -12,6 +12,9 @@ For more information please visit the Trello board: https://trello.com/b/vYBMImb
 # To Do
 
 - Make an overarching pass to distinguish between hero actions (when a hero/character does something) and player actions (when a player does something), because Guise effects can blur the two, and theoretical situations where cards change hands can occur.
+- Update Cascade's unique effects when the core functionality better supports some of the weirder things done. These include: 
+ - Update the initialization so everything starts in the River deck. (Right now, non-Hero cards will not have a back.) 
+ - Update the Aqua Cost to display in a better place (keyword or other icon). (Right now, the keywords cannot show numbers above 2.) 
 
 # Licenses
 
