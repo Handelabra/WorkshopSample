@@ -175,6 +175,59 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestChargeCasterInnatePowerA()
+        {
+            IEnumerable<string> setupItems = new List<string>()
+            {
+                "BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "BreachMageCharacter", "BreachMageChargeCasterCharacter" }
+            };
+            SetupGameController(setupItems, false, promos);
+
+            StartGame();
+
+
+            Card equipment = PlayCard("HammerCharm");
+
+            DecisionSelectCardToPlay = equipment;
+            DecisionSelectCard = equipment;
+
+            QuickHandStorage(BreachMage);
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate.
+            QuickHandCheck(0); // Net no card movement.
+            AssertIsInPlay(equipment); // Card in play.
+        }
+
+        [Test()]
+        public void TestChargeCasterInnatePowerB()
+        {
+            IEnumerable<string> setupItems = new List<string>()
+            {
+                "BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis"
+            };
+            Dictionary<string, string> promos = new Dictionary<string, string>
+            {
+                { "BreachMageCharacter", "BreachMageChargeCasterCharacter" }
+            };
+            SetupGameController(setupItems, false, promos);
+
+            StartGame();
+
+
+            Card equipment = PutInHand("HammerCharm");
+
+            DecisionSelectCard = equipment;
+
+            QuickHandStorage(BreachMage);
+            UsePower(BreachMage.CharacterCard, 0); // Default Innate.
+            QuickHandCheck(-1); // Net card play. 
+            AssertIsInPlay(equipment); // Card used.
+        }
+
+        [Test()]
         public void TestCycleOfMagic()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");

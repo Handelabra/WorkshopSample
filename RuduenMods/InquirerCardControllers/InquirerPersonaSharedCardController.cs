@@ -8,10 +8,10 @@ using System.Linq;
 namespace RuduenWorkshop.Inquirer
 {
     // Token: 0x0200054D RID: 1357
-    public class InquirerFormSharedCardController : CardController
+    public class InquirerPersonaSharedCardController : CardController
     {
         // Token: 0x060028EC RID: 10476 RVA: 0x00023B10 File Offset: 0x00021D10
-        public InquirerFormSharedCardController(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
+        public InquirerPersonaSharedCardController(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
         {
         }
 

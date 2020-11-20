@@ -39,7 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BreachMageCardControllers\BreachMageCharmCasterCharacterCardController.cs" />
+    <Compile Include="BreachMageCardControllers\BreachMageChargeCasterCharacterCardController.cs" />
     <Compile Include="BreachMageCardControllers\BreachMageTwincasterCharacterCardController.cs" />
     <Compile Include="BreachMageCardControllers\BreachMageSpellSharedCardController.cs" />
     <Compile Include="BreachMageCardControllers\FocusBreachCardController.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="InquirerCardControllers\ImAVictorianCardController.cs" />
     <Compile Include="InquirerCardControllers\InquirerCharacterCardController.cs" />
     <Compile Include="InquirerCardControllers\InquirerDistortionSharedCardController.cs" />
-    <Compile Include="InquirerCardControllers\InquirerFormSharedCardController.cs" />
+    <Compile Include="InquirerCardControllers\InquirerPersonaSharedCardController.cs" />
     <Compile Include="InquirerCardControllers\InquirerHardFactsCharacterCardController.cs" />
     <Compile Include="InquirerCardControllers\InquirerLiesOnLiesCharacterCardController.cs" />
     <Compile Include="InquirerCardControllers\InquirerTurnTakerController.cs" />

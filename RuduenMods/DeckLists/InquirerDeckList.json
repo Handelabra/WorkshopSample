@@ -71,7 +71,7 @@
       "identifier": "ImAMolePerson",
       "count": 2,
       "title": "\"I'm a Mole-Person!\"",
-      "keywords": [ "ongoing", "limited", "form" ],
+      "keywords": [ "ongoing", "limited", "persona" ],
       "body": [
         "When Inquirer would regain HP, increase the amount of HP regained by 1.",
         "At the end of your turn, Inquirerer may deal 1 Target 1 Melee Damage.",
@@ -89,7 +89,7 @@
       "identifier": "ImANinja",
       "count": 2,
       "title": "\"I'm a Ninja!\"",
-      "keywords": [ "ongoing", "limited", "form" ],
+      "keywords": [ "ongoing", "limited", "persona" ],
       "body": [
         "Increase Damage dealt by Inquirer by 1.",
         "At the end of your turn, you may discard a card. If you do, use a power.",
@@ -107,7 +107,7 @@
       "identifier": "ImAVictorian",
       "count": 2,
       "title": "\"I'm a Victorian!\"",
-      "keywords": [ "ongoing", "limited", "form" ],
+      "keywords": [ "ongoing", "limited", "persona" ],
       "body": [
         "When you discard a card from your hand, discard the top card of your deck.",
         "At the end of your turn, Inquirerer regains 1 HP.",
@@ -213,7 +213,7 @@
       "title": "Until you Make It",
       "keywords": [ "one-shot" ],
       "body": [
-        "Search your deck or trash for a Form card and put it into play. If you searched your deck, shuffle it.",
+        "Search your deck or trash for a persona card and put it into play. If you searched your deck, shuffle it.",
         "You may draw a card.",
         "You may play a Card. "
       ],

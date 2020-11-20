@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace RuduenWorkshop.BreachMage
 {
-    public class BreachMageCharmCasterCharacterCardController : HeroCharacterCardController
+    public class BreachMageChargeCasterCharacterCardController : HeroCharacterCardController
     {
         public string str;
 
-        public BreachMageCharmCasterCharacterCardController(Card card, TurnTakerController turnTakerController)
+        public BreachMageChargeCasterCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -47,17 +47,13 @@ namespace RuduenWorkshop.BreachMage
                 // Stanard power.
                 List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
-                // Use a Cast.
-                //coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults);
-                coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults, false, this.GetCardSource(null));
+                // Bounce an equipment.
+                coroutine = this.GameController.SelectAndMoveCard(this.HeroTurnTakerController, (Card c) => c.IsInPlay && this.IsEquipment(c) && c.Owner == this.TurnTaker, this.HeroTurnTaker.Hand);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-                if (storedResults.Count > 0)
-                {
-                    // Destroy the cast card.
-                    coroutine = this.GameController.DestroyCard(this.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard);
-                    if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-                }
+                // Play an equipment.
+                coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 1, false, 0, new LinqCardCriteria((Card c) => this.IsEquipment(c), "equipment", true));
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
 

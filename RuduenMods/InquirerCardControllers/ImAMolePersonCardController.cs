@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace RuduenWorkshop.Inquirer
 {
-    public class ImAMolePersonCardController : InquirerFormSharedCardController
+    public class ImAMolePersonCardController : InquirerPersonaSharedCardController
     {
         public ImAMolePersonCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)

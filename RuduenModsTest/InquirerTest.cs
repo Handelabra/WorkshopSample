@@ -243,7 +243,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestForms()
+        public void TestPersonas()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
             StartGame();
@@ -444,24 +444,24 @@ namespace RuduenModsTest
 
             GoToPlayCardPhase(Inquirer);
 
-            Card form = GetCard("ImAMolePerson");
+            Card persona = GetCard("ImAMolePerson");
             Card safeCard = GetCardWithLittleEffect(Inquirer);
 
-            MoveCard(Inquirer, form, Inquirer.TurnTaker.Deck, true);
+            MoveCard(Inquirer, persona, Inquirer.TurnTaker.Deck, true);
             PutInHand(safeCard);
 
             QuickHandStorage(Inquirer);
 
             List<Card> cards = new List<Card>
             {
-                form, // First search for Form.
+                persona, // First search for persona.
                 safeCard // Then play safe card.
             };
             DecisionSelectCards = ArrangeDecisionCards(cards);
 
             PlayCard("UntilYouMakeIt");
             QuickHandCheck(0); // Draw 1, Play 1, Net 0.
-            AssertNumberOfCardsInPlay(Inquirer, 3); // Should now have character card, new form, and card in play, since safe cards are preferred.
+            AssertNumberOfCardsInPlay(Inquirer, 3); // Should now have character card, new persona, and card in play, since safe cards are preferred.
         }
 
         private IEnumerable<Card> ArrangeDecisionCards(List<Card> cards)

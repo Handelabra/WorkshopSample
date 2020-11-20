@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace RuduenWorkshop.Inquirer
 {
     // TODO: TEST!
-    public class ImANinjaCardController : InquirerFormSharedCardController
+    public class ImANinjaCardController : InquirerPersonaSharedCardController
     {
         public ImANinjaCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
