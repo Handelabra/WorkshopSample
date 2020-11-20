@@ -33,7 +33,8 @@
       ],
       "flippedIcons": [],
       "openingLines": {
-        "default": "Oh? You really want to challenge me?"
+        "default": "You have no idea what you're getting into, do you?",
+        "ApostateCharacter": "Let's see who really understands the truths of the world."
       },
       "complexity": 3
     },

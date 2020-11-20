@@ -39,24 +39,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CascadeCardControllers\CascadeCharacterCardController.cs" />
-    <Compile Include="CascadeCardControllers\CascadeRiverSharedCardController.cs" />
-    <Compile Include="CascadeCardControllers\CascadeTurnTakerController.cs" />
-    <Compile Include="CascadeCardControllers\CondensedOrbCardController.cs" />
-    <Compile Include="CascadeCardControllers\DivergingWatersCardController.cs" />
-    <Compile Include="CascadeCardControllers\DropletCardController.cs" />
-    <Compile Include="CascadeCardControllers\MeetingTheOceanCardController.cs" />
-    <Compile Include="CascadeCardControllers\PerpetualFlowCardController.cs" />
-    <Compile Include="CascadeCardControllers\RippledVisionsCardController.cs" />
-    <Compile Include="CascadeCardControllers\RisingWatersCardController.cs" />
-    <Compile Include="CascadeCardControllers\RiverbankCardController.cs" />
-    <Compile Include="CascadeCardControllers\RiverWornStoneCardController.cs" />
-    <Compile Include="CascadeCardControllers\RushingWatersCardController.cs" />
-    <Compile Include="CascadeCardControllers\ShapeTheStreamCardController.cs" />
-    <Compile Include="CascadeCardControllers\StormSwellCardController.cs" />
-    <Compile Include="CascadeCardControllers\StreamSurgeCardController.cs" />
-    <Compile Include="CascadeCardControllers\WaterlogCardController.cs" />
-    <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
     <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCardController.cs" />
     <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCardController.cs" />
     <Compile Include="HeroPromoCardControllers\ExpatrietteQuickshotCardController.cs" />
@@ -68,9 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\HeroPromosDeckList.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="DeckLists\CascadeDeckList.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

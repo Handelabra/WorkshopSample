@@ -26,7 +26,7 @@ namespace RuduenWorkshop.Cascade
             List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
 
             // Initial test: Discard up to three cards.
-            coroutine = this.GameController.SelectAndDiscardCards(this.DecisionMaker, 3, false, 0, storedResults);
+            coroutine = this.GameController.SelectAndDiscardCards(this.DecisionMaker, 3, false, 0, storedResults, allowAutoDecide: true, cardSource: this.GetCardSource());
             if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             int? spellValue = 0;

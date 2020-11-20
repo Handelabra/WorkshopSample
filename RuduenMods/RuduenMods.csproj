@@ -58,6 +58,24 @@
     <Compile Include="BreachMageCardControllers\PotentBreachCardController.cs" />
     <Compile Include="BreachMageCardControllers\BreachMageCharacterCardController.cs" />
     <Compile Include="BreachMageCardControllers\BreachMageTurnTakerController.cs" />
+    <Compile Include="CascadeCardControllers\CascadeCharacterCardController.cs" />
+    <Compile Include="CascadeCardControllers\CascadeRiverSharedCardController.cs" />
+    <Compile Include="CascadeCardControllers\CascadeTurnTakerController.cs" />
+    <Compile Include="CascadeCardControllers\CondensedOrbCardController.cs" />
+    <Compile Include="CascadeCardControllers\DivergingWatersCardController.cs" />
+    <Compile Include="CascadeCardControllers\DropletCardController.cs" />
+    <Compile Include="CascadeCardControllers\MeetingTheOceanCardController.cs" />
+    <Compile Include="CascadeCardControllers\PerpetualFlowCardController.cs" />
+    <Compile Include="CascadeCardControllers\RippledVisionsCardController.cs" />
+    <Compile Include="CascadeCardControllers\RisingWatersCardController.cs" />
+    <Compile Include="CascadeCardControllers\RiverbankCardController.cs" />
+    <Compile Include="CascadeCardControllers\RiverWornStoneCardController.cs" />
+    <Compile Include="CascadeCardControllers\RushingWatersCardController.cs" />
+    <Compile Include="CascadeCardControllers\ShapeTheStreamCardController.cs" />
+    <Compile Include="CascadeCardControllers\StormSwellCardController.cs" />
+    <Compile Include="CascadeCardControllers\StreamSurgeCardController.cs" />
+    <Compile Include="CascadeCardControllers\WaterlogCardController.cs" />
+    <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
     <Compile Include="InquirerCardControllers\BackupPlanCardController.cs" />
     <Compile Include="InquirerCardControllers\FisticuffsCardController.cs" />
     <Compile Include="InquirerCardControllers\ImAMolePersonCardController.cs" />
@@ -86,6 +104,7 @@
     <EmbeddedResource Include="DeckLists\InquirerDeckList.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DeckLists\CascadeDeckList.json" />
     <None Include="manifest.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

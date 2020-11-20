@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace RuduenWorkshop.BreachMage
 {
+    // Manually tested!
     public class AuraCharmCardController : CardController
     {
         public AuraCharmCardController(Card card, TurnTakerController turnTakerController)

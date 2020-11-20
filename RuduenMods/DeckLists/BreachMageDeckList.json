@@ -15,7 +15,7 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "Return one of your Equipment cards to your hand. Play an Equipment card.",
+        "Draw a card or activate a card's Cast effect and destroy that card.",
         "Destroy 2 of your Charge cards. If you do, any player draws 5 cards."
       ],
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
@@ -111,7 +111,7 @@
     {
       "identifier": "HauntingEcho",
       "count": 3,
-      "title": "Spectral Echo",
+      "title": "Haunting Echo",
       "keywords": [ "ongoing", "spell" ],
       "activatableAbilities": [
         {
@@ -238,8 +238,8 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "{BreachMage} deals 1 Target 2 Fire Damage.",
-        "Destroy 2 of your Charge cards. If you do, select a card and activate its [u]Cast[/u] text twice, then destroy that card."
+        "Return one of your Equipment cards to your hand. Play an Equipment card.",
+        "Placeholder."
       ],
       "icons": [ "HasPower", "DealDamageFire", "Destroy" ],
       "hitpoints": 27,
