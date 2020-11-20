@@ -14,7 +14,7 @@ namespace RuduenWorkshop.Cascade
         public override IEnumerator Play()
         {
             // Play 2 Cards.
-            IEnumerator coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 2, false, new int?(0), null, false, null, null);
+            IEnumerator coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, 2, false, new int?(0), null, false, null, null);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

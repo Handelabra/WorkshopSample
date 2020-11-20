@@ -27,7 +27,7 @@ namespace RuduenWorkshop.Inquirer
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // You may destroy one of your ongoings.
-            coroutine = this.GameController.SelectAndDestroyCard(this.HeroTurnTakerController,
+            coroutine = this.GameController.SelectAndDestroyCard(this.DecisionMaker,
                 new LinqCardCriteria((Card c) => c.IsOngoing && c.Owner == this.TurnTaker, "ongoing", true, false, null, null, false),
                 true, storedResults, null, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
@@ -35,7 +35,7 @@ namespace RuduenWorkshop.Inquirer
             // If you do, play a card.
             if (storedResults.Count<DestroyCardAction>() >= 1)
             {
-                coroutine = this.SelectAndPlayCardFromHand(this.HeroTurnTakerController, true, null, null, false, false, false, null);
+                coroutine = this.SelectAndPlayCardFromHand(this.DecisionMaker, true, null, null, false, false, false, null);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
             yield break;

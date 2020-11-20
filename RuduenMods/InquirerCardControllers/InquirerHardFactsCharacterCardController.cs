@@ -26,7 +26,7 @@ namespace RuduenWorkshop.Inquirer
 
             // You may play an ongoing.
             IEnumerator coroutine;
-            coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 1, false, 0, new LinqCardCriteria((Card c) => c.IsOngoing, "ongoing", true));
+            coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, 1, false, 0, new LinqCardCriteria((Card c) => c.IsOngoing, "ongoing", true));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Make distortions HP targets. (Note that this does not apply to pre-existing targets - this is a quirk of how the engine currently applies those effects.)

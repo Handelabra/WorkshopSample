@@ -46,7 +46,7 @@ namespace RuduenWorkshop.Cascade
             //// Removed during physical revamp to make the process simpler.
             //while (remainingCard != null)
             //{
-            //    coroutine = this.GameController.MoveCard(this.HeroTurnTakerController, remainingCard, RiverDeck(), toBottom: true, evenIfIndestructible: true);
+            //    coroutine = this.GameController.MoveCard(this.DecisionMaker, remainingCard, RiverDeck(), toBottom: true, evenIfIndestructible: true);
             //    if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             //    remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
             //}
@@ -55,7 +55,7 @@ namespace RuduenWorkshop.Cascade
             int cardsToMove = 4 - Riverbank().UnderLocation.Cards.Count();
 
             // Then, move the top card to the riverbank. Normal empty deck logic should work if they aren't available.
-            coroutine = this.GameController.MoveCards(this.HeroTurnTakerController, RiverDeck().GetTopCards(cardsToMove), Riverbank().UnderLocation);
+            coroutine = this.GameController.MoveCards(this.DecisionMaker, RiverDeck().GetTopCards(cardsToMove), Riverbank().UnderLocation);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

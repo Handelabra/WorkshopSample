@@ -33,7 +33,7 @@ namespace RuduenWorkshop.Inquirer
             List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
             IEnumerator coroutine;
 
-            coroutine = this.GameController.SelectAndDiscardCard(this.HeroTurnTakerController, true, null, storedResults, SelectionType.DiscardCard);
+            coroutine = this.GameController.SelectAndDiscardCard(this.DecisionMaker, true, null, storedResults, SelectionType.DiscardCard);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             if (this.DidDiscardCards(storedResults, null, false))

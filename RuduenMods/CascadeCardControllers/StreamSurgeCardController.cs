@@ -20,7 +20,7 @@ namespace RuduenWorkshop.Cascade
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // You may play a card.
-            coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 1, true, new int?(0), null, false, null, null);
+            coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, 1, true, new int?(0), null, false, null, null);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

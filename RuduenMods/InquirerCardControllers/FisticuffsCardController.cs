@@ -25,7 +25,7 @@ namespace RuduenWorkshop.Inquirer
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Discard card.
-            coroutine = this.GameController.SelectAndDiscardCard(this.HeroTurnTakerController, false, null, null, SelectionType.DiscardCard);
+            coroutine = this.GameController.SelectAndDiscardCard(this.DecisionMaker, false, null, null, SelectionType.DiscardCard);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

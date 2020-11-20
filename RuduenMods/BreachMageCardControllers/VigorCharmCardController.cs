@@ -18,7 +18,7 @@ namespace RuduenWorkshop.BreachMage
             List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
             // Draw 3 Cards.
-            coroutine = this.DrawCards(this.HeroTurnTakerController, 3);
+            coroutine = this.DrawCards(this.DecisionMaker, 3);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Deal self 2 damage.

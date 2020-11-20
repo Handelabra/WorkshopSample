@@ -51,7 +51,7 @@ namespace RuduenWorkshop.Inquirer
             int powerNumeral = this.GetPowerNumeral(0, 2);
 
             // Play 2 Distortion cards.
-            IEnumerator coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, powerNumeral, false, new int?(0), new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
+            IEnumerator coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, powerNumeral, false, new int?(0), new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

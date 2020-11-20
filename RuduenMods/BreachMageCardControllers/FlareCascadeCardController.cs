@@ -22,7 +22,7 @@ namespace RuduenWorkshop.BreachMage
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // You may destroy 1-3 charges.
-            coroutine = this.GameController.SelectAndDestroyCards(this.HeroTurnTakerController,
+            coroutine = this.GameController.SelectAndDestroyCards(this.DecisionMaker,
                 new LinqCardCriteria((Card c) => c.IsInPlay && c.Owner == this.HeroTurnTaker && c.DoKeywordsContain("charge"), "charge", true, false, null, null, false),
                 3, false, 0, null, storedResultsAction, null, false, null, false, null, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }

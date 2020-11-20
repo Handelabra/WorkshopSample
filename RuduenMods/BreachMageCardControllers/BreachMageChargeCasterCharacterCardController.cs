@@ -30,11 +30,11 @@ namespace RuduenWorkshop.BreachMage
                 List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
                 // Bounce an equipment.
-                coroutine = this.GameController.SelectAndMoveCard(this.HeroTurnTakerController, (Card c) => c.IsInPlay && this.IsEquipment(c) && c.Owner == this.TurnTaker, this.HeroTurnTaker.Hand);
+                coroutine = this.GameController.SelectAndMoveCard(this.DecisionMaker, (Card c) => c.IsInPlay && this.IsEquipment(c) && c.Owner == this.TurnTaker, this.HeroTurnTaker.Hand);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
                 // Play an equipment.
-                coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 1, false, 0, new LinqCardCriteria((Card c) => this.IsEquipment(c), "equipment", true));
+                coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, 1, false, 0, new LinqCardCriteria((Card c) => this.IsEquipment(c), "equipment", true));
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }

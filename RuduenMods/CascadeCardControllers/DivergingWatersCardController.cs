@@ -15,15 +15,15 @@ namespace RuduenWorkshop.Cascade
         {
             IEnumerator coroutine;
             // Draw 3 cards.
-            coroutine = this.DrawCards(this.HeroTurnTakerController, 3);
+            coroutine = this.DrawCards(this.DecisionMaker, 3);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Play a card.
-            coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 1);
+            coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, 1);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Move to the bottom of the draw deck.
-            coroutine = this.GameController.MoveCard(this.HeroTurnTakerController, this.Card, RiverDeck(), toBottom: true, evenIfIndestructible: true);
+            coroutine = this.GameController.MoveCard(this.DecisionMaker, this.Card, RiverDeck(), toBottom: true, evenIfIndestructible: true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 

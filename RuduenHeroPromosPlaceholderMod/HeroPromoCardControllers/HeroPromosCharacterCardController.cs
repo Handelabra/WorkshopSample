@@ -15,7 +15,7 @@ namespace RuduenWorkshop.HeroPromos
 
         public override IEnumerator UsePower(int index = 0)
         {
-            IEnumerator coroutine = DrawCards(this.HeroTurnTakerController, 3);
+            IEnumerator coroutine = DrawCards(this.DecisionMaker, 3);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 

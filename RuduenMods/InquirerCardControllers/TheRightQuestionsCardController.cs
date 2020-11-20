@@ -19,18 +19,18 @@ namespace RuduenWorkshop.Inquirer
             List<DestroyCardAction> storedResultsAction = new List<DestroyCardAction>();
 
             // Destroy Ongoing/Environment.
-            coroutine = this.GameController.SelectAndDestroyCard(this.HeroTurnTakerController, new LinqCardCriteria((Card c) => c.IsOngoing || c.IsEnvironment, "ongoing or environment", true, false, null, null, false), false, storedResultsAction, null, this.GetCardSource(null));
+            coroutine = this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria((Card c) => c.IsOngoing || c.IsEnvironment, "ongoing or environment", true, false, null, null, false), false, storedResultsAction, null, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             if (this.GetNumberOfCardsDestroyed(storedResultsAction) > 0)
             {
                 // Play a distortion.
-                coroutine = this.SelectAndPlayCardsFromHand(this.HeroTurnTakerController, 1, false, 0, new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
+                coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, 1, false, 0, new LinqCardCriteria((Card c) => c.IsDistortion, "distortion", true));
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 
             // Bounce one of your distortions.
-            coroutine = this.GameController.SelectAndMoveCard(this.HeroTurnTakerController, (Card c) => c.IsDistortion && c.Owner == this.HeroTurnTaker && c.IsInPlay, this.HeroTurnTaker.Hand);
+            coroutine = this.GameController.SelectAndMoveCard(this.DecisionMaker, (Card c) => c.IsDistortion && c.Owner == this.HeroTurnTaker && c.IsInPlay, this.HeroTurnTaker.Hand);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

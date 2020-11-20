@@ -21,7 +21,7 @@ namespace RuduenWorkshop.Cascade
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Yes/No question to determine reset-move!
-            YesNoAmountDecision yesNoDecision = new YesNoAmountDecision(this.GameController, this.HeroTurnTakerController, SelectionType.MoveCard, Riverbank().UnderLocation.Cards.Count());
+            YesNoAmountDecision yesNoDecision = new YesNoAmountDecision(this.GameController, this.DecisionMaker, SelectionType.MoveCard, Riverbank().UnderLocation.Cards.Count());
             coroutine = this.GameController.MakeDecisionAction(yesNoDecision);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
@@ -31,13 +31,13 @@ namespace RuduenWorkshop.Cascade
                 Card remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
                 while (remainingCard != null)
                 {
-                    coroutine = this.GameController.MoveCard(this.HeroTurnTakerController, remainingCard, RiverDeck(), toBottom: true, evenIfIndestructible: true);
+                    coroutine = this.GameController.MoveCard(this.DecisionMaker, remainingCard, RiverDeck(), toBottom: true, evenIfIndestructible: true);
                     if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                     remainingCard = Riverbank().UnderLocation.Cards.FirstOrDefault();
                 }
 
                 // Then, move the top four river cards to the riverbank. That should already exist due to being a non-real card.
-                coroutine = this.GameController.MoveCards(this.HeroTurnTakerController, RiverDeck().GetTopCards(4), Riverbank().UnderLocation);
+                coroutine = this.GameController.MoveCards(this.DecisionMaker, RiverDeck().GetTopCards(4), Riverbank().UnderLocation);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }

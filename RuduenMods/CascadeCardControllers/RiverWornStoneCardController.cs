@@ -26,7 +26,7 @@ namespace RuduenWorkshop.Cascade
             IEnumerator coroutine;
             List<MoveCardAction> storedResultsMove = new List<MoveCardAction>();
             // Select and move card to the bottom of the river deck.
-            coroutine = this.GameController.SelectCardsFromLocationAndMoveThem(this.HeroTurnTakerController, this.HeroTurnTaker.Hand, 1, 1,
+            coroutine = this.GameController.SelectCardsFromLocationAndMoveThem(this.DecisionMaker, this.HeroTurnTaker.Hand, 1, 1,
                 new LinqCardCriteria((Card card) => this.HeroTurnTaker.Hand.HasCard(card)),
                 new MoveCardDestination[]
                 {

@@ -29,7 +29,7 @@ namespace RuduenWorkshop.BreachMage
                 List<DestroyCardAction> storedResultsAction = new List<DestroyCardAction>();
 
                 // Destroy two of your charges.
-                coroutine = this.GameController.SelectAndDestroyCards(this.HeroTurnTakerController,
+                coroutine = this.GameController.SelectAndDestroyCards(this.DecisionMaker,
                     new LinqCardCriteria((Card c) => c.IsInPlay && c.Owner == this.HeroTurnTaker && c.DoKeywordsContain("charge"), "charge", true, false, null, null, false),
                     powerNumerals[0], false, null, null, storedResultsAction, null, false, null, null, null, this.GetCardSource(null));
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
@@ -40,18 +40,18 @@ namespace RuduenWorkshop.BreachMage
                     List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
                     // Use a Cast.
-                    //coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults);
-                    coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults, false, this.GetCardSource(null));
+                    //coroutine = this.GameController.SelectAndActivateAbility(this.DecisionMaker, "cast", null, storedResults);
+                    coroutine = this.GameController.SelectAndActivateAbility(this.DecisionMaker, "cast", null, storedResults, false, this.GetCardSource(null));
                     if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
                     if (storedResults.Count > 0)
                     {
                         // Select an ability on that card. Just in case a card has multiple Cast effects, or is no longer valid due to being destroyed.
-                        coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", new LinqCardCriteria(storedResults.FirstOrDefault().SelectedCard), null, false, this.GetCardSource(null));
+                        coroutine = this.GameController.SelectAndActivateAbility(this.DecisionMaker, "cast", new LinqCardCriteria(storedResults.FirstOrDefault().SelectedCard), null, false, this.GetCardSource(null));
                         if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
                         // Destroy the cast card.
-                        coroutine = this.GameController.DestroyCard(this.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard);
+                        coroutine = this.GameController.DestroyCard(this.DecisionMaker, storedResults.FirstOrDefault().SelectedCard);
                         if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                     }
                 }

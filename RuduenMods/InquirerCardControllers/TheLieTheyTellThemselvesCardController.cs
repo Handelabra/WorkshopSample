@@ -36,7 +36,7 @@ namespace RuduenWorkshop.Inquirer
         {
             // Draw 2 cards.
             int powerNumeral = this.GetPowerNumeral(0, 2);
-            IEnumerator coroutine = this.DrawCards(this.HeroTurnTakerController, powerNumeral);
+            IEnumerator coroutine = this.DrawCards(this.DecisionMaker, powerNumeral);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Destroy a distortion.

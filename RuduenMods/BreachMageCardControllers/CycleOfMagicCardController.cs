@@ -19,17 +19,17 @@ namespace RuduenWorkshop.BreachMage
             List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
             // Draw 2 cards.
-            coroutine = this.DrawCards(this.HeroTurnTakerController, 2);
+            coroutine = this.DrawCards(this.DecisionMaker, 2);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Use a Cast.
-            coroutine = this.GameController.SelectAndActivateAbility(this.HeroTurnTakerController, "cast", null, storedResults, false, this.GetCardSource(null));
+            coroutine = this.GameController.SelectAndActivateAbility(this.DecisionMaker, "cast", null, storedResults, false, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             if (storedResults.Count > 0)
             {
                 // Move the top card back to top of deck.
-                coroutine = this.GameController.MoveCard(this.HeroTurnTakerController, storedResults.FirstOrDefault().SelectedCard, this.HeroTurnTaker.Deck);
+                coroutine = this.GameController.MoveCard(this.DecisionMaker, storedResults.FirstOrDefault().SelectedCard, this.HeroTurnTaker.Deck);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }

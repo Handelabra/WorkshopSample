@@ -19,7 +19,7 @@ namespace RuduenWorkshop.BreachMage
             List<ActivateAbilityDecision> storedResults = new List<ActivateAbilityDecision>();
 
             // Someone uses a power.
-            coroutine = this.GameController.SelectHeroToUsePower(this.HeroTurnTakerController, false, true, false, null, null, null, true, true, this.GetCardSource(null));
+            coroutine = this.GameController.SelectHeroToUsePower(this.DecisionMaker, false, true, false, null, null, null, true, true, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

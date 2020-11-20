@@ -17,7 +17,7 @@ namespace RuduenWorkshop.Inquirer
             IEnumerator coroutine;
 
             // Search for persona.
-            coroutine = this.GameController.SelectCardFromLocationAndMoveIt(this.HeroTurnTakerController, this.TurnTaker.Deck, new LinqCardCriteria((Card c) => c.DoKeywordsContain("persona"), () => "persona", true, false, null, null, false), new MoveCardDestination[]
+            coroutine = this.GameController.SelectCardFromLocationAndMoveIt(this.DecisionMaker, this.TurnTaker.Deck, new LinqCardCriteria((Card c) => c.DoKeywordsContain("persona"), () => "persona", true, false, null, null, false), new MoveCardDestination[]
             {
                 new MoveCardDestination(this.TurnTaker.PlayArea, false, false, false)
             }, true, true, true, false, null, false, false, null, false, false, null, null, this.GetCardSource(null));
@@ -28,7 +28,7 @@ namespace RuduenWorkshop.Inquirer
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Play card.
-            coroutine = this.SelectAndPlayCardFromHand(this.HeroTurnTakerController, true, null, null, false, false, true, null);
+            coroutine = this.SelectAndPlayCardFromHand(this.DecisionMaker, true, null, null, false, false, true, null);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
