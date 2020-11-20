@@ -71,7 +71,7 @@ namespace RuduenWorkshop.BreachMage
                 List<int> powerNumerals = new List<int>
                 {
                     this.GetPowerNumeral(0, 2),
-                    this.GetPowerNumeral(1, 5)
+                    this.GetPowerNumeral(1, 4)
                 };
 
                 List<DestroyCardAction> storedResultsAction = new List<DestroyCardAction>();

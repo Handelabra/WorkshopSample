@@ -16,7 +16,7 @@
       "character": true,
       "powers": [
         "Draw a card or activate a card's Cast effect and destroy that card.",
-        "Destroy 2 of your Charge cards. If you do, any player draws 5 cards."
+        "Destroy 2 of your Charge cards. If you do, any player draws 4 cards."
       ],
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
       "hitpoints": 27,
@@ -102,7 +102,7 @@
       "activatableAbilities": [
         {
           "name": "cast",
-          "text": "{BreachMage} deals 1 Target 4 Radiant Damage. Each player draws a card."
+          "text": "{BreachMage} deals 1 Target 3 Radiant Damage. Each player draws a card."
         }
       ],
       "icons": [ "DealDamageRadiant", "DrawCardNow" ],
@@ -116,7 +116,7 @@
       "activatableAbilities": [
         {
           "name": "cast",
-          "text": "{BreachMage} deals 1 Target 3 Psychic Damage. You may destroy an Ongoing or Environment card."
+          "text": "{BreachMage} deals 1 Target 2 Psychic Damage. You may destroy an Ongoing or Environment card."
         }
       ],
       "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],

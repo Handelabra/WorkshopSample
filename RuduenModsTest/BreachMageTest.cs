@@ -114,7 +114,7 @@ namespace RuduenModsTest
 
             QuickHandStorage(BreachMage);
             UsePower(BreachMage.CharacterCard, 1); // Charge innate.
-            QuickHandCheck(5); // 5 Cards Drawn.
+            QuickHandCheck(4); // 4 Cards Drawn.
             AssertInTrash(charges); // All used charges in trash.
         }
 
@@ -343,7 +343,7 @@ namespace RuduenModsTest
             QuickHPStorage(mdp);
             QuickHandStorage(BreachMage);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
-            QuickHPCheck(-4); // Damage Dealt.
+            QuickHPCheck(-3); // Damage Dealt.
             AssertInTrash(spell); // Spell destroyed.
             QuickHandCheck(1); // Card drawn.
         }
@@ -365,7 +365,7 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
-            QuickHPCheck(-3); // Damage Dealt.
+            QuickHPCheck(-2); // Damage Dealt.
             AssertInTrash(ongoing, spell); // Ongoing & Spell destroyed.
         }
 
