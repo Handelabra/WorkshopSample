@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace RuduenWorkshop.BreachMage
 {
-    public class StaffCharmCardController : BreachMageSpellSharedCardController
+    public class StaffCharmCardController : CardController
     {
         public StaffCharmCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)

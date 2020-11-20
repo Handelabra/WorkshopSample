@@ -57,7 +57,6 @@
     <Compile Include="BreachMageCardControllers\ShineCardController.cs" />
     <Compile Include="BreachMageCardControllers\PotentBreachCardController.cs" />
     <Compile Include="BreachMageCardControllers\BreachMageCharacterCardController.cs" />
-    <Compile Include="BreachMageCardControllers\BreachMageEquipmentSharedCardController.cs" />
     <Compile Include="BreachMageCardControllers\BreachMageTurnTakerController.cs" />
     <Compile Include="InquirerCardControllers\BackupPlanCardController.cs" />
     <Compile Include="InquirerCardControllers\FisticuffsCardController.cs" />

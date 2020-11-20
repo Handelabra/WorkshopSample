@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RuduenWorkshop.BreachMage
 {
-    public class SpiralCharmCardController : BreachMageSpellSharedCardController
+    public class SpiralCharmCardController : CardController
     {
         public SpiralCharmCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)

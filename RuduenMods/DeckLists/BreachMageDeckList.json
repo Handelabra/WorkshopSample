@@ -156,7 +156,6 @@
       "title": "Hammer Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, you may destroy an Ongoing or Equipment card.",
-      "powers": "Return this card to your hand.",
       "icons": [ "DealDamageLightning", "DestroyOngoing", "DestroyEnvironment", "Manipulate" ],
       "flavorText": "...."
     },
@@ -166,7 +165,6 @@
       "title": "Staff Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, activate a card's [u]Cast[/u] text, then destroy that card. If that [u]Cast[/u] text deals damage, increase that damage by 2.",
-      "powers": "Return this card to your hand.",
       "icons": [ "Destroy", "IncreaseDamageDealt", "Manipulate" ],
       "flavorText": "...."
     },
@@ -176,7 +174,6 @@
       "title": "Spiral Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, activate a card's [u]Cast[/u] text.",
-      "powers": "Return this card to your hand.",
       "icons": [ "Destroy", "IncreaseDamageDealt", "Manipulate" ],
       "flavorText": "...."
     },
@@ -186,7 +183,6 @@
       "title": "Vigor Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, draw 3 cards and {BreachMage} deals themselves 2 Psychic Damage.",
-      "powers": "Return this card to your hand.",
       "icons": [ "DrawCardNow", "DealDamagePsychic", "Manipulate" ],
       "flavorText": "...."
     },
@@ -196,7 +192,6 @@
       "title": "Aura Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, one Hero may use a power.",
-      "powers": "Return this card to your hand.",
       "icons": [ "UsePowerNow", "Manipulate" ],
       "flavorText": "...."
     }
