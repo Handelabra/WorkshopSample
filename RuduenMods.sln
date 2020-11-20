@@ -4,12 +4,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.808.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuduenModsTest", "RuduenModsTest\RuduenModsTest.csproj", "{AFE958F0-3C90-4493-A425-48A660B58E76}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F} = {16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}
+		{14A986B3-2B6E-4347-87E4-174DBC4C81CC} = {14A986B3-2B6E-4347-87E4-174DBC4C81CC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuduenModsConsole", "RuduenModsConsole\RuduenModsConsole.csproj", "{79F7ED14-FC8A-4625-A297-2CC51C5D803D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F} = {16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}
+		{14A986B3-2B6E-4347-87E4-174DBC4C81CC} = {14A986B3-2B6E-4347-87E4-174DBC4C81CC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuduenMods", "RuduenMods\RuduenMods.csproj", "{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuduenModUnderDevelopment", "RuduenHeroPromosPlaceholderMod\RuduenModUnderDevelopment.csproj", "{14A986B3-2B6E-4347-87E4-174DBC4C81CC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F} = {16E9E49A-4EA1-4C5C-8A7F-1DEC6BD64E0F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
