@@ -33,7 +33,7 @@ namespace RuduenModsTest
             Assert.IsInstanceOf(typeof(HeroPromosTurnTakerController), HeroPromos);
             Assert.IsInstanceOf(typeof(HeroPromosCharacterCardController), HeroPromos.CharacterCardController);
 
-            Assert.AreEqual(100, HeroPromos.CharacterCard.HitPoints);
+            Assert.AreEqual(0, HeroPromos.CharacterCard.HitPoints);
         }
 
         //[Test()]
@@ -76,16 +76,17 @@ namespace RuduenModsTest
 
             StartGame();
 
-            Card power = PlayCard("ExpatrietteQuickshot");
-            Card equipment = PutOnDeck("PlaceholderEquipment");
+            Card equipment = PutOnDeck("Pride");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
 
             DecisionSelectFunction = 1;
+            DecisionSelectPower = equipment;
+            DecisionSelectTarget = mdp;
 
-            // Sample Power - Draw 3 Cards.
-            QuickHandStorage(HeroPromos.ToHero());
-            UsePower(power);
-            QuickHandCheck(3); // 3 Cards drawn from innate power. 
-            AssertInPlayArea(HeroPromos, equipment); // Equipment played. 
+            QuickHPStorage(mdp);
+            UsePower(expatriette, 1);
+            AssertInPlayArea(expatriette, equipment); // Equipment played. 
+            QuickHPCheck(-2); // Damage dealt. 
         }
 
         [Test()]
@@ -96,16 +97,16 @@ namespace RuduenModsTest
 
             StartGame();
 
-            Card power = PlayCard("ExpatrietteQuickshot");
-            Card ongoing = PutOnDeck("PlaceholderOngoing");
+            Card ongoing = PutOnDeck("HairtriggerReflexes");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
 
             DecisionSelectFunction = 1;
+            DecisionSelectTarget = mdp;
 
-            // Sample Power - Draw 3 Cards.
-            QuickHandStorage(HeroPromos.ToHero());
-            UsePower(power);
-            QuickHandCheck(0); // 3 Cards drawn, no power use. 
-            AssertInTrash(HeroPromos, ongoing); // Non-Equipment in Hand
+            QuickHPStorage(mdp);
+            UsePower(expatriette, 1);
+            AssertInTrash(expatriette, ongoing); // Card not played.
+            QuickHPCheck(0); // No damage dealt.
         }
 
         [Test()]
@@ -116,84 +117,98 @@ namespace RuduenModsTest
 
             StartGame();
 
-            Card power = PlayCard("ExpatrietteQuickshot");
-            PutInTrash(HeroPromos.HeroTurnTaker.Deck.Cards); // Move all cards in deck to trash.
-            Card ongoing = PutInHand("PlaceholderOngoing");
+            PutInTrash(expatriette.HeroTurnTaker.Deck.Cards); // Move all cards in deck to trash.
+            Card ongoing = PutInHand("HairtriggerReflexes");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
 
             DecisionSelectFunction = 1;
             DecisionSelectCard = ongoing;
+            DecisionSelectTarget = mdp;
 
-            AssertNumberOfCardsInDeck(HeroPromos, 0); // Deck remains empty.
-            QuickHandStorage(HeroPromos.ToHero());
-            UsePower(power);
+            AssertNumberOfCardsInDeck(expatriette, 0); // Deck remains empty.
+            QuickHandStorage(expatriette);
+            UsePower(expatriette, 1);
 
             // Forced Card Discard.
-            QuickHandCheck(-1); // No power use. 
-            AssertNumberOfCardsInDeck(HeroPromos, 0); // Deck remains empty.
+            QuickHandCheck(-1); // Card Discarded.
+            AssertNumberOfCardsInDeck(expatriette, 0); // Deck remains empty.
         }
 
         [Test()]
         public void TestExpatriettePowerHandA()
         {
-            // Equipment Test
+            // Discarding equipment from hand. 
+            
             SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
-            Card power = PlayCard("ExpatrietteQuickshot");
-            Card equipment = PutInHand("PlaceholderEquipment");
+
+            Card equipment = PutInHand("Pride");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
 
             DecisionSelectFunction = 0;
             DecisionSelectCard = equipment;
+            DecisionSelectPower = equipment;
+            DecisionSelectTarget = mdp;
 
-            // Sample Power - Draw 3 Cards.
-            QuickHandStorage(HeroPromos.ToHero());
-            UsePower(power);
-            QuickHandCheck(2); // 3 Cards drawn from innate power, -1 for card played.
-            AssertInPlayArea(HeroPromos, equipment); // Equipment played. 
+            QuickHPStorage(mdp);
+            UsePower(expatriette, 1);
+            AssertInPlayArea(expatriette, equipment); // Equipment played. 
+            QuickHPCheck(-2); // Damage dealt. 
         }
 
         [Test()]
         public void TestExpatriettePowerHandB()
         {
-            // Not Equipment Test
+            // Discarding ongoing from hand. 
+
             SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
-            Card power = PlayCard("ExpatrietteQuickshot");
-            Card ongoing = PutInHand("PlaceholderOngoing");
+
+            Card ongoing = PutInHand("HairtriggerReflexes");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
 
             DecisionSelectFunction = 0;
             DecisionSelectCard = ongoing;
+            DecisionSelectPower = ongoing;
+            DecisionSelectTarget = mdp;
 
-            // Sample Power - Draw 3 Cards.
-            QuickHandStorage(HeroPromos.ToHero());
-            UsePower(power);
-            QuickHandCheck(-1); // -1 from discard, no gain.
-            AssertInTrash(HeroPromos, ongoing); // Non-Equipment in Hand
+            QuickHPStorage(mdp);
+            UsePower(expatriette, 1);
+            AssertInTrash(expatriette, ongoing); // Ongoing discarded. 
+            QuickHPCheck(0); // Damage dealt. 
         }
 
 
         [Test()]
         public void TestExpatriettePowerNoHand()
         {
-            // Not Equipment Test
+            // No cards in deck test.
             SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
-            Card power = PlayCard("ExpatrietteQuickshot");
-            Card ongoing = PutOnDeck("PlaceholderOngoing");
-            DiscardAllCards(HeroPromos);
+            PutInTrash(expatriette.HeroTurnTaker.Deck.Cards); // Move all cards in deck to trash.
+            Card ongoing = PutOnDeck("HairtriggerReflexes");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectFunction = 0;
+            DecisionSelectFunction = 1;
+            DecisionSelectCard = ongoing;
+            DecisionSelectTarget = mdp;
 
-            // Sample Power - Draw 3 Cards.
-            QuickHandStorage(HeroPromos.ToHero());
-            UsePower(power);
-            QuickHandCheck(0); // No card change.
-            AssertInTrash(HeroPromos, ongoing); // Non-Equipment in trash.
+            DiscardAllCards(expatriette);
+
+            QuickHandStorage(expatriette);
+            int DeckCount = expatriette.HeroTurnTaker.Deck.Cards.Count();
+            UsePower(expatriette, 1);
+
+            
+            QuickHandCheck(0); // Hand identical.
+            AssertNumberOfCardsInDeck(expatriette, DeckCount - 1); // Card discarded.
+            AssertInTrash(ongoing);
         }
 
 
@@ -201,60 +216,57 @@ namespace RuduenModsTest
         public void TestMrFixerPowerA()
         {
             // Tool Test
-            SetupGameController("BaronBlade", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "MrFixer", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
             Card mdp = GetCardInPlay("MobileDefensePlatform");
-            Card power = PlayCard("MrFixerFlowingStrike");
-            Card tool = PutOnDeck("PlaceholderEquipment");
+            Card tool = PutOnDeck("DualCrowbars");
 
             DecisionSelectTarget = mdp;
 
-            QuickHPStorage(HeroPromos.CharacterCard, mdp);
-            UsePower(power);
+            QuickHPStorage(fixer.CharacterCard, mdp);
+            UsePower(fixer, 1);
             QuickHPCheck(-1, -1);
-            AssertInPlayArea(HeroPromos, tool); // Card played. 
+            AssertInPlayArea(fixer, tool); // Card played. 
         }
 
         [Test()]
         public void TestMrFixerPowerB()
         {
             // Style Test
-            SetupGameController("BaronBlade", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "MrFixer", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
             Card mdp = GetCardInPlay("MobileDefensePlatform");
-            Card power = PlayCard("MrFixerFlowingStrike");
-            Card style = PutOnDeck("PlaceholderOngoing");
+            Card style = PutOnDeck("GreaseMonkeyFist");
 
             DecisionSelectTarget = mdp;
 
-            QuickHPStorage(HeroPromos.CharacterCard, mdp);
-            UsePower(power);
+            QuickHPStorage(fixer.CharacterCard, mdp);
+            UsePower(fixer, 1);
             QuickHPCheck(-1, -1);
-            AssertInPlayArea(HeroPromos, style); // Card played. 
+            AssertInPlayArea(fixer, style); // Card played. 
         }
 
         [Test()]
         public void TestMrFixerPowerC()
         {
             // Style Test
-            SetupGameController("BaronBlade", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "MrFixer", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
-            PutInTrash(HeroPromos.HeroTurnTaker.Deck.Cards.Where((Card c) => c.IsTool || c.IsStyle)); // Move all tools and styles to trash.
+            PutInTrash(fixer.HeroTurnTaker.Deck.Cards.Where((Card c) => c.IsTool || c.IsStyle)); // Move all tools and styles to trash.
             Card mdp = GetCardInPlay("MobileDefensePlatform");
-            Card power = PlayCard("MrFixerFlowingStrike");
 
 
             DecisionSelectTarget = mdp;
 
 
-            QuickHPStorage(HeroPromos.CharacterCard, mdp);
-            UsePower(power);
+            QuickHPStorage(fixer.CharacterCard, mdp);
+            UsePower(fixer, 1);
             QuickHPCheck(-1, -1);
             AssertNotInPlay((Card c) => c.IsTool || c.IsStyle); // No tools or styles were played. 
-            AssertNumberOfCardsInDeck(HeroPromos, 0); // Deck was emptied as part of reveal/discard. 
+            AssertNumberOfCardsInDeck(fixer, 0); // Deck was emptied as part of reveal/discard. 
         }
 
 

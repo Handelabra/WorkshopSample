@@ -18,16 +18,14 @@
         "Do a thing!"
       ],
       "icons": [
-        "HasPower",
         "DrawCardNow",
         "PlayCardNow"
       ],
-      "hitpoints": 100,
+      "hitpoints": 0,
       "nemesisIdentifiers": [],
       "incapacitatedAbilities": [
-        "Do Nothing",
-        "Still Do Nothing.",
-        "What do you want? I'm working on it!"
+        "Increase damage dealt by Hero Targets until the start of your next turn.",
+        "Decrease damage dealt to Hero Targets until the start of your next turn."
       ],
       "flippedIcons": [],
       "openingLines": {
@@ -40,7 +38,11 @@
       "count": 1,
       "title": "Expatriette - Quickshot",
       "keywords": [ "Promo Power" ],
-      "powers": "Discard a card or discard the top card of your deck. If it is an Equipment card, you may play it and use a power.",
+      "body": [
+        "Play this card next to {Expatriette}.",
+        "{Expatriette} gains the following power:",
+        "[b]Power:[/b] Discard a card or discard the top card of your deck. If it is an Equipment card, you may play it and use a power."
+      ],
       "icons": [],
       "flavorQuotes": [
         {
@@ -54,7 +56,11 @@
       "count": 1,
       "title": "Mr. Fixer - Flowing Strike",
       "keywords": [ "Promo Power" ],
-      "powers": "{MrFixer} deals 1 Target and himself 1 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way.",
+      "body": [
+        "Play this card next to {MrFixer}.",
+        "{MrFixer} gains the following power:",
+        "[b]Power:[/b] {MrFixer} deals 1 Target and themselves 1 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way."
+      ],
       "icons": [],
       "flavorQuotes": [
         {
