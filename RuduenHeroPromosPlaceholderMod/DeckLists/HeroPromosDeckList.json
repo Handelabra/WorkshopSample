@@ -39,8 +39,8 @@
       "identifier": "ExpatrietteQuickshot",
       "count": 1,
       "title": "Expatriette - Quickshot",
-      "keywords": [ "ongoing" ],
-      "powers": "Discard the top card of your deck. If it is an Equipment card, you may play it and use a power.",
+      "keywords": [ "Promo Power" ],
+      "powers": "Discard a card or discard the top card of your deck. If it is an Equipment card, you may play it and use a power.",
       "icons": [],
       "flavorQuotes": [
         {
@@ -53,7 +53,7 @@
       "identifier": "MrFixerFlowingStrike",
       "count": 1,
       "title": "Mr. Fixer - Flowing Strike",
-      "keywords": [ "ongoing" ],
+      "keywords": [ "Promo Power" ],
       "powers": "{MrFixer} deals 1 Target and himself 1 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way.",
       "icons": [],
       "flavorQuotes": [

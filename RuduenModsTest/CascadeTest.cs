@@ -192,7 +192,7 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp, Cascade.CharacterCard);
             PlayCard("WaterSurge"); // Play the card.
-            QuickHPCheck(-3, 2);
+            QuickHPCheck(-3, 1);
         }
 
         [Test()]

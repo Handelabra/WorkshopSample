@@ -36,6 +36,23 @@ namespace RuduenModsTest
             Assert.AreEqual(100, HeroPromos.CharacterCard.HitPoints);
         }
 
+        //[Test()]
+        //public void TestModWorksPostGameStart()
+        //{
+        //    SetupGameController("BaronBlade", "Legacy", "RuduenWorkshop.HeroPromos", "Megalopolis");
+
+        //    StartGame();
+
+        //    Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
+        //    // TurnTakerController count still exists, though one is null.
+
+        //    Assert.IsNull(HeroPromos);
+        //    Assert.IsInstanceOf(typeof(HeroPromosTurnTakerController), HeroPromos);
+        //    Assert.IsInstanceOf(typeof(HeroPromosCharacterCardController), HeroPromos.CharacterCardController);
+
+        //    Assert.AreEqual(100, HeroPromos.CharacterCard.HitPoints);
+        //}
+
 
         [Test()]
         public void TestInnatePower()
@@ -52,15 +69,17 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestExpatriettePowerA()
+        public void TestExpatriettePowerDeckA()
         {
             // Equipment Test
-            SetupGameController("BaronBlade", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
             Card power = PlayCard("ExpatrietteQuickshot");
             Card equipment = PutOnDeck("PlaceholderEquipment");
+
+            DecisionSelectFunction = 1;
 
             // Sample Power - Draw 3 Cards.
             QuickHandStorage(HeroPromos.ToHero());
@@ -70,15 +89,17 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestExpatriettePowerB()
+        public void TestExpatriettePowerDeckB()
         {
             // Not Equipment Test
-            SetupGameController("BaronBlade", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
             Card power = PlayCard("ExpatrietteQuickshot");
             Card ongoing = PutOnDeck("PlaceholderOngoing");
+
+            DecisionSelectFunction = 1;
 
             // Sample Power - Draw 3 Cards.
             QuickHandStorage(HeroPromos.ToHero());
@@ -88,24 +109,93 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestExpatriettePowerC()
+        public void TestExpatriettePowerNoDeck()
         {
             // No cards in deck test.
-            SetupGameController("BaronBlade", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
             Card power = PlayCard("ExpatrietteQuickshot");
             PutInTrash(HeroPromos.HeroTurnTaker.Deck.Cards); // Move all cards in deck to trash.
+            Card ongoing = PutInHand("PlaceholderOngoing");
+
+            DecisionSelectFunction = 1;
+            DecisionSelectCard = ongoing;
 
             AssertNumberOfCardsInDeck(HeroPromos, 0); // Deck remains empty.
             QuickHandStorage(HeroPromos.ToHero());
             UsePower(power);
 
-            // No card was moved or drawn. 
-            QuickHandCheck(0); // No power use. 
+            // Forced Card Discard.
+            QuickHandCheck(-1); // No power use. 
             AssertNumberOfCardsInDeck(HeroPromos, 0); // Deck remains empty.
         }
+
+        [Test()]
+        public void TestExpatriettePowerHandA()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+
+            StartGame();
+
+            Card power = PlayCard("ExpatrietteQuickshot");
+            Card equipment = PutInHand("PlaceholderEquipment");
+
+            DecisionSelectFunction = 0;
+            DecisionSelectCard = equipment;
+
+            // Sample Power - Draw 3 Cards.
+            QuickHandStorage(HeroPromos.ToHero());
+            UsePower(power);
+            QuickHandCheck(2); // 3 Cards drawn from innate power, -1 for card played.
+            AssertInPlayArea(HeroPromos, equipment); // Equipment played. 
+        }
+
+        [Test()]
+        public void TestExpatriettePowerHandB()
+        {
+            // Not Equipment Test
+            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+
+            StartGame();
+
+            Card power = PlayCard("ExpatrietteQuickshot");
+            Card ongoing = PutInHand("PlaceholderOngoing");
+
+            DecisionSelectFunction = 0;
+            DecisionSelectCard = ongoing;
+
+            // Sample Power - Draw 3 Cards.
+            QuickHandStorage(HeroPromos.ToHero());
+            UsePower(power);
+            QuickHandCheck(-1); // -1 from discard, no gain.
+            AssertInTrash(HeroPromos, ongoing); // Non-Equipment in Hand
+        }
+
+
+        [Test()]
+        public void TestExpatriettePowerNoHand()
+        {
+            // Not Equipment Test
+            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+
+            StartGame();
+
+            Card power = PlayCard("ExpatrietteQuickshot");
+            Card ongoing = PutOnDeck("PlaceholderOngoing");
+            DiscardAllCards(HeroPromos);
+
+            DecisionSelectFunction = 0;
+
+            // Sample Power - Draw 3 Cards.
+            QuickHandStorage(HeroPromos.ToHero());
+            UsePower(power);
+            QuickHandCheck(0); // No card change.
+            AssertInTrash(HeroPromos, ongoing); // Non-Equipment in trash.
+        }
+
 
         [Test()]
         public void TestMrFixerPowerA()

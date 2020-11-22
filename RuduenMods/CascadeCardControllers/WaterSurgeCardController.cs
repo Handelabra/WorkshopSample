@@ -18,7 +18,7 @@ namespace RuduenWorkshop.Cascade
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Heal.
-            coroutine = this.GameController.GainHP(this.CharacterCard, 2, null, null, this.GetCardSource(null));
+            coroutine = this.GameController.GainHP(this.CharacterCard, 1, null, null, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
