@@ -3,6 +3,7 @@ using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
 using RuduenPromosWorkshop.HeroPromos;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -79,14 +80,13 @@ namespace RuduenModsTest
             Card equipment = PutOnDeck("Pride");
             Card mdp = FindCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectFunction = 1;
             DecisionSelectPower = equipment;
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
             UsePower(expatriette, 1);
             AssertInPlayArea(expatriette, equipment); // Equipment played. 
-            QuickHPCheck(-2); // Damage dealt. 
+            QuickHPCheck(-1); // Damage dealt. 
         }
 
         [Test()]
@@ -100,13 +100,44 @@ namespace RuduenModsTest
             Card ongoing = PutOnDeck("HairtriggerReflexes");
             Card mdp = FindCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectFunction = 1;
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
             UsePower(expatriette, 1);
             AssertInTrash(expatriette, ongoing); // Card not played.
-            QuickHPCheck(0); // No damage dealt.
+            QuickHPCheck(0); // No damage dealt - no power.
+        }
+
+        [Test()]
+        public void TestExpatriettePowerDeckChain()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "Expatriette", "TheArgentAdept", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
+
+            StartGame();
+
+            Card safeCard = PutInHand("AssaultRifle");
+            Card equipment = PutOnDeck("Pride");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+            PlayCard("InspiringSupertonic");
+
+            DecisionSelectCard = safeCard;
+
+            UsePower(expatriette); // Use power so it's 'consumed' for testing purposes. Play a safe card.
+
+            DecisionSelectPowers = new List<Card>() { expatriette.CharacterCard, equipment }.ToArray();
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            UsePower(adept);
+            AssertInPlayArea(expatriette, equipment); // Equipment played. 
+            QuickHPCheck(-1); // Damage dealt. 
+        }
+
+        [Test()]
+        public void TestExpatriettePowerDeckChainB()
+        {
+            // TODO: Set up a scenario where the power use can trigger another power use and link in. Probably safe since card source seems to depend on chains.
         }
 
         [Test()]
@@ -121,96 +152,14 @@ namespace RuduenModsTest
             Card ongoing = PutInHand("HairtriggerReflexes");
             Card mdp = FindCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectFunction = 1;
             DecisionSelectCard = ongoing;
             DecisionSelectTarget = mdp;
 
             AssertNumberOfCardsInDeck(expatriette, 0); // Deck remains empty.
             QuickHandStorage(expatriette);
             UsePower(expatriette, 1);
-
-            // Forced Card Discard.
-            QuickHandCheck(-1); // Card Discarded.
             AssertNumberOfCardsInDeck(expatriette, 0); // Deck remains empty.
         }
-
-        [Test()]
-        public void TestExpatriettePowerHandA()
-        {
-            // Discarding equipment from hand. 
-            
-            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
-
-            StartGame();
-
-
-            Card equipment = PutInHand("Pride");
-            Card mdp = FindCardInPlay("MobileDefensePlatform");
-
-            DecisionSelectFunction = 0;
-            DecisionSelectCard = equipment;
-            DecisionSelectPower = equipment;
-            DecisionSelectTarget = mdp;
-
-            QuickHPStorage(mdp);
-            UsePower(expatriette, 1);
-            AssertInPlayArea(expatriette, equipment); // Equipment played. 
-            QuickHPCheck(-2); // Damage dealt. 
-        }
-
-        [Test()]
-        public void TestExpatriettePowerHandB()
-        {
-            // Discarding ongoing from hand. 
-
-            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
-
-            StartGame();
-
-
-            Card ongoing = PutInHand("HairtriggerReflexes");
-            Card mdp = FindCardInPlay("MobileDefensePlatform");
-
-            DecisionSelectFunction = 0;
-            DecisionSelectCard = ongoing;
-            DecisionSelectPower = ongoing;
-            DecisionSelectTarget = mdp;
-
-            QuickHPStorage(mdp);
-            UsePower(expatriette, 1);
-            AssertInTrash(expatriette, ongoing); // Ongoing discarded. 
-            QuickHPCheck(0); // Damage dealt. 
-        }
-
-
-        [Test()]
-        public void TestExpatriettePowerNoHand()
-        {
-            // No cards in deck test.
-            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
-
-            StartGame();
-
-            PutInTrash(expatriette.HeroTurnTaker.Deck.Cards); // Move all cards in deck to trash.
-            Card ongoing = PutOnDeck("HairtriggerReflexes");
-            Card mdp = FindCardInPlay("MobileDefensePlatform");
-
-            DecisionSelectFunction = 1;
-            DecisionSelectCard = ongoing;
-            DecisionSelectTarget = mdp;
-
-            DiscardAllCards(expatriette);
-
-            QuickHandStorage(expatriette);
-            int DeckCount = expatriette.HeroTurnTaker.Deck.Cards.Count();
-            UsePower(expatriette, 1);
-
-            
-            QuickHandCheck(0); // Hand identical.
-            AssertNumberOfCardsInDeck(expatriette, DeckCount - 1); // Card discarded.
-            AssertInTrash(ongoing);
-        }
-
 
         [Test()]
         public void TestMrFixerPowerA()

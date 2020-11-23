@@ -12,84 +12,55 @@ namespace RuduenPromosWorkshop.HeroPromos
             : base(card, turnTakerController)
         {
             ToHeroIdentifier = "ExpatrietteCharacter";
-            PowerDescription = "Discard a card or discard the top card of your deck. If it is an Equipment card, you may play it and use a power.";
+            PowerDescription = "Until the start of your next turn, reduce damage dealt by this hero by 1. Discard the top card of your deck. If it is an Equipment card, play it. Use a power.";
         }
 
         public override IEnumerator PowerCoroutine(CardController cardController)
-        {
-            // Break down into selection.
-            IEnumerator coroutine;
-            List<SelectFunctionDecision> selectFunctionDecisions = new List<SelectFunctionDecision>();
-
-            List<Function> list = new List<Function>
-                {
-                    new Function(cardController.DecisionMaker, "Discard a card", SelectionType.DiscardCard, () => this.DiscardAndCheckHandCard(cardController), cardController.DecisionMaker.HasCardsInHand, this.TurnTaker.Name + " cannot discard the top card of their deck, so they must discard a card."),
-                    new Function(cardController.DecisionMaker, "Discard the top card of your deck", SelectionType.DiscardFromDeck, () => this.DiscardAndCheckTopCard(cardController), !cardController.HeroTurnTaker.Deck.IsEmpty, this.TurnTaker.Name + " cannot discard a card, so they must discard the top card of their deck.", null)
-                };
-            SelectFunctionDecision selectFunction = new SelectFunctionDecision(this.GameController, cardController.DecisionMaker, list, false, null, cardController.TurnTaker.Name + " cannot discard a card nor discard the top card of their deck, so" + this.Card.Title + " has no effect.", null, this.GetCardSource(null));
-            coroutine = cardController.GameController.SelectAndPerformFunction(selectFunction, selectFunctionDecisions, null);
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-        }
-
-        public IEnumerator DiscardAndCheckTopCard(CardController cardController)
         {
             IEnumerator coroutine;
             Card card;
             List<MoveCardAction> storedResults = new List<MoveCardAction>();
 
-            coroutine = this.GameController.DiscardTopCards(cardController.DecisionMaker, cardController.HeroTurnTaker.Deck, 1, storedResults);
+            ReduceDamageStatusEffect reduceDamageStatusEffect = new ReduceDamageStatusEffect(this.GetPowerNumeral(0, 1));
+            reduceDamageStatusEffect.SourceCriteria.IsSpecificCard = cardController.CharacterCard;
+            reduceDamageStatusEffect.UntilStartOfNextTurn(cardController.TurnTaker);
+            coroutine = base.AddStatusEffect(reduceDamageStatusEffect, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            if (storedResults != null)
+            if (cardController.HeroTurnTaker.Deck.IsEmpty)
             {
-                card = storedResults.FirstOrDefault().CardToMove;
+                coroutine = this.GameController.SendMessageAction(cardController.TurnTaker.Name + " cannot discard a card nor discard the top card of their deck, so" + this.Card.Title + " has no effect.", Priority.Medium, this.GetCardSource());
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+            }
+            else
+            {
+                coroutine = this.GameController.DiscardTopCards(cardController.DecisionMaker, cardController.HeroTurnTaker.Deck, 1, storedResults);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-                if (card != null)
+                if (storedResults != null)
                 {
-                    coroutine = this.GameController.SendMessageAction("Discarded " + card.Title + ".", Priority.Medium, this.GetCardSource(), new List<Card>() { card });
-                    if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                    card = storedResults.FirstOrDefault().CardToMove;
 
-                    if (storedResults != null)
+                    if (card != null)
                     {
-                        coroutine = this.IfEquipmentPlayCardAndUsePower(cardController, card);
+                        coroutine = this.GameController.SendMessageAction("Discarded " + card.Title + ".", Priority.Medium, this.GetCardSource(), new List<Card>() { card });
                         if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+                        // If card is equipment, play it.
+                        if (card != null && IsEquipment(card))
+                        {
+                            coroutine = this.GameController.PlayCard(cardController.DecisionMaker, card);
+                            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                        }
                     }
                 }
-            }
-        }
 
-        public IEnumerator DiscardAndCheckHandCard(CardController cardController)
-        {
-            IEnumerator coroutine;
-            List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
-
-            coroutine = this.GameController.SelectAndDiscardCard(cardController.DecisionMaker, storedResults: storedResults, cardSource: this.GetCardSource());
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
-            if (storedResults != null)
-            {
-                coroutine = this.IfEquipmentPlayCardAndUsePower(cardController, storedResults.FirstOrDefault().CardToDiscard);
-                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-            }
-        }
-
-        public IEnumerator IfEquipmentPlayCardAndUsePower(CardController cardController, Card card)
-        {
-            IEnumerator coroutine;
-
-            // If card is equipment, play it and use a power. 
-            if (card != null && IsEquipment(card))
-            {
-                coroutine = this.GameController.PlayCard(cardController.DecisionMaker, card);
-                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
-                coroutine = this.GameController.SelectAndUsePower(cardController.DecisionMaker, false);
+                coroutine = this.GameController.SelectAndUsePower(cardController.DecisionMaker, false, cardSource: this.GetCardSource());
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 
 
         }
-
 
     }
 }

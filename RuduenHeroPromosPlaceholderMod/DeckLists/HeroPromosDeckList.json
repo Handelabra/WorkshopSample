@@ -41,7 +41,7 @@
       "body": [
         "Play this card next to {Expatriette}.",
         "{Expatriette} gains the following power:",
-        "[b]Power:[/b] Discard a card or discard the top card of your deck. If it is an Equipment card, you may play it and use a power."
+        "[b]Power:[/b] Until the start of your next turn, reduce damage dealt by this hero by 1. Discard the top card of your deck. If it is an Equipment card, play it. Use a power."
       ],
       "icons": [],
       "flavorQuotes": [
@@ -59,7 +59,7 @@
       "body": [
         "Play this card next to {MrFixer}.",
         "{MrFixer} gains the following power:",
-        "[b]Power:[/b] {MrFixer} deals 1 Target 1 Melee Damage and themselves 0 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way."
+        "[b]Power:[/b] {MrFixer} deals 1 Target 1 Melee Damage and himself 0 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way."
       ],
       "icons": [],
       "flavorQuotes": [
