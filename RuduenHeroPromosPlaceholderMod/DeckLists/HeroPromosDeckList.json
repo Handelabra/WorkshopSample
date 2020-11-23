@@ -37,7 +37,7 @@
       "identifier": "ExpatrietteQuickshot",
       "count": 1,
       "title": "Expatriette - Quickshot",
-      "keywords": [ "Promo Power" ],
+      "keywords": [ "promo power" ],
       "body": [
         "Play this card next to {Expatriette}.",
         "{Expatriette} gains the following power:",
@@ -55,11 +55,11 @@
       "identifier": "MrFixerFlowingStrike",
       "count": 1,
       "title": "Mr. Fixer - Flowing Strike",
-      "keywords": [ "Promo Power" ],
+      "keywords": [ "promo power" ],
       "body": [
         "Play this card next to {MrFixer}.",
         "{MrFixer} gains the following power:",
-        "[b]Power:[/b] {MrFixer} deals 1 Target and themselves 1 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way."
+        "[b]Power:[/b] {MrFixer} deals 1 Target 1 Melee Damage and themselves 0 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way."
       ],
       "icons": [],
       "flavorQuotes": [

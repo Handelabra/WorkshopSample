@@ -2,7 +2,7 @@
 using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
-using RuduenWorkshop.HeroPromos;
+using RuduenPromosWorkshop.HeroPromos;
 using System.Linq;
 using System.Reflection;
 
@@ -17,7 +17,7 @@ namespace RuduenModsTest
             // Tell the engine about our mod assembly so it can load up our code.
             // It doesn't matter which type as long as it comes from the mod's assembly.
             //var a = Assembly.GetAssembly(typeof(InquirerCharacterCardController)); // replace with your own type
-            ModHelper.AddAssembly("RuduenWorkshop", Assembly.GetAssembly(typeof(HeroPromosCharacterCardController))); // replace with your own namespace
+            ModHelper.AddAssembly("RuduenPromosWorkshop", Assembly.GetAssembly(typeof(HeroPromosCharacterCardController))); // replace with your own namespace
         }
 
         protected HeroTurnTakerController HeroPromos { get { return FindHero("HeroPromos"); } }
@@ -25,7 +25,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestModWorks()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
@@ -39,7 +39,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestModWorksPostGameStart()
         //{
-        //    SetupGameController("BaronBlade", "Legacy", "RuduenWorkshop.HeroPromos", "Megalopolis");
+        //    SetupGameController("BaronBlade", "Legacy", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
         //    StartGame();
 
@@ -54,25 +54,25 @@ namespace RuduenModsTest
         //}
 
 
-        [Test()]
-        public void TestInnatePower()
-        {
-            SetupGameController("BaronBlade", "RuduenWorkshop.HeroPromos", "Megalopolis");
+        //[Test()]
+        //public void TestInnatePower()
+        //{
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
-            StartGame();
+        //    StartGame();
 
-            // Sample Power - Draw 3 Cards.
+        //    // Sample Power - Draw 3 Cards.
 
-            QuickHandStorage(HeroPromos.ToHero());
-            UsePower(HeroPromos.CharacterCard);
-            QuickHandCheck(3);
-        }
+        //    QuickHandStorage(HeroPromos.ToHero());
+        //    UsePower(HeroPromos.CharacterCard);
+        //    QuickHandCheck(0);
+        //}
 
         [Test()]
         public void TestExpatriettePowerDeckA()
         {
             // Equipment Test
-            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
@@ -93,7 +93,7 @@ namespace RuduenModsTest
         public void TestExpatriettePowerDeckB()
         {
             // Not Equipment Test
-            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
@@ -113,7 +113,7 @@ namespace RuduenModsTest
         public void TestExpatriettePowerNoDeck()
         {
             // No cards in deck test.
-            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
@@ -139,7 +139,7 @@ namespace RuduenModsTest
         {
             // Discarding equipment from hand. 
             
-            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
@@ -163,7 +163,7 @@ namespace RuduenModsTest
         {
             // Discarding ongoing from hand. 
 
-            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
@@ -187,7 +187,7 @@ namespace RuduenModsTest
         public void TestExpatriettePowerNoHand()
         {
             // No cards in deck test.
-            SetupGameController("BaronBlade", "Expatriette", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
 
@@ -216,7 +216,7 @@ namespace RuduenModsTest
         public void TestMrFixerPowerA()
         {
             // Tool Test
-            SetupGameController("BaronBlade", "MrFixer", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "MrFixer", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -234,7 +234,7 @@ namespace RuduenModsTest
         public void TestMrFixerPowerB()
         {
             // Style Test
-            SetupGameController("BaronBlade", "MrFixer", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "MrFixer", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -252,7 +252,7 @@ namespace RuduenModsTest
         public void TestMrFixerPowerC()
         {
             // Style Test
-            SetupGameController("BaronBlade", "MrFixer", "RuduenWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "MrFixer", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
             PutInTrash(fixer.HeroTurnTaker.Deck.Cards.Where((Card c) => c.IsTool || c.IsStyle)); // Move all tools and styles to trash.
@@ -273,7 +273,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestInnatePower()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
 
         //    StartGame();
 
@@ -287,7 +287,7 @@ namespace RuduenModsTest
         //{
         //    IEnumerable<string> setupItems = new List<string>()
         //    {
-        //        "BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis"
+        //        "BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis"
         //    };
         //    Dictionary<string, string> promos = new Dictionary<string, string>
         //    {
@@ -316,7 +316,7 @@ namespace RuduenModsTest
         //{
         //    IEnumerable<string> setupItems = new List<string>()
         //    {
-        //        "BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis"
+        //        "BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis"
         //    };
         //    Dictionary<string, string> promos = new Dictionary<string, string>
         //    {
@@ -347,7 +347,7 @@ namespace RuduenModsTest
         //{
         //    IEnumerable<string> setupItems = new List<string>()
         //    {
-        //        "BaronBlade", "RuduenWorkshop.Inquirer", "RealmOfDiscord"
+        //        "BaronBlade", "RuduenPromosWorkshop.Inquirer", "RealmOfDiscord"
         //    };
         //    Dictionary<string, string> promos = new Dictionary<string, string>
         //    {
@@ -383,7 +383,7 @@ namespace RuduenModsTest
         //{
         //    IEnumerable<string> setupItems = new List<string>()
         //    {
-        //        "BaronBlade", "RuduenWorkshop.Inquirer", "RealmOfDiscord"
+        //        "BaronBlade", "RuduenPromosWorkshop.Inquirer", "RealmOfDiscord"
         //    };
         //    Dictionary<string, string> promos = new Dictionary<string, string>
         //    {
@@ -411,7 +411,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestTheLieTheyTellThemselves()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
         //    GoToUsePowerPhase(Inquirer);
 
@@ -428,7 +428,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestUndeniableFacts()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
         //    GoToUsePowerPhase(Inquirer);
 
@@ -444,7 +444,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestForms()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -475,7 +475,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestBackupPlan()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -497,7 +497,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestYoureLookingPaleInitial()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -513,7 +513,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestYoureLookingPaleAfter()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -531,7 +531,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestYoureOnOurSideInitial()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -548,7 +548,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestYoureOnOurSideAfter()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -568,7 +568,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestIveFixedTheWoundInitial()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    DealDamage(Inquirer, Inquirer, 10, DamageType.Melee);
@@ -583,7 +583,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestIveFixedTheWoundAfter()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    DealDamage(Inquirer, Inquirer, 10, DamageType.Melee);
@@ -599,7 +599,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestLookADistractionInitial()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -616,7 +616,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestLookADistractionAfter()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -636,7 +636,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestUntilYouMakeIt()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -672,7 +672,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestFisticuffs()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    GoToPlayCardPhase(Inquirer);
@@ -693,7 +693,7 @@ namespace RuduenModsTest
         //[Test()]
         //public void TestTheRightQuestions()
         //{
-        //    SetupGameController("BaronBlade", "RuduenWorkshop.Inquirer", "Megalopolis");
+        //    SetupGameController("BaronBlade", "RuduenPromosWorkshop.Inquirer", "Megalopolis");
         //    StartGame();
 
         //    Card ongoing = PlayCard("LivingForceField");

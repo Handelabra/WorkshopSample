@@ -3,8 +3,9 @@ using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace RuduenWorkshop.HeroPromos
+namespace RuduenPromosWorkshop.HeroPromos
 {
     public class HeroPromosCharacterCardController : HeroCharacterCardController
     {
@@ -24,8 +25,14 @@ namespace RuduenWorkshop.HeroPromos
         // Keep cards out when incapacitation.
         protected override IEnumerator RemoveCardsFromGame(IEnumerable<Card> cards)
         {
-            Log.Debug("None of " + this.TurnTakerControllerWithoutReplacements.Name + "'s cards are removed from the game.");
-            IEnumerator coroutine = this.GameController.SendMessageAction(this.Card.Title + "does not remove any cards from the game.", Priority.Medium, this.GetCardSource());
+            cards = from c in cards
+                    where !c.IsCharacter && !c.IsMissionCard && !c.Location.IsOffToTheSide && !c.DoKeywordsContain("promo power")
+                    select c;
+            IEnumerator coroutine = this.GameController.BulkMoveCards(this.TurnTakerController, cards, this.TurnTakerControllerWithoutReplacements.TurnTaker.OutOfGame, false, true, null, false, null);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+            Log.Debug("All of " + this.TurnTakerControllerWithoutReplacements.Name + "'s cards are removed from the game except Promo Power cards.");
+            coroutine = this.GameController.SendMessageAction(this.Card.Title + "does not remove any cards from the game.", Priority.Medium, this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 

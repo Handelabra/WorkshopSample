@@ -4,7 +4,7 @@ using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace RuduenWorkshop.HeroPromos
+namespace RuduenPromosWorkshop.HeroPromos
 {
     public abstract class HeroPromosSharedToHeroCardController : CardController
     {

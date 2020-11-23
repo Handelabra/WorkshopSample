@@ -2,7 +2,7 @@
   "title": "Ruduen's Hero Promos",
   "author": "Ruduen",
   "description": "Ruduen's Hero Promos",
-  "namespace": "RuduenWorkshop",
+  "namespace": "RuduenPromosWorkshop",
   "dll": "RuduenPromosMod.dll",
   "decks": {
     "heroes": [

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RuduenWorkshop.HeroPromos
+namespace RuduenPromosWorkshop.HeroPromos
 {
     public class HeroPromosTurnTakerController : HeroTurnTakerController
     {
@@ -37,6 +37,9 @@ namespace RuduenWorkshop.HeroPromos
                         break;
                 }
             }
+
+            coroutine = this.GameController.DestroyCard(this, this.CharacterCard);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             //// Remove turn taker from the game. It looks like doing so will fix the "H" count. 
             //coroutine = this.GameController.ReplaceTurnTaker(this.TurnTaker, null, false, true);

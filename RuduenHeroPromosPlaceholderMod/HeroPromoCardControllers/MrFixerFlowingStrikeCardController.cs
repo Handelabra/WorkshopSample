@@ -3,7 +3,7 @@ using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace RuduenWorkshop.HeroPromos
+namespace RuduenPromosWorkshop.HeroPromos
 {
     public class MrFixerFlowingStrikeCardController : HeroPromosSharedToHeroCardController
     {
@@ -11,7 +11,7 @@ namespace RuduenWorkshop.HeroPromos
             : base(card, turnTakerController)
         {
             ToHeroIdentifier = "MrFixerCharacter";
-            PowerDescription = "This Hero deals 1 Target and themselves 1 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way.";
+            PowerDescription = "This Hero deals 1 Target 1 Melee Damage and themselves 0 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way.";
         }
 
         public override IEnumerator PowerCoroutine(CardController cardController)
