@@ -2,6 +2,7 @@
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RuduenPromosWorkshop.HeroPromos
 {
@@ -11,7 +12,7 @@ namespace RuduenPromosWorkshop.HeroPromos
             : base(card, turnTakerController)
         {
             ToHeroIdentifier = "MrFixerCharacter";
-            PowerDescription = "This Hero deals 1 Target 1 Melee Damage and themselves 0 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool or Style card, play it, and discard the other cards revealed this way.";
+            PowerDescription = "This Hero deals 1 Target 1 Melee Damage and themselves 1 Melee Damage. Play a Tool card. If you do not, reveal cards from the top of your deck until you reveal a Tool card, play it, and discard the other cards revealed this way.";
         }
 
         public override IEnumerator PowerCoroutine(CardController cardController)
@@ -32,8 +33,20 @@ namespace RuduenPromosWorkshop.HeroPromos
             coroutine = this.GameController.DealDamageToTarget(new DamageSource(this.GameController, cardController.CharacterCard), cardController.CharacterCard, powerNumerals[1], DamageType.Melee, cardSource: this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Grouped logic for putting the first tool or style into play and discarding the rest.
-            coroutine = this.RevealCards_PutSomeIntoPlay_DiscardRemaining(cardController.DecisionMaker, cardController.HeroTurnTaker.Deck, null, new LinqCardCriteria((Card c) => c.IsTool || c.IsStyle, "tool or style"), isPutIntoPlay: false, revealUntilNumberOfMatchingCards: 1);
+            // Selection: Draw or use a cast and destroy. 
+
+            List<Function> list = new List<Function>
+                {
+                    new Function(cardController.DecisionMaker, "Play a Tool card", SelectionType.PlayCard,
+                    () => cardController.GameController.SelectAndPlayCardFromHand(cardController.HeroTurnTakerController, false, cardCriteria: new LinqCardCriteria((Card c) => c.IsTool, "tool"), cardSource: cardController.GetCardSource()),
+                    cardController.HeroTurnTaker.Hand.Cards.Any(c => c.IsTool), cardController.TurnTaker.Name + " cannot reveal cards from their deck, so they must Play a Tool card.", null),
+                    new Function(cardController.DecisionMaker, "Activate a card's Cast effect and destroy that card", SelectionType.ActivateAbility, 
+                    () => this.RevealCards_PutSomeIntoPlay_DiscardRemaining(cardController.DecisionMaker, cardController.HeroTurnTaker.Deck, null, cardCriteria: new LinqCardCriteria((Card c) => c.IsTool, "tool"), 
+                    isPutIntoPlay: false, revealUntilNumberOfMatchingCards: 1), 
+                    cardController.HeroTurnTaker.Deck.Cards.Count() > 0 , cardController.TurnTaker.Name + " cannot play any Tool cards, so they must reveal cards until they reveal a Tool card and play it.", null)
+                };
+            SelectFunctionDecision selectFunction = new SelectFunctionDecision(this.GameController, this.DecisionMaker, list, false, null, this.TurnTaker.Name + " cannot play any tool cards nor reveal cards from their deck so" + this.Card.Title + " has no effect.", null, this.GetCardSource(null));
+            coroutine = this.GameController.SelectAndPerformFunction(selectFunction, null, null);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
