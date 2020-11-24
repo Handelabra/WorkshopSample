@@ -72,10 +72,11 @@ namespace RuduenModsTest
         [Test()]
         public void TestChronoRangerDraw()
         {
-            // Equipment Test
-            SetupGameController("BaronBlade", "ChronoRanger", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
+            SetupGameController("BaronBlade", "ChronoRanger", "RuduenPromosWorkshop.HeroPromos", "TheBlock");
 
             StartGame();
+
+            PlayCard("DefensiveDisplacement");
 
             Card card = PutInHand("TerribleTechStrike");
             Card mdp = FindCardInPlay("MobileDefensePlatform");
@@ -85,10 +86,12 @@ namespace RuduenModsTest
 
             DecisionSelectCard = card;
 
-            QuickHPStorage(mdp);
+            QuickHPStorage(chrono.CharacterCard, mdp);
             QuickHandStorage(chrono);
             UsePower(chrono, 1);
-            QuickHPCheck(0); // No damage dealt.
+            DealDamage(chrono.CharacterCard, mdp, 1, DamageType.Melee);
+            DealDamage(mdp, chrono.CharacterCard, 1, DamageType.Melee);
+            QuickHPCheck(-1, -1); // Damage dealt through DR.
             QuickHandCheck(1); // Card drawn.
         }
 

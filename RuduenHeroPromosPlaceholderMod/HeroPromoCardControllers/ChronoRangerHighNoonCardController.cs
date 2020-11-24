@@ -12,7 +12,7 @@ namespace RuduenPromosWorkshop.HeroPromos
             : base(card, turnTakerController)
         {
             ToHeroIdentifier = "ChronoRangerCharacter";
-            PowerDescription = "Until the end of your next turn, damage dealt to and by this hero is irreducible. Draw a card or play a card.";
+            PowerDescription = "Until the end of your next turn, damage dealt by and to this hero is irreducible. Draw a card.";
         }
 
         public override IEnumerator PowerCoroutine(CardController cardController)
@@ -33,8 +33,8 @@ namespace RuduenPromosWorkshop.HeroPromos
             coroutine = this.AddStatusEffect(makeDamageIrreducibleB, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Draw or play. 
-            coroutine = this.DrawACardOrPlayACard(cardController.DecisionMaker, false);
+            // Draw. 
+            coroutine = this.DrawCard(cardController.HeroTurnTaker);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
