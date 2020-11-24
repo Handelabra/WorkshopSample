@@ -34,6 +34,24 @@
       "complexity": 3
     },
     {
+      "identifier": "ChronoRangerHighNoon",
+      "count": 1,
+      "title": "Chrono-Ranger - High Noon",
+      "keywords": [ "promo power" ],
+      "body": [
+        "Play this card next to {ChronoRanger}.",
+        "{ChronoRanger} gains the following power:",
+        "[b]Power:[/b] Until the end of your next turn, damage dealt to and by this hero is irreducible. Draw a card or play a card."
+      ],
+      "icons": [],
+      "flavorQuotes": [
+        {
+          "flavorReference": "...",
+          "text": "..."
+        }
+      ]
+    },
+    {
       "identifier": "ExpatrietteQuickshot",
       "count": 1,
       "title": "Expatriette - Quickshot",
@@ -59,7 +77,7 @@
       "body": [
         "Play this card next to {MrFixer}.",
         "{MrFixer} gains the following power:",
-        "[b]Power:[/b] {MrFixer} deals 1 Target and himself 1 Melee Damage. Reveal cards from the top of your deck until you reveal a Tool card, play it, and discard the other cards revealed this way."
+        "[b]Power:[/b] {MrFixer} deals 1 Target 1 Melee Damage and themselves 0 Melee Damage. Play a Tool card. If you do not, reveal cards from the top of your deck until you reveal a Tool card, play it, and shuffle the other cards revealed this way into your deck."
       ],
       "icons": [],
       "flavorQuotes": [

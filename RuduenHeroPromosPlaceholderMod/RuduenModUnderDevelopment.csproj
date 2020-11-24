@@ -39,6 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HeroPromoCardControllers\ChronoRangerHighNoonCardController.cs" />
     <Compile Include="HeroPromoCardControllers\HeroPromosSharedToHeroCardController.cs" />
     <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCardController.cs" />
     <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCardController.cs" />

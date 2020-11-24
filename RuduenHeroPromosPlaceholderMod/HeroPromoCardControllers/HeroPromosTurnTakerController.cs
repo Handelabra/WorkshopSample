@@ -25,6 +25,10 @@ namespace RuduenPromosWorkshop.HeroPromos
             {
                 switch (httc.TurnTaker.Identifier)
                 {
+                    case "ChronoRanger":
+                        coroutine = this.GameController.PlayCard(this, this.FindCardsWhere((Card c) => c.Identifier == "ChronoRangerHighNoon").FirstOrDefault(), true);
+                        if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                        break;
                     case "Expatriette":
                         coroutine = this.GameController.PlayCard(this, this.FindCardsWhere((Card c) => c.Identifier == "ExpatrietteQuickshot").FirstOrDefault(), true);
                         if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }

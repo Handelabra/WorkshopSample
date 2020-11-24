@@ -70,6 +70,54 @@ namespace RuduenModsTest
         //}
 
         [Test()]
+        public void TestChronoRangerDraw()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "ChronoRanger", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
+
+            StartGame();
+
+            Card card = PutInHand("TerribleTechStrike");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectFunction = 1;
+            DecisionSelectTarget = mdp;
+
+            DecisionSelectCard = card;
+
+            QuickHPStorage(mdp);
+            QuickHandStorage(chrono);
+            UsePower(chrono, 1);
+            QuickHPCheck(0); // No damage dealt.
+            QuickHandCheck(1); // Card drawn.
+        }
+
+        [Test()]
+        public void TestChronoRangerPlay()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "ChronoRanger", "RuduenPromosWorkshop.HeroPromos", "TheBlock");
+
+            StartGame();
+
+            PlayCard("DefensiveDisplacement");
+
+            Card card = PutInHand("TerribleTechStrike");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectFunction = 0;
+            DecisionSelectTarget = mdp;
+            DecisionSelectCard = card;
+
+            QuickHPStorage(chrono.CharacterCard, mdp);
+            QuickHandStorage(chrono);
+            UsePower(chrono, 1);
+            DealDamage(mdp, chrono, 2, DamageType.Energy);
+            QuickHPCheck(-2, -3); // Irreducible damage dealt.
+            QuickHandCheck(-1); // Card played.
+        }
+
+        [Test()]
         public void TestExpatriettePowerDeck()
         {
             // Equipment Test
@@ -113,42 +161,62 @@ namespace RuduenModsTest
         [Test()]
         public void TestMrFixerPowerA()
         {
+            // Style Test
+            SetupGameController("BaronBlade", "MrFixer", "Legacy", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
+
+            StartGame();
+            UsePower(legacy);
+            Card tool = PutInHand("DualCrowbars");
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCardToPlay = tool;
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(fixer.CharacterCard, mdp);
+            UsePower(fixer, 1);
+            QuickHPCheck(-1, -2);
+            AssertInPlayArea(fixer, tool); // Card put into play.
+        }
+
+        [Test()]
+        public void TestMrFixerPowerB()
+        {
             // Tool Test
             SetupGameController("BaronBlade", "MrFixer", "Legacy", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
             UsePower(legacy);
             Card mdp = GetCardInPlay("MobileDefensePlatform");
+            MoveAllCards(fixer, fixer.HeroTurnTaker.Hand, fixer.HeroTurnTaker.Deck);
+
             Card tool = PutOnDeck("DualCrowbars");
 
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(fixer.CharacterCard, mdp);
             UsePower(fixer, 1);
-            QuickHPCheck(-2, -2);
-            AssertInPlayArea(fixer, tool); // Card played. 
+            QuickHPCheck(-1, -2);
+            AssertInPlayArea(fixer, tool); // Card put into play.
         }
 
         [Test()]
-        public void TestMrFixerPowerB()
+        public void TestMrFixerPowerC()
         {
-            // Style Test
+            // Tool Test
             SetupGameController("BaronBlade", "MrFixer", "Legacy", "RuduenPromosWorkshop.HeroPromos", "Megalopolis");
 
             StartGame();
             UsePower(legacy);
-            PutInTrash(fixer.HeroTurnTaker.Deck.Cards.Where((Card c) => c.IsTool )); // Move all tools and styles to trash.
             Card mdp = GetCardInPlay("MobileDefensePlatform");
-
+            MoveAllCards(fixer, fixer.HeroTurnTaker.Hand, fixer.HeroTurnTaker.Trash);
+            MoveAllCards(fixer, fixer.HeroTurnTaker.Deck, fixer.HeroTurnTaker.Trash);
 
             DecisionSelectTarget = mdp;
 
-
             QuickHPStorage(fixer.CharacterCard, mdp);
             UsePower(fixer, 1);
-            QuickHPCheck(-2, -2);
-            AssertNotInPlay((Card c) => c.IsTool ); // No tools or styles were played. 
-            AssertNumberOfCardsInDeck(fixer, 0); // Deck was emptied as part of reveal/discard. 
+            QuickHPCheck(-1, -2);
+            AssertNotInPlay((Card c) => c.IsTool);
         }
 
 
