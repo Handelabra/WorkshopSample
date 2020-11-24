@@ -21,4 +21,9 @@ Making your mod:
 - The namespace of your deck's code (card controllers, etc) should be YourNameSpace.DeckIdentifier
 - Update the Setup.cs in the test project to register your own class & namespace with the engine in the DoSetup method.
 
+Making variants for other decks in your mod:
+
+- Create a PromoCardList.json in your DeckLists folder as in the example project
+- Implement your variants as CharacterCardController subclasses in a sub-namespace of your project based on the original deck identifier, e.g. YourNameSpace.OriginalDeckIdentifier
+
 More documentation and proper template project to come some day!
