@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{14A986B3-2B6E-4347-87E4-174DBC4C81CC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>RuduenWorkshop</RootNamespace>
-    <AssemblyName>RuduenModHeroPromos</AssemblyName>
+    <RootNamespace>RuduenPromosWorkshop</RootNamespace>
+    <AssemblyName>RuduenPromosMod</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,6 +39,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HeroPromoCardControllers\ChronoRangerHighNoonCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\HeroPromosSharedToHeroCardController.cs" />
     <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCardController.cs" />
     <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCardController.cs" />
     <Compile Include="HeroPromoCardControllers\ExpatrietteQuickshotCardController.cs" />
@@ -50,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\HeroPromosDeckList.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="manifest.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

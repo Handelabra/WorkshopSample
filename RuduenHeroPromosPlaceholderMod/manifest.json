@@ -1,0 +1,12 @@
+{
+  "title": "Ruduen's Hero Promos",
+  "author": "Ruduen",
+  "description": "Ruduen's Hero Promos",
+  "namespace": "RuduenPromosWorkshop",
+  "dll": "RuduenPromosMod.dll",
+  "decks": {
+    "heroes": [
+      "HeroPromos"
+    ]
+  }
+}
