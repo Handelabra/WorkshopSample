@@ -33,9 +33,6 @@
     <Reference Include="RuduenMod">
       <HintPath>..\RuduenMods\bin\Debug\RuduenMod.dll</HintPath>
     </Reference>
-    <Reference Include="RuduenPromosMod">
-      <HintPath>..\RuduenHeroPromosPlaceholderMod\bin\Debug\RuduenPromosMod.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="EngineCommon">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels_Data\Managed\EngineCommon.dll</HintPath>

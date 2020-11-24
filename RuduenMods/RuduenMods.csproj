@@ -76,6 +76,11 @@
     <Compile Include="CascadeCardControllers\StreamSurgeCardController.cs" />
     <Compile Include="CascadeCardControllers\WaterlogCardController.cs" />
     <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\PromoDefaultCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\ChronoRangerHighNoonCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\ExpatrietteQuickShotCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCharacterCardController.cs" />
     <Compile Include="InquirerCardControllers\BackupPlanCardController.cs" />
     <Compile Include="InquirerCardControllers\FisticuffsCardController.cs" />
     <Compile Include="InquirerCardControllers\ImAMolePersonCardController.cs" />
@@ -105,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\CascadeDeckList.json" />
+    <EmbeddedResource Include="DeckLists\PromoCardList.json" />
     <None Include="manifest.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

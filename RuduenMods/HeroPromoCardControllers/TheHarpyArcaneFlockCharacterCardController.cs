@@ -3,9 +3,9 @@ using Handelabra.Sentinels.Engine.Model;
 
 namespace RuduenPromosWorkshop.HeroPromos
 {
-    public class TheHarpyArcaneFlockCardController : CardController
+    public class TheHarpyArcaneFlockCharacterCardController : HeroCharacterCardController
     {
-        public TheHarpyArcaneFlockCardController(Card card, TurnTakerController turnTakerController)
+        public TheHarpyArcaneFlockCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }

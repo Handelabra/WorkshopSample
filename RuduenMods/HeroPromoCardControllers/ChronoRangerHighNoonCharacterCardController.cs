@@ -1,42 +1,40 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
+using RuduenWorkshop.HeroPromos;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RuduenPromosWorkshop.HeroPromos
+namespace RuduenWorkshop.ChronoRanger
 {
-    public class ChronoRangerHighNoonCardController : HeroPromosSharedToHeroCardController
+    public class ChronoRangerHighNoonCharacterCardController : PromoDefaultCharacterCardController
     {
-        public ChronoRangerHighNoonCardController(Card card, TurnTakerController turnTakerController)
+        public ChronoRangerHighNoonCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
-            ToHeroIdentifier = "ChronoRangerCharacter";
-            PowerDescription = "Until the end of your next turn, damage dealt by and to this hero is irreducible. Draw a card.";
         }
 
-        public override IEnumerator PowerCoroutine(CardController cardController)
+        public override IEnumerator UsePower(int index = 0)
         {
             IEnumerator coroutine;
 
             // Separate effects for making irreducible, or else it only applies to self-inflicted.
 
             MakeDamageIrreducibleStatusEffect makeDamageIrreducibleA = new MakeDamageIrreducibleStatusEffect();
-            makeDamageIrreducibleA.SourceCriteria.IsSpecificCard = cardController.CharacterCard;
-            makeDamageIrreducibleA.UntilEndOfNextTurn(cardController.TurnTaker);
+            makeDamageIrreducibleA.SourceCriteria.IsSpecificCard = this.CharacterCard;
+            makeDamageIrreducibleA.UntilEndOfNextTurn(this.TurnTaker);
             coroutine = this.AddStatusEffect(makeDamageIrreducibleA, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             MakeDamageIrreducibleStatusEffect makeDamageIrreducibleB = new MakeDamageIrreducibleStatusEffect();
-            makeDamageIrreducibleB.TargetCriteria.IsSpecificCard = cardController.CharacterCard;
-            makeDamageIrreducibleB.UntilEndOfNextTurn(cardController.TurnTaker);
+            makeDamageIrreducibleB.TargetCriteria.IsSpecificCard = this.CharacterCard;
+            makeDamageIrreducibleB.UntilEndOfNextTurn(this.TurnTaker);
             coroutine = this.AddStatusEffect(makeDamageIrreducibleB, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Draw. 
-            coroutine = this.DrawCard(cardController.HeroTurnTaker);
+            coroutine = this.DrawCard(this.HeroTurnTaker);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
-
     }
 }

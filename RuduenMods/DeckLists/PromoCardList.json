@@ -1,0 +1,98 @@
+﻿{
+  "ChronoRanger": [
+    {
+      "identifier": "ChronoRangerCharacter",
+      "promoIdentifier": "ChronoRangerHighNoonCharacter",
+      "count": 1,
+      "title": "Chrono-Ranger",
+      "body": [
+        "High Noon"
+      ],
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "character": true,
+      "powers": "Until the end of your next turn, damage dealt to and by {ChronoRanger} is irreducible. Draw a card.",
+      "hitpoints": 25,
+      "icons": [],
+      "nemesisIdentifiers": [ "ChronoRanger" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "It's about that time..."
+      }
+    }
+  ],
+  "Expatriette": [
+    {
+      "identifier": "ExpatrietteCharacter",
+      "promoIdentifier": "ExpatrietteQuickShotCharacter",
+      "count": 1,
+      "title": "Expatriette",
+      "body": [ "Quick-Shot" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Until the start of your next turn, reduce damage dealt by {Expatriette} by 1. Play the top card of your deck. Use a power.",
+      "hitpoints": 25,
+      "icons": [],
+      "nemesisIdentifiers": [ "Expatriette" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "I've brought the whole arsenal this time."
+      }
+    }
+  ],
+  "MrFixer": [
+    {
+      "identifier": "MrFixerCharacter",
+      "promoIdentifier": "MrFixerFlowingStrikeCharacter",
+      "count": 1,
+      "title": "Mr. Fixer",
+      "body": [ "Flowing Strike" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "{MrFixer} deals 1 Target 1 Melee Damage and himself 0 Melee Damage. Play a Tool card. If you do not, reveal cards from the top of your deck until you reveal a Tool card, play it, and shuffle the other cards revealed this way into your deck.",
+      "hitpoints": 28,
+      "icons": [],
+
+      "nemesisIdentifiers": [ "MrFixer" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "This seems like the right time to strike."
+      }
+    }
+  ]
+}

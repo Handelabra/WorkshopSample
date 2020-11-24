@@ -264,7 +264,6 @@
         "UsePowerNow",
         "DrawCardNow"
       ],
-      "flippedIcons": [],
       "openingLines": {
         "default": "..."
       },

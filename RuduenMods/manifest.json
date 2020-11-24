@@ -10,5 +10,10 @@
       "Cascade",
       "Inquirer"
     ]
+  },
+  "variants": {
+    "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
+    "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
+    "MrFixer": [ "MrFixerFlowingStrikeCharacter" ]
   }
 }
