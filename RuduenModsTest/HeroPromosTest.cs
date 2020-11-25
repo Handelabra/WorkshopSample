@@ -43,24 +43,28 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestAbsoluteZeroPlayForced()
+        public void TestAbsoluteZeroDestroy()
         {
             SetupGameController("BaronBlade", "AbsoluteZero/RuduenWorkshop.AbsoluteZeroOverchillCharacter", "TheBlock");
 
             StartGame();
 
             Assert.IsTrue(az.CharacterCard.IsPromoCard);
-            Card card = PutInHand("IsothermicTransducer");
+            List<Card> transducers = new List<Card>(this.GameController.FindCardsWhere((Card c) => c.Identifier == "IsothermicTransducer"));
+            PlayCard(transducers[0]);
+            DiscardAllCards(az);
+            PutInHand(transducers[1]);
 
-            DecisionSelectCard = card;
-            DecisionSelectFunction = 0;
+            DecisionSelectFunction = 1;
+
+            // Only available card is a copy of a limited card. Play will fail, cause destroy. 
 
             QuickHPStorage(az);
             QuickHandStorage(az);
             UsePower(az);
             QuickHPCheck(-1); // Damage dealt through DR.
-            QuickHandCheck(1); // 1 Played, 2 Drawn.
-            AssertInPlayArea(az, card);
+            QuickHandCheck(2); // No play, draw 2.
+            AssertInTrash(az, transducers[0]);
         }
 
         [Test()]
@@ -101,52 +105,6 @@ namespace RuduenModsTest
             QuickHandCheck(1); //  2 Drawn, 1 Discarded
             AssertNumberOfCardsInTrash(bunker, 1); // 1 Discarded.
             AssertPhaseActionCount(1); // 1 Power Remaining
-        }
-
-        [Test()]
-        public void TestAbsoluteZeroDestroy()
-        {
-            SetupGameController("BaronBlade", "AbsoluteZero/RuduenWorkshop.AbsoluteZeroOverchillCharacter", "TheBlock");
-
-            StartGame();
-
-            Assert.IsTrue(az.CharacterCard.IsPromoCard);
-            Card card = PutIntoPlay("IsothermicTransducer");
-
-            DecisionSelectCard = card;
-            DecisionSelectFunction = 1;
-
-            QuickHPStorage(az);
-            QuickHandStorage(az);
-            UsePower(az);
-            QuickHPCheck(-1); // Damage dealt through DR.
-            QuickHandCheck(2); // No play, draw 2.
-            AssertInTrash(az, card);
-        }
-
-        [Test()]
-        public void TestAbsoluteZeroDestroyForced()
-        {
-            SetupGameController("BaronBlade", "AbsoluteZero/RuduenWorkshop.AbsoluteZeroOverchillCharacter", "TheBlock");
-
-            StartGame();
-
-            Assert.IsTrue(az.CharacterCard.IsPromoCard);
-            List<Card> transducers = new List<Card>(this.GameController.FindCardsWhere((Card c) => c.Identifier == "IsothermicTransducer"));
-            PlayCard(transducers[0]);
-            DiscardAllCards(az);
-            PutInHand(transducers[1]);
-
-            DecisionSelectFunction = 1;
-
-            // Only available card is a copy of a limited card. Force destroy.
-
-            QuickHPStorage(az);
-            QuickHandStorage(az);
-            UsePower(az);
-            QuickHPCheck(-1); // Damage dealt through DR.
-            QuickHandCheck(2); // No play, draw 2.
-            AssertInTrash(az, transducers[0]);
         }
 
         [Test()]

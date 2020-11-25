@@ -12,7 +12,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "{AbsoluteZero} deals himself 1 Cold Damage. Play an Equipment card or destroy one of your Equipment cards. Draw 2 Cards.",
+      "powers": "{AbsoluteZero} deals himself 1 Cold Damage. Play an Equipment card. If you do not, destroy one of your Equipment cards. Draw 2 Cards.",
       "hitpoints": 31,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "AbsoluteZero" ],
