@@ -76,6 +76,8 @@
     <Compile Include="CascadeCardControllers\StreamSurgeCardController.cs" />
     <Compile Include="CascadeCardControllers\WaterlogCardController.cs" />
     <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\BunkerFullSalvoCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\AbsoluteZeroOverchillCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\PromoDefaultCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\ChronoRangerHighNoonCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\ExpatrietteQuickShotCharacterCardController.cs" />

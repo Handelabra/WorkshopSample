@@ -12,6 +12,8 @@
     ]
   },
   "variants": {
+    "AbsoluteZero": [ "AbsoluteZeroOverchillCharacter" ],
+    "Bunker": [ "BunkerFullSalvoCharacter" ],
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
     "MrFixer": [ "MrFixerFlowingStrikeCharacter" ]

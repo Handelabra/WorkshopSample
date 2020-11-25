@@ -3,6 +3,7 @@ using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
 using RuduenWorkshop.HeroPromos;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace RuduenModsTest
@@ -20,9 +21,138 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestAbsoluteZeroPlay()
+        {
+            SetupGameController("BaronBlade", "AbsoluteZero/RuduenWorkshop.AbsoluteZeroOverchillCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(az.CharacterCard.IsPromoCard);
+            Card card = PutInHand("CryoChamber");
+            PutIntoPlay("IsothermicTransducer");
+
+            DecisionSelectCard = card;
+            DecisionSelectFunction = 0;
+
+            QuickHPStorage(az);
+            QuickHandStorage(az);
+            UsePower(az);
+            QuickHPCheck(-1); // Damage dealt through DR.
+            QuickHandCheck(1); // 1 Played, 2 Drawn.
+            AssertInPlayArea(az, card);
+        }
+
+        [Test()]
+        public void TestAbsoluteZeroPlayForced()
+        {
+            SetupGameController("BaronBlade", "AbsoluteZero/RuduenWorkshop.AbsoluteZeroOverchillCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(az.CharacterCard.IsPromoCard);
+            Card card = PutInHand("IsothermicTransducer");
+
+            DecisionSelectCard = card;
+            DecisionSelectFunction = 0;
+
+            QuickHPStorage(az);
+            QuickHandStorage(az);
+            UsePower(az);
+            QuickHPCheck(-1); // Damage dealt through DR.
+            QuickHandCheck(1); // 1 Played, 2 Drawn.
+            AssertInPlayArea(az, card);
+        }
+
+        [Test()]
+        public void TestBunkerNoOtherPower()
+        {
+            SetupGameController("BaronBlade", "Bunker/RuduenWorkshop.BunkerFullSalvoCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(bunker.CharacterCard.IsPromoCard);
+
+            GoToUsePowerPhase(bunker);
+
+            QuickHandStorage(bunker);
+            UsePower(bunker);
+            QuickHandCheck(2); //  2 Drawn.
+
+            AssertPhaseActionCount(0); // Powers used.
+        }
+
+        [Test()]
+        public void TestBunkerOneOtherPower()
+        {
+            SetupGameController("BaronBlade", "Bunker/RuduenWorkshop.BunkerFullSalvoCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(bunker.CharacterCard.IsPromoCard);
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            PutIntoPlay("FlakCannon");
+
+            DecisionSelectTarget = mdp;
+
+            GoToUsePowerPhase(bunker);
+
+            QuickHandStorage(bunker);
+            UsePower(bunker);
+            QuickHandCheck(1); //  2 Drawn, 1 Discarded
+            AssertNumberOfCardsInTrash(bunker, 1); // 1 Discarded.
+            AssertPhaseActionCount(1); // 1 Power Remaining
+        }
+
+        [Test()]
+        public void TestAbsoluteZeroDestroy()
+        {
+            SetupGameController("BaronBlade", "AbsoluteZero/RuduenWorkshop.AbsoluteZeroOverchillCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(az.CharacterCard.IsPromoCard);
+            Card card = PutIntoPlay("IsothermicTransducer");
+
+            DecisionSelectCard = card;
+            DecisionSelectFunction = 1;
+
+            QuickHPStorage(az);
+            QuickHandStorage(az);
+            UsePower(az);
+            QuickHPCheck(-1); // Damage dealt through DR.
+            QuickHandCheck(2); // No play, draw 2.
+            AssertInTrash(az, card);
+        }
+
+        [Test()]
+        public void TestAbsoluteZeroDestroyForced()
+        {
+            SetupGameController("BaronBlade", "AbsoluteZero/RuduenWorkshop.AbsoluteZeroOverchillCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(az.CharacterCard.IsPromoCard);
+            List<Card> transducers = new List<Card>(this.GameController.FindCardsWhere((Card c) => c.Identifier == "IsothermicTransducer"));
+            PlayCard(transducers[0]);
+            DiscardAllCards(az);
+            PutInHand(transducers[1]);
+
+            DecisionSelectFunction = 1;
+
+            // Only available card is a copy of a limited card. Force destroy.
+
+            QuickHPStorage(az);
+            QuickHandStorage(az);
+            UsePower(az);
+            QuickHPCheck(-1); // Damage dealt through DR.
+            QuickHandCheck(2); // No play, draw 2.
+            AssertInTrash(az, transducers[0]);
+        }
+
+        [Test()]
         public void TestChronoRanger()
         {
-            SetupGameController("BaronBlade", "ChronoRanger/RuduenWorkshop.ChronoRangerHighNoonCharacter",  "TheBlock");
+            SetupGameController("BaronBlade", "ChronoRanger/RuduenWorkshop.ChronoRangerHighNoonCharacter", "TheBlock");
 
             StartGame();
 
@@ -52,7 +182,7 @@ namespace RuduenModsTest
         public void TestExpatriettePowerDeck()
         {
             // Equipment Test
-            SetupGameController("BaronBlade", "Expatriette/RuduenWorkshop.ExpatrietteQuickShotCharacter",  "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette/RuduenWorkshop.ExpatrietteQuickShotCharacter", "Megalopolis");
 
             StartGame();
 
@@ -72,7 +202,7 @@ namespace RuduenModsTest
         public void TestExpatriettePowerNoDeck()
         {
             // No cards in deck test.
-            SetupGameController("BaronBlade", "Expatriette/RuduenWorkshop.ExpatrietteQuickShotCharacter",  "Megalopolis");
+            SetupGameController("BaronBlade", "Expatriette/RuduenWorkshop.ExpatrietteQuickShotCharacter", "Megalopolis");
 
             StartGame();
 
@@ -93,7 +223,7 @@ namespace RuduenModsTest
         public void TestMrFixerPowerA()
         {
             // Style Test
-            SetupGameController("BaronBlade", "MrFixer/RuduenWorkshop.MrFixerFlowingStrikeCharacter", "Legacy",  "Megalopolis");
+            SetupGameController("BaronBlade", "MrFixer/RuduenWorkshop.MrFixerFlowingStrikeCharacter", "Legacy", "Megalopolis");
 
             StartGame();
             UsePower(legacy);
@@ -134,7 +264,7 @@ namespace RuduenModsTest
         public void TestMrFixerPowerC()
         {
             // Tool Test
-            SetupGameController("BaronBlade", "MrFixer/RuduenWorkshop.MrFixerFlowingStrikeCharacter", "Legacy",  "Megalopolis");
+            SetupGameController("BaronBlade", "MrFixer/RuduenWorkshop.MrFixerFlowingStrikeCharacter", "Legacy", "Megalopolis");
 
             StartGame();
             UsePower(legacy);
