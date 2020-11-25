@@ -13,10 +13,7 @@ namespace RuduenWorkshop.Bunker
         public BunkerFullSalvoCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
-            this.usedCards = new List<Card>();
         }
-
-        private List<Card> usedCards;
 
         public override IEnumerator UsePower(int index = 0)
         {
@@ -41,8 +38,10 @@ namespace RuduenWorkshop.Bunker
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 
-            CardCriteria cardCriteria = new CardCriteria(null);
-            cardCriteria.IsOneOfTheseCards = GetCardsWithPowersInPlay();
+            CardCriteria cardCriteria = new CardCriteria(null)
+            {
+                IsOneOfTheseCards = GetCardsWithPowersInPlay()
+            };
             coroutine = base.SetPhaseActionCountThisTurn(this.TurnTaker, Phase.UsePower, cardCriteria);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }

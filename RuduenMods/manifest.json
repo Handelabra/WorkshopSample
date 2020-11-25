@@ -16,6 +16,7 @@
     "Bunker": [ "BunkerFullSalvoCharacter" ],
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
+    "Knyfe": [ "KnyfeKineticLoopCharacter" ],
     "MrFixer": [ "MrFixerFlowingStrikeCharacter" ]
   }
 }

@@ -109,7 +109,7 @@
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Until the start of your next turn, reduce damage dealt by {Expatriette} by 1. Play the top card of your deck. Use a power.",
+      "powers": "Until the end of the turn, reduce damage dealt by {Expatriette} by 1. Play the top card of your deck. Use a power.",
       "hitpoints": 25,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "Expatriette" ],
@@ -126,6 +126,37 @@
       "complexity": 2,
       "openingLines": {
         "default": "I've brought the whole arsenal this time."
+      }
+    }
+  ],
+  "Knyfe": [
+    {
+      "identifier": "KnyfeCharacter",
+      "promoIdentifier": "KnyfeKineticLoopCharacter",
+      "count": 1,
+      "title": "K.N.Y.F.E.",
+      "body": [ "Kinetic Loop" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Until the end of your next turn, after {Knyfe} deals herself damage, she Regains 1 HP. Draw a card.",
+      "hitpoints": 27,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "Knyfe" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "A chance to take a few more risks, eh?"
       }
     }
   ],

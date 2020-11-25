@@ -178,6 +178,41 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestKnyfePower()
+        {
+            // No cards in deck test.
+            SetupGameController("BaronBlade", "Knyfe/RuduenWorkshop.KnyfeKineticLoopCharacter", "Megalopolis");
+
+            StartGame();
+
+            QuickHandStorage(knyfe);
+            QuickHPStorage(knyfe);
+            UsePower(knyfe);
+            DealDamage(knyfe, knyfe, 1, DamageType.Energy);
+            QuickHPCheck(0); // 1 damage, healed 1. 
+            QuickHandCheck(1); // Card drawn.
+        }
+
+        [Test()]
+        public void TestKnyfePowerNoDamageDealt()
+        {
+            SetupGameController("BaronBlade", "Knyfe/RuduenWorkshop.KnyfeKineticLoopCharacter", "TheBlock");
+
+            StartGame();
+
+            DealDamage(knyfe, knyfe, 5, DamageType.Energy);
+
+            PutIntoPlay("DefensiveDisplacement");
+
+            QuickHandStorage(knyfe);
+            QuickHPStorage(knyfe);
+            UsePower(knyfe);
+            DealDamage(knyfe, knyfe, 1, DamageType.Energy);
+            QuickHPCheck(0); // No damage or healing.
+            QuickHandCheck(1); // Card drawn.
+        }
+
+        [Test()]
         public void TestMrFixerPowerA()
         {
             // Style Test

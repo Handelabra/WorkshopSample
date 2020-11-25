@@ -20,7 +20,7 @@ namespace RuduenWorkshop.Expatriette
 
             ReduceDamageStatusEffect reduceDamageStatusEffect = new ReduceDamageStatusEffect(this.GetPowerNumeral(0, 1));
             reduceDamageStatusEffect.SourceCriteria.IsSpecificCard = this.CharacterCard;
-            reduceDamageStatusEffect.UntilStartOfNextTurn(this.TurnTaker);
+            reduceDamageStatusEffect.UntilThisTurnIsOver(this.Game);
             coroutine = base.AddStatusEffect(reduceDamageStatusEffect, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
