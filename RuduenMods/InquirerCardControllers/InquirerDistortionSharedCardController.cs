@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace RuduenWorkshop.Inquirer
 {
-    public class InquirerDistortionSharedCardController : CardController
+    public abstract class InquirerDistortionSharedCardController : CardController
     {
         protected LinqCardCriteria NextToCriteria { get; set; }
 

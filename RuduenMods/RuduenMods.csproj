@@ -84,6 +84,20 @@
     <Compile Include="HeroPromoCardControllers\ExpatrietteQuickShotCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCharacterCardController.cs" />
+    <Compile Include="WordsmithCardControllers\OfResonanceCardController.cs" />
+    <Compile Include="WordsmithCardControllers\OfDisruptionCardController.cs" />
+    <Compile Include="WordsmithCardControllers\WildCardController.cs" />
+    <Compile Include="WordsmithCardControllers\ShockCardController.cs" />
+    <Compile Include="WordsmithCardControllers\RayCardController.cs" />
+    <Compile Include="WordsmithCardControllers\OfHealingCardController.cs" />
+    <Compile Include="WordsmithCardControllers\ImpactCardController.cs" />
+    <Compile Include="WordsmithCardControllers\WordsmithCharacterCardController.cs" />
+    <Compile Include="WordsmithCardControllers\WaveCardController.cs" />
+    <Compile Include="WordsmithCardControllers\ControlledCardController.cs" />
+    <Compile Include="WordsmithCardControllers\WordsmithDefineCharacterCardController.cs" />
+    <Compile Include="WordsmithCardControllers\WordsmithSharedEssenceCardController.cs" />
+    <Compile Include="WordsmithCardControllers\WordsmithSharedModifierCardController.cs" />
+    <Compile Include="WordsmithCardControllers\WordsmithTurnTakerController.cs" />
     <Compile Include="InquirerCardControllers\BackupPlanCardController.cs" />
     <Compile Include="InquirerCardControllers\FisticuffsCardController.cs" />
     <Compile Include="InquirerCardControllers\ImAMolePersonCardController.cs" />
@@ -114,6 +128,7 @@
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\CascadeDeckList.json" />
     <EmbeddedResource Include="DeckLists\PromoCardList.json" />
+    <EmbeddedResource Include="DeckLists\WordsmithDeckList.json" />
     <None Include="manifest.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
