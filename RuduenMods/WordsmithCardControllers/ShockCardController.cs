@@ -15,8 +15,8 @@ namespace RuduenWorkshop.Wordsmith
 
         protected override IEnumerator PerformModifiedAction()
         {
-            // Deal up to 2 targets 3 lightning. 
-            IEnumerator coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 3, DamageType.Lightning, 2, false, 0, cardSource: this.GetCardSource());
+            // Deal up to 3 targets 3 lightning. 
+            IEnumerator coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 3, DamageType.Lightning, 3, false, 0, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

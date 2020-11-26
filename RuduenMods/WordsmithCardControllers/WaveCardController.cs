@@ -15,8 +15,8 @@ namespace RuduenWorkshop.Wordsmith
 
         protected override IEnumerator PerformModifiedAction()
         {
-            // Deal Non-Heroes 2. 
-            IEnumerator coroutine = this.DealDamage(this.CharacterCard, (Card card) => !card.IsHero, 2, DamageType.Sonic);
+            // Deal up to 5 targets 2 sonic. 
+            IEnumerator coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 2, DamageType.Lightning, 5, false, 0, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
