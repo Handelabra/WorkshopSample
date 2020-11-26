@@ -26,7 +26,7 @@ namespace RuduenWorkshop.Wordsmith
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
-        public override ITrigger AddModifierTrigger(CardSource cardSource)
+        protected override ITrigger AddModifierTriggerOverride(CardSource cardSource)
         {
             // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger. 
             ITrigger trigger = null;

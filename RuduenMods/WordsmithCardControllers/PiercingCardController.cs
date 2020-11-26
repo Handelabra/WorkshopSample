@@ -20,16 +20,13 @@ namespace RuduenWorkshop.Wordsmith
             // Power.
             coroutine = this.GameController.SelectHeroToUsePower(this.DecisionMaker, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
-            // Draw. 
-            coroutine = this.DrawCard(this.HeroTurnTaker, false, null, true);
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
-        public override ITrigger AddModifierTrigger(CardSource cardSource)
+        protected override ITrigger AddModifierTriggerOverride(CardSource cardSource)
         {
             // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger. 
             ITrigger trigger = null;
+
             bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources; // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
 
             trigger = this.AddTrigger<DealDamageAction>((DealDamageAction dd) => damageCriteria(dd),

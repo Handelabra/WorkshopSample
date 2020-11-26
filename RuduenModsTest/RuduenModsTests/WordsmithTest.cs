@@ -64,7 +64,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestInnatePowerDiscardPrefix()
+        public void TestDefineInnatePowerDiscardPrefix()
         {
             IEnumerable<string> setupItems = new List<string>()
             {
@@ -92,7 +92,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestInnatePowerDiscardSuffix()
+        public void TestDefineInnatePowerDiscardSuffix()
         {
             IEnumerable<string> setupItems = new List<string>()
             {
@@ -118,7 +118,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestInnatePowerDiscardPrefixSuffix()
+        public void TestDefineInnatePowerDiscardPrefixSuffix()
         {
             IEnumerable<string> setupItems = new List<string>()
             {
@@ -172,7 +172,7 @@ namespace RuduenModsTest
             StartGame();
 
             DiscardAllCards(Wordsmith);
-            PutInHand("Wild");
+            PutInHand("Inspired");
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
@@ -180,7 +180,7 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
             PlayCard("Ray");
-            QuickHPCheck(-6);
+            QuickHPCheck(-5);
         }
 
         [Test()]
@@ -210,7 +210,7 @@ namespace RuduenModsTest
             StartGame();
 
             DiscardAllCards(Wordsmith);
-            PutInHand("Wild");
+            PutInHand("Inspired");
             PutInHand("OfDisruption");
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -219,10 +219,57 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
             PlayCard("Ray");
-            QuickHPCheck(-7); // 6 base damage, 1 self damage.
+            QuickHPCheck(-7); // 5 base damage, 2 self damage.
         }
 
         [Test()]
+        [Category("DiscardModifier")]
+        public void TestDiscardControlled()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+
+            StartGame();
+
+            UsePower(legacy);
+            UsePower(legacy);
+            UsePower(legacy);
+
+            DiscardAllCards(Wordsmith);
+            PutInHand("Controlled");
+            PutInHand("OfResonance");
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            Card play = PutInHand("Impact");
+
+            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            PlayCard(play);
+            QuickHPCheck(-1, -1, -8); // 1 controlled. 4 boosted to MDP, doubled by Resonance.
+        }
+
+        [Test()]
+        [Category("DiscardModifier")]
+        public void TestDiscardInspired()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+
+            StartGame();
+
+            DiscardAllCards(Wordsmith);
+            PutInHand("Inspired");
+            PutInHand("OfResonance");
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            Card play = PutInHand("Impact");
+
+            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            PlayCard(play);
+            QuickHPCheck(-2, -2, -4); // 1 controlled. 2 boosted to MDP, doubled by Resonance.
+        }
+
+        [Test()]
+        [Category("DiscardModifier")]
         public void TestDiscardPiercing()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
@@ -241,10 +288,11 @@ namespace RuduenModsTest
 
             QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
             PlayCard(play);
-            QuickHPCheck(-1, -1, -1); // 1 base and irreducible. Self-damage is not irreducible.
+            QuickHPCheck(-1, -1, -2); // 1 base and irreducible. Self-damage is also irreducible.
         }
 
         [Test()]
+        [Category("DiscardModifier")]
         public void TestDiscardOfDisruption()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
@@ -252,7 +300,7 @@ namespace RuduenModsTest
             StartGame();
 
             DiscardAllCards(Wordsmith);
-            PutInHand("Wild");
+            PutInHand("Inspired");
             PutInHand("OfDisruption");
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -262,10 +310,38 @@ namespace RuduenModsTest
 
             QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
             PlayCard(play);
-            QuickHPCheck(-3, -3, -4); // 3 base damage, 1 targetted damage for mdp only.
+            QuickHPCheck(-2, -2, -4); // 2 base damage, 2 targetted damage for mdp only.
         }
 
         [Test()]
+        [Category("DiscardModifier")]
+        public void TestDiscardOfDisruptionRedirect()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "MrFixer", "Megalopolis");
+
+            StartGame();
+
+            DiscardAllCards(Wordsmith);
+            PutInHand("Inspired");
+            PutInHand("OfDisruption");
+            PutIntoPlay("DrivingMantis");
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTargets = new List<Card>() { fixer.CharacterCard, mdp, Wordsmith.CharacterCard, baron.CharacterCard }.ToArray();
+
+            DecisionRedirectTarget = mdp;
+
+            Card play = PutInHand("Impact");
+
+
+            QuickHPStorage(Wordsmith.CharacterCard, fixer.CharacterCard, mdp);
+            PlayCard(play);
+            QuickHPCheck(-2, 0, -8); // 2 base damage, 2 + 2 redirected to MDP + trigger, 2+2 direct to MDP without trigger.
+        }
+
+        [Test()]
+        [Category("DiscardModifier")]
         public void TestDiscardOfHealing()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
@@ -273,7 +349,7 @@ namespace RuduenModsTest
             StartGame();
 
             DiscardAllCards(Wordsmith);
-            PutInHand("Wild");
+            PutInHand("Inspired");
             PutInHand("OfHealing");
             DealDamage(Wordsmith, Wordsmith.CharacterCard, 5, DamageType.Melee);
 
@@ -282,19 +358,20 @@ namespace RuduenModsTest
 
             QuickHPStorage(Wordsmith.CharacterCard, mdp);
             PlayCard("Impact");
-            QuickHPCheck(0, -3); // 3 damage, 3 healing to self; 3 damage to enemy.
+            QuickHPCheck(1, -2); // 2 damage, 3 healing to self; 2 damage to enemy.
         }
 
         [Test()]
-        public void TestDiscardOfInspiration()
+        [Category("DiscardModifier")]
+        public void TestDiscardOfAura()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
 
             StartGame();
 
             DiscardAllCards(Wordsmith);
-            PutInHand("Wild");
-            PutInHand("OfInspiration");
+            PutInHand("Inspired");
+            PutInHand("OfAura");
             Card play = PutInHand("Impact");
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -304,11 +381,12 @@ namespace RuduenModsTest
 
             PlayCard(play);
 
-            QuickHPCheck(-3,-3,-3); // 3 Damage each due to wild. 
+            QuickHPCheck(-2, -2, -2); // 3 Damage each due to Inspired. 
             QuickHandCheck(-2, 1); // 3 used, 1 drawn for Wordsmith, 1 drawn for others.
         }
 
         [Test()]
+        [Category("DiscardModifier")]
         public void TestDiscardOfResonance()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
@@ -316,7 +394,7 @@ namespace RuduenModsTest
             StartGame();
 
             DiscardAllCards(Wordsmith);
-            PutInHand("Wild");
+            PutInHand("Inspired");
             PutInHand("OfResonance");
 
             Card play = PutInHand("Impact");
@@ -325,7 +403,144 @@ namespace RuduenModsTest
 
             QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
             PlayCard(play);
-            QuickHPCheck(-3, -3, -4); // 3 base damage, 1 targetted damage for mdp only.
+            QuickHPCheck(-2, -2, -4); // 2 base damage, 2 targetted damage for mdp only.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayControlled()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+
+            StartGame();
+            Card[] cards = FindCardsWhere((Card c) => c.Identifier == "Inspired").ToArray();
+            PutInHand(cards);
+            PutInHand(FindCardsWhere((Card c) => c.Identifier == "Controlled").ToArray());
+
+            DecisionSelectCards = cards;
+
+            QuickHandStorage(Wordsmith);
+            PlayCard("Controlled");
+            QuickHandCheck(3); // 3 cards played, 6 cards drawn.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayInspired()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+
+            StartGame();
+            Card[] cards = FindCardsWhere((Card c) => c.Identifier == "Inspired").ToArray();
+            PutInHand(cards);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCards = cards;
+
+            QuickHandStorage(Wordsmith);
+            PlayCard("Inspired");
+            QuickHandCheck(2); // 1 cards played, 3 cards drawn.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayPiercing()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Ra", "TheBlock");
+
+            StartGame();
+            Card[] cards = new Card[] { PutInHand(Wordsmith, "Inspired", 0), PutInHand(Wordsmith, "Inspired", 1) };
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            // TODO: Find a better option!
+            // For whatever reason, the power selection logic is always defaulting to Wordsmith's, so just consume it so it can default otherwise.
+            UsePower(Wordsmith);
+
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            PlayCard("Piercing");
+            QuickHPCheck(-2); // Damage was boosted.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayOfAura()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "TheBlock");
+
+            StartGame();
+
+
+            Card card = PutInHand("OfAura");
+            Card environment = PutIntoPlay("DefensiveDisplacement");
+
+            QuickHandStorage(Wordsmith);
+            PlayCard(card);
+            QuickHandCheckZero(); // One played, one drawn.
+            AssertInTrash(environment); // Destroyed.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayOfDisruption()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "TheBlock");
+
+            StartGame();
+
+            Card card = PutInHand("OfDisruption");
+            Card ongoing = PutIntoPlay("LivingForceField");
+
+            QuickHandStorage(Wordsmith);
+            PlayCard(card);
+            QuickHandCheckZero(); // One played, one drawn.
+            AssertInTrash(ongoing); // Destroyed.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayOfHealing()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "TheBlock");
+
+            StartGame();
+
+            Card card = PutInHand("OfHealing");
+
+            DealDamage(Wordsmith, Wordsmith.CharacterCard, 5, DamageType.Melee);
+
+            QuickHPStorage(Wordsmith);
+            QuickHandStorage(Wordsmith);
+            PlayCard(card);
+            QuickHPCheck(2); // Heal 2. 
+            QuickHandCheckZero(); // One played, one drawn.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayOfResonance()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "TheBlock");
+
+            StartGame();
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            // TODO: Find a better option!
+            // For whatever reason, the power selection logic is always defaulting to Wordsmith's, so just consume it so it can default otherwise.
+
+            DecisionSelectTarget = mdp;
+
+            Card card = PutInHand("OfResonance");
+
+            DealDamage(Wordsmith, Wordsmith.CharacterCard, 5, DamageType.Melee);
+
+            QuickHPStorage(mdp);
+            QuickHandStorage(Wordsmith);
+            PlayCard(card);
+            QuickHPCheck(-2); // Deal 2. 
+            QuickHandCheckZero(); // One played, one drawn.
         }
     }
 }

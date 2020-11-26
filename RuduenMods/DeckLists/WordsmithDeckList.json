@@ -15,7 +15,7 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "Draw 2 cards."
+        "Draw a card. If you have discarded any cards this turn, draw a card."
       ],
       "icons": [
         "HasPower",
@@ -42,10 +42,10 @@
     },
     {
       "identifier": "Ray",
-      "count": 4,
+      "count": 3,
       "title": "Ray",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to apply its [u]Prefix[/u] effect to this card's damage.", "You may discard a Suffix card to apply its [u]Suffix[/u] effect to damage dealt by this card's printed effect.", "{Wordsmith} deals 1 Target 4 Energy Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Wordsmith} deals 1 Target 4 Energy Damage." ],
       "icons": [ "DealDamageEnergy", "Discard" ],
       "flavorQuotes": [
         {
@@ -54,10 +54,10 @@
     },
     {
       "identifier": "Shock",
-      "count": 4,
+      "count": 3,
       "title": "Shock",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to apply its [u]Prefix[/u] effect to this card's damage.", "You may discard a Suffix card to apply its [u]Suffix[/u] effect to damage dealt by this card's printed effect.", "{Wordsmith} deals up to 2 Targets 3 Lightning Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Wordsmith} deals up to 2 Targets 3 Lightning Damage." ],
       "icons": [ "DealDamageLightning", "Discard" ],
       "flavorQuotes": [
         {
@@ -66,10 +66,10 @@
     },
     {
       "identifier": "Wave",
-      "count": 4,
+      "count": 3,
       "title": "Wave",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to apply its [u]Prefix[/u] effect to this card's damage.", "You may discard a Suffix card to apply its [u]Suffix[/u] effect to damage dealt by this card's printed effect.", "{Wordsmith} deals each non-Hero Target 2 Sonic Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Wordsmith} deals each non-Hero Target 2 Sonic Damage." ],
       "icons": [ "DealDamageSonic", "Discard" ],
       "flavorQuotes": [
         {
@@ -78,10 +78,10 @@
     },
     {
       "identifier": "Impact",
-      "count": 4,
+      "count": 3,
       "title": "Impact",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to apply its [u]Prefix[/u] effect to this card's damage.", "You may discard a Suffix card to apply its [u]Suffix[/u] effect to damage dealt by this card's printed effect.", "{Wordsmith} deals each Target 1 Melee Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Wordsmith} deals each Target 1 Melee Damage." ],
       "icons": [ "DealDamageMelee", "Discard" ],
       "flavorQuotes": [
         {
@@ -90,10 +90,10 @@
     },
     {
       "identifier": "Controlled",
-      "count": 3,
+      "count": 4,
       "title": "Controlled",
       "keywords": [ "one-shot", "prefix" ],
-      "body": [ "You may destroy an Ongoing card. Draw a card.", "[u]Prefix[/u]: The modified damage is reduced to 1 when targetting Hero Targets." ],
+      "body": [ "You may destroy an Ongoing card. Draw a card.", "[u]Prefix[/u]: This effect's damage is reduced to 1 when targetting Hero Targets." ],
       "icons": [ "DrawCardNow", "DestroyOngoing", "ReduceDamageDealt" ],
       "flavorQuotes": [
         {
@@ -101,11 +101,23 @@
       ]
     },
     {
+      "identifier": "Inspired",
+      "count": 4,
+      "title": "Inspired",
+      "keywords": [ "one-shot", "prefix" ],
+      "body": [ "Draw 3 cards.", "[u]Prefix[/u]: This effect's damage is increased by 1." ],
+      "icons": [ "DrawCardNow", "DestroyEnvironment", "IncreaseDamageDealt" ],
+      "flavorQuotes": [
+        {
+        }
+      ]
+    },
+    {
       "identifier": "Piercing",
-      "count": 3,
+      "count": 4,
       "title": "Piercing",
       "keywords": [ "one-shot", "prefix" ],
-      "body": [ "One Hero may use a power. Draw a card.", "[u]Prefix[/u]: The modified damage is Irreducible." ],
+      "body": [ "One Hero may use a power. ", "[u]Prefix[/u]: This effect's damage is Irreducible." ],
       "icons": [ "DrawCardNow", "UsePowerNow", "MakeDamageIrreducible" ],
       "flavorQuotes": [
         {
@@ -113,12 +125,12 @@
       ]
     },
     {
-      "identifier": "Wild",
+      "identifier": "OfAura",
       "count": 3,
-      "title": "Wild",
-      "keywords": [ "one-shot", "prefix" ],
-      "body": [ "You may destroy an Environment card. Draw a card.", "[u]Prefix[/u]: The modified damage is increased by 2." ],
-      "icons": [ "DrawCardNow", "DestroyEnvironment", "IncreaseDamageDealt" ],
+      "title": "of Aura",
+      "keywords": [ "one-shot", "suffix" ],
+      "body": [ "You may destroy an Environment card. Draw a card.", "[u]Suffix[/u]: After a Hero is dealt damage this way, their player draws a card." ],
+      "icons": [ "DrawCardNow" ],
       "flavorQuotes": [
         {
         }
@@ -129,7 +141,7 @@
       "count": 3,
       "title": "of Disruption",
       "keywords": [ "one-shot", "suffix" ],
-      "body": [ "{Wordsmith} deals 1 Target 2 Sonic Damage. Draw a card.", "[u]Suffix[/u]: After a non-Hero Target is dealt damage by the modified effect, it deals itself 1 Sonic Damage." ],
+      "body": [ "You may destroy an Ongoing card. Draw a card.", "[u]Suffix[/u]: After a non-Hero Target is dealt damage this way, it deals itself 1 Sonic Damage." ],
       "icons": [ "DrawCardNow", "DealDamageSonic" ],
       "flavorQuotes": [
         {
@@ -141,20 +153,8 @@
       "count": 3,
       "title": "of Healing",
       "keywords": [ "one-shot", "suffix" ],
-      "body": [ "{Wordsmith} Regains 2 HP. Draw a card.", "[u]Suffix[/u]: After a Hero Target is dealt damage by the modified effect, it regains 3 HP." ],
+      "body": [ "{Wordsmith} Regains 2 HP. Draw a card.", "[u]Suffix[/u]: After a Hero Target is dealt damage this way, it regains 3 HP." ],
       "icons": [ "DrawCardNow", "DestroyEnvironment", "GainHP" ],
-      "flavorQuotes": [
-        {
-        }
-      ]
-    },
-    {
-      "identifier": "OfInspiration",
-      "count": 3,
-      "title": "of Inspiration",
-      "keywords": [ "one-shot", "suffix" ],
-      "body": [ "Draw 3 cards.", "[u]Suffix[/u]: After a Hero is dealt damage by the modified effect, their player draws a card." ],
-      "icons": [ "DrawCardNow" ],
       "flavorQuotes": [
         {
         }
@@ -165,7 +165,7 @@
       "count": 3,
       "title": "of Resonance",
       "keywords": [ "one-shot", "suffix" ],
-      "body": [ "Play up to 2 Prefix or Suffix cards now. Draw a card.", "[u]Suffix[/u]: After a non-Hero Target is dealt damage by the modified effect, {Wordsmith} deals it 1 Sonic Damage." ],
+      "body": [ "{Wordsmith} deals 1 Target 2 Sonic Damage. Draw a card.", "[u]Suffix[/u]: After a non-Hero Target is dealt damage this way, {Wordsmith} deals it 1 Sonic Damage." ],
       "icons": [ "DrawCardNow" ],
       "flavorQuotes": [
         {
@@ -185,7 +185,7 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "You may discard a Prefix card to apply its [u]Prefix[/u] effect to this power's damage. You may discard a Suffix card to apply its [u]Suffix[/u] effect to this power's damage. {Wordsmith} deals 1 Target 1 Infernal Damage."
+        "You may discard a Prefix card to add its [u]Prefix[/u] text to this power. You may discard a Suffix card to apply its [u]Suffix[/u] text to this power. {Wordsmith} deals 1 Target 1 Infernal Damage."
       ],
       "icons": [
         "HasPower",

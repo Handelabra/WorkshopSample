@@ -46,7 +46,7 @@ namespace RuduenModsTest
 
         //    StartGame();
 
-        //    Card spell = PlayCard("ScryingBolt");
+        //    Card spell = PlayCard("VisionShock");
         //    Card mdp = GetCardInPlay("MobileDefensePlatform");
         //    DecisionSelectTarget = mdp;
 
@@ -63,7 +63,7 @@ namespace RuduenModsTest
 
             StartGame();
 
-            Card spell = PlayCard("ScryingBolt");
+            Card spell = PlayCard("VisionShock");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
             DecisionSelectTarget = mdp;
@@ -84,7 +84,7 @@ namespace RuduenModsTest
 
             StartGame();
 
-            Card spell = PlayCard("ScryingBolt");
+            Card spell = PlayCard("VisionShock");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
             DecisionSelectTarget = mdp;
@@ -163,7 +163,7 @@ namespace RuduenModsTest
             {
                 PlayCard("HammerCharm", 0),
                 PlayCard("HammerCharm", 1),
-                PlayCard("ScryingBolt")
+                PlayCard("VisionShock")
             };
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
@@ -234,7 +234,7 @@ namespace RuduenModsTest
 
             StartGame();
 
-            Card spell = PlayCard("ScryingBolt");
+            Card spell = PlayCard("VisionShock");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
 
@@ -256,7 +256,7 @@ namespace RuduenModsTest
             List<Card> cards = new List<Card>
             {
                 PutInDeck("OpenBreach"),
-                PutInHand("ScryingBolt")
+                PutInHand("VisionShock")
             };
 
             DecisionSelectCards = cards;
@@ -279,7 +279,7 @@ namespace RuduenModsTest
             PlayCard("OpenBreach");
             // Discard hand to make sure there's only one valid card. It's messy, but tracking for decision isn't working well.
             DiscardAllCards(BreachMage);
-            Card spell = PutInHand("ScryingBolt");
+            Card spell = PutInHand("VisionShock");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
 
@@ -298,7 +298,7 @@ namespace RuduenModsTest
             StartGame();
 
             PlayCard("PotentBreach");
-            Card spell = PlayCard("ScryingBolt");
+            Card spell = PlayCard("VisionShock");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
 
@@ -309,13 +309,13 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestScryingBolt()
+        public void TestVisionShock()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.BreachMage", "Megalopolis");
 
             StartGame();
 
-            Card spell = PlayCard("ScryingBolt");
+            Card spell = PlayCard("VisionShock");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
             DecisionSelectFunction = 1;
@@ -456,7 +456,7 @@ namespace RuduenModsTest
 
             StartGame();
 
-            Card spell = PlayCard("ScryingBolt");
+            Card spell = PlayCard("VisionShock");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
 
@@ -473,7 +473,7 @@ namespace RuduenModsTest
 
             StartGame();
 
-            Card spell = PlayCard("ScryingBolt");
+            Card spell = PlayCard("VisionShock");
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             DecisionSelectTarget = mdp;
 

@@ -53,7 +53,7 @@
     <Compile Include="BreachMageCardControllers\FlareCascadeCardController.cs" />
     <Compile Include="BreachMageCardControllers\MoltenWaveCardController.cs" />
     <Compile Include="BreachMageCardControllers\HauntingEchoCardController.cs" />
-    <Compile Include="BreachMageCardControllers\ScryingBoltCardController.cs" />
+    <Compile Include="BreachMageCardControllers\VisionShockCardController.cs" />
     <Compile Include="BreachMageCardControllers\ShineCardController.cs" />
     <Compile Include="BreachMageCardControllers\PotentBreachCardController.cs" />
     <Compile Include="BreachMageCardControllers\BreachMageCharacterCardController.cs" />
@@ -84,11 +84,11 @@
     <Compile Include="HeroPromoCardControllers\ExpatrietteQuickShotCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCharacterCardController.cs" />
-    <Compile Include="WordsmithCardControllers\OfInspirationCardController.cs" />
+    <Compile Include="WordsmithCardControllers\OfAuraCardController.cs" />
     <Compile Include="WordsmithCardControllers\OfResonanceCardController.cs" />
     <Compile Include="WordsmithCardControllers\OfDisruptionCardController.cs" />
     <Compile Include="WordsmithCardControllers\PiercingCardController.cs" />
-    <Compile Include="WordsmithCardControllers\WildCardController.cs" />
+    <Compile Include="WordsmithCardControllers\InspiredCardController.cs" />
     <Compile Include="WordsmithCardControllers\ShockCardController.cs" />
     <Compile Include="WordsmithCardControllers\RayCardController.cs" />
     <Compile Include="WordsmithCardControllers\OfHealingCardController.cs" />

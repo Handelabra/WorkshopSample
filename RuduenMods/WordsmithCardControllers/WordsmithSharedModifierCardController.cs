@@ -2,6 +2,7 @@
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RuduenWorkshop.Wordsmith
 {
@@ -10,29 +11,40 @@ namespace RuduenWorkshop.Wordsmith
         public WordsmithSharedModifierCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
-
-            this.OriginalTargets = new List<Card>();
         }
 
-        private readonly List<Card> OriginalTargets;
+        private CardSource baseCardSource;
 
         public virtual ITrigger AddModifierTrigger(CardSource cardSource)
         {
-            this.OriginalTargets.Clear();
+            baseCardSource = this.GetCardSource(); // "Base" is a single instance of the card at moment of discard. Used to prevent self-triggers.
+            return AddModifierTriggerOverride(cardSource);
+        }
+
+        protected virtual ITrigger AddModifierTriggerOverride(CardSource cardSource)
+        {
             return null;
         }
 
         protected virtual IEnumerator TrackOriginalTargetsAndRunResponse(DealDamageAction dd, CardSource cardSource, params object[] otherItems)
         {
-            if (!this.OriginalTargets.Contains(dd.OriginalTarget))
+            if (!cardSource.AssociatedCardSources.Contains(baseCardSource)) 
             {
-                // Best way to 'track' to make sure only base instances of damage trigger the effect. 
-                if (!dd.IsPretend)
+                // Indicate this is a related card for that damage instance only!
+                if (this.IsRealAction())
                 {
-                    OriginalTargets.Add(dd.OriginalTarget);
+                    cardSource.AddAssociatedCardSource(baseCardSource);
                 }
+
+                // Best way to 'track' to make sure only base instances of damage trigger the effect. 
                 IEnumerator coroutine = RunResponse(dd, cardSource, otherItems);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+                if (this.IsRealAction())
+                {
+                    cardSource.RemoveAssociatedCardSourcesWhere((CardSource cs) => cs == baseCardSource);
+                }
+
             }
         }
 

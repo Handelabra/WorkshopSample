@@ -85,9 +85,9 @@
       "flavorText": "..."
     },
     {
-      "identifier": "ScryingBolt",
+      "identifier": "VisionShock",
       "count": 3,
-      "title": "Scrying Bolt",
+      "title": "VisionShock",
       "keywords": [ "ongoing", "spell" ],
       "activatableAbilities": [
         {

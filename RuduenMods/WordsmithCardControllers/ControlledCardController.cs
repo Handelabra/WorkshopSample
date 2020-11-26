@@ -16,20 +16,15 @@ namespace RuduenWorkshop.Wordsmith
         public override IEnumerator Play()
         {
             IEnumerator coroutine;
-
-            // Destroy.
-            coroutine = this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria((Card c) => c.IsOngoing, "ongoing", true, false, null, null, false), false, null, null, this.GetCardSource(null));
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
-            // Draw. 
-            coroutine = this.DrawCard(this.HeroTurnTaker, false, null, true);
+            // Play 2. 
+            coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, 2, cardCriteria: new LinqCardCriteria((Card c) => c.DoKeywordsContain("prefix") || c.DoKeywordsContain("suffix"), "prefix or suffix"));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
-        public override ITrigger AddModifierTrigger(CardSource cardSource)
+        protected override ITrigger AddModifierTriggerOverride(CardSource cardSource)
         {
             // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger. 
-            ITrigger trigger = base.AddModifierTrigger(cardSource); // Use null base to initialize. 
+            ITrigger trigger = null; // Use null base to initialize. 
             bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources; // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
             int amountToSet = 1;
 

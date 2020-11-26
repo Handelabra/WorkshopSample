@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace RuduenWorkshop.BreachMage
 {
-    public class ScryingBoltCardController : BreachMageSpellSharedCardController
+    public class VisionShockCardController : BreachMageSpellSharedCardController
     {
-        public ScryingBoltCardController(Card card, TurnTakerController turnTakerController)
+        public VisionShockCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }

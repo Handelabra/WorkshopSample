@@ -19,12 +19,19 @@ namespace RuduenWorkshop.Wordsmith
         public override IEnumerator UsePower(int index = 0)
         {
             IEnumerator coroutine;
-            int powerNumeral = GetPowerNumeral(0, 2);
             List<DestroyCardAction> storedResults = new List<DestroyCardAction>();
 
-            // Draw 2 cards.
-            coroutine = this.DrawCards(this.HeroTurnTakerController, powerNumeral);
+            // Draw a card.
+            coroutine = this.DrawCard(this.HeroTurnTaker);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+            // Discard check via Journal. 
+            if (this.Journal.MoveCardEntriesThisTurn().Any((MoveCardJournalEntry m) => m.IsDiscard && m.ResponsibleTurnTaker == base.TurnTaker))
+            {
+                // Draw a card.
+                coroutine = this.DrawCard(this.HeroTurnTaker);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+            }
         }
 
         // TODO: Replace with something more unique!

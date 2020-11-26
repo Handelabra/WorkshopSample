@@ -20,7 +20,7 @@ namespace RuduenWorkshop.Wordsmith
             IEnumerator coroutine;
 
             // Deal 1 target 2 sonic. 
-            coroutine = this.SelectAndPlayCardsFromHand(this.DecisionMaker, 2, cardCriteria: new LinqCardCriteria((Card c) => c.DoKeywordsContain("prefix") || c.DoKeywordsContain("suffix")));
+            coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 2, DamageType.Projectile, 1, false, 1, false, false, false, null, null, null, null, null, false, null, null, false, null, this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Draw. 
@@ -28,10 +28,10 @@ namespace RuduenWorkshop.Wordsmith
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
-        public override ITrigger AddModifierTrigger(CardSource cardSource)
+        protected override ITrigger AddModifierTriggerOverride(CardSource cardSource)
         {
             // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger. 
-            ITrigger trigger = base.AddModifierTrigger(cardSource); // Use null base to initialize. 
+            ITrigger trigger = null; // Use null base to initialize. 
 
             // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same. 
             bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources && !dd.Target.IsHero && dd.DidDealDamage;

@@ -2,18 +2,16 @@
 using Handelabra.Sentinels.Engine.Model;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace RuduenWorkshop.Wordsmith
 {
     // TODO: TEST!
-    public class OfInspirationCardController : WordsmithSharedModifierCardController
+    public class InspiredCardController : WordsmithSharedModifierCardController
     {
-        public OfInspirationCardController(Card card, TurnTakerController turnTakerController)
+        public InspiredCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
-
 
         public override IEnumerator Play()
         {
@@ -24,31 +22,30 @@ namespace RuduenWorkshop.Wordsmith
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
-        public override ITrigger AddModifierTrigger(CardSource cardSource)
+        protected override ITrigger AddModifierTriggerOverride(CardSource cardSource)
         {
             // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger. 
-            ITrigger trigger = base.AddModifierTrigger(cardSource); // Use null base to initialize. 
-
-            // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same. 
-            bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources && dd.Target.IsHeroCharacterCard && dd.DidDealDamage;
+            ITrigger trigger = null;
+            bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources; // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
 
             trigger = this.AddTrigger<DealDamageAction>((DealDamageAction dd) => damageCriteria(dd),
                 (DealDamageAction dd) => this.TrackOriginalTargetsAndRunResponse(dd, cardSource),
                 new TriggerType[]
                 {
-                    TriggerType.DrawCard
+                    TriggerType.IncreaseDamage
                 },
-                TriggerTiming.After);
+                TriggerTiming.Before);
 
             return trigger;
         }
-
         protected override IEnumerator RunResponse(DealDamageAction dd, CardSource cardSource, params object[] otherObjects)
         {
             IEnumerator coroutine;
-            // Draw Response - Should target only characters, but generic sanity check is included.
-            coroutine = this.DrawCard(dd.Target.Owner.ToHero());
+
+            // Deal damage response. 
+            coroutine = this.GameController.IncreaseDamage(dd, 1, cardSource: cardSource);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
+
     }
 }
