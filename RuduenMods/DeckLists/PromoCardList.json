@@ -191,5 +191,38 @@
         "default": "This seems like the right time to strike."
       }
     }
+  ],
+  "Tachyon": [
+    {
+      "identifier": "TachyonCharacter",
+      "promoIdentifier": "TachyonControlledPaceCharacter",
+      "count": 1,
+      "title": "Tachyon",
+      "body": [
+        "Controlled Pace"
+      ],
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "character": true,
+      "powers": "Play the top card of your discard. Move the top card of your discard to the bottom of your deck.",
+      "hitpoints": 26,
+      "icons": [ "HasPower", "PlayCardNow" ],
+      "nemesisIdentifiers": [ "Tachyon" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "Hm."
+      }
+    }
   ]
 }

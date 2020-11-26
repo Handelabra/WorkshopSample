@@ -450,7 +450,6 @@ namespace RuduenModsTest
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Ra", "TheBlock");
 
             StartGame();
-            Card[] cards = new Card[] { PutInHand(Wordsmith, "Inspired", 0), PutInHand(Wordsmith, "Inspired", 1) };
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             // TODO: Find a better option!

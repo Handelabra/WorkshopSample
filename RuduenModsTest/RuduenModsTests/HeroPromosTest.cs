@@ -272,5 +272,64 @@ namespace RuduenModsTest
             QuickHPCheck(-1, -2);
             AssertNotInPlay((Card c) => c.IsTool);
         }
+
+        [Test()]
+        public void TestTachyonControlledPacePowerNoTrash()
+        {
+            SetupGameController("BaronBlade", "Tachyon/RuduenWorkshop.TachyonControlledPaceCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(tachyon.CharacterCard.IsPromoCard);
+
+            GoToUsePowerPhase(tachyon);
+
+            QuickHandStorage(tachyon);
+            UsePower(tachyon);
+
+            AssertPhaseActionCount(0); // Powers used.
+        }
+
+        [Test()]
+        public void TestTachyonControlledPacePowerOngoingTrash()
+        {
+            SetupGameController("BaronBlade", "Tachyon/RuduenWorkshop.TachyonControlledPaceCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(tachyon.CharacterCard.IsPromoCard);
+
+            Card lingering = PutInTrash(GetCardWithLittleEffect(tachyon));
+
+            GoToUsePowerPhase(tachyon);
+
+            QuickHandStorage(tachyon);
+            UsePower(tachyon);
+
+            AssertPhaseActionCount(0); // Powers used.
+
+            AssertInPlayArea(tachyon, lingering);
+        }
+
+        [Test()]
+        public void TestTachyonControlledPacePowerOneshotTrash()
+        {
+            SetupGameController("BaronBlade", "Tachyon/RuduenWorkshop.TachyonControlledPaceCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(tachyon.CharacterCard.IsPromoCard);
+
+            Card oneshot = PutInTrash("SuckerPunch");
+
+            GoToUsePowerPhase(tachyon);
+
+            QuickHandStorage(tachyon);
+            UsePower(tachyon);
+
+            AssertPhaseActionCount(0); // Powers used.
+
+            AssertOnBottomOfDeck(tachyon, oneshot);
+        }
     }
 }

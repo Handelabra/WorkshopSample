@@ -18,6 +18,7 @@
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
     "Knyfe": [ "KnyfeKineticLoopCharacter" ],
-    "MrFixer": [ "MrFixerFlowingStrikeCharacter" ]
+    "MrFixer": [ "MrFixerFlowingStrikeCharacter" ],
+    "Tachyon":  [ "TachyonControlledPaceCharacter" ],
   }
 }
