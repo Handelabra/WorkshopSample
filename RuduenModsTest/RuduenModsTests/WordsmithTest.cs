@@ -223,7 +223,29 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestEssenceDiscardOfDisruption()
+        public void TestDiscardPiercing()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+
+            StartGame();
+
+            PutIntoPlay("DefensiveDisplacement");
+
+            DiscardAllCards(Wordsmith);
+            PutInHand("Piercing");
+            PutInHand("OfResonance");
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            Card play = PutInHand("Impact");
+
+            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            PlayCard(play);
+            QuickHPCheck(-1, -1, -1); // 1 base and irreducible. Self-damage is not irreducible.
+        }
+
+        [Test()]
+        public void TestDiscardOfDisruption()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
 
@@ -235,15 +257,16 @@ namespace RuduenModsTest
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectTarget = mdp;
+            Card play = PutInHand("Impact");
 
-            QuickHPStorage(mdp);
-            PlayCard("Ray");
-            QuickHPCheck(-7); // 6 base damage, 1 targetted damage.
+
+            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            PlayCard(play);
+            QuickHPCheck(-3, -3, -4); // 3 base damage, 1 targetted damage for mdp only.
         }
 
         [Test()]
-        public void TestEssenceDiscardOfHealing()
+        public void TestDiscardOfHealing()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
 
@@ -263,7 +286,30 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestEssenceDiscardOfResonance()
+        public void TestDiscardOfInspiration()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+
+            StartGame();
+
+            DiscardAllCards(Wordsmith);
+            PutInHand("Wild");
+            PutInHand("OfInspiration");
+            Card play = PutInHand("Impact");
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            QuickHandStorage(Wordsmith, legacy);
+
+            PlayCard(play);
+
+            QuickHPCheck(-3,-3,-3); // 3 Damage each due to wild. 
+            QuickHandCheck(-2, 1); // 3 used, 1 drawn for Wordsmith, 1 drawn for others.
+        }
+
+        [Test()]
+        public void TestDiscardOfResonance()
         {
             SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
 
@@ -273,17 +319,13 @@ namespace RuduenModsTest
             PutInHand("Wild");
             PutInHand("OfResonance");
 
+            Card play = PutInHand("Impact");
+
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectTarget = mdp;
-
-            QuickHPStorage(mdp);
-            PlayCard("Ray");
-            QuickHPCheck(-7); // 6 base damage, 1 targetted damage.
+            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            PlayCard(play);
+            QuickHPCheck(-3, -3, -4); // 3 base damage, 1 targetted damage for mdp only.
         }
-
-        // TODO: Test to make sure Disruption doesn't repeat. 
-
-        // TODO: Test to make sure damage is only boosted by direct instance, not indirect instance. 
     }
 }

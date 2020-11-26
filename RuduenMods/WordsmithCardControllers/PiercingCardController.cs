@@ -6,9 +6,9 @@ using System.Collections;
 namespace RuduenWorkshop.Wordsmith
 {
     // TODO: TEST!
-    public class ControlledCardController : WordsmithSharedModifierCardController
+    public class PiercingCardController : WordsmithSharedModifierCardController
     {
-        public ControlledCardController(Card card, TurnTakerController turnTakerController)
+        public PiercingCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -17,8 +17,8 @@ namespace RuduenWorkshop.Wordsmith
         {
             IEnumerator coroutine;
 
-            // Destroy.
-            coroutine = this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria((Card c) => c.IsOngoing, "ongoing", true, false, null, null, false), false, null, null, this.GetCardSource(null));
+            // Power.
+            coroutine = this.GameController.SelectHeroToUsePower(this.DecisionMaker, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Draw. 
@@ -29,27 +29,25 @@ namespace RuduenWorkshop.Wordsmith
         public override ITrigger AddModifierTrigger(CardSource cardSource)
         {
             // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger. 
-            ITrigger trigger = base.AddModifierTrigger(cardSource); // Use null base to initialize. 
+            ITrigger trigger = null;
             bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources; // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
-            int amountToSet = 1;
 
-            trigger = this.AddTrigger<DealDamageAction>((DealDamageAction dd) => damageCriteria(dd) && dd.CanDealDamage && dd.Amount > amountToSet && dd.Target.IsHero, 
-                (DealDamageAction dd) => this.TrackOriginalTargetsAndRunResponse(dd, cardSource, amountToSet, trigger), 
+            trigger = this.AddTrigger<DealDamageAction>((DealDamageAction dd) => damageCriteria(dd),
+                (DealDamageAction dd) => this.TrackOriginalTargetsAndRunResponse(dd, cardSource),
                 new TriggerType[]
                 {
-                    TriggerType.ReduceDamage
-                }, 
+                    TriggerType.MakeDamageIrreducible
+                },
                 TriggerTiming.Before);
 
             return trigger;
         }
-
         protected override IEnumerator RunResponse(DealDamageAction dd, CardSource cardSource, params object[] otherObjects)
         {
             IEnumerator coroutine;
-            int amountToSet = (int) otherObjects[0];
-            ITrigger trigger = (ITrigger) otherObjects[1];
-            coroutine = this.GameController.ReduceDamage(dd, dd.Amount - amountToSet, trigger, cardSource);
+
+            // Deal damage response. 
+            coroutine = this.GameController.MakeDamageIrreducible(dd, cardSource: cardSource);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 

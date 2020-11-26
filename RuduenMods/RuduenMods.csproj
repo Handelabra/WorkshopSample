@@ -84,8 +84,10 @@
     <Compile Include="HeroPromoCardControllers\ExpatrietteQuickShotCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCharacterCardController.cs" />
+    <Compile Include="WordsmithCardControllers\OfInspirationCardController.cs" />
     <Compile Include="WordsmithCardControllers\OfResonanceCardController.cs" />
     <Compile Include="WordsmithCardControllers\OfDisruptionCardController.cs" />
+    <Compile Include="WordsmithCardControllers\PiercingCardController.cs" />
     <Compile Include="WordsmithCardControllers\WildCardController.cs" />
     <Compile Include="WordsmithCardControllers\ShockCardController.cs" />
     <Compile Include="WordsmithCardControllers\RayCardController.cs" />
