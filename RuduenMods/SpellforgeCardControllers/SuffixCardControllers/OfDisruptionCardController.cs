@@ -5,9 +5,9 @@ using System.Collections;
 namespace RuduenWorkshop.Spellforge
 {
     // TODO: TEST!
-    public class OfResonanceCardController : SpellforgeSharedModifierCardController
+    public class OfDisruptionCardController : SpellforgeSharedModifierCardController
     {
-        public OfResonanceCardController(Card card, TurnTakerController turnTakerController)
+        public OfDisruptionCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -16,8 +16,8 @@ namespace RuduenWorkshop.Spellforge
         {
             IEnumerator coroutine;
 
-            // Deal 1 target 2 sonic.
-            coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 2, DamageType.Projectile, 1, false, 1, false, false, false, null, null, null, null, null, false, null, null, false, null, this.GetCardSource());
+            // Destroy.
+            coroutine = this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria((Card c) => c.IsOngoing, "ongoing", true, false, null, null, false), false, null, null, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Draw.
@@ -31,7 +31,7 @@ namespace RuduenWorkshop.Spellforge
             ITrigger trigger = null; // Use null base to initialize.
 
             // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
-            bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources && !dd.Target.IsHero && dd.DidDealDamage;
+            bool damageCriteria(DealDamageAction dd) => dd.CardSource.Card == cardSource.Card && !dd.Target.IsHero && dd.DidDealDamage;
 
             trigger = this.AddTrigger<DealDamageAction>((DealDamageAction dd) => damageCriteria(dd),
                 (DealDamageAction dd) => this.TrackOriginalTargetsAndRunResponse(dd, cardSource),
@@ -49,7 +49,7 @@ namespace RuduenWorkshop.Spellforge
             IEnumerator coroutine;
 
             // Self Damage Response
-            coroutine = this.DealDamage(this.CharacterCard, dd.Target, 1, DamageType.Sonic, cardSource: cardSource);
+            coroutine = this.DealDamage(dd.Target, dd.Target, 1, DamageType.Sonic, cardSource: cardSource);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

@@ -5,9 +5,9 @@ using System.Collections;
 namespace RuduenWorkshop.Spellforge
 {
     // TODO: TEST!
-    public class PiercingCardController : SpellforgeSharedModifierCardController
+    public class InspiredCardController : SpellforgeSharedModifierCardController
     {
-        public PiercingCardController(Card card, TurnTakerController turnTakerController)
+        public InspiredCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -16,8 +16,8 @@ namespace RuduenWorkshop.Spellforge
         {
             IEnumerator coroutine;
 
-            // Power.
-            coroutine = this.GameController.SelectHeroToUsePower(this.DecisionMaker, cardSource: this.GetCardSource());
+            // Draw 3.
+            coroutine = this.DrawCards(this.DecisionMaker, 3);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
@@ -25,14 +25,13 @@ namespace RuduenWorkshop.Spellforge
         {
             // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger.
             ITrigger trigger = null;
-
-            bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources; // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
+            bool damageCriteria(DealDamageAction dd) => dd.CardSource.Card == cardSource.Card; // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
 
             trigger = this.AddTrigger<DealDamageAction>((DealDamageAction dd) => damageCriteria(dd),
                 (DealDamageAction dd) => this.TrackOriginalTargetsAndRunResponse(dd, cardSource),
                 new TriggerType[]
                 {
-                    TriggerType.MakeDamageIrreducible
+                    TriggerType.IncreaseDamage
                 },
                 TriggerTiming.Before);
 
@@ -44,7 +43,7 @@ namespace RuduenWorkshop.Spellforge
             IEnumerator coroutine;
 
             // Deal damage response.
-            coroutine = this.GameController.MakeDamageIrreducible(dd, cardSource: cardSource);
+            coroutine = this.GameController.IncreaseDamage(dd, 1, cardSource: cardSource);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

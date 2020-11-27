@@ -16,8 +16,8 @@ namespace RuduenModsTest
         {
             { "Impact", -2 },
             { "Wave", -3 },
-            { "Shock", -4 },
-            { "Ray", -5 },
+            { "Shock", -3 },
+            { "Ray", -4 },
             { "Inspired", -1 },
             { "Controlled", -1 },
             { "OfResonance", -1 },

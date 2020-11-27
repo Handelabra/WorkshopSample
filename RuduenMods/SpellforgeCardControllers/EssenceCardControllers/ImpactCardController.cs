@@ -11,7 +11,7 @@ namespace RuduenWorkshop.Spellforge
         {
         }
 
-        protected override IEnumerator PerformModifiedAction()
+        protected override IEnumerator PerformModifiedAction(CardSource cardSource)
         {
             // Deal all 1 melee.
             IEnumerator coroutine = this.DealDamage(this.CharacterCard, (Card c) => c.IsTarget, 2, DamageType.Melee);

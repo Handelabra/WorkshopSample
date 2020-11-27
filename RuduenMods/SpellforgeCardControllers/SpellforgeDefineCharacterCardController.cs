@@ -25,9 +25,10 @@ namespace RuduenWorkshop.Spellforge
             List<DiscardCardAction> storedResults = new List<DiscardCardAction>();
             string spacedPrefixTitle = "";
             string spacedSuffixTitle = "";
+            CardSource cardSource = this.GetCardSource(); // Only fetch once to pass through all references.
 
             // Discard prefix.
-            coroutine = this.GameController.SelectAndDiscardCards(this.DecisionMaker, 1, false, 0, storedResults, false, cardCriteria: new LinqCardCriteria((Card c) => c.DoKeywordsContain("prefix"), "prefix"), cardSource: this.GetCardSource());
+            coroutine = this.GameController.SelectAndDiscardCards(this.DecisionMaker, 1, false, 0, storedResults, false, cardCriteria: new LinqCardCriteria((Card c) => c.DoKeywordsContain("prefix"), "prefix"), cardSource: cardSource);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             if (storedResults.Count > 0 && storedResults.FirstOrDefault().IsSuccessful)
@@ -38,14 +39,14 @@ namespace RuduenWorkshop.Spellforge
                 {
                     // Type matches, everything should be implemented now!
                     SpellforgeSharedModifierCardController wcc = (SpellforgeSharedModifierCardController)this.FindCardController(c);
-                    this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(this.GetCardSource()));
+                    this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(cardSource));
                     spacedPrefixTitle = " " + c.Title;
                 }
             }
 
             // Discard suffix.
             storedResults.Clear();
-            coroutine = this.GameController.SelectAndDiscardCards(this.DecisionMaker, 1, false, 0, storedResults, false, cardCriteria: new LinqCardCriteria((Card c) => c.DoKeywordsContain("suffix"), "suffix"), cardSource: this.GetCardSource());
+            coroutine = this.GameController.SelectAndDiscardCards(this.DecisionMaker, 1, false, 0, storedResults, false, cardCriteria: new LinqCardCriteria((Card c) => c.DoKeywordsContain("suffix"), "suffix"), cardSource: cardSource);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             if (storedResults.Count > 0 && storedResults.FirstOrDefault().IsSuccessful)
@@ -56,19 +57,19 @@ namespace RuduenWorkshop.Spellforge
                 {
                     // Type matches, everything should be implemented now!
                     SpellforgeSharedModifierCardController wcc = (SpellforgeSharedModifierCardController)this.FindCardController(c);
-                    this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(this.GetCardSource()));
+                    this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(cardSource));
                     spacedSuffixTitle = " " + c.Title;
                 }
             }
 
             if (spacedPrefixTitle.Length > 0 || spacedSuffixTitle.Length > 0)
             {
-                coroutine = this.GameController.SendMessageAction("{Spellforge} uses" + spacedPrefixTitle + " " + this.CharacterCard.Definition.Body + spacedSuffixTitle + "!", Priority.Low, this.GetCardSource());
+                coroutine = this.GameController.SendMessageAction("{Spellforge} uses" + spacedPrefixTitle + " " + this.CharacterCard.Definition.Body + spacedSuffixTitle + "!", Priority.Low, cardSource);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 
             // Deal 1 target 1 infernal (as a base).
-            coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), powerNumerals[1], DamageType.Projectile, powerNumerals[0], false, powerNumerals[0], false, false, false, null, null, null, null, null, false, null, null, false, null, this.GetCardSource(null));
+            coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), powerNumerals[1], DamageType.Projectile, powerNumerals[0], false, powerNumerals[0], false, false, false, null, null, null, null, null, false, null, null, false, null, cardSource);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Clear all temporary triggers created by this card.

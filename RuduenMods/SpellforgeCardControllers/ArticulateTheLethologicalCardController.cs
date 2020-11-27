@@ -22,13 +22,13 @@ namespace RuduenWorkshop.Spellforge
             List<Function> list = new List<Function>
                 {
                     new Function(this.DecisionMaker, "Prefix", SelectionType.RevealTopCardOfDeck,
-                    () => this.RevealCards_MoveMatching_ReturnNonMatchingCards(this.DecisionMaker, this.HeroTurnTaker.Deck, false, false, true, new LinqCardCriteria((Card c) => c.DoKeywordsContain("prefix"), "prefix"), 2, shuffleReturnedCards: true),
+                    () => this.RevealCards_MoveMatching_ReturnNonMatchingCards(this.DecisionMaker, this.HeroTurnTaker.Deck, false, false, true, new LinqCardCriteria((Card c) => c.DoKeywordsContain("prefix"), "prefix"), 2, revealedCardDisplay: RevealedCardDisplay.ShowMatchingCards, shuffleReturnedCards: true),
                     this.HeroTurnTaker.Deck.Cards.Count() > 0),
                      new Function(this.DecisionMaker, "Essence", SelectionType.RevealTopCardOfDeck,
-                    () => this.RevealCards_MoveMatching_ReturnNonMatchingCards(this.DecisionMaker, this.HeroTurnTaker.Deck, false, false, true, new LinqCardCriteria((Card c) => c.DoKeywordsContain("essence"), "essence"), 2, shuffleReturnedCards: true),
+                    () => this.RevealCards_MoveMatching_ReturnNonMatchingCards(this.DecisionMaker, this.HeroTurnTaker.Deck, false, false, true, new LinqCardCriteria((Card c) => c.DoKeywordsContain("essence"), "essence"), 2, revealedCardDisplay: RevealedCardDisplay.ShowMatchingCards, shuffleReturnedCards: true),
                     this.HeroTurnTaker.Deck.Cards.Count() > 0),
                       new Function(this.DecisionMaker, "Suffix", SelectionType.RevealTopCardOfDeck,
-                    () => this.RevealCards_MoveMatching_ReturnNonMatchingCards(this.DecisionMaker, this.HeroTurnTaker.Deck, false, false, true, new LinqCardCriteria((Card c) => c.DoKeywordsContain("suffix"), "suffix"), 2, shuffleReturnedCards: true),
+                    () => this.RevealCards_MoveMatching_ReturnNonMatchingCards(this.DecisionMaker, this.HeroTurnTaker.Deck, false, false, true, new LinqCardCriteria((Card c) => c.DoKeywordsContain("suffix"), "suffix"), 2, revealedCardDisplay: RevealedCardDisplay.ShowMatchingCards, shuffleReturnedCards: true),
                     this.HeroTurnTaker.Deck.Cards.Count() > 0),
                 };
 

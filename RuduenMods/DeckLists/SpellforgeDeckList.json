@@ -45,7 +45,7 @@
       "count": 3,
       "title": "Ray",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Spellforge} deals 1 Target 5 Energy Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Spellforge} deals 1 Target 4 Energy Damage." ],
       "icons": [ "DealDamageEnergy", "Discard" ],
       "flavorQuotes": [
         {
@@ -57,7 +57,7 @@
       "count": 3,
       "title": "Shock",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Spellforge} deals 3 Targets 4 Lightning Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Spellforge} deals 3 Targets 3 Lightning Damage." ],
       "icons": [ "DealDamageLightning", "Discard" ],
       "flavorQuotes": [
         {

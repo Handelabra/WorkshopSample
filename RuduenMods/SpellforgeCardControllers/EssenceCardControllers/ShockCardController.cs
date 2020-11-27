@@ -11,10 +11,10 @@ namespace RuduenWorkshop.Spellforge
         {
         }
 
-        protected override IEnumerator PerformModifiedAction()
+        protected override IEnumerator PerformModifiedAction(CardSource cardSource)
         {
             // Deal up to 3 targets 3 lightning.
-            IEnumerator coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 4, DamageType.Lightning, 3, false, 3, cardSource: this.GetCardSource());
+            IEnumerator coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 3, DamageType.Lightning, 3, false, 3, cardSource: cardSource);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
