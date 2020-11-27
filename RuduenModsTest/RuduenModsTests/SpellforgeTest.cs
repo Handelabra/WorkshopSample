@@ -12,7 +12,7 @@ namespace RuduenModsTest
     [TestFixture]
     public class SpellforgeTest : BaseTest
     {
-        private Dictionary<string, int> CardDamage = new Dictionary<string, int>()
+        private readonly Dictionary<string, int> CardDamage = new Dictionary<string, int>()
         {
             { "Impact", -2 },
             { "Wave", -3 },
@@ -557,6 +557,90 @@ namespace RuduenModsTest
             PlayCard(card);
             QuickHPCheck(-2); // Deal 2.
             QuickHandCheckZero(); // One played, one drawn.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayArticulateTheLethologicalPrefix()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "TheBlock");
+
+            StartGame();
+
+            Card card = PutInHand("ArticulateTheLethological");
+            Card safeish = PutInHand("OfDisruption");
+
+            DecisionSelectFunction = 0;
+            DecisionSelectCardToPlay = safeish;
+
+            DealDamage(Spellforge, Spellforge.CharacterCard, 5, DamageType.Melee);
+
+            QuickHandStorage(Spellforge);
+            PlayCard(card);
+            QuickHandCheck(1); // 2 played, 2 added, 1 drawn.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayArticulateTheLethologicalEssence()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "TheBlock");
+
+            StartGame();
+
+            Card card = PutInHand("ArticulateTheLethological");
+            Card safeish = PutInHand("OfDisruption");
+
+            DecisionSelectFunction = 1;
+            DecisionSelectCardToPlay = safeish;
+
+            DealDamage(Spellforge, Spellforge.CharacterCard, 5, DamageType.Melee);
+
+            QuickHandStorage(Spellforge);
+            PlayCard(card);
+            QuickHandCheck(1); // 2 played, 2 added, 1 drawn.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayArticulateTheLethologicalSuffix()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "TheBlock");
+
+            StartGame();
+
+            Card card = PutInHand("ArticulateTheLethological");
+            Card safeish = PutInHand("OfDisruption");
+
+            DecisionSelectFunction = 2;
+            DecisionSelectCardToPlay = safeish;
+
+            DealDamage(Spellforge, Spellforge.CharacterCard, 5, DamageType.Melee);
+
+            QuickHandStorage(Spellforge);
+            PlayCard(card);
+            QuickHandCheck(1); // 2 played, 2 added, 1 drawn.
+        }
+
+        [Test]
+        [Category("DiscardModifier")]
+        public void TestPlayArticulateTheLethologicalNoDeck()
+        {
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "TheBlock");
+
+            StartGame();
+
+            Card safeish = PutInHand("OfDisruption");
+
+            DecisionSelectCardToPlay = safeish;
+
+            MoveAllCards(Spellforge, Spellforge.HeroTurnTaker.Deck, Spellforge.HeroTurnTaker.Trash);
+            MoveAllCards(Spellforge, Spellforge.HeroTurnTaker.Deck, Spellforge.HeroTurnTaker.Trash);
+
+            QuickHandStorage(Spellforge);
+            PlayCard("ArticulateTheLethological");
+            QuickHandCheck(0); // 1 Played, 1 drawn. This should trigger a reshuffle. 
+            AssertNumberOfCardsInTrash(Spellforge, 2); // Cards that were used move to the trash after a reshuffle.
         }
     }
 }

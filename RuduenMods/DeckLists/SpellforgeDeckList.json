@@ -171,6 +171,23 @@
         {
         }
       ]
+    },
+    {
+      "identifier": "ArticulateTheLethological",
+      "count": 4,
+      "title": "Articulate the Lethological",
+      "keywords": [ "one-shot" ],
+      "body": [ "Select Essence, Prefix, or Suffix.", "Reveal cards from the top of your deck until you reveal 2 cards of the selected type. Put each of those cards to your hand. Shuffle the other revealed cards into your deck.", "You may play a card." ],
+      "icons": [ "DrawCardNow", "PlayCardNow" ],
+      "flavorQuotes": [
+        {
+          "text": "Is that even a word?"
+        },
+        {
+          "text": "It is now.",
+          "identifier": "Spellforge"
+        }
+      ]
     }
   ],
   "promoCards": [

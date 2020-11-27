@@ -95,6 +95,7 @@
     <Compile Include="SpellforgeCardControllers\OfHealingCardController.cs" />
     <Compile Include="SpellforgeCardControllers\ImpactCardController.cs" />
     <Compile Include="SpellforgeCardControllers\SpellforgeCharacterCardController.cs" />
+    <Compile Include="SpellforgeCardControllers\ArticulateTheLethologicalCardController.cs" />
     <Compile Include="SpellforgeCardControllers\WaveCardController.cs" />
     <Compile Include="SpellforgeCardControllers\ControlledCardController.cs" />
     <Compile Include="SpellforgeCardControllers\SpellforgeDefineCharacterCardController.cs" />
