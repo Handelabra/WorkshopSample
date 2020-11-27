@@ -4,14 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-
-namespace RuduenWorkshop.Wordsmith
+namespace RuduenWorkshop.Spellforge
 {
-    public class WordsmithCharacterCardController : HeroCharacterCardController
+    public class SpellforgeCharacterCardController : HeroCharacterCardController
     {
         public string str;
 
-        public WordsmithCharacterCardController(Card card, TurnTakerController turnTakerController)
+        public SpellforgeCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -25,7 +24,7 @@ namespace RuduenWorkshop.Wordsmith
             coroutine = this.DrawCard(this.HeroTurnTaker);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Discard check via Journal. 
+            // Discard check via Journal.
             if (this.Journal.MoveCardEntriesThisTurn().Any((MoveCardJournalEntry m) => m.IsDiscard && m.ResponsibleTurnTaker == base.TurnTaker))
             {
                 // Draw a card.

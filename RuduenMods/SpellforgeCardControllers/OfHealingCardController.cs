@@ -1,14 +1,13 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
-using System;
 using System.Collections;
 
-namespace RuduenWorkshop.Wordsmith
+namespace RuduenWorkshop.Spellforge
 {
     // TODO: TEST!
-    public class PiercingCardController : WordsmithSharedModifierCardController
+    public class OfHealingCardController : SpellforgeSharedModifierCardController
     {
-        public PiercingCardController(Card card, TurnTakerController turnTakerController)
+        public OfHealingCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -17,36 +16,37 @@ namespace RuduenWorkshop.Wordsmith
         {
             IEnumerator coroutine;
 
-            // Power.
-            coroutine = this.GameController.SelectHeroToUsePower(this.DecisionMaker, cardSource: this.GetCardSource());
+            // Heal.
+            coroutine = this.GameController.GainHP(this.CharacterCard, 2, null, null, this.GetCardSource());
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+            // Draw.
+            coroutine = this.DrawCard(this.HeroTurnTaker, false, null, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
         protected override ITrigger AddModifierTriggerOverride(CardSource cardSource)
         {
-            // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger. 
+            // Mostly copied from AddReduceDamageToSetAmountTrigger since that doesn't return an ITrigger.
             ITrigger trigger = null;
-
-            bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources; // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
+            // Only if the action sources of this play and the damage are an exact match, AKA the triggering step is the same.
+            // Also confirm hero target that was damaged.
+            bool damageCriteria(DealDamageAction dd) => dd.CardSource.ActionSources == cardSource.ActionSources && dd.Target.IsHero && dd.DidDealDamage;
 
             trigger = this.AddTrigger<DealDamageAction>((DealDamageAction dd) => damageCriteria(dd),
                 (DealDamageAction dd) => this.TrackOriginalTargetsAndRunResponse(dd, cardSource),
                 new TriggerType[]
                 {
-                    TriggerType.MakeDamageIrreducible
+                    TriggerType.GainHP
                 },
-                TriggerTiming.Before);
-
+                TriggerTiming.After);
             return trigger;
         }
+
         protected override IEnumerator RunResponse(DealDamageAction dd, CardSource cardSource, params object[] otherObjects)
         {
-            IEnumerator coroutine;
-
-            // Deal damage response. 
-            coroutine = this.GameController.MakeDamageIrreducible(dd, cardSource: cardSource);
+            IEnumerator coroutine = this.GameController.GainHP(dd.Target, 3);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
-
     }
 }

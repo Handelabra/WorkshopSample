@@ -4,14 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-
-namespace RuduenWorkshop.Wordsmith
+namespace RuduenWorkshop.Spellforge
 {
-    public class WordsmithDefineCharacterCardController : HeroCharacterCardController
+    public class SpellforgeDefineCharacterCardController : HeroCharacterCardController
     {
         public string str;
 
-        public WordsmithDefineCharacterCardController(Card card, TurnTakerController turnTakerController)
+        public SpellforgeDefineCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -35,10 +34,10 @@ namespace RuduenWorkshop.Wordsmith
             {
                 Card c = storedResults.FirstOrDefault().CardToDiscard;
                 CardController cc = this.FindCardController(c);
-                if (cc is WordsmithSharedModifierCardController)
+                if (cc is SpellforgeSharedModifierCardController)
                 {
                     // Type matches, everything should be implemented now!
-                    WordsmithSharedModifierCardController wcc = (WordsmithSharedModifierCardController)this.FindCardController(c);
+                    SpellforgeSharedModifierCardController wcc = (SpellforgeSharedModifierCardController)this.FindCardController(c);
                     this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(this.GetCardSource()));
                     spacedPrefixTitle = " " + c.Title;
                 }
@@ -53,10 +52,10 @@ namespace RuduenWorkshop.Wordsmith
             {
                 Card c = storedResults.FirstOrDefault().CardToDiscard;
                 CardController cc = this.FindCardController(c);
-                if (cc is WordsmithSharedModifierCardController)
+                if (cc is SpellforgeSharedModifierCardController)
                 {
                     // Type matches, everything should be implemented now!
-                    WordsmithSharedModifierCardController wcc = (WordsmithSharedModifierCardController)this.FindCardController(c);
+                    SpellforgeSharedModifierCardController wcc = (SpellforgeSharedModifierCardController)this.FindCardController(c);
                     this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(this.GetCardSource()));
                     spacedSuffixTitle = " " + c.Title;
                 }
@@ -64,11 +63,11 @@ namespace RuduenWorkshop.Wordsmith
 
             if (spacedPrefixTitle.Length > 0 || spacedSuffixTitle.Length > 0)
             {
-                coroutine = this.GameController.SendMessageAction("{Wordsmith} uses" + spacedPrefixTitle + " " + this.CharacterCard.Definition.Body + spacedSuffixTitle + "!", Priority.Low, this.GetCardSource());
+                coroutine = this.GameController.SendMessageAction("{Spellforge} uses" + spacedPrefixTitle + " " + this.CharacterCard.Definition.Body + spacedSuffixTitle + "!", Priority.Low, this.GetCardSource());
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 
-            // Deal 1 target 1 infernal (as a base). 
+            // Deal 1 target 1 infernal (as a base).
             coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), powerNumerals[1], DamageType.Projectile, powerNumerals[0], false, powerNumerals[0], false, false, false, null, null, null, null, null, false, null, null, false, null, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 

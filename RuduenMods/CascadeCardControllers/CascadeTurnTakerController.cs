@@ -43,7 +43,7 @@ namespace RuduenWorkshop.Cascade
                 }
             }
 
-            //// Working iteration - but currently unsupported due to card backs. 
+            //// Working iteration - but currently unsupported due to card backs.
             //{
             //    // Shuffle river deck.
             //    coroutine = this.GameController.ShuffleLocation(riverDeck);
@@ -53,8 +53,6 @@ namespace RuduenWorkshop.Cascade
             //    coroutine = this.GameController.MoveCards(this, riverDeck.GetTopCards(4), this.TurnTaker.FindCard("Riverbank", false).UnderLocation);
             //    if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             //}
-
-
         }
 
         // Old logic for River.

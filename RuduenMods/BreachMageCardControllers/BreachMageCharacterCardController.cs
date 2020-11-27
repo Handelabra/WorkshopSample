@@ -15,6 +15,7 @@ namespace RuduenWorkshop.BreachMage
             : base(card, turnTakerController)
         {
         }
+
         public override IEnumerator UsePower(int index = 0)
         {
             // Break down into two powers.
@@ -44,7 +45,7 @@ namespace RuduenWorkshop.BreachMage
             }
             else
             {
-                // Selection: Draw or use a cast and destroy. 
+                // Selection: Draw or use a cast and destroy.
 
                 List<Function> list = new List<Function>
                 {

@@ -4,18 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RuduenWorkshop.Wordsmith
+namespace RuduenWorkshop.Spellforge
 {
-    public abstract class WordsmithSharedEssenceCardController : CardController
+    public abstract class SpellforgeSharedEssenceCardController : CardController
     {
-        public WordsmithSharedEssenceCardController(Card card, TurnTakerController turnTakerController)
+        public SpellforgeSharedEssenceCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
 
         protected virtual IEnumerator PerformModifiedAction()
         {
-            // Deal 1 target 1 infernal (as a base). 
+            // Deal 1 target 1 infernal (as a base).
             IEnumerator coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 1, DamageType.Projectile, 1, false, 1, false, false, false, null, null, null, null, null, false, null, null, false, null, this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
@@ -35,10 +35,10 @@ namespace RuduenWorkshop.Wordsmith
             {
                 Card c = storedResults.FirstOrDefault().CardToDiscard;
                 CardController cc = this.FindCardController(c);
-                if (cc is WordsmithSharedModifierCardController)
+                if (cc is SpellforgeSharedModifierCardController)
                 {
                     // Type matches, everything should be implemented now!
-                    WordsmithSharedModifierCardController wcc = (WordsmithSharedModifierCardController)this.FindCardController(c);
+                    SpellforgeSharedModifierCardController wcc = (SpellforgeSharedModifierCardController)this.FindCardController(c);
                     this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(this.GetCardSource()));
                     spacedPrefixTitle = " " + c.Title;
                 }
@@ -53,10 +53,10 @@ namespace RuduenWorkshop.Wordsmith
             {
                 Card c = storedResults.FirstOrDefault().CardToDiscard;
                 CardController cc = this.FindCardController(c);
-                if (cc is WordsmithSharedModifierCardController)
+                if (cc is SpellforgeSharedModifierCardController)
                 {
                     // Type matches, everything should be implemented now!
-                    WordsmithSharedModifierCardController wcc = (WordsmithSharedModifierCardController)this.FindCardController(c);
+                    SpellforgeSharedModifierCardController wcc = (SpellforgeSharedModifierCardController)this.FindCardController(c);
                     this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(this.GetCardSource()));
                     spacedSuffixTitle = " " + c.Title;
                 }
@@ -64,7 +64,7 @@ namespace RuduenWorkshop.Wordsmith
 
             if (spacedPrefixTitle.Length > 0 || spacedSuffixTitle.Length > 0)
             {
-                coroutine = this.GameController.SendMessageAction("{Wordsmith} uses" + spacedPrefixTitle + " " + this.Card.Title + spacedSuffixTitle + "!", Priority.Low, this.GetCardSource());
+                coroutine = this.GameController.SendMessageAction("{Spellforge} uses" + spacedPrefixTitle + " " + this.Card.Title + spacedSuffixTitle + "!", Priority.Low, this.GetCardSource());
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 

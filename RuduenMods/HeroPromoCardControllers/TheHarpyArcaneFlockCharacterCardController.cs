@@ -15,7 +15,6 @@ namespace RuduenPromosWorkshop.HeroPromos
         //    TokenPool avianPool = base.Card.FindTokenPool(TokenPool.AvianControlPool);
         //    TokenPool arcanaPool = base.Card.FindTokenPool(TokenPool.ArcanaControlPool);
 
-
         //        if (avianPool == null || !base.TurnTaker.IsHero)
         //        {
         //            TurnTaker turnTaker = this.FindTurnTakersWhere((TurnTaker tt) => tt.Identifier == "TheHarpy", false).FirstOrDefault<TurnTaker>();
@@ -27,7 +26,7 @@ namespace RuduenPromosWorkshop.HeroPromos
         //        }
         //    IEnumerator coroutine;
 
-        //    // Sanity check - need birds for more birds, and we can avoid shenanigans related to if the token pool already exists. Dang it, Guise! 
+        //    // Sanity check - need birds for more birds, and we can avoid shenanigans related to if the token pool already exists. Dang it, Guise!
         //    if (arcanaPool != null && avianPool != null && avianPool.CurrentValue >= 1)
         //    {
         //        List<Function> list = new List<Function>();

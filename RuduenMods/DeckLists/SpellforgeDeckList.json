@@ -1,14 +1,14 @@
 ﻿{
-  "name": "Wordsmith",
+  "name": "Spellforge",
   "kind": "Hero",
   "initialCardIdentifiers": [
-    "WordsmithCharacter"
+    "SpellforgeCharacter"
   ],
   "cards": [
     {
-      "identifier": "WordsmithCharacter",
+      "identifier": "SpellforgeCharacter",
       "count": 1,
-      "title": "Wordsmith",
+      "title": "Spellforge",
       "body": "Sesquipedalian Recitation",
       "backgroundColor": "7FFFD4",
       "foilBackgroundColor": "7FFFD4",
@@ -23,7 +23,7 @@
       ],
       "hitpoints": 26,
       "nemesisIdentifiers": [
-        "Wordsmith"
+        "Spellforge"
       ],
       "incapacitatedAbilities": [
         "One player may play a card.",
@@ -45,7 +45,7 @@
       "count": 3,
       "title": "Ray",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Wordsmith} deals 1 Target 4 Energy Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Spellforge} deals 1 Target 5 Energy Damage." ],
       "icons": [ "DealDamageEnergy", "Discard" ],
       "flavorQuotes": [
         {
@@ -57,7 +57,7 @@
       "count": 3,
       "title": "Shock",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Wordsmith} deals up to 3 Targets 3 Lightning Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Spellforge} deals 3 Targets 4 Lightning Damage." ],
       "icons": [ "DealDamageLightning", "Discard" ],
       "flavorQuotes": [
         {
@@ -69,7 +69,7 @@
       "count": 3,
       "title": "Wave",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Wordsmith} deals up to 5 Targets 2 Sonic Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Spellforge} deals 5 Targets 3 Sonic Damage." ],
       "icons": [ "DealDamageSonic", "Discard" ],
       "flavorQuotes": [
         {
@@ -81,7 +81,7 @@
       "count": 3,
       "title": "Impact",
       "keywords": [ "one-shot", "essence" ],
-      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Wordsmith} deals each Target 1 Melee Damage." ],
+      "body": [ "You may discard a Prefix card to add its [u]Prefix[/u] text to this card.", "You may discard a Suffix card to add its [u]Suffix[/u] text to this card.", "{Spellforge} deals each Target 2 Melee Damage." ],
       "icons": [ "DealDamageMelee", "Discard" ],
       "flavorQuotes": [
         {
@@ -153,7 +153,7 @@
       "count": 3,
       "title": "of Healing",
       "keywords": [ "one-shot", "suffix" ],
-      "body": [ "{Wordsmith} Regains 2 HP. Draw a card.", "[u]Suffix[/u]: After a Hero Target is dealt damage this way, it regains 3 HP." ],
+      "body": [ "{Spellforge} Regains 2 HP. Draw a card.", "[u]Suffix[/u]: After a Hero Target is dealt damage this way, it regains 3 HP." ],
       "icons": [ "DrawCardNow", "DestroyEnvironment", "GainHP" ],
       "flavorQuotes": [
         {
@@ -165,7 +165,7 @@
       "count": 3,
       "title": "of Resonance",
       "keywords": [ "one-shot", "suffix" ],
-      "body": [ "{Wordsmith} deals 1 Target 2 Sonic Damage. Draw a card.", "[u]Suffix[/u]: After a non-Hero Target is dealt damage this way, {Wordsmith} deals it 1 Sonic Damage." ],
+      "body": [ "{Spellforge} deals 1 Target 2 Sonic Damage. Draw a card.", "[u]Suffix[/u]: After a non-Hero Target is dealt damage this way, {Spellforge} deals it 1 Sonic Damage." ],
       "icons": [ "DrawCardNow" ],
       "flavorQuotes": [
         {
@@ -175,17 +175,17 @@
   ],
   "promoCards": [
     {
-      "identifier": "WordsmithCharacter",
-      "promoIdentifier": "WordsmithDefineCharacter",
+      "identifier": "SpellforgeCharacter",
+      "promoIdentifier": "SpellforgeDefineCharacter",
       "count": 1,
-      "title": "Wordsmith",
+      "title": "Spellforge",
       "body": "Definition",
       "backgroundColor": "fbf8f9",
       "foilBackgroundColor": "FEFEFE",
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "You may discard a Prefix card to add its [u]Prefix[/u] text to this power. You may discard a Suffix card to apply its [u]Suffix[/u] text to this power. {Wordsmith} deals 1 Target 1 Infernal Damage."
+        "You may discard a Prefix card to add its [u]Prefix[/u] text to this power. You may discard a Suffix card to apply its [u]Suffix[/u] text to this power. {Spellforge} deals 1 Target 1 Infernal Damage."
       ],
       "icons": [
         "HasPower",
@@ -194,7 +194,7 @@
       ],
       "hitpoints": 28,
       "nemesisIdentifiers": [
-        "Wordsmith"
+        "Spellforge"
       ],
       "incapacitatedAbilities": [
         "One player may play a card.",

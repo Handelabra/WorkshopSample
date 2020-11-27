@@ -95,6 +95,7 @@ namespace RuduenWorkshop.Cascade
             }
             yield break;
         }
+
         public Location RiverDeck()
         {
             if (CascadeCharacterCardController._riverDeck == null)

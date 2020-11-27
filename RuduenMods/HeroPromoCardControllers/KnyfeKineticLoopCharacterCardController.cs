@@ -1,9 +1,7 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using RuduenWorkshop.HeroPromos;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RuduenWorkshop.Knyfe
@@ -28,7 +26,7 @@ namespace RuduenWorkshop.Knyfe
             {
                 turnTakerName = this.Card.Title;
             }
-            OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "HealResponse" , "Whenever " + this.Card.Title + " is dealt damage, they regain " + powerNumeral + " HP.", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
+            OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "HealResponse", "Whenever " + this.Card.Title + " is dealt damage, they regain " + powerNumeral + " HP.", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
             onDealDamageStatusEffect.TargetCriteria.IsSpecificCard = this.CharacterCard;
             onDealDamageStatusEffect.SourceCriteria.IsSpecificCard = this.CharacterCard;
             onDealDamageStatusEffect.CanEffectStack = true;
@@ -44,6 +42,7 @@ namespace RuduenWorkshop.Knyfe
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter
+
         public IEnumerator HealResponse(DealDamageAction dd, TurnTaker hero, StatusEffect effect, int[] powerNumerals = null)
 #pragma warning restore IDE0060 // Remove unused parameter
         {

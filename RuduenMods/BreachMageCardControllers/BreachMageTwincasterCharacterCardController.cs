@@ -96,6 +96,5 @@ namespace RuduenWorkshop.BreachMage
             }
             yield break;
         }
-
     }
 }

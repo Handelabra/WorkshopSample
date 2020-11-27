@@ -18,7 +18,7 @@ namespace RuduenWorkshop.MrFixer
         {
             List<int> powerNumerals = new List<int>()
             {
-                this.GetPowerNumeral(0, 1), // Number of targets. 
+                this.GetPowerNumeral(0, 1), // Number of targets.
                 this.GetPowerNumeral(1, 1), // Amount of damage.
                 this.GetPowerNumeral(2, 0) // Amount of damage.
             };
@@ -39,7 +39,7 @@ namespace RuduenWorkshop.MrFixer
             coroutine = this.GameController.SelectAndPlayCardFromHand(this.HeroTurnTakerController, false, cardCriteria: new LinqCardCriteria((Card c) => c.IsTool, "tool"), storedResults: storedResults, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // If you didn't, reveal until one is played. 
+            // If you didn't, reveal until one is played.
             if (storedResults != null && (storedResults.Count == 0 || !storedResults.FirstOrDefault().IsSuccessful))
             {
                 coroutine = this.RevealCards_MoveMatching_ReturnNonMatchingCards(this.HeroTurnTakerController, this.HeroTurnTaker.Deck, true, false, false, new LinqCardCriteria((Card c) => c.IsTool, "tool"), 1, showMessage: true);
@@ -47,6 +47,5 @@ namespace RuduenWorkshop.MrFixer
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
-
     }
 }

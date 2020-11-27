@@ -30,7 +30,7 @@ namespace RuduenWorkshop.AbsoluteZero
             coroutine = this.GameController.SelectAndPlayCardFromHand(this.HeroTurnTakerController, false, cardCriteria: new LinqCardCriteria((Card c) => this.IsEquipment(c), "equipment"), storedResults: storedResults, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // No successful card play means destroy. 
+            // No successful card play means destroy.
             if (storedResults == null || storedResults.Count == 0 || !storedResults.FirstOrDefault().IsSuccessful)
             {
                 coroutine = this.GameController.SelectAndDestroyCard(this.DecisionMaker, cardCriteria: new LinqCardCriteria((Card c) => this.IsEquipment(c), "equipment"), false, cardSource: this.GetCardSource());
@@ -41,6 +41,5 @@ namespace RuduenWorkshop.AbsoluteZero
             coroutine = this.DrawCards(this.HeroTurnTakerController, 2);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
-
     }
 }

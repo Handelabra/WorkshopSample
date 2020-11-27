@@ -1,5 +1,4 @@
-﻿using Handelabra.Sentinels.Engine.Controller;
-using Handelabra.Sentinels.Engine.Model;
+﻿using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
 using RuduenWorkshop.HeroPromos;
@@ -57,7 +56,7 @@ namespace RuduenModsTest
 
             DecisionSelectFunction = 1;
 
-            // Only available card is a copy of a limited card. Play will fail, cause destroy. 
+            // Only available card is a copy of a limited card. Play will fail, cause destroy.
 
             QuickHPStorage(az);
             QuickHandStorage(az);
@@ -135,7 +134,6 @@ namespace RuduenModsTest
             QuickHandCheck(1); // Card drawn.
         }
 
-
         [Test()]
         public void TestExpatriettePowerDeck()
         {
@@ -152,8 +150,8 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
             UsePower(expatriette);
-            AssertInPlayArea(expatriette, equipment); // Equipment played. 
-            QuickHPCheck(-1); // Damage dealt. 
+            AssertInPlayArea(expatriette, equipment); // Equipment played.
+            QuickHPCheck(-1); // Damage dealt.
         }
 
         [Test()]
@@ -189,7 +187,7 @@ namespace RuduenModsTest
             QuickHPStorage(knyfe);
             UsePower(knyfe);
             DealDamage(knyfe, knyfe, 1, DamageType.Energy);
-            QuickHPCheck(0); // 1 damage, healed 1. 
+            QuickHPCheck(0); // 1 damage, healed 1.
             QuickHandCheck(1); // Card drawn.
         }
 

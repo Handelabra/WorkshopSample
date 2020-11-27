@@ -9,7 +9,7 @@
       "BreachMage",
       "Cascade",
       "Inquirer",
-      "Wordsmith"
+      "Spellforge"
     ]
   },
   "variants": {
@@ -19,6 +19,6 @@
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
     "Knyfe": [ "KnyfeKineticLoopCharacter" ],
     "MrFixer": [ "MrFixerFlowingStrikeCharacter" ],
-    "Tachyon":  [ "TachyonControlledPaceCharacter" ],
+    "Tachyon": [ "TachyonControlledPaceCharacter" ]
   }
 }

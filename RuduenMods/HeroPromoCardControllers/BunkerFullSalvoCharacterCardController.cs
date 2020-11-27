@@ -1,7 +1,6 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using RuduenWorkshop.HeroPromos;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +26,7 @@ namespace RuduenWorkshop.Bunker
             coroutine = this.DrawCards(this.HeroTurnTakerController, powerNumeral);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-
-            // Discard 1 for each of your other powers. 
+            // Discard 1 for each of your other powers.
             coroutine = SelectAndDiscardCards(this.HeroTurnTakerController, GetNumberOfOtherCardsWithPowersInPlay());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 

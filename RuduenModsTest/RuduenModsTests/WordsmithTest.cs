@@ -2,7 +2,7 @@
 using Handelabra.Sentinels.Engine.Model;
 using Handelabra.Sentinels.UnitTest;
 using NUnit.Framework;
-using RuduenWorkshop.Wordsmith;
+using RuduenWorkshop.Spellforge;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,31 +10,44 @@ using System.Reflection;
 namespace RuduenModsTest
 {
     [TestFixture]
-    public class WordsmithTest : BaseTest
+    public class SpellforgeTest : BaseTest
     {
+        private Dictionary<string, int> CardDamage = new Dictionary<string, int>()
+        {
+            { "Impact", -2 },
+            { "Wave", -3 },
+            { "Shock", -4 },
+            { "Ray", -5 },
+            { "Inspired", -1 },
+            { "Controlled", -1 },
+            { "OfResonance", -1 },
+            { "OfDisruption", -1 },
+            { "OfHealing", 3 }
+        };
+
         [OneTimeSetUp]
         public void DoSetup()
         {
             // Tell the engine about our mod assembly so it can load up our code.
             // It doesn't matter which type as long as it comes from the mod's assembly.
             //var a = Assembly.GetAssembly(typeof(InquirerCharacterCardController)); // replace with your own type
-            ModHelper.AddAssembly("RuduenWorkshop", Assembly.GetAssembly(typeof(WordsmithCharacterCardController))); // replace with your own namespace
+            ModHelper.AddAssembly("RuduenWorkshop", Assembly.GetAssembly(typeof(SpellforgeCharacterCardController))); // replace with your own namespace
         }
 
-        protected HeroTurnTakerController Wordsmith { get { return FindHero("Wordsmith"); } }
+        protected HeroTurnTakerController Spellforge { get { return FindHero("Spellforge"); } }
 
         [Test()]
         public void TestModWorks()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Megalopolis");
 
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
-            Assert.IsNotNull(Wordsmith);
-            Assert.IsInstanceOf(typeof(WordsmithTurnTakerController), Wordsmith);
-            Assert.IsInstanceOf(typeof(WordsmithCharacterCardController), Wordsmith.CharacterCardController);
+            Assert.IsNotNull(Spellforge);
+            Assert.IsInstanceOf(typeof(SpellforgeTurnTakerController), Spellforge);
+            Assert.IsInstanceOf(typeof(SpellforgeCharacterCardController), Spellforge.CharacterCardController);
 
-            Assert.AreEqual(26, Wordsmith.CharacterCard.HitPoints);
+            Assert.AreEqual(26, Spellforge.CharacterCard.HitPoints);
         }
 
         [Test()]
@@ -42,24 +55,24 @@ namespace RuduenModsTest
         {
             IEnumerable<string> setupItems = new List<string>()
             {
-                "BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis"
+                "BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
-                { "WordsmithCharacter", "WordsmithDefineCharacter" }
+                { "SpellforgeCharacter", "SpellforgeDefineCharacter" }
             };
             SetupGameController(setupItems, promoIdentifiers: promos);
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(mdp);
-            UsePower(Wordsmith);
+            UsePower(Spellforge);
             QuickHPCheck(-1);
         }
 
@@ -68,11 +81,11 @@ namespace RuduenModsTest
         {
             IEnumerable<string> setupItems = new List<string>()
             {
-                "BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis"
+                "BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
-                { "WordsmithCharacter", "WordsmithDefineCharacter" }
+                { "SpellforgeCharacter", "SpellforgeDefineCharacter" }
             };
             SetupGameController(setupItems, promoIdentifiers: promos);
 
@@ -84,10 +97,10 @@ namespace RuduenModsTest
             UsePower(legacy);
             UsePower(legacy);
 
-            DecisionSelectCards = new List<Card>() { prefix, null, Wordsmith.CharacterCard };
+            DecisionSelectCards = new List<Card>() { prefix, null, Spellforge.CharacterCard };
 
-            QuickHPStorage(Wordsmith.CharacterCard);
-            UsePower(Wordsmith);
+            QuickHPStorage(Spellforge.CharacterCard);
+            UsePower(Spellforge);
             QuickHPCheck(-1);
         }
 
@@ -96,11 +109,11 @@ namespace RuduenModsTest
         {
             IEnumerable<string> setupItems = new List<string>()
             {
-                "BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis"
+                "BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
-                { "WordsmithCharacter", "WordsmithDefineCharacter" }
+                { "SpellforgeCharacter", "SpellforgeDefineCharacter" }
             };
             SetupGameController(setupItems, promoIdentifiers: promos);
 
@@ -110,11 +123,11 @@ namespace RuduenModsTest
             UsePower(legacy);
             UsePower(legacy);
 
-            DecisionSelectCards = new List<Card>() { null, suffix, Wordsmith.CharacterCard };
+            DecisionSelectCards = new List<Card>() { null, suffix, Spellforge.CharacterCard };
 
-            QuickHPStorage(Wordsmith.CharacterCard);
-            UsePower(Wordsmith);
-            QuickHPCheck(-1); // Hit for 4, healed 3. 
+            QuickHPStorage(Spellforge.CharacterCard);
+            UsePower(Spellforge);
+            QuickHPCheck(-1); // Hit for 4, healed 3.
         }
 
         [Test()]
@@ -122,11 +135,11 @@ namespace RuduenModsTest
         {
             IEnumerable<string> setupItems = new List<string>()
             {
-                "BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis"
+                "BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis"
             };
             Dictionary<string, string> promos = new Dictionary<string, string>
             {
-                { "WordsmithCharacter", "WordsmithDefineCharacter" }
+                { "SpellforgeCharacter", "SpellforgeDefineCharacter" }
             };
             SetupGameController(setupItems, promoIdentifiers: promos);
 
@@ -137,23 +150,23 @@ namespace RuduenModsTest
             UsePower(legacy);
             UsePower(legacy);
 
-            DecisionSelectCards = new List<Card>() { prefix, suffix, Wordsmith.CharacterCard };
+            DecisionSelectCards = new List<Card>() { prefix, suffix, Spellforge.CharacterCard };
 
-            DealDamage(Wordsmith, Wordsmith.CharacterCard, 4, DamageType.Melee);
+            DealDamage(Spellforge, Spellforge.CharacterCard, 4, DamageType.Melee);
 
-            QuickHPStorage(Wordsmith.CharacterCard);
-            UsePower(Wordsmith);
-            QuickHPCheck(2); // Hit for 1, healed 3. 
+            QuickHPStorage(Spellforge.CharacterCard);
+            UsePower(Spellforge);
+            QuickHPCheck(2); // Hit for 1, healed 3.
         }
 
         [Test()]
         public void TestEssenceNoDiscard()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
@@ -161,17 +174,17 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
             PlayCard("Ray");
-            QuickHPCheck(-4);
+            QuickHPCheck(CardDamage["Ray"]);
         }
 
         [Test()]
         public void TestEssenceDiscardPrefix()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Inspired");
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -180,17 +193,17 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
             PlayCard("Ray");
-            QuickHPCheck(-5);
+            QuickHPCheck(CardDamage["Inspired"] + CardDamage["Ray"]);
         }
 
         [Test()]
         public void TestEssenceDiscardSuffix()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("OfDisruption");
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
@@ -199,17 +212,17 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
             PlayCard("Ray");
-            QuickHPCheck(-5); // 4 base damage, 1 self damage.
+            QuickHPCheck(CardDamage["Ray"] + CardDamage["OfDisruption"]); // 4 base damage, 1 self damage.
         }
 
         [Test()]
         public void TestEssenceDiscardPrefixSuffix()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Inspired");
             PutInHand("OfDisruption");
 
@@ -219,22 +232,20 @@ namespace RuduenModsTest
 
             QuickHPStorage(mdp);
             PlayCard("Ray");
-            QuickHPCheck(-7); // 5 base damage, 2 self damage.
+            QuickHPCheck(CardDamage["Inspired"] + CardDamage["Ray"] + CardDamage["Inspired"] + CardDamage["OfDisruption"]); // 5 base damage, 2 self damage.
         }
 
         [Test()]
         [Category("DiscardModifier")]
         public void TestDiscardControlled()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "TheBlock");
 
             StartGame();
 
             UsePower(legacy);
-            UsePower(legacy);
-            UsePower(legacy);
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Controlled");
             PutInHand("OfResonance");
 
@@ -242,20 +253,20 @@ namespace RuduenModsTest
 
             Card play = PutInHand("Impact");
 
-            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            QuickHPStorage(Spellforge.CharacterCard, legacy.CharacterCard, mdp);
             PlayCard(play);
-            QuickHPCheck(-1, -1, -8); // 1 controlled. 4 boosted to MDP, doubled by Resonance.
+            QuickHPCheck(CardDamage["Controlled"], CardDamage["Controlled"], CardDamage["Impact"] - 1 + CardDamage["OfResonance"] - 1); // 1 controlled. 4 boosted to MDP, doubled by Resonance.
         }
 
         [Test()]
         [Category("DiscardModifier")]
         public void TestDiscardInspired()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "TheBlock");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Inspired");
             PutInHand("OfResonance");
 
@@ -263,22 +274,24 @@ namespace RuduenModsTest
 
             Card play = PutInHand("Impact");
 
-            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            QuickHPStorage(Spellforge.CharacterCard, legacy.CharacterCard, mdp);
             PlayCard(play);
-            QuickHPCheck(-2, -2, -4); // 1 controlled. 2 boosted to MDP, doubled by Resonance.
+            QuickHPCheck(CardDamage["Inspired"] + CardDamage["Impact"],
+                CardDamage["Inspired"] + CardDamage["Impact"],
+                CardDamage["Inspired"] + CardDamage["Impact"] + CardDamage["Inspired"] + CardDamage["OfResonance"]); // 1 controlled. 2 boosted to MDP, doubled by Resonance.
         }
 
         [Test()]
         [Category("DiscardModifier")]
         public void TestDiscardPiercing()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "TheBlock");
 
             StartGame();
 
             PutIntoPlay("DefensiveDisplacement");
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Piercing");
             PutInHand("OfResonance");
 
@@ -286,20 +299,20 @@ namespace RuduenModsTest
 
             Card play = PutInHand("Impact");
 
-            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            QuickHPStorage(Spellforge.CharacterCard, legacy.CharacterCard, mdp);
             PlayCard(play);
-            QuickHPCheck(-1, -1, -2); // 1 base and irreducible. Self-damage is also irreducible.
+            QuickHPCheck(CardDamage["Impact"], CardDamage["Impact"], CardDamage["Impact"] + CardDamage["OfResonance"]); // 1 base and irreducible. Self-damage is also irreducible.
         }
 
         [Test()]
         [Category("DiscardModifier")]
         public void TestDiscardOfDisruption()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Inspired");
             PutInHand("OfDisruption");
 
@@ -307,93 +320,96 @@ namespace RuduenModsTest
 
             Card play = PutInHand("Impact");
 
-
-            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            QuickHPStorage(Spellforge.CharacterCard, legacy.CharacterCard, mdp);
             PlayCard(play);
-            QuickHPCheck(-2, -2, -4); // 2 base damage, 2 targetted damage for mdp only.
+            QuickHPCheck(CardDamage["Inspired"] + CardDamage["Impact"],
+                 CardDamage["Inspired"] + CardDamage["Impact"],
+                 CardDamage["Inspired"] + CardDamage["Impact"] + CardDamage["Inspired"] + CardDamage["OfDisruption"]); // 2 base damage, 2 targetted damage for mdp only.
         }
 
         [Test()]
         [Category("DiscardModifier")]
         public void TestDiscardOfDisruptionRedirect()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "MrFixer", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Tachyon", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Inspired");
             PutInHand("OfDisruption");
-            PutIntoPlay("DrivingMantis");
+            PutIntoPlay("SynapticInterruption");
 
-            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DestroyCard(GetCardInPlay("MobileDefensePlatform"));
 
-            DecisionSelectTargets = new List<Card>() { fixer.CharacterCard, mdp, Wordsmith.CharacterCard, baron.CharacterCard }.ToArray();
+            Card bb = GetCardInPlay("BaronBladeCharacter");
 
-            DecisionRedirectTarget = mdp;
+            DecisionSelectTargets = new List<Card>() { tachyon.CharacterCard, bb, Spellforge.CharacterCard, baron.CharacterCard }.ToArray();
+
+            DecisionRedirectTarget = bb;
 
             Card play = PutInHand("Impact");
 
-
-            QuickHPStorage(Wordsmith.CharacterCard, fixer.CharacterCard, mdp);
+            QuickHPStorage(Spellforge.CharacterCard, tachyon.CharacterCard, bb);
             PlayCard(play);
-            QuickHPCheck(-2, 0, -8); // 2 base damage, 2 + 2 redirected to MDP + trigger, 2+2 direct to MDP without trigger.
+            QuickHPCheck(CardDamage["Inspired"] + CardDamage["Impact"],
+                0,
+                (CardDamage["Inspired"] + CardDamage["Impact"] + CardDamage["Inspired"] + CardDamage["OfDisruption"]) * 2); // 2 base damage, 2 + 2 redirected to MDP + trigger, 2+2 direct to MDP without trigger.
         }
 
         [Test()]
         [Category("DiscardModifier")]
         public void TestDiscardOfHealing()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Inspired");
             PutInHand("OfHealing");
-            DealDamage(Wordsmith, Wordsmith.CharacterCard, 5, DamageType.Melee);
+            DealDamage(Spellforge, Spellforge.CharacterCard, 5, DamageType.Melee);
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
-
-            QuickHPStorage(Wordsmith.CharacterCard, mdp);
+            QuickHPStorage(Spellforge.CharacterCard, mdp);
             PlayCard("Impact");
-            QuickHPCheck(1, -2); // 2 damage, 3 healing to self; 2 damage to enemy.
+            QuickHPCheck(CardDamage["Inspired"] + CardDamage["Impact"] + CardDamage["OfHealing"], CardDamage["Inspired"] + CardDamage["Impact"]); // 2 damage, 3 healing to self; 2 damage to enemy.
         }
 
         [Test()]
         [Category("DiscardModifier")]
         public void TestDiscardOfAura()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Inspired");
             PutInHand("OfAura");
             Card play = PutInHand("Impact");
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
-            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
-            QuickHandStorage(Wordsmith, legacy);
+            QuickHPStorage(Spellforge.CharacterCard, legacy.CharacterCard, mdp);
+            QuickHandStorage(Spellforge, legacy);
 
             PlayCard(play);
 
-            QuickHPCheck(-2, -2, -2); // 3 Damage each due to Inspired. 
-            QuickHandCheck(-2, 1); // 3 used, 1 drawn for Wordsmith, 1 drawn for others.
+            QuickHPCheck(CardDamage["Inspired"] + CardDamage["Impact"], CardDamage["Inspired"] + CardDamage["Impact"], CardDamage["Inspired"] + CardDamage["Impact"]); // 3 Damage each due to Inspired.
+            QuickHandCheck(-2, 1); // 3 used, 1 drawn for Spellforge, 1 drawn for others.
         }
 
         [Test()]
         [Category("DiscardModifier")]
         public void TestDiscardOfResonance()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "Megalopolis");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "Megalopolis");
 
             StartGame();
 
-            DiscardAllCards(Wordsmith);
+            DiscardAllCards(Spellforge);
             PutInHand("Inspired");
             PutInHand("OfResonance");
 
@@ -401,16 +417,18 @@ namespace RuduenModsTest
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
-            QuickHPStorage(Wordsmith.CharacterCard, legacy.CharacterCard, mdp);
+            QuickHPStorage(Spellforge.CharacterCard, legacy.CharacterCard, mdp);
             PlayCard(play);
-            QuickHPCheck(-2, -2, -4); // 2 base damage, 2 targetted damage for mdp only.
+            QuickHPCheck(CardDamage["Inspired"] + CardDamage["Impact"],
+                CardDamage["Inspired"] + CardDamage["Impact"],
+                CardDamage["Inspired"] + CardDamage["Impact"] + CardDamage["Inspired"] + CardDamage["OfResonance"]); //  2 boosted to MDP, doubled by Resonance.
         }
 
         [Test]
         [Category("DiscardModifier")]
         public void TestPlayControlled()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "TheBlock");
 
             StartGame();
             Card[] cards = FindCardsWhere((Card c) => c.Identifier == "Inspired").ToArray();
@@ -419,7 +437,7 @@ namespace RuduenModsTest
 
             DecisionSelectCards = cards;
 
-            QuickHandStorage(Wordsmith);
+            QuickHandStorage(Spellforge);
             PlayCard("Controlled");
             QuickHandCheck(3); // 3 cards played, 6 cards drawn.
         }
@@ -428,7 +446,7 @@ namespace RuduenModsTest
         [Category("DiscardModifier")]
         public void TestPlayInspired()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Legacy", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Legacy", "TheBlock");
 
             StartGame();
             Card[] cards = FindCardsWhere((Card c) => c.Identifier == "Inspired").ToArray();
@@ -438,7 +456,7 @@ namespace RuduenModsTest
 
             DecisionSelectCards = cards;
 
-            QuickHandStorage(Wordsmith);
+            QuickHandStorage(Spellforge);
             PlayCard("Inspired");
             QuickHandCheck(2); // 1 cards played, 3 cards drawn.
         }
@@ -447,14 +465,14 @@ namespace RuduenModsTest
         [Category("DiscardModifier")]
         public void TestPlayPiercing()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "Ra", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "Ra", "TheBlock");
 
             StartGame();
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             // TODO: Find a better option!
-            // For whatever reason, the power selection logic is always defaulting to Wordsmith's, so just consume it so it can default otherwise.
-            UsePower(Wordsmith);
+            // For whatever reason, the power selection logic is always defaulting to Spellforge's, so just consume it so it can default otherwise.
+            UsePower(Spellforge);
 
             DecisionSelectTarget = mdp;
 
@@ -467,15 +485,14 @@ namespace RuduenModsTest
         [Category("DiscardModifier")]
         public void TestPlayOfAura()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "TheBlock");
 
             StartGame();
-
 
             Card card = PutInHand("OfAura");
             Card environment = PutIntoPlay("DefensiveDisplacement");
 
-            QuickHandStorage(Wordsmith);
+            QuickHandStorage(Spellforge);
             PlayCard(card);
             QuickHandCheckZero(); // One played, one drawn.
             AssertInTrash(environment); // Destroyed.
@@ -485,14 +502,14 @@ namespace RuduenModsTest
         [Category("DiscardModifier")]
         public void TestPlayOfDisruption()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "TheBlock");
 
             StartGame();
 
             Card card = PutInHand("OfDisruption");
             Card ongoing = PutIntoPlay("LivingForceField");
 
-            QuickHandStorage(Wordsmith);
+            QuickHandStorage(Spellforge);
             PlayCard(card);
             QuickHandCheckZero(); // One played, one drawn.
             AssertInTrash(ongoing); // Destroyed.
@@ -502,18 +519,18 @@ namespace RuduenModsTest
         [Category("DiscardModifier")]
         public void TestPlayOfHealing()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "TheBlock");
 
             StartGame();
 
             Card card = PutInHand("OfHealing");
 
-            DealDamage(Wordsmith, Wordsmith.CharacterCard, 5, DamageType.Melee);
+            DealDamage(Spellforge, Spellforge.CharacterCard, 5, DamageType.Melee);
 
-            QuickHPStorage(Wordsmith);
-            QuickHandStorage(Wordsmith);
+            QuickHPStorage(Spellforge);
+            QuickHandStorage(Spellforge);
             PlayCard(card);
-            QuickHPCheck(2); // Heal 2. 
+            QuickHPCheck(2); // Heal 2.
             QuickHandCheckZero(); // One played, one drawn.
         }
 
@@ -521,24 +538,24 @@ namespace RuduenModsTest
         [Category("DiscardModifier")]
         public void TestPlayOfResonance()
         {
-            SetupGameController("BaronBlade", "RuduenWorkshop.Wordsmith", "TheBlock");
+            SetupGameController("BaronBlade", "RuduenWorkshop.Spellforge", "TheBlock");
 
             StartGame();
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
             // TODO: Find a better option!
-            // For whatever reason, the power selection logic is always defaulting to Wordsmith's, so just consume it so it can default otherwise.
+            // For whatever reason, the power selection logic is always defaulting to Spellforge's, so just consume it so it can default otherwise.
 
             DecisionSelectTarget = mdp;
 
             Card card = PutInHand("OfResonance");
 
-            DealDamage(Wordsmith, Wordsmith.CharacterCard, 5, DamageType.Melee);
+            DealDamage(Spellforge, Spellforge.CharacterCard, 5, DamageType.Melee);
 
             QuickHPStorage(mdp);
-            QuickHandStorage(Wordsmith);
+            QuickHandStorage(Spellforge);
             PlayCard(card);
-            QuickHPCheck(-2); // Deal 2. 
+            QuickHPCheck(-2); // Deal 2.
             QuickHandCheckZero(); // One played, one drawn.
         }
     }

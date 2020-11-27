@@ -98,7 +98,6 @@ namespace RuduenModsTest
             AssertInTrash(spell); // Spell  used.
         }
 
-
         [Test()]
         public void TestInnatePowerB()
         {
@@ -189,7 +188,6 @@ namespace RuduenModsTest
 
             StartGame();
 
-
             Card equipment = PlayCard("HammerCharm");
 
             DecisionSelectCardToPlay = equipment;
@@ -216,14 +214,13 @@ namespace RuduenModsTest
 
             StartGame();
 
-
             Card equipment = PutInHand("HammerCharm");
 
             DecisionSelectCard = equipment;
 
             QuickHandStorage(BreachMage);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate.
-            QuickHandCheck(-1); // Net card play. 
+            QuickHandCheck(-1); // Net card play.
             AssertIsInPlay(equipment); // Card used.
         }
 
@@ -361,7 +358,6 @@ namespace RuduenModsTest
             DecisionSelectTarget = mdp;
             DecisionDestroyCard = ongoing;
             DecisionSelectFunction = 1;
-
 
             QuickHPStorage(mdp);
             UsePower(BreachMage.CharacterCard, 0); // Default Innate. Cast.
