@@ -26,7 +26,7 @@ namespace RuduenWorkshop.Knyfe
             {
                 turnTakerName = this.Card.Title;
             }
-            OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "HealResponse", "Whenever " + this.Card.Title + " is dealt damage, they regain " + powerNumeral + " HP.", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
+            OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "HealResponse", "Whenever " + this.Card.AlternateTitleOrTitle + " is dealt damage, they regain " + powerNumeral + " HP.", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
             onDealDamageStatusEffect.TargetCriteria.IsSpecificCard = this.CharacterCard;
             onDealDamageStatusEffect.SourceCriteria.IsSpecificCard = this.CharacterCard;
             onDealDamageStatusEffect.CanEffectStack = true;

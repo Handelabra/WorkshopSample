@@ -27,7 +27,7 @@ namespace RuduenWorkshop.BreachMage
             }
             else
             {
-                coroutine = this.GameController.SendMessageAction(this.Card.Title + " has no deck or trash to search.", Priority.Medium, this.GetCardSource(null), null, true);
+                coroutine = this.GameController.SendMessageAction(this.Card.AlternateTitleOrTitle + " has no deck or trash to search.", Priority.Medium, this.GetCardSource(null), null, true);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 

@@ -1,4 +1,5 @@
 ﻿{
+
   "AbsoluteZero": [
     {
       "identifier": "AbsoluteZeroCharacter",
@@ -29,6 +30,39 @@
       "complexity": 3,
       "openingLines": {
         "default": "Sorry, I don't have a cold pun in storage right now."
+      }
+    }
+  ],
+  "TheArgentAdept": [
+    {
+      "identifier": "TheArgentAdeptCharacter",
+      "promoIdentifier": "TheArgentAdeptAriaCharacter",
+      "count": 1,
+      "title": "The Argent Adept",
+      "body": [
+        "Aria"
+      ],
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "character": true,
+      "powers": "Play a card. Activate that card's [u]perform[/u] text. Activate that card's [u]accompany[/u] text.",
+      "hitpoints": 31,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "TheArgentAdept" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3,
+      "openingLines": {
+        "default": "I wonder if I can carry a tune all the way through this..."
       }
     }
   ],

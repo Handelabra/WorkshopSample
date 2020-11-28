@@ -33,7 +33,7 @@ namespace RuduenWorkshop.Inquirer
                 Card card = selectCardDecision.SelectedCard;
                 if (selectCardDecision.Choices.Count<Card>() == 1)
                 {
-                    coroutine = this.GameController.SendMessageAction(card.Title + " is the only distortion card in play.", Priority.Low, this.GetCardSource(null), selectCardDecision.Choices, true);
+                    coroutine = this.GameController.SendMessageAction(card.AlternateTitleOrTitle + " is the only distortion card in play.", Priority.Low, this.GetCardSource(null), selectCardDecision.Choices, true);
                     if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                 }
                 coroutine = this.GameController.MoveCard(this.TurnTakerController, card, card.NativeDeck, false, false, true, null, false, null, null, null, false, false, null, false, false, false, false, this.GetCardSource(null));
@@ -49,7 +49,7 @@ namespace RuduenWorkshop.Inquirer
             }
             else
             {
-                coroutine = this.GameController.SendMessageAction(this.Card.Title + " has no deck to play cards from.", Priority.Medium, this.GetCardSource(null), null, true);
+                coroutine = this.GameController.SendMessageAction(this.Card.AlternateTitleOrTitle + " has no deck to play cards from.", Priority.Medium, this.GetCardSource(null), null, true);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }

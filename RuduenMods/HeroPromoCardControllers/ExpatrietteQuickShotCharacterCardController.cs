@@ -24,7 +24,7 @@ namespace RuduenWorkshop.Expatriette
 
             if (this.HeroTurnTaker.Deck.IsEmpty)
             {
-                coroutine = this.GameController.SendMessageAction(this.TurnTaker.Name + " cannot discard a card nor discard the top card of their deck, so" + this.Card.Title + " has no effect.", Priority.Medium, this.GetCardSource());
+                coroutine = this.GameController.SendMessageAction(this.TurnTaker.Name + " cannot discard a card nor discard the top card of their deck, so" + this.Card.AlternateTitleOrTitle + " has no effect.", Priority.Medium, this.GetCardSource());
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
             else

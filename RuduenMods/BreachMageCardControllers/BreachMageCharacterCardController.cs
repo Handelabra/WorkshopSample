@@ -52,7 +52,7 @@ namespace RuduenWorkshop.BreachMage
                     new Function(this.DecisionMaker, "Draw a card", SelectionType.DrawCard, () => this.DrawCard(this.HeroTurnTaker), this.CanDrawCards(this.DecisionMaker), this.TurnTaker.Name + " cannot activate any Cast effects, so they must draw a card.", null),
                     new Function(this.DecisionMaker, "Activate a card's Cast effect and destroy that card", SelectionType.ActivateAbility, () => this.CastAndDestroySpell(this.DecisionMaker), this.GameController.GetActivatableAbilitiesInPlay(this.DecisionMaker, "cast", false).Count() > 0, this.TurnTaker.Name + " cannot draw any cards, so they must activate a card's Cast effect and destroy that card.", null)
                 };
-                SelectFunctionDecision selectFunction = new SelectFunctionDecision(this.GameController, this.DecisionMaker, list, false, null, this.TurnTaker.Name + " cannot draw any cards nor activate any Cast effects, so" + this.Card.Title + " has no effect.", null, this.GetCardSource(null));
+                SelectFunctionDecision selectFunction = new SelectFunctionDecision(this.GameController, this.DecisionMaker, list, false, null, this.TurnTaker.Name + " cannot draw any cards nor activate any Cast effects, so" + this.Card.AlternateTitleOrTitle + " has no effect.", null, this.GetCardSource(null));
                 coroutine = this.GameController.SelectAndPerformFunction(selectFunction, null, null);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }

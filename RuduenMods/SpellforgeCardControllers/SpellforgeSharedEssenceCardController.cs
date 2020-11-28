@@ -41,7 +41,7 @@ namespace RuduenWorkshop.Spellforge
                     // Type matches, everything should be implemented now!
                     SpellforgeSharedModifierCardController wcc = (SpellforgeSharedModifierCardController)this.FindCardController(c);
                     this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(cardSource));
-                    spacedPrefixTitle = " " + c.Title;
+                    spacedPrefixTitle = " " + c.Definition.AlternateTitle;
                 }
             }
 
@@ -59,13 +59,13 @@ namespace RuduenWorkshop.Spellforge
                     // Type matches, everything should be implemented now!
                     SpellforgeSharedModifierCardController wcc = (SpellforgeSharedModifierCardController)this.FindCardController(c);
                     this.AddToTemporaryTriggerList(wcc.AddModifierTrigger(cardSource));
-                    spacedSuffixTitle = " " + c.Title;
+                    spacedSuffixTitle = " " + c.Definition.AlternateTitle;
                 }
             }
 
             if (spacedPrefixTitle.Length > 0 || spacedSuffixTitle.Length > 0)
             {
-                coroutine = this.GameController.SendMessageAction("{Spellforge} uses" + spacedPrefixTitle + " " + this.Card.Title + spacedSuffixTitle + "!", Priority.Low, cardSource);
+                coroutine = this.GameController.SendMessageAction("{Spellforge} uses" + spacedPrefixTitle + " " + this.Card.AlternateTitleOrTitle + spacedSuffixTitle + "!", Priority.Low, cardSource);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 

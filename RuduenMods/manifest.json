@@ -14,6 +14,7 @@
   },
   "variants": {
     "AbsoluteZero": [ "AbsoluteZeroOverchillCharacter" ],
+    "TheArgentAdept": [ "TheArgentAdeptAriaCharacter" ],
     "Bunker": [ "BunkerFullSalvoCharacter" ],
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],

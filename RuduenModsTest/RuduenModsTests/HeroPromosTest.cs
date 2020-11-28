@@ -67,6 +67,65 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestArgentAdeptPlaySafe()
+        {
+            SetupGameController("BaronBlade", "TheArgentAdept/RuduenWorkshop.TheArgentAdeptAriaCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(adept.CharacterCard.IsPromoCard);
+
+            Card card = PutInHand("DrakesPipes");
+
+            DecisionSelectCard = card;
+
+            UsePower(adept);
+            AssertInPlayArea(adept, card);
+        }
+
+        [Test()]
+        public void TestArgentAdeptPlayPerform()
+        {
+            SetupGameController("BaronBlade", "TheArgentAdept/RuduenWorkshop.TheArgentAdeptAriaCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(adept.CharacterCard.IsPromoCard);
+
+            Card card = PutInHand("ScherzoOfFrostAndFlame");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTarget = mdp;
+            DecisionSelectCard = card;
+
+            QuickHPStorage(mdp);
+            UsePower(adept);
+            AssertInPlayArea(adept, card);
+            QuickHPCheck(-2);
+        }
+
+        [Test()]
+        public void TestArgentAdeptPlayPerformAccompany()
+        {
+            SetupGameController("BaronBlade", "TheArgentAdept/RuduenWorkshop.TheArgentAdeptAriaCharacter", "Legacy", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(adept.CharacterCard.IsPromoCard);
+
+            Card card = PutInHand("SyncopatedOnslaught");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCards = new Card[] { card, adept.CharacterCard, mdp, mdp };
+
+            QuickHPStorage(mdp);
+            UsePower(adept);
+            AssertInPlayArea(adept, card);
+            QuickHPCheck(-2);
+        }
+
+
+        [Test()]
         public void TestBunkerNoOtherPower()
         {
             SetupGameController("BaronBlade", "Bunker/RuduenWorkshop.BunkerFullSalvoCharacter", "TheBlock");

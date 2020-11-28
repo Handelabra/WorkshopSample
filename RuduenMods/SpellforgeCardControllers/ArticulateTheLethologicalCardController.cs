@@ -32,7 +32,7 @@ namespace RuduenWorkshop.Spellforge
                     this.HeroTurnTaker.Deck.Cards.Count() > 0),
                 };
 
-            SelectFunctionDecision selectFunction = new SelectFunctionDecision(this.GameController, this.DecisionMaker, list, false, null, this.TurnTaker.Name + " does not have any cards in their deck, so" + this.Card.Title + " has no effect.", null, this.GetCardSource(null));
+            SelectFunctionDecision selectFunction = new SelectFunctionDecision(this.GameController, this.DecisionMaker, list, false, null, this.TurnTaker.Name + " does not have any cards in their deck, so" + this.Card.AlternateTitleOrTitle + " has no effect.", null, this.GetCardSource(null));
             coroutine = this.GameController.SelectAndPerformFunction(selectFunction, null, null);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
