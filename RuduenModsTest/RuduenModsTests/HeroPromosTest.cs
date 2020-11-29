@@ -124,6 +124,46 @@ namespace RuduenModsTest
             QuickHPCheck(-2);
         }
 
+        [Test()]
+        public void TestBenchmarkNoSoftware()
+        {
+            SetupGameController("BaronBlade", "Benchmark/RuduenWorkshop.BenchmarkDownloadManagerCharacter", "Legacy", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(bench.CharacterCard.IsPromoCard);
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            UsePower(legacy);
+            UsePower(bench);
+            QuickHPCheck(-1);
+        }
+
+        [Test()]
+        public void TestBenchmarkSoftwareAndIncap()
+        {
+            SetupGameController("BaronBlade", "Benchmark/RuduenWorkshop.BenchmarkDownloadManagerCharacter", "Legacy", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(bench.CharacterCard.IsPromoCard);
+            Card software = PutIntoPlay("AutoTargetingProtocol");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            UsePower(bench);
+            GoToStartOfTurn(bench);
+            QuickHPCheck(-1);
+            AssertInPlayArea(bench, software); // Card is in play. 
+
+            DestroyCard(bench.CharacterCard);
+            AssertNotInPlay(software); // Removed after during incap. 
+        }
 
         [Test()]
         public void TestBunkerNoOtherPower()

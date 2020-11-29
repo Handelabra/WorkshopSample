@@ -66,6 +66,39 @@
       }
     }
   ],
+  "Benchmark": [
+    {
+      "identifier": "BenchmarkCharacter",
+      "promoIdentifier": "BenchmarkDownloadManagerCharacter",
+      "count": 1,
+      "title": "Benchmark",
+      "body": [
+        "DownloadManager"
+      ],
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "character": true,
+      "powers": "Select one of your Software cards. Until the end of your next turn, that card is indestructible. Benchmark deals 1 Target Lightning Damage equal to the number of Software cards in play.",
+      "hitpoints": 25,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "Benchmark" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3,
+      "openingLines": {
+        "default": "Hm."
+      }
+    }
+  ],
   "Bunker": [
     {
       "identifier": "BunkerCharacter",
