@@ -209,7 +209,7 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "You may discard a Prefix card to add its [u]Prefix[/u] text to this power. You may discard a Suffix card to apply its [u]Suffix[/u] text to this power. {Spellforge} deals 1 Target 1 Infernal Damage."
+        "You may discard a Prefix card to add its [u]Prefix[/u] text to this power. You may discard a Suffix card to apply its [u]Suffix[/u] text to this power. {Spellforge} deals up to 3 Targets 1 Infernal Damage."
       ],
       "icons": [
         "HasPower",

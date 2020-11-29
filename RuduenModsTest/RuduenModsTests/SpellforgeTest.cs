@@ -69,7 +69,7 @@ namespace RuduenModsTest
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectTarget = mdp;
+            DecisionSelectTargets = new Card[] { mdp, baron.CharacterCard, Spellforge.CharacterCard };
 
             QuickHPStorage(mdp);
             UsePower(Spellforge);
@@ -91,13 +91,14 @@ namespace RuduenModsTest
 
             StartGame();
 
+
             Card prefix = PutInHand("Controlled");
             PutInHand("OfHealing");
             UsePower(legacy);
             UsePower(legacy);
             UsePower(legacy);
 
-            DecisionSelectCards = new List<Card>() { prefix, null, Spellforge.CharacterCard };
+            DecisionSelectCards = new Card[] { prefix, null, Spellforge.CharacterCard, null };
 
             QuickHPStorage(Spellforge.CharacterCard);
             UsePower(Spellforge);
@@ -123,7 +124,7 @@ namespace RuduenModsTest
             UsePower(legacy);
             UsePower(legacy);
 
-            DecisionSelectCards = new List<Card>() { null, suffix, Spellforge.CharacterCard };
+            DecisionSelectCards = new List<Card>() { null, suffix, Spellforge.CharacterCard, null };
 
             QuickHPStorage(Spellforge.CharacterCard);
             UsePower(Spellforge);
@@ -150,7 +151,7 @@ namespace RuduenModsTest
             UsePower(legacy);
             UsePower(legacy);
 
-            DecisionSelectCards = new List<Card>() { prefix, suffix, Spellforge.CharacterCard };
+            DecisionSelectCards = new List<Card>() { prefix, suffix, Spellforge.CharacterCard, null };
 
             DealDamage(Spellforge, Spellforge.CharacterCard, 4, DamageType.Melee);
 

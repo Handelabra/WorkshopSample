@@ -26,12 +26,12 @@ namespace RuduenWorkshop.AbsoluteZero
             coroutine = this.GameController.DealDamageToTarget(new DamageSource(this.GameController, this.CharacterCard), this.CharacterCard, powerNumeral, DamageType.Cold, cardSource: this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Play card.
+            // Play equipment card.
             coroutine = this.GameController.SelectAndPlayCardFromHand(this.HeroTurnTakerController, false, cardCriteria: new LinqCardCriteria((Card c) => this.IsEquipment(c), "equipment"), storedResults: storedResults, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // No successful card play means destroy.
-            if (storedResults == null || storedResults.Count == 0 || !storedResults.FirstOrDefault().IsSuccessful)
+            if (storedResults.Count == 0 || !storedResults.FirstOrDefault().IsSuccessful)
             {
                 coroutine = this.GameController.SelectAndDestroyCard(this.DecisionMaker, cardCriteria: new LinqCardCriteria((Card c) => this.IsEquipment(c), "equipment"), false, cardSource: this.GetCardSource());
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
