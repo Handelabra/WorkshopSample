@@ -254,7 +254,10 @@ namespace RuduenModsTest
             UsePower(cosmic);
             DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
             DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
-            QuickHPCheck(-6); // Damage was redirected for first, then worn off for second.
+            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
+            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
+            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
+            QuickHPCheck(-6); // Damage was redirected until destroyed, then one more.
             QuickHandCheck(0); // No draw. 
             AssertInTrash(construct);
         }

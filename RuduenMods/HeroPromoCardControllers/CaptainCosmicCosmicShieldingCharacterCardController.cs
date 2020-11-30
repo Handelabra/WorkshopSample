@@ -30,26 +30,32 @@ namespace RuduenWorkshop.CaptainCosmic
             Card selectedCard = this.GetSelectedCard(storedResults);
             if (selectedCard != null)
             {
-                // Reduce all damage to the construct by 1. 
-                ReduceDamageStatusEffect redu = new ReduceDamageStatusEffect(powerNumeral);
-                redu.UntilStartOfNextTurn(this.HeroTurnTaker);
-                redu.TargetCriteria.IsSpecificCard = selectedCard;
+                // Reduce damage to fixed amount.
+                OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "ReduceToDamageResponse", "Whenever " + selectedCard.AlternateTitleOrTitle + " would be dealt damage, reduce that damage to " + powerNumeral + ".", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
+                onDealDamageStatusEffect.TargetCriteria.IsSpecificCard = selectedCard;
+                onDealDamageStatusEffect.CanEffectStack = false;
+                onDealDamageStatusEffect.BeforeOrAfter = BeforeOrAfter.Before;
+                onDealDamageStatusEffect.UntilStartOfNextTurn(this.HeroTurnTaker);
 
-                coroutine = this.GameController.AddStatusEffect(redu, true, this.GetCardSource());
-                if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                coroutine = this.AddStatusEffect(onDealDamageStatusEffect);
+                if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-                // Redirect all hero damage to the construct.
-                RedirectDamageStatusEffect redir = new RedirectDamageStatusEffect();
-                redir.TargetCriteria.IsHero = true;
-                redir.RedirectTarget = selectedCard;
-                redir.CardDestroyedExpiryCriteria.Card = selectedCard;
-                redir.UntilCardLeavesPlay(selectedCard);
-                redir.UntilTargetLeavesPlay(selectedCard);
-                redir.TargetRemovedExpiryCriteria.Card = selectedCard;
-                redir.UntilStartOfNextTurn(this.HeroTurnTaker);
+                // Redirect all damage deal to what's next to the construct to the construct.
+                // Figure out the card it's next to. The GetCardThisCardIsNextTo function is protected, so we have to manually check. 
+                if (selectedCard.Location.IsNextToCard)
+                {
+                    RedirectDamageStatusEffect redir = new RedirectDamageStatusEffect();
+                    redir.TargetCriteria.IsSpecificCard = selectedCard.Location.OwnerCard;
+                    redir.RedirectTarget = selectedCard;
+                    redir.CardDestroyedExpiryCriteria.Card = selectedCard;
+                    redir.UntilCardLeavesPlay(selectedCard);
+                    redir.UntilTargetLeavesPlay(selectedCard);
+                    redir.TargetRemovedExpiryCriteria.Card = selectedCard;
+                    redir.UntilStartOfNextTurn(this.HeroTurnTaker);
 
-                coroutine = this.GameController.AddStatusEffect(redir, true, this.GetCardSource());
-                if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                    coroutine = this.GameController.AddStatusEffect(redir, true, this.GetCardSource());
+                    if (UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+                }
             }
             else
             {
@@ -57,6 +63,24 @@ namespace RuduenWorkshop.CaptainCosmic
                 coroutine = this.DrawCards(this.DecisionMaker, 1);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
+        }
+
+
+        public IEnumerator ReduceToDamageResponse(DealDamageAction dd, TurnTaker hero, StatusEffect effect, int[] powerNumerals = null)
+        {
+            IEnumerator coroutine;
+            int? powerNumeral = null;
+            if (powerNumerals != null)
+            {
+                powerNumeral = powerNumerals.ElementAtOrDefault(0);
+            }
+            if (powerNumeral == null)
+            {
+                powerNumeral = 1;
+            }
+
+            coroutine = this.GameController.ReduceDamage(dd, dd.Amount - (int)powerNumeral, null, this.GetCardSource());
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

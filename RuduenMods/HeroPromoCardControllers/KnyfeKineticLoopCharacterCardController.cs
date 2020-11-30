@@ -18,6 +18,13 @@ namespace RuduenWorkshop.Knyfe
             string turnTakerName;
             IEnumerator coroutine;
             int powerNumeral = this.GetPowerNumeral(0, 1);
+
+
+            // Draw a card.
+            coroutine = this.GameController.DrawCard(this.HeroTurnTaker);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+            // Set up heal response.
             if (base.TurnTaker.IsHero)
             {
                 turnTakerName = this.TurnTaker.Name;
@@ -26,7 +33,7 @@ namespace RuduenWorkshop.Knyfe
             {
                 turnTakerName = this.Card.Title;
             }
-            OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "HealResponse", "Whenever " + this.Card.AlternateTitleOrTitle + " is dealt damage, they regain " + powerNumeral + " HP.", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
+            OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "HealResponse", "Whenever " + turnTakerName + " is dealt damage, they regain " + powerNumeral + " HP.", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
             onDealDamageStatusEffect.TargetCriteria.IsSpecificCard = this.CharacterCard;
             onDealDamageStatusEffect.SourceCriteria.IsSpecificCard = this.CharacterCard;
             onDealDamageStatusEffect.CanEffectStack = true;
@@ -36,9 +43,6 @@ namespace RuduenWorkshop.Knyfe
             coroutine = this.AddStatusEffect(onDealDamageStatusEffect);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Draw a card.
-            coroutine = this.GameController.DrawCard(this.HeroTurnTaker);
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter
