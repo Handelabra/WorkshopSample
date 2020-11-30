@@ -35,6 +35,11 @@ namespace RuduenWorkshop.CaptainCosmic
                 onDealDamageStatusEffect.TargetCriteria.IsSpecificCard = selectedCard;
                 onDealDamageStatusEffect.CanEffectStack = false;
                 onDealDamageStatusEffect.BeforeOrAfter = BeforeOrAfter.Before;
+                onDealDamageStatusEffect.CardDestroyedExpiryCriteria.Card = selectedCard;
+                onDealDamageStatusEffect.UntilCardLeavesPlay(selectedCard);
+                onDealDamageStatusEffect.UntilTargetLeavesPlay(selectedCard);
+                onDealDamageStatusEffect.TargetRemovedExpiryCriteria.Card = selectedCard;
+                onDealDamageStatusEffect.UntilStartOfNextTurn(this.HeroTurnTaker);
                 onDealDamageStatusEffect.UntilStartOfNextTurn(this.HeroTurnTaker);
 
                 coroutine = this.AddStatusEffect(onDealDamageStatusEffect);
@@ -42,6 +47,7 @@ namespace RuduenWorkshop.CaptainCosmic
 
                 // Redirect all damage deal to what's next to the construct to the construct.
                 // Figure out the card it's next to. The GetCardThisCardIsNextTo function is protected, so we have to manually check. 
+                // TODO: Rework into a different onDealDamageStatusEffect if necessary, since it can be done to future-proof for a theoretical effect which could move constructs to a different target.
                 if (selectedCard.Location.IsNextToCard)
                 {
                     RedirectDamageStatusEffect redir = new RedirectDamageStatusEffect();
@@ -66,7 +72,9 @@ namespace RuduenWorkshop.CaptainCosmic
         }
 
 
+        #pragma warning disable IDE0060 // Remove unused parameter
         public IEnumerator ReduceToDamageResponse(DealDamageAction dd, TurnTaker hero, StatusEffect effect, int[] powerNumerals = null)
+        #pragma warning restore IDE0060 // Remove unused parameter
         {
             IEnumerator coroutine;
             int? powerNumeral = null;

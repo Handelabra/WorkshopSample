@@ -19,7 +19,6 @@ namespace RuduenWorkshop.Knyfe
             IEnumerator coroutine;
             int powerNumeral = this.GetPowerNumeral(0, 1);
 
-
             // Draw a card.
             coroutine = this.GameController.DrawCard(this.HeroTurnTaker);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
@@ -45,10 +44,10 @@ namespace RuduenWorkshop.Knyfe
 
         }
 
-#pragma warning disable IDE0060 // Remove unused parameter
+        #pragma warning disable IDE0060 // Remove unused parameter
 
         public IEnumerator HealResponse(DealDamageAction dd, TurnTaker hero, StatusEffect effect, int[] powerNumerals = null)
-#pragma warning restore IDE0060 // Remove unused parameter
+        #pragma warning restore IDE0060 // Remove unused parameter
         {
             IEnumerator coroutine;
             int? powerNumeral = null;

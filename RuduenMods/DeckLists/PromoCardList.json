@@ -178,7 +178,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "Until the end of your next turn, damage dealt to and by {ChronoRanger} is irreducible. Draw a card.",
+      "powers": "Draw a card. Until the end of your next turn, damage dealt to and by {ChronoRanger} is irreducible.",
       "hitpoints": 30,
       "icons": [ "HasPower", "MakeDamageIrreducible", "DrawCardNow" ],
       "nemesisIdentifiers": [ "ChronoRanger" ],

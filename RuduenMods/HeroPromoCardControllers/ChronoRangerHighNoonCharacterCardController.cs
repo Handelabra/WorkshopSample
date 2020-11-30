@@ -16,6 +16,10 @@ namespace RuduenWorkshop.ChronoRanger
         {
             IEnumerator coroutine;
 
+            // Draw.
+            coroutine = this.DrawCard(this.HeroTurnTaker);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
             // Separate effects for making irreducible, or else it only applies to self-inflicted.
 
             MakeDamageIrreducibleStatusEffect makeDamageIrreducibleA = new MakeDamageIrreducibleStatusEffect();
@@ -30,9 +34,6 @@ namespace RuduenWorkshop.ChronoRanger
             coroutine = this.AddStatusEffect(makeDamageIrreducibleB, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Draw.
-            coroutine = this.DrawCard(this.HeroTurnTaker);
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }
