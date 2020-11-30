@@ -206,6 +206,60 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestCaptainCosmicNoConstruct()
+        {
+            SetupGameController("BaronBlade", "CaptainCosmic/RuduenWorkshop.CaptainCosmicCosmicShieldingCharacter", "Legacy", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(cosmic.CharacterCard.IsPromoCard);
+
+            QuickHandStorage(cosmic);
+            UsePower(cosmic);
+            QuickHandCheck(1);
+        }
+
+        [Test()]
+        public void TestCaptainCosmicConstruct()
+        {
+            SetupGameController("BaronBlade", "CaptainCosmic/RuduenWorkshop.CaptainCosmicCosmicShieldingCharacter", "Legacy", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(cosmic.CharacterCard.IsPromoCard);
+
+            Card construct=PutIntoPlay("CosmicWeapon");
+            QuickHandStorage(cosmic);
+            QuickHPStorage(construct, cosmic.CharacterCard);
+            UsePower(cosmic);
+            DealDamage(legacy, cosmic.CharacterCard, 2, DamageType.Melee);
+            GoToStartOfTurn(cosmic);
+            DealDamage(legacy, cosmic.CharacterCard, 2, DamageType.Melee);
+            QuickHPCheck(-1, -2); // Damage was reduced for first, then worn off for second.
+            QuickHandCheck(0); // No draw. 
+        }
+
+        [Test()]
+        public void TestCaptainCosmicConstructDestroyed()
+        {
+            SetupGameController("BaronBlade", "CaptainCosmic/RuduenWorkshop.CaptainCosmicCosmicShieldingCharacter", "Legacy", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(cosmic.CharacterCard.IsPromoCard);
+
+            Card construct = PutIntoPlay("CosmicWeapon");
+            QuickHandStorage(cosmic);
+            QuickHPStorage(cosmic.CharacterCard);
+            UsePower(cosmic);
+            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
+            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
+            QuickHPCheck(-6); // Damage was redirected for first, then worn off for second.
+            QuickHandCheck(0); // No draw. 
+            AssertInTrash(construct);
+        }
+
+        [Test()]
         public void TestChronoRanger()
         {
             SetupGameController("BaronBlade", "ChronoRanger/RuduenWorkshop.ChronoRangerHighNoonCharacter", "TheBlock");

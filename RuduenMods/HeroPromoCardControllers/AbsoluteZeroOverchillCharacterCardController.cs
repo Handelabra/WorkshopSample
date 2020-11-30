@@ -16,14 +16,17 @@ namespace RuduenWorkshop.AbsoluteZero
 
         public override IEnumerator UsePower(int index = 0)
         {
-            int powerNumeral = this.GetPowerNumeral(0, 1); // Amount of damage.
+            List<int> powerNumerals = new List<int>(){
+                this.GetPowerNumeral(0, 1), // Amount of damage.
+                this.GetPowerNumeral(1, 2) // Cards Drawn.
+            };
 
             List<PlayCardAction> storedResults = new List<PlayCardAction>();
 
             IEnumerator coroutine;
 
             // Deal self damage.
-            coroutine = this.GameController.DealDamageToTarget(new DamageSource(this.GameController, this.CharacterCard), this.CharacterCard, powerNumeral, DamageType.Cold, cardSource: this.GetCardSource(null));
+            coroutine = this.GameController.DealDamageToTarget(new DamageSource(this.GameController, this.CharacterCard), this.CharacterCard, powerNumerals[0], DamageType.Cold, cardSource: this.GetCardSource(null));
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Play equipment card.
@@ -38,7 +41,7 @@ namespace RuduenWorkshop.AbsoluteZero
             }
 
             // Draw 2 cards.
-            coroutine = this.DrawCards(this.HeroTurnTakerController, 2);
+            coroutine = this.DrawCards(this.HeroTurnTakerController, powerNumerals[1]);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
