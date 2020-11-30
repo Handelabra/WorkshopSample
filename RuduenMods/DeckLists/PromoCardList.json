@@ -209,7 +209,7 @@
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Until the end of the turn, reduce damage dealt by {Expatriette} by 1. Play the top card of your deck. Use a power.",
+      "powers": "Until the end of the turn, reduce damage dealt by {Expatriette} by 1. Play the top card of your deck. You may use an additional power this turn.",
       "hitpoints": 27,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "Expatriette" ],
@@ -354,6 +354,37 @@
       }
     }
   ],
+  "Parse": [
+    {
+      "identifier": "ParseCharacter",
+      "promoIdentifier": "ParseLaplaceAnalysisCharacter",
+      "count": 1,
+      "title": "Parse",
+      "body": [ "Laplace Analysis" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Look at the top card a non-Hero Deck. You may shuffle all of the cards from that deck's Trash into that Deck. If you do, {Parse} deals 1 Target damage equal to the number of cards shuffled in this way.",
+      "hitpoints": 27,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "Parse" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "..."
+      }
+    }
+  ],
   "Tachyon": [
     {
       "identifier": "TachyonCharacter",
@@ -367,7 +398,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "Play the top card of your discard. Move the top card of your discard to the bottom of your deck.",
+      "powers": "Play the top card of your Trash. Move the top card of your Trash to the bottom of your deck.",
       "hitpoints": 26,
       "icons": [ "HasPower", "PlayCardNow" ],
       "nemesisIdentifiers": [ "Tachyon" ],

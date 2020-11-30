@@ -44,10 +44,10 @@ namespace RuduenWorkshop.Knyfe
 
         }
 
-        #pragma warning disable IDE0060 // Remove unused parameter
+#pragma warning disable IDE0060 // Remove unused parameter
 
         public IEnumerator HealResponse(DealDamageAction dd, TurnTaker hero, StatusEffect effect, int[] powerNumerals = null)
-        #pragma warning restore IDE0060 // Remove unused parameter
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             IEnumerator coroutine;
             int? powerNumeral = null;

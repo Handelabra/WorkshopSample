@@ -231,7 +231,7 @@ namespace RuduenModsTest
 
             Assert.IsTrue(cosmic.CharacterCard.IsPromoCard);
 
-            Card construct=PutIntoPlay("CosmicWeapon");
+            Card construct = PutIntoPlay("CosmicWeapon");
             QuickHandStorage(cosmic);
             QuickHPStorage(construct, cosmic.CharacterCard);
             UsePower(cosmic);
@@ -299,6 +299,8 @@ namespace RuduenModsTest
             // Equipment Test
             SetupGameController("BaronBlade", "Expatriette/RuduenWorkshop.ExpatrietteQuickShotCharacter", "Megalopolis");
 
+            Assert.IsTrue(expatriette.CharacterCard.IsPromoCard);
+
             StartGame();
 
             Card equipment = PutOnDeck("Pride");
@@ -318,6 +320,7 @@ namespace RuduenModsTest
         {
             // No cards in deck test.
             SetupGameController("BaronBlade", "Expatriette/RuduenWorkshop.ExpatrietteQuickShotCharacter", "Megalopolis");
+            Assert.IsTrue(expatriette.CharacterCard.IsPromoCard);
 
             StartGame();
 
@@ -339,6 +342,7 @@ namespace RuduenModsTest
         {
             // No cards in deck test.
             SetupGameController("BaronBlade", "Knyfe/RuduenWorkshop.KnyfeKineticLoopCharacter", "Megalopolis");
+            Assert.IsTrue(knyfe.CharacterCard.IsPromoCard);
 
             StartGame();
 
@@ -354,6 +358,7 @@ namespace RuduenModsTest
         public void TestKnyfePowerNoDamageDealt()
         {
             SetupGameController("BaronBlade", "Knyfe/RuduenWorkshop.KnyfeKineticLoopCharacter", "TheBlock");
+            Assert.IsTrue(knyfe.CharacterCard.IsPromoCard);
 
             StartGame();
 
@@ -374,6 +379,7 @@ namespace RuduenModsTest
         {
             // Tool in hand. 
             SetupGameController("BaronBlade", "MrFixer/RuduenWorkshop.MrFixerFlowingStrikeCharacter", "Legacy", "Megalopolis");
+            Assert.IsTrue(fixer.CharacterCard.IsPromoCard);
 
             StartGame();
             UsePower(legacy);
@@ -394,6 +400,7 @@ namespace RuduenModsTest
         {
             // Tool not in hand.
             SetupGameController("BaronBlade", "MrFixer/RuduenWorkshop.MrFixerFlowingStrikeCharacter", "Legacy", "Megalopolis");
+            Assert.IsTrue(fixer.CharacterCard.IsPromoCard);
 
             StartGame();
             UsePower(legacy);
@@ -415,6 +422,7 @@ namespace RuduenModsTest
         {
             // Tool not in hand and empty deck.
             SetupGameController("BaronBlade", "MrFixer/RuduenWorkshop.MrFixerFlowingStrikeCharacter", "Legacy", "Megalopolis");
+            Assert.IsTrue(fixer.CharacterCard.IsPromoCard);
 
             StartGame();
             UsePower(legacy);
@@ -434,6 +442,7 @@ namespace RuduenModsTest
         public void TestNightMistPowerDraw()
         {
             SetupGameController("BaronBlade", "NightMist/RuduenWorkshop.NightMistLimitedNumerologyCharacter", "Legacy", "Megalopolis");
+            Assert.IsTrue(mist.CharacterCard.IsPromoCard);
 
             StartGame();
 
@@ -450,9 +459,10 @@ namespace RuduenModsTest
         public void TestNightMistPowerPlay()
         {
             SetupGameController("BaronBlade", "NightMist/RuduenWorkshop.NightMistLimitedNumerologyCharacter", "Legacy", "Megalopolis");
+            Assert.IsTrue(mist.CharacterCard.IsPromoCard);
 
             StartGame();
-            Card play=PutInHand("TomeOfElderMagic");
+            Card play = PutInHand("TomeOfElderMagic");
 
             DecisionSelectFunction = 1;
             DecisionSelectCardToPlay = play;
@@ -471,6 +481,7 @@ namespace RuduenModsTest
         {
             // Tool in hand. 
             SetupGameController("BaronBlade", "OmnitronX/RuduenWorkshop.OmnitronXElectroShieldedSystemsCharacter", "Megalopolis");
+            Assert.IsTrue(omnix.CharacterCard.IsPromoCard);
 
             StartGame();
             Card component = PutIntoPlay("ElectroDeploymentUnit");
@@ -486,6 +497,67 @@ namespace RuduenModsTest
             GoToStartOfTurn(omnix);
             DestroyCard(component);
             AssertInTrash(component); // New turn, effect wears off, destroyed.
+        }
+
+        [Test()]
+        public void TestParsePowerNoTrash()
+        {
+            // Tool in hand. 
+            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
+            Assert.IsTrue(parse.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(mdp);
+            UsePower(parse);
+            QuickHPCheck(0);
+        }
+
+        [Test()]
+        public void TestParsePowerTrashNoShuffle()
+        {
+            // Tool in hand. 
+            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
+            Assert.IsTrue(parse.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            DiscardTopCards(baron, 2);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTarget = mdp;
+            DecisionYesNo = false;
+
+            QuickHPStorage(mdp);
+            UsePower(parse);
+            QuickHPCheck(0);
+            AssertNumberOfCardsInTrash(baron, 2);
+        }
+        [Test()]
+        public void TestParsePowerTrashShuffle()
+        {
+            // Tool in hand. 
+            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
+            Assert.IsTrue(parse.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            DiscardTopCards(baron, 2);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTarget = mdp;
+            DecisionYesNo = true;
+
+            QuickHPStorage(mdp);
+            UsePower(parse);
+            QuickHPCheck(-2);
+            AssertNumberOfCardsInTrash(baron, 0);
         }
 
         [Test()]
