@@ -79,7 +79,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "Select one of your Software cards. Until the end of your next turn, that card is indestructible. Benchmark deals 1 Target Lightning Damage equal to the number of Software cards in play.",
+      "powers": "Play a Software card. Until the end of your next turn, that Software is indestructible. {Benchmark} deals 1 Target Lightning Damage equal to the number of Software cards in play.",
       "hitpoints": 25,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "Benchmark" ],
@@ -240,7 +240,7 @@
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Draw a card. Until the end of your next turn, after {Knyfe} deals herself damage, she Regains 1 HP.",
+      "powers": "Draw a card. Until the end of your next turn, when {Knyfe} deals themselves damage, they Regain 1 HP.",
       "hitpoints": 26,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "Knyfe" ],
@@ -289,6 +289,68 @@
       "complexity": 2,
       "openingLines": {
         "default": "This seems like the right time to strike."
+      }
+    }
+  ],
+  "NightMist": [
+    {
+      "identifier": "NightMistCharacter",
+      "promoIdentifier": "NightMistLimitedNumerologyCharacter",
+      "count": 1,
+      "title": "NightMist",
+      "body": [ "Limited Numerology" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Until the end of your next turn, when {NightMist} would deal a hero target damage, reduce that damage by 1. Draw a card or play a card.",
+      "hitpoints": 28,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "NightMist" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3,
+      "openingLines": {
+        "default": "Let's see if I can practice what I teach."
+      }
+    }
+  ],
+  "OmnitronX": [
+    {
+      "identifier": "OmnitronXCharacter",
+      "promoIdentifier": "OmnitronXElectroShieldedSystemsCharacter",
+      "count": 1,
+      "title": "OmnitronX",
+      "body": [ "Electro-Shielded Systems" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Until the start of your next turn, your Components are indestructible. {OmnitronX} deals 1 Target and themselves Lightning Damage equal to the number of your Components in play.",
+      "hitpoints": 29,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "OmnitronX" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "..."
       }
     }
   ],
