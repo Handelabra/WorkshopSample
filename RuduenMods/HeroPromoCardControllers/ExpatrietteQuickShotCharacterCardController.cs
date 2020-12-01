@@ -33,7 +33,7 @@ namespace RuduenWorkshop.Expatriette
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 
-            coroutine =  this.AdditionalPhaseActionThisTurn(this.HeroTurnTaker, Phase.UsePower, 1, true);
+            coroutine = this.AdditionalPhaseActionThisTurn(this.HeroTurnTaker, Phase.UsePower, 1, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

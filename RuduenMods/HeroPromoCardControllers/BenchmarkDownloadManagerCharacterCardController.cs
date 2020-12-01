@@ -22,7 +22,7 @@ namespace RuduenWorkshop.Benchmark
 
             IEnumerator coroutine;
 
-            // Play a Software. 
+            // Play a Software.
             coroutine = this.GameController.SelectAndPlayCardFromHand(this.HeroTurnTakerController, false, cardCriteria: new LinqCardCriteria((Card c) => c.IsSoftware, "software"), storedResults: storedResults, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
@@ -40,7 +40,7 @@ namespace RuduenWorkshop.Benchmark
                 }
             }
 
-            // Deal damage to two targets equal to number of software. 
+            // Deal damage to two targets equal to number of software.
             int amount = this.FindCardsWhere((Card c) => c.IsInPlay && c.IsSoftware).Count();
 
             coroutine = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), amount, DamageType.Lightning, powerNumeral, false, powerNumeral, cardSource: this.GetCardSource());

@@ -92,7 +92,7 @@
       "identifier": "Controlled",
       "count": 4,
       "title": "Controlled...",
-      "alternateTitle":  "Controlled",
+      "alternateTitle": "Controlled",
       "keywords": [ "one-shot", "prefix" ],
       "body": [ "You may play up to 2 cards now.", "[u]Prefix[/u]: This effect's damage is reduced to 1 when targetting Hero Targets." ],
       "icons": [ "DrawCardNow", "DestroyOngoing", "ReduceDamageDealt" ],

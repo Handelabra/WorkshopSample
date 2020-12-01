@@ -16,10 +16,15 @@
     "AbsoluteZero": [ "AbsoluteZeroOverchillCharacter" ],
     "TheArgentAdept": [ "TheArgentAdeptAriaCharacter" ],
     "Bunker": [ "BunkerFullSalvoCharacter" ],
+    "Benchmark": [ "BenchmarkDownloadManagerCharacter" ],
+    "CaptainCosmic": [ "CaptainCosmicCosmicShieldingCharacter" ],
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
     "Knyfe": [ "KnyfeKineticLoopCharacter" ],
     "MrFixer": [ "MrFixerFlowingStrikeCharacter" ],
+    "NightMist": [ "NightMistLimitedNumerologyCharacter" ],
+    "OmnitronX": [ "OmnitronXElectroShieldedSystemsCharacter" ],
+    "Parse": [ "ParseLaplaceAnalysisCharacter" ],
     "Tachyon": [ "TachyonControlledPaceCharacter" ]
   }
 }

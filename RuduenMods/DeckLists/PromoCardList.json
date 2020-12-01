@@ -1,14 +1,11 @@
 ﻿{
-
   "AbsoluteZero": [
     {
       "identifier": "AbsoluteZeroCharacter",
       "promoIdentifier": "AbsoluteZeroOverchillCharacter",
       "count": 1,
       "title": "Absolute Zero",
-      "body": [
-        "Overchill"
-      ],
+      "body": [ "Overchill" ],
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
@@ -39,9 +36,7 @@
       "promoIdentifier": "TheArgentAdeptAriaCharacter",
       "count": 1,
       "title": "The Argent Adept",
-      "body": [
-        "Aria"
-      ],
+      "body": [ "Aria" ],
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
@@ -72,9 +67,7 @@
       "promoIdentifier": "BenchmarkDownloadManagerCharacter",
       "count": 1,
       "title": "Benchmark",
-      "body": [
-        "DownloadManager"
-      ],
+      "body": [ "Download Manager" ],
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
@@ -105,9 +98,7 @@
       "promoIdentifier": "BunkerFullSalvoCharacter",
       "count": 1,
       "title": "Bunker",
-      "body": [
-        "Full Salvo"
-      ],
+      "body": [ "Full Salvo" ],
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
@@ -138,9 +129,7 @@
       "promoIdentifier": "CaptainCosmicCosmicShieldingCharacter",
       "count": 1,
       "title": "Captain Cosmic",
-      "body": [
-        "CosmicShielding"
-      ],
+      "body": [ "Cosmic Shielding" ],
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
@@ -171,9 +160,7 @@
       "promoIdentifier": "ChronoRangerHighNoonCharacter",
       "count": 1,
       "title": "Chrono-Ranger",
-      "body": [
-        "High Noon"
-      ],
+      "body": [ "High Noon" ],
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
@@ -328,7 +315,7 @@
       "identifier": "OmnitronXCharacter",
       "promoIdentifier": "OmnitronXElectroShieldedSystemsCharacter",
       "count": 1,
-      "title": "OmnitronX",
+      "title": "Omnitron-X",
       "body": [ "Electro-Shielded Systems" ],
       "character": true,
       "backgroundColor": "86BB71",
@@ -365,7 +352,7 @@
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Look at the top card a non-Hero Deck. You may shuffle all of the cards from that deck's Trash into that Deck. If you do, {Parse} deals 1 Target damage equal to the number of cards shuffled in this way.",
+      "powers": "Look at the top card a non-Hero Deck. {Parse} deals up to 1 Target damage equal to the number of cards in that Deck's Trash. If damage is dealt this way, shuffle that Trash into that Deck.",
       "hitpoints": 27,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "Parse" ],
@@ -391,9 +378,7 @@
       "promoIdentifier": "TachyonControlledPaceCharacter",
       "count": 1,
       "title": "Tachyon",
-      "body": [
-        "Controlled Pace"
-      ],
+      "body": [ "Controlled Pace" ],
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",

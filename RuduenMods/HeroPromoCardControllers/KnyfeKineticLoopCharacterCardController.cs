@@ -41,7 +41,6 @@ namespace RuduenWorkshop.Knyfe
 
             coroutine = this.AddStatusEffect(onDealDamageStatusEffect);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter

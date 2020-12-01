@@ -16,8 +16,6 @@ namespace RuduenWorkshop.TheArgentAdept
 
         public override IEnumerator UsePower(int index = 0)
         {
-
-
             List<PlayCardAction> storedResults = new List<PlayCardAction>();
 
             IEnumerator coroutine;
@@ -40,7 +38,7 @@ namespace RuduenWorkshop.TheArgentAdept
                     }
                     else
                     {
-                        // Use very specific check on card to future-proof for multiple options. 
+                        // Use very specific check on card to future-proof for multiple options.
                         coroutine = this.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "perform", new LinqCardCriteria((Card c) => c == card), null, false, this.GetCardSource());
                         if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                     }
@@ -61,7 +59,7 @@ namespace RuduenWorkshop.TheArgentAdept
                     }
                     else
                     {
-                        // Use very specific check on card to future-proof for multiple options. 
+                        // Use very specific check on card to future-proof for multiple options.
                         coroutine = this.GameController.SelectAndActivateAbility(base.HeroTurnTakerController, "accompany", new LinqCardCriteria((Card c) => c == card), null, false, this.GetCardSource());
                         if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                     }

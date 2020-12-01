@@ -33,7 +33,6 @@ namespace RuduenWorkshop.ChronoRanger
             makeDamageIrreducibleB.UntilEndOfNextTurn(this.TurnTaker);
             coroutine = this.AddStatusEffect(makeDamageIrreducibleB, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
         }
     }
 }

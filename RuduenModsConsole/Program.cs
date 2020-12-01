@@ -1249,10 +1249,10 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
         private string OutputFileName;
         private string DataFileName;
 
-        static GameSpeed Speed = GameSpeed.Fast;
-        static bool CheatStops = false;
-        Card _lastCardPrinted = null;
-        const string UserDataFileName = "userdata.json";
+        private static GameSpeed Speed = GameSpeed.Fast;
+        private static bool CheatStops = false;
+        private Card _lastCardPrinted = null;
+        private const string UserDataFileName = "userdata.json";
 
         public void SetupGameController(Game game)
         {

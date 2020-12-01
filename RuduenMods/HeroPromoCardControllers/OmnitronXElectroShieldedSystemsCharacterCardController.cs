@@ -22,7 +22,6 @@ namespace RuduenWorkshop.OmnitronX
 
             IEnumerator coroutine;
 
-
             MakeIndestructibleStatusEffect makeIndestructibleStatusEffect = new MakeIndestructibleStatusEffect();
             makeIndestructibleStatusEffect.CardsToMakeIndestructible.HasAnyOfTheseKeywords = new List<string>() { "component" };
             makeIndestructibleStatusEffect.CardsToMakeIndestructible.OwnedBy = this.HeroTurnTaker;

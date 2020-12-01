@@ -18,7 +18,7 @@ namespace RuduenWorkshop.Spellforge
         {
             IEnumerator coroutine;
 
-            // Select type. 
+            // Select type.
             List<Function> list = new List<Function>
                 {
                     new Function(this.DecisionMaker, "Prefix", SelectionType.RevealTopCardOfDeck,

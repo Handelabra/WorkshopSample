@@ -91,7 +91,6 @@ namespace RuduenModsTest
 
             StartGame();
 
-
             Card prefix = PutInHand("Controlled");
             PutInHand("OfHealing");
             UsePower(legacy);
@@ -640,7 +639,7 @@ namespace RuduenModsTest
 
             QuickHandStorage(Spellforge);
             PlayCard("ArticulateTheLethological");
-            QuickHandCheck(0); // 1 Played, 1 drawn. This should trigger a reshuffle. 
+            QuickHandCheck(0); // 1 Played, 1 drawn. This should trigger a reshuffle.
             AssertNumberOfCardsInTrash(Spellforge, 2); // Cards that were used move to the trash after a reshuffle.
         }
     }

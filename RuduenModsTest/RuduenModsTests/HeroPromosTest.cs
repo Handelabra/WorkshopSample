@@ -162,10 +162,10 @@ namespace RuduenModsTest
             UsePower(bench);
             GoToStartOfTurn(bench);
             QuickHPCheck(-1);
-            AssertInPlayArea(bench, software); // Card is in play. 
+            AssertInPlayArea(bench, software); // Card is in play.
 
             DestroyCard(bench.CharacterCard);
-            AssertNotInPlay(software); // Removed after during incap. 
+            AssertNotInPlay(software); // Removed after during incap.
         }
 
         [Test()]
@@ -239,7 +239,7 @@ namespace RuduenModsTest
             GoToStartOfTurn(cosmic);
             DealDamage(legacy, cosmic.CharacterCard, 2, DamageType.Melee);
             QuickHPCheck(-1, -2); // Damage was reduced for first, then worn off for second.
-            QuickHandCheck(0); // No draw. 
+            QuickHandCheck(1); // No draw.
         }
 
         [Test()]
@@ -261,7 +261,7 @@ namespace RuduenModsTest
             DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
             DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
             QuickHPCheck(-6); // Damage was redirected until destroyed, then one more.
-            QuickHandCheck(0); // No draw. 
+            QuickHandCheck(0); // No draw.
             AssertInTrash(construct);
         }
 
@@ -377,7 +377,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestMrFixerPowerA()
         {
-            // Tool in hand. 
+            // Tool in hand.
             SetupGameController("BaronBlade", "MrFixer/RuduenWorkshop.MrFixerFlowingStrikeCharacter", "Legacy", "Megalopolis");
             Assert.IsTrue(fixer.CharacterCard.IsPromoCard);
 
@@ -479,7 +479,7 @@ namespace RuduenModsTest
         [Test()]
         public void TestOmnitronXPower()
         {
-            // Tool in hand. 
+            // Tool in hand.
             SetupGameController("BaronBlade", "OmnitronX/RuduenWorkshop.OmnitronXElectroShieldedSystemsCharacter", "Megalopolis");
             Assert.IsTrue(omnix.CharacterCard.IsPromoCard);
 
@@ -500,9 +500,28 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestParsePowerNoDeck()
+        {
+            // Tool in hand.
+            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
+            Assert.IsTrue(parse.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            MoveAllCards(parse, baron.TurnTaker.Deck, baron.TurnTaker.Trash);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectTarget = mdp;
+
+            UsePower(parse);
+            AssertInDeck(mdp); // Destroyed and shuffled back in.
+        }
+
+        [Test()]
         public void TestParsePowerNoTrash()
         {
-            // Tool in hand. 
+            // Tool in hand.
             SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
             Assert.IsTrue(parse.CharacterCard.IsPromoCard);
 
@@ -518,9 +537,9 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestParsePowerTrashNoShuffle()
+        public void TestParsePowerTrashSkipAttack()
         {
-            // Tool in hand. 
+            // Tool in hand.
             SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
             Assert.IsTrue(parse.CharacterCard.IsPromoCard);
 
@@ -530,18 +549,18 @@ namespace RuduenModsTest
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectTarget = mdp;
-            DecisionYesNo = false;
+            DecisionSelectTarget = null;
 
             QuickHPStorage(mdp);
             UsePower(parse);
             QuickHPCheck(0);
             AssertNumberOfCardsInTrash(baron, 2);
         }
+
         [Test()]
-        public void TestParsePowerTrashShuffle()
+        public void TestParsePowerTrashAttack()
         {
-            // Tool in hand. 
+            // Tool in hand.
             SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
             Assert.IsTrue(parse.CharacterCard.IsPromoCard);
 
