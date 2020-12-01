@@ -232,36 +232,14 @@ namespace RuduenModsTest
             Assert.IsTrue(cosmic.CharacterCard.IsPromoCard);
 
             Card construct = PutIntoPlay("CosmicWeapon");
+
             QuickHandStorage(cosmic);
             QuickHPStorage(construct, cosmic.CharacterCard);
             UsePower(cosmic);
-            DealDamage(legacy, cosmic.CharacterCard, 2, DamageType.Melee);
+            QuickHandCheck(1); // Draw.
+            DealDamage(legacy, construct, 2, DamageType.Melee);
+            AssertNextToCard(construct, cosmic.CharacterCard);
             GoToStartOfTurn(cosmic);
-            DealDamage(legacy, cosmic.CharacterCard, 2, DamageType.Melee);
-            QuickHPCheck(-1, -2); // Damage was reduced for first, then worn off for second.
-            QuickHandCheck(1); // No draw.
-        }
-
-        [Test()]
-        public void TestCaptainCosmicConstructDestroyed()
-        {
-            SetupGameController("BaronBlade", "CaptainCosmic/RuduenWorkshop.CaptainCosmicCosmicShieldingCharacter", "Legacy", "TheBlock");
-
-            StartGame();
-
-            Assert.IsTrue(cosmic.CharacterCard.IsPromoCard);
-
-            Card construct = PutIntoPlay("CosmicWeapon");
-            QuickHandStorage(cosmic);
-            QuickHPStorage(cosmic.CharacterCard);
-            UsePower(cosmic);
-            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
-            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
-            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
-            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
-            DealDamage(legacy, cosmic.CharacterCard, 6, DamageType.Melee);
-            QuickHPCheck(-6); // Damage was redirected until destroyed, then one more.
-            QuickHandCheck(0); // No draw.
             AssertInTrash(construct);
         }
 
@@ -439,6 +417,63 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestLaComodoraPower()
+        {
+            SetupGameController("BaronBlade", "LaComodora/RuduenWorkshop.LaComodoraTemporalScavengeCharacter", "Megalopolis");
+            Assert.IsTrue(comodora.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToPlayCardPhase(comodora);
+
+            Card equip = PlayCard("ConcordantHelm");
+
+            GoToUsePowerPhase(comodora);
+            UsePower(comodora);
+
+            DecisionYesNo = true;
+            DecisionSelectCard = equip;
+
+            GoToStartOfTurn(baron);
+            PutIntoPlay("DeviousDisruption");
+
+            AssertFlipped(equip);
+            AssertInPlayArea(comodora, equip);
+
+            GoToUsePowerPhase(comodora);
+            UsePower(comodora);
+            AssertNotFlipped(equip);
+        }
+
+        [Test()]
+        public void TestLaComodoraPowerGuiseDangIt()
+        {
+            SetupGameController("BaronBlade", "LaComodora/RuduenWorkshop.LaComodoraTemporalScavengeCharacter", "Guise/SantaGuiseCharacter", "Megalopolis");
+            Assert.IsTrue(comodora.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToPlayCardPhase(comodora);
+
+            Card equip = PlayCard("ConcordantHelm");
+
+            GoToUsePowerPhase(comodora);
+            UsePower(comodora);
+
+            DecisionYesNo = true;
+            DecisionSelectCard = equip;
+
+            GoToStartOfTurn(baron);
+            PutIntoPlay("DeviousDisruption");
+
+            AssertFlipped(equip);
+            AssertInPlayArea(comodora, equip);
+
+            UsePower(guise, 1);
+            AssertNotFlipped(equip);
+        }
+
+        [Test()]
         public void TestNightMistPowerDraw()
         {
             SetupGameController("BaronBlade", "NightMist/RuduenWorkshop.NightMistLimitedNumerologyCharacter", "Legacy", "Megalopolis");
@@ -488,6 +523,7 @@ namespace RuduenModsTest
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
             DecisionSelectTarget = mdp;
+            DecisionSelectFunction = 1;
 
             QuickHPStorage(omnix.CharacterCard, mdp);
             UsePower(omnix);

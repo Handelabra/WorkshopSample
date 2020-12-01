@@ -76,6 +76,7 @@
     <Compile Include="CascadeCardControllers\StreamSurgeCardController.cs" />
     <Compile Include="CascadeCardControllers\WaterlogCardController.cs" />
     <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\LaComodoraTemporalScavengeCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\ParseLaplaceAnalysisCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\OmnitronXElectroShieldedSystemsCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\BenchmarkDownloadManagerCharacterCardController.cs" />

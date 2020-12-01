@@ -21,6 +21,7 @@
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
     "Knyfe": [ "KnyfeKineticLoopCharacter" ],
+    "LaComodora": [ "LaComodoraTemporalScavengeCharacter" ],
     "MrFixer": [ "MrFixerFlowingStrikeCharacter" ],
     "NightMist": [ "NightMistLimitedNumerologyCharacter" ],
     "OmnitronX": [ "OmnitronXElectroShieldedSystemsCharacter" ],

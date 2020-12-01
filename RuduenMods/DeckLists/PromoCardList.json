@@ -134,7 +134,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "Select a Construct Target. Until the start of your next turn, reduce damage dealt to that Construct to 1 and redirect any damage that would be dealt to a Target next to the construct to that Construct. If there are no construct targets, draw a card. ",
+      "powers": "Draw a card. Select a Construct Target. Until the start of your next turn, that construct is Indestructible. That Construct deals itself 2 Energy Damage.",
       "hitpoints": 26,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "CaptainCosmic" ],
@@ -244,6 +244,37 @@
       "complexity": 2,
       "openingLines": {
         "default": "A chance to take a few more risks, eh?"
+      }
+    }
+  ],
+  "LaComodora": [
+    {
+      "identifier": "LaComodoraCharacter",
+      "promoIdentifier": "LaComodoraTemporalScavengeCharacter",
+      "count": 1,
+      "title": "La Comodora",
+      "body": [ "Temporal Scavenge" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Flip a face-down Card in your play area, treating it as if it were just put into play. Until the end of your next turn, when one of your Equipment cards would be destroyed, flip it face-down instead.",
+      "hitpoints": 26,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "Knyfe" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "..."
       }
     }
   ],
