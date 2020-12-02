@@ -168,6 +168,27 @@ namespace RuduenModsTest
             AssertNotInPlay(software); // Removed after during incap.
         }
 
+        // TODO: Fix if Handlabra fix!
+        [Test(Description = "Failing Handlabra Case", ExpectedResult = false)]
+        public bool TestBrokenBenchmarkSoftwareIndestructibleBounce()
+        {
+            SetupGameController("BaronBlade", "Benchmark/RuduenWorkshop.BenchmarkDownloadManagerCharacter", "Legacy", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(bench.CharacterCard.IsPromoCard);
+            Card software = PutInHand("AutoTargetingProtocol");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            // Play, damage, bounce, play.
+            DecisionSelectCards = new Card[] { software, mdp, software, null };
+
+            QuickHPStorage(mdp);
+            UsePower(bench);
+            PutIntoPlay("OverhaulLoadout");
+            return (software.Location == bench.TurnTaker.PlayArea); // The card should be in the play area! Expect a fail right now. 
+        }
+
         [Test()]
         public void TestBunkerFullSalvoNoOtherPower()
         {
@@ -221,7 +242,7 @@ namespace RuduenModsTest
             DecisionSelectCard = recharge;
 
             GoToUsePowerPhase(bunker);
-            
+
             UsePower(bunker);
             AssertPhaseActionCount(0); // Powers used.
 
@@ -245,6 +266,26 @@ namespace RuduenModsTest
 
             UsePower(bunker);
             AssertPhaseActionCount(1); // 1 Use Remaining from Turret Mode. 
+        }
+
+        [Test()]
+        public void TestBunkerModeShiftUpgrade()
+        {
+            SetupGameController("BaronBlade", "Bunker/RuduenWorkshop.BunkerModeShiftCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(bunker.CharacterCard.IsPromoCard);
+
+            Card upgrade = PutOnDeck("UpgradeMode");
+            Card equip = PutInHand("FlakCannon");
+            DecisionSelectCards = new Card[] { upgrade, equip };
+
+            GoToUsePowerPhase(bunker);
+
+            UsePower(bunker);
+            AssertPhaseActionCount(0); // Powers used.
+            AssertIsInPlay(equip);
         }
 
         [Test()]

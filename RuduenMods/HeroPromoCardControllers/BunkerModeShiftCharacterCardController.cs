@@ -27,6 +27,10 @@ namespace RuduenWorkshop.Bunker
                 coroutine = this.GameController.SendMessageAction(this.Card.Title + " has no deck or trash to search.", Priority.Medium, this.GetCardSource(), null, true);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
+
+            // Play a card. This is so Upgrade Mode results in a card play - the other modes will block it. 
+            coroutine = this.SelectAndPlayCardFromHand(this.DecisionMaker);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }
 }

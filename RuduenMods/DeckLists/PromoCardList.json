@@ -132,7 +132,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "Search your deck or trash for a Mode and put it into play. If you searched your deck, shuffle your deck.",
+      "powers": "Search your deck or trash for a Mode and put it into play. If you searched your deck, shuffle your deck. Play a card.",
       "hitpoints": 27,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "Bunker" ],
