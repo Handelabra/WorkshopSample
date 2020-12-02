@@ -169,7 +169,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestBunkerNoOtherPower()
+        public void TestBunkerFullSalvoNoOtherPower()
         {
             SetupGameController("BaronBlade", "Bunker/RuduenWorkshop.BunkerFullSalvoCharacter", "TheBlock");
 
@@ -187,7 +187,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestBunkerOneOtherPower()
+        public void TestBunkerFullSalvoOneOtherPower()
         {
             SetupGameController("BaronBlade", "Bunker/RuduenWorkshop.BunkerFullSalvoCharacter", "TheBlock");
 
@@ -206,6 +206,45 @@ namespace RuduenModsTest
             QuickHandCheck(1); //  2 Drawn, 1 Discarded
             AssertNumberOfCardsInTrash(bunker, 1); // 1 Discarded.
             AssertPhaseActionCount(1); // 1 Power Remaining
+        }
+
+        [Test()]
+        public void TestBunkerModeShiftRecharge()
+        {
+            SetupGameController("BaronBlade", "Bunker/RuduenWorkshop.BunkerModeShiftCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(bunker.CharacterCard.IsPromoCard);
+
+            Card recharge = PutOnDeck("RechargeMode");
+            DecisionSelectCard = recharge;
+
+            GoToUsePowerPhase(bunker);
+            
+            UsePower(bunker);
+            AssertPhaseActionCount(0); // Powers used.
+
+            GoToDrawCardPhase(bunker);
+            AssertPhaseActionCount(2); // 2 Draws
+        }
+
+        [Test()]
+        public void TestBunkerModeShiftTurret()
+        {
+            SetupGameController("BaronBlade", "Bunker/RuduenWorkshop.BunkerModeShiftCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(bunker.CharacterCard.IsPromoCard);
+
+            Card turret = PutOnDeck("TurretMode");
+            DecisionSelectCard = turret;
+
+            GoToUsePowerPhase(bunker);
+
+            UsePower(bunker);
+            AssertPhaseActionCount(1); // 1 Use Remaining from Turret Mode. 
         }
 
         [Test()]

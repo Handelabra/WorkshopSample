@@ -21,7 +21,6 @@ namespace RuduenWorkshop.CaptainCosmic
 
             IEnumerator coroutine;
 
-
             // Draw a card.
             coroutine = this.DrawCards(this.DecisionMaker, 1);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }

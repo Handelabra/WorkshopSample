@@ -17,9 +17,7 @@
       "character": true,
       "powers": [ "You may discard up to 3 cards. You may move a card with an Aqua Cost of your discarded cards' total {magic} or less from the Riverbank to your discard, ignoring its Indestructable status. Draw until you have 4 cards." ],
       "icons": [ "HasPower", "Manipulate", "DrawCardNow" ],
-      "setup": [
-        "At the start of the game, put The Riverbank into play."
-      ],
+      "setup": [ "At the start of the game, put The Riverbank into play." ],
       "hitpoints": 27,
       "nemesisIdentifiers": [
         "Cascade"
@@ -401,6 +399,7 @@
       "foilBackgroundColor": "7FFFD4",
       "hitpointsColor": "C94742",
       "character": true,
+      "setup": [ "At the start of the game, put The Riverbank into play." ],
       "powers": "Discard up to 2 cards with {magic} of 2 or more. For each card discarded this way, move 1 card from under Riverbank to the bottom of the River deck, ignoring its indestructible status. Move the card under the Riverbank with the lowest Gain Cost to your Trash, ignoring its indestructible status.",
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
       "hitpoints": 27,
@@ -433,6 +432,7 @@
       "foilBackgroundColor": "7FFFD4",
       "hitpointsColor": "C94742",
       "character": true,
+      "setup": [ "At the start of the game, put The Riverbank into play." ],
       "powers": "Move 1 card from your hand to the bottom of the River deck. Select a card under Riverbank with an Aqua Cost of up to 2 higher than the moved card and move it to your Trash. Draw until you have 3 cards.",
       "icons": [ "HasPower", "Destroy", "DrawCardNow" ],
       "hitpoints": 27,

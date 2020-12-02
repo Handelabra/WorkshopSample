@@ -32,7 +32,7 @@ namespace RuduenWorkshop.BreachMage
             }
 
             // Draw a card.
-            coroutine = this.DrawCard(this.HeroTurnTaker);
+            coroutine = this.DrawCard(this.HeroTurnTaker, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Play a card.

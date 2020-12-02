@@ -57,10 +57,10 @@
       "keywords": [ "one-shot" ],
       "body": [
         "Search your deck or trash for a Breach card and put it into play. If you searched your deck, shuffle it.",
-        "Draw a card.",
+        "You may draw a card.",
         "You may play a card. "
       ],
-      "icons": [ "DrawCardNow", "Search", "PlayCardNow" ],
+      "icons": [ "Search", "DrawCardNow", "PlayCardNow" ],
       "flavorText": "..."
     },
     {
@@ -81,7 +81,7 @@
         "At the start of your turn, you may activate a card's [u]Cast[/u] text, then destroy that card.",
         "If that [u]Cast[/u] text deals damage, increase that damage by 1. "
       ],
-      "icons": [ "StartAndEndOfTurnAction", "Destroy", "IncreaseDamageDealt" ],
+      "icons": [ "StartOfTurnAction", "Destroy", "IncreaseDamageDealt" ],
       "flavorText": "..."
     },
     {
@@ -151,7 +151,7 @@
           "text": "{BreachMage} deals each non-Hero Target 3 Fire Damage."
         }
       ],
-      "icons": [ "DealDamagePsychic", "DestroyOngoing", "DestroyEnvironment" ],
+      "icons": [ "DealDamageFire" ],
       "flavorText": "...."
     },
     {
@@ -160,7 +160,7 @@
       "title": "Hammer Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, you may destroy an Ongoing or Environment card.",
-      "icons": [ "DealDamageLightning", "DestroyOngoing", "DestroyEnvironment", "Manipulate" ],
+      "icons": [ "DestroyOngoing", "DestroyEnvironment" ],
       "flavorText": "...."
     },
     {
@@ -169,7 +169,7 @@
       "title": "Staff Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, activate a card's [u]Cast[/u] text, then destroy that card. If that [u]Cast[/u] text deals damage, increase that damage by 2.",
-      "icons": [ "Destroy", "IncreaseDamageDealt", "Manipulate" ],
+      "icons": [ "Destroy", "IncreaseDamageDealt"],
       "flavorText": "...."
     },
     {
@@ -178,7 +178,7 @@
       "title": "Spiral Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, activate a card's [u]Cast[/u] text.",
-      "icons": [ "Destroy", "IncreaseDamageDealt", "Manipulate" ],
+      "icons": [ ],
       "flavorText": "...."
     },
     {
@@ -187,7 +187,7 @@
       "title": "Vigor Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, draw 3 cards and {BreachMage} deals themselves 2 Psychic Damage.",
-      "icons": [ "DrawCardNow", "DealDamagePsychic", "Manipulate" ],
+      "icons": [ "DrawCardNow", "DealDamagePsychic" ],
       "flavorText": "...."
     },
     {
@@ -196,7 +196,7 @@
       "title": "Aura Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, one Hero may use a power.",
-      "icons": [ "UsePowerNow", "Manipulate" ],
+      "icons": [ "UsePowerNow" ],
       "flavorText": "...."
     }
   ],
@@ -249,7 +249,7 @@
         "Return one of your Equipment cards to your hand. Play an Equipment card.",
         "Placeholder."
       ],
-      "icons": [ "HasPower", "DealDamageFire", "Destroy" ],
+      "icons": [ "HasPower", "Manipulate", "PlayCardNow", "Destroy" ],
       "hitpoints": 27,
       "nemesisIdentifiers": [
         "BreachMage"

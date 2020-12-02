@@ -15,7 +15,7 @@
   "variants": {
     "AbsoluteZero": [ "AbsoluteZeroOverchillCharacter" ],
     "TheArgentAdept": [ "TheArgentAdeptAriaCharacter" ],
-    "Bunker": [ "BunkerFullSalvoCharacter" ],
+    "Bunker": [ "BunkerFullSalvoCharacter", "BunkerModeShiftCharacter" ],
     "Benchmark": [ "BenchmarkDownloadManagerCharacter" ],
     "CaptainCosmic": [ "CaptainCosmicCosmicShieldingCharacter" ],
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
