@@ -31,7 +31,7 @@ namespace RuduenWorkshop.LaComodora
             { TriggerType.FlipCard }, this.HeroTurnTaker, this.Card, null);
             whenCardIsDestroyedStatusEffect.CardDestroyedCriteria.HasAnyOfTheseKeywords = new List<string> { "equipment" };
             whenCardIsDestroyedStatusEffect.CardDestroyedCriteria.OwnedBy = this.HeroTurnTaker;
-            whenCardIsDestroyedStatusEffect.UntilStartOfNextTurn(this.HeroTurnTaker);
+            whenCardIsDestroyedStatusEffect.UntilEndOfNextTurn(this.HeroTurnTaker);
             whenCardIsDestroyedStatusEffect.Priority = new StatusEffectPriority?(StatusEffectPriority.High);
             whenCardIsDestroyedStatusEffect.CanEffectStack = false;
             whenCardIsDestroyedStatusEffect.PostDestroyDestinationMustBeChangeable = true;

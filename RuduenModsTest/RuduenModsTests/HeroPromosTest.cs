@@ -523,6 +523,12 @@ namespace RuduenModsTest
             GoToUsePowerPhase(comodora);
             UsePower(comodora);
             AssertNotFlipped(equip);
+            GoToStartOfTurn(baron);
+            PutIntoPlay("DeviousDisruption");
+
+            // Make sure effect has been re-applied and therefore still works here.
+            AssertFlipped(equip);
+            AssertInPlayArea(comodora, equip);
         }
 
         [Test()]
