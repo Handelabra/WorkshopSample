@@ -245,6 +245,55 @@
       }
     }
   ],
+  "TheHarpy": [
+    {
+      "identifier": "TheHarpyCharacter",
+      "promoIdentifier": "TheHarpyExtremeCallingCharacter",
+      "count": 1,
+      "title": "The Harpy",
+      "body": [ "Extreme Calling" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Flip all of your {arcana} or {avian} tokens. {TheHarpy} deals herself Psychic Damage equal to the number of tokens flipped this way. Draw 1 card.",
+      "hitpoints": 27,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "TheHarpy" ],
+      "tokenPools": [
+        {
+          "identifier": "AvianControlPool",
+          "name": "The Harpy's {avian} Control Pool",
+          "initialValue": 2,
+          "minimumValue": 0,
+          "maximumValue": 5,
+          "color": "DFE6E5"
+        },
+        {
+          "identifier": "ArcanaControlPool",
+          "name": "The Harpy's {arcana} Control Pool",
+          "initialValue": 3,
+          "minimumValue": 0,
+          "maximumValue": 5,
+          "color": "DFE6E5"
+        }
+      ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "I've brought the whole arsenal this time."
+      }
+    }
+  ],
   "Knyfe": [
     {
       "identifier": "KnyfeCharacter",
@@ -404,15 +453,15 @@
   "Parse": [
     {
       "identifier": "ParseCharacter",
-      "promoIdentifier": "ParseLaplaceAnalysisCharacter",
+      "promoIdentifier": "ParseLaplaceShotCharacter",
       "count": 1,
       "title": "Parse",
-      "body": [ "Laplace Analysis" ],
+      "body": [ "Laplace Shot" ],
       "character": true,
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Look at the top card a non-Hero Deck. {Parse} deals up to 1 Target damage equal to the number of cards in that Deck's Trash. If damage is dealt this way, shuffle that Trash into that Deck.",
+      "powers": "Look at the top card of the Environment Deck. {Parse} deals up to 1 Target damage equal to the number of cards in that Deck's Trash. If damage is dealt this way, shuffle the Environment Trash into the Environment Deck.",
       "hitpoints": 27,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "Parse" ],

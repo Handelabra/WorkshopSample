@@ -396,6 +396,50 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestTheHarpy()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "TheHarpy/RuduenWorkshop.TheHarpyExtremeCallingCharacter", "Megalopolis");
+
+            Assert.IsTrue(harpy.CharacterCard.IsPromoCard);
+
+            DecisionSelectWord = "Flip 3 {arcana}";
+
+            StartGame();
+            QuickHPStorage(harpy);
+            UsePower(harpy);
+            QuickHPCheck(-3); // Damage dealt.
+            ;
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.ArcanaControlPool), 0);
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.AvianControlPool), 5);
+        }
+
+        [Test()]
+        public void TestTheHarpyFancierTrigger()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "TheHarpy/RuduenWorkshop.TheHarpyExtremeCallingCharacter", "Megalopolis");
+
+            Assert.IsTrue(harpy.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            PutIntoPlay("HarpyHex");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectWord = "Flip 2 {avian}";
+            DecisionSelectTarget = mdp;
+
+            QuickHPStorage(harpy.CharacterCard, mdp) ;
+            UsePower(harpy);
+            QuickHPCheck(-2, -2); // Damage dealt.
+            ;
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.ArcanaControlPool), 5);
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.AvianControlPool), 0);
+        }
+
+
+        [Test()]
         public void TestKnyfePower()
         {
             // No cards in deck test.
@@ -625,26 +669,26 @@ namespace RuduenModsTest
         public void TestParsePowerNoDeck()
         {
             // Tool in hand.
-            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
+            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceShotCharacter", "Megalopolis");
             Assert.IsTrue(parse.CharacterCard.IsPromoCard);
 
             StartGame();
 
-            MoveAllCards(parse, baron.TurnTaker.Deck, baron.TurnTaker.Trash);
+            MoveAllCards(parse, env.TurnTaker.Deck, env.TurnTaker.Trash);
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 
             DecisionSelectTarget = mdp;
 
             UsePower(parse);
-            AssertInDeck(mdp); // Destroyed and shuffled back in.
+            AssertInTrash(mdp); // Destroyed.
         }
 
         [Test()]
         public void TestParsePowerNoTrash()
         {
             // Tool in hand.
-            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
+            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceShotCharacter", "Megalopolis");
             Assert.IsTrue(parse.CharacterCard.IsPromoCard);
 
             StartGame();
@@ -662,7 +706,7 @@ namespace RuduenModsTest
         public void TestParsePowerTrashSkipAttack()
         {
             // Tool in hand.
-            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
+            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceShotCharacter", "Megalopolis");
             Assert.IsTrue(parse.CharacterCard.IsPromoCard);
 
             StartGame();
@@ -683,12 +727,12 @@ namespace RuduenModsTest
         public void TestParsePowerTrashAttack()
         {
             // Tool in hand.
-            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceAnalysisCharacter", "Megalopolis");
+            SetupGameController("BaronBlade", "Parse/RuduenWorkshop.ParseLaplaceShotCharacter", "Megalopolis");
             Assert.IsTrue(parse.CharacterCard.IsPromoCard);
 
             StartGame();
 
-            DiscardTopCards(baron, 2);
+            DiscardTopCards(env, 2);
 
             Card mdp = GetCardInPlay("MobileDefensePlatform");
 

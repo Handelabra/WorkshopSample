@@ -20,12 +20,13 @@
     "CaptainCosmic": [ "CaptainCosmicCosmicShieldingCharacter" ],
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
+    "TheHarpy": [ "TheHarpyExtremeCallingCharacter" ],
     "Knyfe": [ "KnyfeKineticLoopCharacter" ],
     "LaComodora": [ "LaComodoraTemporalScavengeCharacter" ],
     "MrFixer": [ "MrFixerFlowingStrikeCharacter" ],
     "NightMist": [ "NightMistLimitedNumerologyCharacter" ],
     "OmnitronX": [ "OmnitronXElectroShieldedSystemsCharacter" ],
-    "Parse": [ "ParseLaplaceAnalysisCharacter" ],
+    "Parse": [ "ParseLaplaceShotCharacter" ],
     "Tachyon": [ "TachyonControlledPaceCharacter" ]
   }
 }

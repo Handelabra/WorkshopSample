@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace RuduenWorkshop.Parse
 {
-    public class ParseLaplaceAnalysisCharacterCardController : PromoDefaultCharacterCardController
+    public class ParseLaplaceShotCharacterCardController : PromoDefaultCharacterCardController
     {
-        public ParseLaplaceAnalysisCharacterCardController(Card card, TurnTakerController turnTakerController)
+        public ParseLaplaceShotCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -22,30 +22,26 @@ namespace RuduenWorkshop.Parse
             List<SelectLocationDecision> storedResultsDeck = new List<SelectLocationDecision>();
             List<DealDamageAction> storedResultsDamage = new List<DealDamageAction>();
 
-            // Select a non-hero deck.
-            coroutine = this.GameController.SelectADeck(this.DecisionMaker, SelectionType.RevealTopCardOfDeck, (Location l) => !l.IsHero, storedResultsDeck, cardSource: this.GetCardSource());
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
-            Location deck = this.GetSelectedLocation(storedResultsDeck);
-            if (deck != null)
+            TurnTakerController env = this.FindEnvironment();
+            if (env.TurnTaker.Deck != null)
             {
                 // Reveal a card.
                 List<Card> storedCardResults = new List<Card>();
-                coroutine = this.GameController.RevealCards(base.TurnTakerController, deck, 1, storedCardResults, false, RevealedCardDisplay.ShowRevealedCards, null, this.GetCardSource(null));
+                coroutine = this.GameController.RevealCards(base.TurnTakerController, env.TurnTaker.Deck, 1, storedCardResults, false, RevealedCardDisplay.ShowRevealedCards, null, this.GetCardSource(null));
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-                coroutine = this.CleanupCardsAtLocations(new List<Location> { deck.OwnerTurnTaker.Revealed }, deck, cardsInList: storedCardResults);
+                coroutine = this.CleanupCardsAtLocations(new List<Location> { env.TurnTaker.Revealed }, env.TurnTaker.Deck, cardsInList: storedCardResults);
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
 
-            int trashCount = deck.OwnerTurnTaker.Trash.NumberOfCards;
+            int trashCount = env.TurnTaker.Trash.NumberOfCards;
 
             coroutine = base.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.Card), trashCount, DamageType.Projectile, powerNumeral, false, 0, storedResultsDamage: storedResultsDamage, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             if (storedResultsDamage.Count > 0 && storedResultsDamage.Any((DealDamageAction dd) => dd.DidDealDamage))
             {
-                coroutine = this.GameController.ShuffleTrashIntoDeck(this.FindTurnTakerController(deck.OwnerTurnTaker), cardSource: this.GetCardSource());
+                coroutine = this.GameController.ShuffleTrashIntoDeck(env, cardSource: this.GetCardSource());
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }

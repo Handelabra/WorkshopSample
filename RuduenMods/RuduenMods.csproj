@@ -78,7 +78,7 @@
     <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
     <Compile Include="HeroPromoCardControllers\BunkerModeShiftCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\LaComodoraTemporalScavengeCharacterCardController.cs" />
-    <Compile Include="HeroPromoCardControllers\ParseLaplaceAnalysisCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\ParseLaplaceShotCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\OmnitronXElectroShieldedSystemsCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\BenchmarkDownloadManagerCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\CaptainCosmicCosmicShieldingCharacterCardController.cs" />
@@ -92,6 +92,7 @@
     <Compile Include="HeroPromoCardControllers\ChronoRangerHighNoonCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\ExpatrietteQuickShotCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\MrFixerFlowingStrikeCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\TheHarpyExtremeCallingCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\TheHarpyArcaneFlockCharacterCardController.cs" />
     <Compile Include="SpellforgeCardControllers\SuffixCardControllers\OfAuraCardController.cs" />
     <Compile Include="SpellforgeCardControllers\SuffixCardControllers\OfResonanceCardController.cs" />
