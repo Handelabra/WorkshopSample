@@ -14,6 +14,7 @@
   },
   "variants": {
     "AbsoluteZero": [ "AbsoluteZeroOverchillCharacter" ],
+    "AkashThriya": [ "AkashThriyaSeedRotationCharacter" ],
     "TheArgentAdept": [ "TheArgentAdeptAriaCharacter" ],
     "Bunker": [ "BunkerFullSalvoCharacter", "BunkerModeShiftCharacter" ],
     "Benchmark": [ "BenchmarkDownloadManagerCharacter" ],
@@ -27,6 +28,7 @@
     "NightMist": [ "NightMistLimitedNumerologyCharacter" ],
     "OmnitronX": [ "OmnitronXElectroShieldedSystemsCharacter" ],
     "Parse": [ "ParseLaplaceShotCharacter" ],
-    "Tachyon": [ "TachyonControlledPaceCharacter" ]
+    "Tachyon": [ "TachyonControlledPaceCharacter" ],
+    "VoidGuardMainstay": [ "VoidGuardMainstayShrugItOffCharacter" ]
   }
 }

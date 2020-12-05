@@ -1,8 +1,6 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RuduenWorkshop.VoidGuardMainstay
 {
@@ -32,7 +30,7 @@ namespace RuduenWorkshop.VoidGuardMainstay
             {
                 turnTakerName = this.Card.Title;
             }
-            
+
             OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "PreventResponse", "Whenever " + turnTakerName + " is dealt exactly " + powerNumeral + " damage, prevent that damage.", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
             onDealDamageStatusEffect.TargetCriteria.IsSpecificCard = this.CharacterCard;
             onDealDamageStatusEffect.CanEffectStack = false;
@@ -45,13 +43,13 @@ namespace RuduenWorkshop.VoidGuardMainstay
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter
+
         public IEnumerator PreventResponse(DealDamageAction dd, TurnTaker hero, StatusEffect effect, int[] powerNumerals = null)
 #pragma warning restore IDE0060 // Remove unused parameter
         {
             // Exactly 1 damage is checked in the Criteria, so just prevent the damage.
             IEnumerator coroutine = this.CancelAction(dd, true, true, null, true);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
         }
 
         public override bool CanOrderAffectOutcome(GameAction action)

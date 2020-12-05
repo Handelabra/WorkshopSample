@@ -75,7 +75,7 @@ namespace RuduenModsTest
 
             Assert.IsTrue(thriya.CharacterCard.IsPromoCard);
 
-            // Set seed so it doesn't randomly use the self-destructing one. 
+            // Set seed so it doesn't randomly use the self-destructing one.
             Card seed = PutOnDeck("NoxiousPod");
 
             UsePower(thriya);
@@ -91,7 +91,7 @@ namespace RuduenModsTest
 
             Assert.IsTrue(thriya.CharacterCard.IsPromoCard);
 
-            // Set seed so it doesn't randomly use the self-destructing one. 
+            // Set seed so it doesn't randomly use the self-destructing one.
             Card seed = PutOnDeck("NoxiousPod");
             Card cycled = PutInTrash("VitalizedThorns");
 
@@ -212,7 +212,7 @@ namespace RuduenModsTest
 
             Assert.IsTrue(bench.CharacterCard.IsPromoCard);
             Card software = PutInHand("AutoTargetingProtocol");
-            PutInHand("AllyMatrix"); // Add second one so the decision selection always has a choice. 
+            PutInHand("AllyMatrix"); // Add second one so the decision selection always has a choice.
             Card mdp = FindCardInPlay("MobileDefensePlatform");
 
             // Play, damage, bounce, play.
@@ -874,7 +874,7 @@ namespace RuduenModsTest
             UsePower(voidMainstay);
             DealDamage(voidMainstay, voidMainstay, 0, DamageType.Melee);
             QuickHandCheck(1); // Card drawn.
-            QuickHPCheck(0); // Increased damage should not work. 
+            QuickHPCheck(0); // Increased damage should not work.
         }
 
         [Test()]

@@ -1,12 +1,13 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
+using RuduenWorkshop.HeroPromos;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace RuduenWorkshop.TheHarpy
 {
-    public class TheHarpyExtremeCallingCharacterCardController : HeroCharacterCardController
+    public class TheHarpyExtremeCallingCharacterCardController : PromoDefaultCharacterCardController
     {
         public TheHarpyExtremeCallingCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
