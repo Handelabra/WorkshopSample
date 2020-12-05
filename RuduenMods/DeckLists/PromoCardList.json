@@ -30,6 +30,37 @@
       }
     }
   ],
+  "AkashThriya": [
+    {
+      "identifier": "AkashThriyaCharacter",
+      "promoIdentifier": "AkashThriyaSeedRotationCharacter",
+      "count": 1,
+      "title": "Akash'Thriya",
+      "body": [ "Seed Rotation" ],
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "character": true,
+      "powers": "Select 1 Primordial Seed from your trash and put it on the bottom of your deck. Reveal cards from the top of your deck until you reveal a Primordial Seed, play it, and shuffle all other cards revealed this way into your deck.",
+      "hitpoints": 45,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "AkashThriya" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3,
+      "openingLines": {
+        "default": "Sorry, I don't have a cold pun in storage right now."
+      }
+    }
+  ],
   "TheArgentAdept": [
     {
       "identifier": "TheArgentAdeptCharacter",
@@ -509,6 +540,44 @@
       "complexity": 2,
       "openingLines": {
         "default": "Hm."
+      }
+    }
+  ],
+  "VoidGuardMainstay": [
+    {
+      "identifier": "VoidGuardMainstayCharacter",
+      "promoIdentifier": "VoidGuardMainstayShrugItOffCharacter",
+      "count": 1,
+      "title": "Mainstay",
+      "promoTitle": "Mainstay",
+      "body": "Shrug it Off",
+      "backgroundColor": "C87243",
+      "foilBackgroundColor": "C87243",
+      "character": true,
+      "powers": [
+        "Draw a card. Until the start of your next turn, whenever exactly 1 Damage would be dealt to {VoidGuardMainstayCharacter}, prevent that damage."
+      ],
+      "icons": [
+        "HasPower",
+        "ReduceDamageTaken"
+      ],
+      "hitpoints": 29,
+      "nemesisIdentifiers": [
+        "TheSentinels"
+      ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "Hm..."
       }
     }
   ]

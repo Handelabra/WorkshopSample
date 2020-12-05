@@ -10,8 +10,6 @@ namespace RuduenPromosWorkshop.HeroPromos
         {
         }
 
-
-
         //public override IEnumerator UsePower(int index = 0)
         //{
         //    TokenPool avianPool = base.Card.FindTokenPool(TokenPool.AvianControlPool);

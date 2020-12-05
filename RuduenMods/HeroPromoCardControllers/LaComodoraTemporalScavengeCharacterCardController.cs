@@ -3,7 +3,6 @@ using Handelabra.Sentinels.Engine.Model;
 using RuduenWorkshop.HeroPromos;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RuduenWorkshop.LaComodora
 {
@@ -22,11 +21,11 @@ namespace RuduenWorkshop.LaComodora
             if (this.TurnTaker.IsHero) { turnTakerName = this.TurnTaker.Name; }
             else { turnTakerName = this.Card.Title; }
 
-            // Flip a card face-up. 
+            // Flip a card face-up.
             coroutine = this.GameController.SelectAndFlipCards(this.DecisionMaker, new LinqCardCriteria((Card c) => c.Location == this.HeroTurnTaker.PlayArea && c.IsFaceDownNonCharacter && !c.IsMissionCard, "face-down cards in " + turnTakerName + "'s play area"), 1, false, false, 1, null, true, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Set up an effect to respond when your equipment is destroyed 
+            // Set up an effect to respond when your equipment is destroyed
             WhenCardIsDestroyedStatusEffect whenCardIsDestroyedStatusEffect = new WhenCardIsDestroyedStatusEffect(this.CardWithoutReplacements, "WhenEquipIsDestroyedFlip", "Whenever a construct is destroyed, " + turnTakerName + " may shuffle it into their deck and either draw or play a card.", new TriggerType[]
             { TriggerType.FlipCard }, this.HeroTurnTaker, this.Card, null);
             whenCardIsDestroyedStatusEffect.CardDestroyedCriteria.HasAnyOfTheseKeywords = new List<string> { "equipment" };
@@ -59,7 +58,6 @@ namespace RuduenWorkshop.LaComodora
 
                     if (this.DidPlayerAnswerYes(storedResults))
                     {
-
                         destroy.PreventMoveToTrash = true;
 
                         // Cancel the destruction.
@@ -69,11 +67,11 @@ namespace RuduenWorkshop.LaComodora
                         // Flip the card face-down.
                         coroutine = this.GameController.FlipCard(destroy.CardToDestroy, cardSource: this.GetCardSource());
                         if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
                     }
                 }
             }
         }
+
 #pragma warning restore IDE0060 // Remove unused parameter
     }
 }

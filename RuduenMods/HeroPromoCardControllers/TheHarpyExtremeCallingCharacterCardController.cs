@@ -29,7 +29,6 @@ namespace RuduenWorkshop.TheHarpy
             // Draw 1 card.
             coroutine = this.DrawCards(this.DecisionMaker, powerNumeral);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
         }
 
         // Token: 0x060015E4 RID: 5604 RVA: 0x0003C07C File Offset: 0x0003A27C

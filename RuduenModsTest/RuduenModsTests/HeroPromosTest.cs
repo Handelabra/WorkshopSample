@@ -67,6 +67,40 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestAkashThriyaNoTrash()
+        {
+            SetupGameController("BaronBlade", "AkashThriya/RuduenWorkshop.AkashThriyaSeedRotationCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(thriya.CharacterCard.IsPromoCard);
+
+            // Set seed so it doesn't randomly use the self-destructing one. 
+            Card seed = PutOnDeck("NoxiousPod");
+
+            UsePower(thriya);
+            AssertIsInPlay(seed);
+        }
+
+        [Test()]
+        public void TestAkashThriyaTrash()
+        {
+            SetupGameController("BaronBlade", "AkashThriya/RuduenWorkshop.AkashThriyaSeedRotationCharacter", "TheBlock");
+
+            StartGame();
+
+            Assert.IsTrue(thriya.CharacterCard.IsPromoCard);
+
+            // Set seed so it doesn't randomly use the self-destructing one. 
+            Card seed = PutOnDeck("NoxiousPod");
+            Card cycled = PutInTrash("VitalizedThorns");
+
+            UsePower(thriya);
+            AssertIsInPlay(seed);
+            AssertInDeck(cycled);
+        }
+
+        [Test()]
         public void TestArgentAdeptPlaySafe()
         {
             SetupGameController("BaronBlade", "TheArgentAdept/RuduenWorkshop.TheArgentAdeptAriaCharacter", "TheBlock");
@@ -178,6 +212,7 @@ namespace RuduenModsTest
 
             Assert.IsTrue(bench.CharacterCard.IsPromoCard);
             Card software = PutInHand("AutoTargetingProtocol");
+            PutInHand("AllyMatrix"); // Add second one so the decision selection always has a choice. 
             Card mdp = FindCardInPlay("MobileDefensePlatform");
 
             // Play, damage, bounce, play.
@@ -186,7 +221,7 @@ namespace RuduenModsTest
             QuickHPStorage(mdp);
             UsePower(bench);
             PutIntoPlay("OverhaulLoadout");
-            return (software.Location == bench.TurnTaker.PlayArea); // The card should be in the play area! Expect a fail right now. 
+            return (software.Location == bench.TurnTaker.PlayArea); // The card should be in the play area! Expect a fail right now.
         }
 
         [Test()]
@@ -265,7 +300,7 @@ namespace RuduenModsTest
             GoToUsePowerPhase(bunker);
 
             UsePower(bunker);
-            AssertPhaseActionCount(1); // 1 Use Remaining from Turret Mode. 
+            AssertPhaseActionCount(1); // 1 Use Remaining from Turret Mode.
         }
 
         [Test()]
@@ -430,14 +465,13 @@ namespace RuduenModsTest
             DecisionSelectWord = "Flip 2 {avian}";
             DecisionSelectTarget = mdp;
 
-            QuickHPStorage(harpy.CharacterCard, mdp) ;
+            QuickHPStorage(harpy.CharacterCard, mdp);
             UsePower(harpy);
             QuickHPCheck(-2, -2); // Damage dealt.
             ;
             AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.ArcanaControlPool), 5);
             AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.AvianControlPool), 0);
         }
-
 
         [Test()]
         public void TestKnyfePower()
@@ -802,6 +836,73 @@ namespace RuduenModsTest
             AssertPhaseActionCount(0); // Powers used.
 
             AssertOnBottomOfDeck(tachyon, oneshot);
+        }
+
+        [Test()]
+        public void TestVoidGuardMainstay()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "VoidGuardMainstay/RuduenWorkshop.VoidGuardMainstayShrugItOffCharacter", "Megalopolis");
+
+            Assert.IsTrue(voidMainstay.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            QuickHPStorage(voidMainstay);
+            QuickHandStorage(voidMainstay);
+            UsePower(voidMainstay);
+            DealDamage(voidMainstay, voidMainstay, 1, DamageType.Melee);
+            DealDamage(voidMainstay, voidMainstay, 2, DamageType.Melee);
+            QuickHandCheck(1); // Card drawn.
+            QuickHPCheck(-2); // Only the 2 went through.
+        }
+
+        [Test()]
+        public void TestVoidGuardMainstayIncreasePierces()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "VoidGuardMainstay/RuduenWorkshop.VoidGuardMainstayShrugItOffCharacter", "Legacy", "TheBlock");
+
+            Assert.IsTrue(voidMainstay.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            UsePower(legacy);
+
+            QuickHPStorage(voidMainstay);
+            QuickHandStorage(voidMainstay);
+            UsePower(voidMainstay);
+            DealDamage(voidMainstay, voidMainstay, 0, DamageType.Melee);
+            QuickHandCheck(1); // Card drawn.
+            QuickHPCheck(0); // Increased damage should not work. 
+        }
+
+        [Test()]
+        public void TestVoidGuardMainstayGuiseDangIt()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "VoidGuardMainstay/RuduenWorkshop.VoidGuardMainstayShrugItOffCharacter", "Guise", "TheHarpy", "TheBlock");
+
+            Assert.IsTrue(voidMainstay.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            PutIntoPlay("AppliedNumerology");
+
+            Card play = PutInHand("ICanDoThatToo");
+
+            DecisionSelectTurnTaker = harpy.TurnTaker;
+            DecisionSelectCard = voidMainstay.CharacterCard;
+            DecisionYesNo = true;
+
+            PutIntoPlay("UhYeahImThatGuy");
+
+            QuickHPStorage(guise);
+            QuickHandStorage(guise);
+            PlayCard(play);
+            DealDamage(guise, guise, 2, DamageType.Melee); // -1 from Numerology, then prevent. Numerology only works on cards in Guise's play area!
+            QuickHandCheck(0); // Played and drawn.
+            QuickHPCheck(0); // Prevented.
         }
     }
 }

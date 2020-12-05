@@ -3,7 +3,6 @@ using Handelabra.Sentinels.Engine.Model;
 using RuduenWorkshop.HeroPromos;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RuduenWorkshop.CaptainCosmic
 {
@@ -46,6 +45,5 @@ namespace RuduenWorkshop.CaptainCosmic
                 if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
             }
         }
-
     }
 }

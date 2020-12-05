@@ -169,7 +169,7 @@
       "title": "Staff Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, activate a card's [u]Cast[/u] text, then destroy that card. If that [u]Cast[/u] text deals damage, increase that damage by 2.",
-      "icons": [ "Destroy", "IncreaseDamageDealt"],
+      "icons": [ "Destroy", "IncreaseDamageDealt" ],
       "flavorText": "...."
     },
     {
@@ -178,7 +178,7 @@
       "title": "Spiral Charm",
       "keywords": [ "equipment", "charge" ],
       "body": "When you play this, activate a card's [u]Cast[/u] text.",
-      "icons": [ ],
+      "icons": [],
       "flavorText": "...."
     },
     {
