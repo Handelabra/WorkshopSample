@@ -21,6 +21,8 @@
     "CaptainCosmic": [ "CaptainCosmicCosmicShieldingCharacter" ],
     "ChronoRanger": [ "ChronoRangerHighNoonCharacter" ],
     "Expatriette": [ "ExpatrietteQuickShotCharacter" ],
+    "Fanatic": [ "FanaticZealCharacter" ],
+    "Guise": [ "GuiseShenanigansCharacter" ],
     "TheHarpy": [ "TheHarpyExtremeCallingCharacter" ],
     "Knyfe": [ "KnyfeKineticLoopCharacter" ],
     "LaComodora": [ "LaComodoraTemporalScavengeCharacter" ],

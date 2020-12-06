@@ -276,6 +276,68 @@
       }
     }
   ],
+  "Fanatic": [
+    {
+      "identifier": "FanaticCharacter",
+      "promoIdentifier": "FanaticZealCharacter",
+      "count": 1,
+      "title": "Fanatic",
+      "body": [ "Zeal" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Fanatic deals up to 2 Targets and themselves 1 Radiant Damage. Play a card or use a power.",
+      "hitpoints": 27,
+      "icons": [ "HasPower", "DealDamageRadiant", "PlayCardNow", "UsePowerNow" ],
+      "nemesisIdentifiers": [ "Fanatic" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "..."
+      }
+    }
+  ],
+  "Guise": [
+    {
+      "identifier": "GuiseCharacter",
+      "promoIdentifier": "GuiseShenanigansCharacter",
+      "count": 1,
+      "title": "Guise",
+      "body": [ "Shenanigans" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Draw a card. Wait, that's it? Fine, select 1 of your Ongoing cards. Until the end of your next turn, that Ongoing is Indestructible.",
+      "hitpoints": 27,
+      "icons": [ "HasPower", "DrawCardsNow", "Indestructible" ],
+      "nemesisIdentifiers": [ "Guise" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3,
+      "openingLines": {
+        "default": "Wait, I'm here? That means I've got a fan! Woo!"
+      }
+    }
+  ],
   "TheHarpy": [
     {
       "identifier": "TheHarpyCharacter",
@@ -510,7 +572,7 @@
       "openingLines": {
         "default": "..."
       },
-      "devNotes":  "This is coded as 'up to 1', but shouldn't make a difference since Guise can't interact and making it actually optional is messy. I'll fix it if there's every something that interacts with it, but since Chrono-Ranger uses similar logic for his optional damage, this is the default for playability. And Guise can't break this yet, as far as I know."
+      "devNotes": "This is coded as 'up to 1', but shouldn't make a difference since Guise can't interact and making it actually optional is messy. I'll fix it if there's every something that interacts with it, but since Chrono-Ranger uses similar logic for his optional damage, this is the default for playability. And Guise can't break this yet, as far as I know."
     }
   ],
   "Tachyon": [

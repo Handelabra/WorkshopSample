@@ -29,11 +29,11 @@ namespace RuduenWorkshop.NightMist
 
             // Draw or play.
             List<Function> list = new List<Function>() {
-                new Function(base.HeroTurnTakerController, "Draw a card", SelectionType.DrawCard, () => base.DrawCard(base.HeroTurnTaker)),
-                new Function(base.HeroTurnTakerController, "Play a card", SelectionType.PlayCard, () => base.SelectAndPlayCardFromHand(base.HeroTurnTakerController, false))
+                new Function(this.HeroTurnTakerController, "Draw a card", SelectionType.DrawCard, () => base.DrawCard(base.HeroTurnTaker)),
+                new Function(this.HeroTurnTakerController, "Play a card", SelectionType.PlayCard, () => base.SelectAndPlayCardFromHand(base.HeroTurnTakerController, false))
             };
             SelectFunctionDecision selectFunction = new SelectFunctionDecision(base.GameController, base.HeroTurnTakerController, list, false, cardSource: this.GetCardSource());
-            coroutine = base.GameController.SelectAndPerformFunction(selectFunction, null, null);
+            coroutine = this.GameController.SelectAndPerformFunction(selectFunction, null, null);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

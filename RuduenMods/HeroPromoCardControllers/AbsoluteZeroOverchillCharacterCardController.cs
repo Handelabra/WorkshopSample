@@ -41,7 +41,7 @@ namespace RuduenWorkshop.AbsoluteZero
             }
 
             // Draw 2 cards.
-            coroutine = this.DrawCards(this.HeroTurnTakerController, powerNumerals[1]);
+            coroutine = this.DrawCards(this.DecisionMaker, powerNumerals[1]);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
     }

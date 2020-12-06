@@ -79,6 +79,8 @@
     <Compile Include="HeroPromoCardControllers\BunkerModeShiftCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\LaComodoraTemporalScavengeCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\AkashThriyaSeedRotationCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\FanaticZealCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\GuiseShenanigansCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\ParseLaplaceShotCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\OmnitronXElectroShieldedSystemsCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\BenchmarkDownloadManagerCharacterCardController.cs" />

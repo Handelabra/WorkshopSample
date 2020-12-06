@@ -431,6 +431,69 @@ namespace RuduenModsTest
         }
 
         [Test()]
+        public void TestFanaticPlay()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "Fanatic/RuduenWorkshop.FanaticZealCharacter", "Megalopolis");
+
+            Assert.IsTrue(fanatic.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            Card play = PutInHand("AegisOfResurrection");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCardToPlay = play;
+
+            QuickHPStorage(fanatic.CharacterCard, mdp);
+            UsePower(fanatic);
+            AssertIsInPlay(play);
+            QuickHPCheck(-1, -1); // Damage dealt to BB (canceled), mdp, and self.
+        }
+
+        [Test()]
+        public void TestFanaticPower()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "Fanatic/RuduenWorkshop.FanaticZealCharacter", "Megalopolis");
+
+            Assert.IsTrue(fanatic.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            PutIntoPlay("Absolution");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectFunction = 1;
+            DecisionSelectTargets = new Card[] { mdp, baron.CharacterCard, mdp }; // Attempt to attack MDP twice.
+
+            QuickHPStorage(fanatic.CharacterCard, mdp);
+            UsePower(fanatic);
+            QuickHPCheck(-1, -4); // Damage dealt to BB (canceled), mdp, and self.
+        }
+
+        [Test()]
+        public void TestGuisePower()
+        {
+            SetupGameController("BaronBlade", "Guise/RuduenWorkshop.GuiseShenanigansCharacter", "Megalopolis");
+            Assert.IsTrue(guise.CharacterCard.IsPromoCard);
+
+            StartGame();
+            GoToUsePowerPhase(guise);
+            Card ongoing = PutIntoPlay("GrittyReboot");
+
+            QuickHandStorage(guise);
+            UsePower(guise);
+            QuickHandCheck(1); // 1 Card Drawn.
+            DestroyCard(ongoing);
+            AssertIsInPlay(ongoing);
+            GoToStartOfTurn(guise);
+            AssertIsInPlay(ongoing); // First new turn, should survive self-destruct.
+            GoToStartOfTurn(guise);
+            AssertInTrash(ongoing); // Second new turn. Without a power, it's gone! 
+        }
+
+        [Test()]
         public void TestTheHarpy()
         {
             // Equipment Test
@@ -678,7 +741,6 @@ namespace RuduenModsTest
         [Test()]
         public void TestOmnitronXPower()
         {
-            // Tool in hand.
             SetupGameController("BaronBlade", "OmnitronX/RuduenWorkshop.OmnitronXElectroShieldedSystemsCharacter", "Megalopolis");
             Assert.IsTrue(omnix.CharacterCard.IsPromoCard);
 
