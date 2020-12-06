@@ -473,7 +473,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestGuisePower()
+        public void TestGuiseOngoing()
         {
             SetupGameController("BaronBlade", "Guise/RuduenWorkshop.GuiseShenanigansCharacter", "Megalopolis");
             Assert.IsTrue(guise.CharacterCard.IsPromoCard);
@@ -491,6 +491,21 @@ namespace RuduenModsTest
             AssertIsInPlay(ongoing); // First new turn, should survive self-destruct.
             GoToStartOfTurn(guise);
             AssertInTrash(ongoing); // Second new turn. Without a power, it's gone! 
+        }
+
+        [Test()]
+        public void TestGuiseNoOngoing()
+        {
+            SetupGameController("BaronBlade", "Guise/RuduenWorkshop.GuiseShenanigansCharacter", "Megalopolis");
+            Assert.IsTrue(guise.CharacterCard.IsPromoCard);
+
+            StartGame();
+            GoToUsePowerPhase(guise);
+
+            QuickHandStorage(guise);
+            AssertNextMessage("Guise does not have any Ongoings in play, so he cannot make any indestructible. Whoops!");
+            UsePower(guise);
+            QuickHandCheck(1); // 1 Card Drawn.
         }
 
         [Test()]
