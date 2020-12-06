@@ -521,9 +521,8 @@ namespace RuduenModsTest
             PutInHand("VitalitySurge");
             GoToUsePowerPhase(haka);
 
-            AssertNextMessage("Guise does not have any Ongoings in play, so he cannot make any indestructible. Whoops!");
             UsePower(haka);
-            AssertNumberOfCardsInHand(haka, 3); // Make sure the net effect is 3 cards in hand, even if the played card results in a draw. 
+            AssertNumberOfCardsInHand(haka, 2); // Make sure the net effect is 2 cards in hand, even if the played card results in a draw. 
         }
 
         [Test()]
@@ -626,6 +625,90 @@ namespace RuduenModsTest
             QuickHPCheck(0); // No damage or healing.
             QuickHandCheck(1); // Card drawn.
         }
+
+        [Test()]
+        public void TestLegacyOngoing()
+        {
+            SetupGameController("BaronBlade", "Legacy/RuduenWorkshop.LegacyLeadersPresenceCharacter", "Megalopolis");
+            Assert.IsTrue(legacy.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            DiscardAllCards(legacy);
+            Card card=PutInHand("SurgeOfStrength");
+            GoToUsePowerPhase(legacy);
+
+            DecisionSelectCardToPlay = card;
+
+            QuickHandStorage(legacy);
+            UsePower(legacy);
+            AssertIsInPlay(card);
+            QuickHandCheck(0); // 1 played, 1 drawn.
+        }
+
+        [Test()]
+        public void TestLegacyNotOngoing()
+        {
+            SetupGameController("BaronBlade", "Legacy/RuduenWorkshop.LegacyLeadersPresenceCharacter", "Megalopolis");
+            Assert.IsTrue(legacy.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            DiscardAllCards(legacy);
+            Card card = PutInHand("TheLegacyRing");
+            GoToUsePowerPhase(legacy);
+
+            DecisionSelectCardToPlay = card;
+
+            QuickHandStorage(legacy);
+            UsePower(legacy);
+            AssertIsInPlay(card);
+            QuickHandCheck(-1); // 1 played, 0 drawn.
+        }
+
+        [Test()]
+        public void TestLifelineNormalHit()
+        {
+            // Tool in hand.
+            SetupGameController("BaronBlade", "Lifeline/RuduenWorkshop.LifelineEnergyTapCharacter", "Legacy", "Megalopolis");
+            Assert.IsTrue(lifeline.CharacterCard.IsPromoCard);
+
+            StartGame();
+            UsePower(legacy);
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            DealDamage(lifeline, lifeline.CharacterCard, 5, DamageType.Melee);
+
+            QuickHPStorage(lifeline.CharacterCard, mdp);
+            UsePower(lifeline);
+            QuickHPCheck(1, -2); // One successful hit, one HP regained. 
+        }
+
+        [Test()]
+        public void TestLifelineRedirectedHit()
+        {
+            // Tool in hand.
+            SetupGameController("BaronBlade", "Lifeline/RuduenWorkshop.LifelineEnergyTapCharacter", "Legacy", "Tachyon", "Megalopolis");
+            Assert.IsTrue(lifeline.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            PutIntoPlay("SynapticInterruption");
+
+            DecisionSelectCards = new Card[] { mdp, tachyon.CharacterCard, mdp };
+
+            UsePower(legacy);
+            UsePower(legacy); // Boost damage to 3 for redirect.
+
+            DealDamage(lifeline, lifeline.CharacterCard, 5, DamageType.Melee);
+
+            QuickHPStorage(lifeline.CharacterCard, tachyon.CharacterCard, mdp);
+            UsePower(lifeline);
+            QuickHPCheck(1, 0, -6); // Two hits but only one target damaged, so 1 HP.
+        }
+
+
 
         [Test()]
         public void TestMrFixerPowerA()

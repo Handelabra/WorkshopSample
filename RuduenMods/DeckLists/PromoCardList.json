@@ -480,6 +480,71 @@
       }
     }
   ],
+  "Legacy": [
+    {
+      "identifier": "LegacyCharacter",
+      "promoIdentifier": "LegacyLeadersPresenceCharacter",
+      "count": 1,
+      "title": "Legacy",
+      "body": [ "Leader's Presence" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Play a card. If that card is an Ongoing, draw a card.",
+      "hitpoints": 30,
+      "icons": [ "HasPower", "PlayCardNow", "DrawCardsNow" ],
+      "nemesisIdentifiers": [ "Legacy" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 1,
+      "openingLines": {
+        "default": "..."
+      },
+      "devNotes": [
+        "Potentially swap wording to 'If you did not play a one-shot' for handling the case where your hand is empty."
+      ]
+    }
+  ],
+  "Lifeline": [
+    {
+      "identifier": "LifelineCharacter",
+      "promoIdentifier": "LifelineEnergyTapCharacter",
+      "count": 1,
+      "title": "Lifeline",
+      "body": [ "Energy Tap" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "{Lifeline} deals up to 2 Targets 1 Infernal Damage. {Lifeline} Regains HP equal to the number of targets damaged this way.",
+      "hitpoints": 29,
+      "icons": [ "HasPower", "DealDamageInfernal", "GainHP" ],
+      "nemesisIdentifiers": [ "Lifeline" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 1,
+      "openingLines": {
+        "default": "..."
+      }
+    }
+  ],
   "MrFixer": [
     {
       "identifier": "MrFixerCharacter",

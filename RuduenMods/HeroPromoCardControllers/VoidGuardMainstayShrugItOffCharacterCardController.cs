@@ -31,7 +31,8 @@ namespace RuduenWorkshop.VoidGuardMainstay
                 turnTakerName = this.Card.Title;
             }
 
-            OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "PreventResponse", "Whenever " + turnTakerName + " is dealt exactly " + powerNumeral + " damage, prevent that damage.", new TriggerType[] { TriggerType.DealDamage }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
+            // ReduceDamage isn't technically an accurate trigger, but CancelAction alone causes the numbers to not work well when boosting or reducing, so it has to be kept. 
+            OnDealDamageStatusEffect onDealDamageStatusEffect = new OnDealDamageStatusEffect(this.CardWithoutReplacements, "PreventResponse", "Whenever " + turnTakerName + " is dealt exactly " + powerNumeral + " damage, prevent that damage.", new TriggerType[] { TriggerType.CancelAction }, this.HeroTurnTaker, this.Card, new int[] { powerNumeral });
             onDealDamageStatusEffect.TargetCriteria.IsSpecificCard = this.CharacterCard;
             onDealDamageStatusEffect.CanEffectStack = false;
             onDealDamageStatusEffect.BeforeOrAfter = BeforeOrAfter.Before;
