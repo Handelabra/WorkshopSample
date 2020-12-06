@@ -501,15 +501,15 @@ namespace RuduenModsTest
 
             Assert.IsTrue(harpy.CharacterCard.IsPromoCard);
 
-            DecisionSelectWord = "Flip 3 {arcana}";
+            DecisionSelectWord = "Flip 2 {arcana}";
 
             StartGame();
             QuickHPStorage(harpy);
             UsePower(harpy);
-            QuickHPCheck(-3); // Damage dealt.
+            QuickHPCheck(-2); // Damage dealt.
             ;
-            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.ArcanaControlPool), 0);
-            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.AvianControlPool), 5);
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.ArcanaControlPool), 1);
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.AvianControlPool), 4);
         }
 
         [Test()]
@@ -525,15 +525,36 @@ namespace RuduenModsTest
             PutIntoPlay("HarpyHex");
             Card mdp = FindCardInPlay("MobileDefensePlatform");
 
-            DecisionSelectWord = "Flip 2 {avian}";
+            DecisionSelectWord = "Flip 1 {avian}";
             DecisionSelectTarget = mdp;
 
             QuickHPStorage(harpy.CharacterCard, mdp);
             UsePower(harpy);
-            QuickHPCheck(-2, -2); // Damage dealt.
+            QuickHPCheck(-1, -1); // Damage dealt.
             ;
-            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.ArcanaControlPool), 5);
-            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.AvianControlPool), 0);
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.ArcanaControlPool), 4);
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.AvianControlPool), 1);
+        }
+
+        [Test()]
+        public void TestTheHarpyNumerology()
+        {
+            // Equipment Test
+            SetupGameController("BaronBlade", "TheHarpy/RuduenWorkshop.TheHarpyExtremeCallingCharacter", "Megalopolis");
+
+            Assert.IsTrue(harpy.CharacterCard.IsPromoCard);
+
+            PutIntoPlay("AppliedNumerology");
+
+            DecisionSelectWord = "Flip 1 {arcana}";
+
+            StartGame();
+            QuickHPStorage(harpy);
+            UsePower(harpy);
+            QuickHPCheck(-1); // Damage dealt.
+            ;
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.ArcanaControlPool), 2);
+            AssertTokenPoolCount(harpy.CharacterCard.FindTokenPool(TokenPool.AvianControlPool), 3);
         }
 
         [Test()]

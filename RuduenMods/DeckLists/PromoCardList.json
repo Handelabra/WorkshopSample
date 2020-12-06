@@ -349,7 +349,7 @@
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Flip all of your {arcana} or {avian} tokens. {TheHarpy} deals herself Psychic Damage equal to the number of tokens flipped this way. Draw 1 card.",
+      "powers": "Flip all but 1 of your {arcana} or {avian} tokens. {TheHarpy} deals herself Psychic Damage equal to the number of tokens flipped this way. Draw a card.",
       "hitpoints": 27,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "TheHarpy" ],

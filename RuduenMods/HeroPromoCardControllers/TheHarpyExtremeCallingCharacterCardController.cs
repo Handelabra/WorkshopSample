@@ -24,16 +24,16 @@ namespace RuduenWorkshop.TheHarpy
             IEnumerator coroutine;
             int powerNumeral = GetPowerNumeral(0, 1);
 
-            coroutine = this.FlipAllControlTokenAndDamage();
+            coroutine = this.FlipAllControlTokenAndDamage(powerNumeral);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
-            // Draw 1 card.
-            coroutine = this.DrawCards(this.DecisionMaker, powerNumeral);
+            // Draw a card.
+            coroutine = this.DrawCards(this.DecisionMaker, 1);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
         }
 
         // Token: 0x060015E4 RID: 5604 RVA: 0x0003C07C File Offset: 0x0003A27C
-        public IEnumerator FlipAllControlTokenAndDamage()
+        public IEnumerator FlipAllControlTokenAndDamage(int powerNumeral)
         {
             IEnumerator coroutine;
 
@@ -41,6 +41,8 @@ namespace RuduenWorkshop.TheHarpy
             List<FlipTokensAction> storedResultsToken = new List<FlipTokensAction>();
             TokenPool avianPool = this.Card.FindTokenPool(TokenPool.AvianControlPool);
             TokenPool arcanaPool = this.Card.FindTokenPool(TokenPool.ArcanaControlPool);
+            int arcanaToFlip;
+            int avianToFlip;
             int tokensFlipped = 0;
 
             if (avianPool == null || arcanaPool == null || !this.TurnTaker.IsHero)
@@ -54,10 +56,12 @@ namespace RuduenWorkshop.TheHarpy
             }
             if (avianPool != null && arcanaPool != null)
             {
+                arcanaToFlip = (arcanaPool.CurrentValue > powerNumeral) ? (arcanaPool.CurrentValue) - powerNumeral : 0;
+                avianToFlip = (avianPool.CurrentValue > powerNumeral) ? (avianPool.CurrentValue) - powerNumeral : 0;
                 string[] words = new string[]
                         {
-                            "Flip " + arcanaPool.CurrentValue + " {arcana}",
-                            "Flip " + avianPool.CurrentValue + " {avian}"
+                            "Flip " + arcanaToFlip + " {arcana}",
+                            "Flip " + avianToFlip + " {avian}"
                         };
 
                 coroutine = this.GameController.SelectWord(this.DecisionMaker, words, SelectionType.HarpyTokenType, storedResultsWord, false, null, this.GetCardSource());
@@ -69,18 +73,19 @@ namespace RuduenWorkshop.TheHarpy
                 {
                     TokenPool originPool;
                     TokenPool destinationPool;
-                    if (text == "Flip " + avianPool.CurrentValue + " {avian}")
-                    {
-                        originPool = avianPool;
-                        destinationPool = arcanaPool;
-                    }
-                    else
+                    if (text == words[0])
                     {
                         originPool = arcanaPool;
                         destinationPool = avianPool;
+                        tokensFlipped = arcanaToFlip;
                     }
-                    tokensFlipped = originPool.CurrentValue;
-                    coroutine = this.FlipTokens(originPool, destinationPool, originPool.CurrentValue, storedResultsToken);
+                    else
+                    {
+                        originPool = avianPool;
+                        destinationPool = arcanaPool;
+                        tokensFlipped = avianToFlip;
+                    }
+                    coroutine = this.FlipTokens(originPool, destinationPool, tokensFlipped, storedResultsToken);
                     if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
                 }
             }
