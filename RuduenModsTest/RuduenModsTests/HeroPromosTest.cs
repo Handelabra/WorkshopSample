@@ -508,6 +508,24 @@ namespace RuduenModsTest
             QuickHandCheck(1); // 1 Card Drawn.
         }
 
+
+        [Test()]
+        public void TestHaka()
+        {
+            SetupGameController("BaronBlade", "Haka/RuduenWorkshop.HakaVigorCharacter", "Megalopolis");
+            Assert.IsTrue(haka.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            DiscardAllCards(haka);
+            PutInHand("VitalitySurge");
+            GoToUsePowerPhase(haka);
+
+            AssertNextMessage("Guise does not have any Ongoings in play, so he cannot make any indestructible. Whoops!");
+            UsePower(haka);
+            AssertNumberOfCardsInHand(haka, 3); // Make sure the net effect is 3 cards in hand, even if the played card results in a draw. 
+        }
+
         [Test()]
         public void TestTheHarpy()
         {

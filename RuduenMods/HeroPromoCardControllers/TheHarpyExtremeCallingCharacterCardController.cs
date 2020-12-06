@@ -24,12 +24,13 @@ namespace RuduenWorkshop.TheHarpy
             IEnumerator coroutine;
             int powerNumeral = GetPowerNumeral(0, 1);
 
-            coroutine = this.FlipAllControlTokenAndDamage(powerNumeral);
-            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
-
             // Draw a card.
             coroutine = this.DrawCards(this.DecisionMaker, 1);
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
+            coroutine = this.FlipAllControlTokenAndDamage(powerNumeral);
+            if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
+
         }
 
         // Token: 0x060015E4 RID: 5604 RVA: 0x0003C07C File Offset: 0x0003A27C

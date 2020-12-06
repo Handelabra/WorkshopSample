@@ -10,7 +10,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "{AbsoluteZero} deals himself 1 Cold Damage. Play an Equipment card. If you do not, destroy one of your Equipment cards. Draw 2 Cards.",
+      "powers": "{AbsoluteZero} deals himself 1 Cold Damage. You may play an Equipment card. If you do not, destroy one of your Equipment cards. Draw 2 Cards.",
       "hitpoints": 26,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "AbsoluteZero" ],
@@ -103,7 +103,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "Play a Software card. Until the end of your next turn, that Software is indestructible. {Benchmark} deals 1 Target Lightning Damage equal to the number of Software cards in play.",
+      "powers": "You may play a Software card. Until the end of your next turn, that Software is indestructible. {Benchmark} deals 1 Target Lightning Damage equal to the number of Software cards in play.",
       "hitpoints": 25,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "Benchmark" ],
@@ -194,7 +194,7 @@
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
       "character": true,
-      "powers": "Draw a card. Select a Construct Target. Until the start of your next turn, that construct is Indestructible. That Construct deals itself 2 Energy Damage.",
+      "powers": "Draw a card. Select a Construct Target. Until the start of your next turn, that Construct is Indestructible. That Construct deals itself 2 Energy Damage.",
       "hitpoints": 26,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "CaptainCosmic" ],
@@ -338,6 +338,37 @@
       }
     }
   ],
+  "Haka": [
+    {
+      "identifier": "HakaCharacter",
+      "promoIdentifier": "HakaVigorCharacter",
+      "count": 1,
+      "title": "Haka",
+      "body": [ "Vigor" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Play a card. Draw until you have 2 cards in your hand.",
+      "hitpoints": 30,
+      "icons": [ "HasPower", "PlayCardNow", "DrawCardsNow" ],
+      "nemesisIdentifiers": [ "Haka" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 1,
+      "openingLines": {
+        "default": "..."
+      }
+    }
+  ],
   "TheHarpy": [
     {
       "identifier": "TheHarpyCharacter",
@@ -349,7 +380,7 @@
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Flip all but 1 of your {arcana} or {avian} tokens. {TheHarpy} deals herself Psychic Damage equal to the number of tokens flipped this way. Draw a card.",
+      "powers": "Draw a card. Flip all but 1 of your {arcana} or {avian} tokens. {TheHarpy} deals herself Psychic Damage equal to the number of tokens flipped this way.",
       "hitpoints": 27,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "TheHarpy" ],
@@ -383,7 +414,7 @@
       ],
       "complexity": 2,
       "openingLines": {
-        "default": "I've brought the whole arsenal this time."
+        "default": "..."
       }
     }
   ],
@@ -460,7 +491,7 @@
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "{MrFixer} deals 1 Target 1 Melee Damage and himself 0 Melee Damage. Play a Tool card. If you do not, reveal cards from the top of your deck until you reveal a Tool card, play it, and shuffle the other cards revealed this way into your deck.",
+      "powers": "{MrFixer} deals 1 Target 1 Melee Damage and himself 0 Melee Damage. You may play a Tool card. If you do not, reveal cards from the top of your deck until you reveal a Tool card, play it, and shuffle the other cards revealed this way into your deck.",
       "hitpoints": 28,
       "icons": [ "HasPower" ],
 
@@ -572,7 +603,10 @@
       "openingLines": {
         "default": "..."
       },
-      "devNotes": "This is coded as 'up to 1', but shouldn't make a difference since Guise can't interact and making it actually optional is messy. I'll fix it if there's every something that interacts with it, but since Chrono-Ranger uses similar logic for his optional damage, this is the default for playability. And Guise can't break this yet, as far as I know."
+      "devNotes": [
+        "This is coded as 'up to 1', but shouldn't make a difference since Guise can't interact and making it actually optional is messy. I'll fix it if there's every something that interacts with it, but since Chrono-Ranger uses similar logic for his optional damage, this is the default for playability. And Guise can't break this yet, as far as I know.",
+        "This might still be a bit strong in certain combos. Allowing this to mess with Villain decks was a bit much, though, due to those that use the discard as a resource."
+      ]
     }
   ],
   "Tachyon": [

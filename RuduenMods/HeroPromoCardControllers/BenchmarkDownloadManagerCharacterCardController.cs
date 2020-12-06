@@ -22,8 +22,8 @@ namespace RuduenWorkshop.Benchmark
 
             IEnumerator coroutine;
 
-            // Play a Software.
-            coroutine = this.GameController.SelectAndPlayCardFromHand(this.HeroTurnTakerController, false, cardCriteria: new LinqCardCriteria((Card c) => c.IsSoftware, "software"), storedResults: storedResults, cardSource: this.GetCardSource());
+            // You may play a Software.
+            coroutine = this.GameController.SelectAndPlayCardFromHand(this.HeroTurnTakerController, true, cardCriteria: new LinqCardCriteria((Card c) => c.IsSoftware, "software"), storedResults: storedResults, cardSource: this.GetCardSource());
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // No successful card play means destroy.
