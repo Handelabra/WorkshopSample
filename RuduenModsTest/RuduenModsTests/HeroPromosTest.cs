@@ -627,29 +627,29 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestLegacyOngoing()
+        public void TestLegacyPlayOneShot()
         {
-            SetupGameController("BaronBlade", "Legacy/RuduenWorkshop.LegacyLeadersPresenceCharacter", "Megalopolis");
+            SetupGameController("BaronBlade", "Legacy/RuduenWorkshop.LegacyInTheFrayCharacter", "Megalopolis");
             Assert.IsTrue(legacy.CharacterCard.IsPromoCard);
 
             StartGame();
 
             DiscardAllCards(legacy);
-            Card card=PutInHand("SurgeOfStrength");
+            Card card=PutInHand("FlyingSmash");
             GoToUsePowerPhase(legacy);
 
             DecisionSelectCardToPlay = card;
 
             QuickHandStorage(legacy);
             UsePower(legacy);
-            AssertIsInPlay(card);
-            QuickHandCheck(0); // 1 played, 1 drawn.
+            AssertInTrash(card);
+            QuickHandCheck(-1); // 1 played, 0 drawn.
         }
 
         [Test()]
-        public void TestLegacyNotOngoing()
+        public void TestLegacyNotOneShot()
         {
-            SetupGameController("BaronBlade", "Legacy/RuduenWorkshop.LegacyLeadersPresenceCharacter", "Megalopolis");
+            SetupGameController("BaronBlade", "Legacy/RuduenWorkshop.LegacyInTheFrayCharacter", "Megalopolis");
             Assert.IsTrue(legacy.CharacterCard.IsPromoCard);
 
             StartGame();
@@ -658,12 +658,10 @@ namespace RuduenModsTest
             Card card = PutInHand("TheLegacyRing");
             GoToUsePowerPhase(legacy);
 
-            DecisionSelectCardToPlay = card;
-
             QuickHandStorage(legacy);
             UsePower(legacy);
-            AssertIsInPlay(card);
-            QuickHandCheck(-1); // 1 played, 0 drawn.
+            AssertInHand(card);
+            QuickHandCheck(1); // 0 played, 1 drawn.
         }
 
         [Test()]

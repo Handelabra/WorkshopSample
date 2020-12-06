@@ -483,15 +483,15 @@
   "Legacy": [
     {
       "identifier": "LegacyCharacter",
-      "promoIdentifier": "LegacyLeadersPresenceCharacter",
+      "promoIdentifier": "LegacyInTheFrayCharacter",
       "count": 1,
       "title": "Legacy",
-      "body": [ "Leader's Presence" ],
+      "body": [ "In The Fray" ],
       "character": true,
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Play a card. If that card is an Ongoing, draw a card.",
+      "powers": "You may play a One-Shot. If you do not, draw a card.",
       "hitpoints": 30,
       "icons": [ "HasPower", "PlayCardNow", "DrawCardsNow" ],
       "nemesisIdentifiers": [ "Legacy" ],

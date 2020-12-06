@@ -78,7 +78,7 @@
     <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
     <Compile Include="HeroPromoCardControllers\BunkerModeShiftCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\LifelineEnergyTapCharacterCardController.cs" />
-    <Compile Include="HeroPromoCardControllers\LegacyLeadersPresenceCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\LegacyInTheFrayCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\LaComodoraTemporalScavengeCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\AkashThriyaSeedRotationCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\FanaticZealCharacterCardController.cs" />
