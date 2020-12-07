@@ -30,6 +30,7 @@
     "Legacy": [ "LegacyInTheFrayCharacter" ],
     "Lifeline": [ "LifelineEnergyTapCharacter" ],
     "Luminary": [ "LuminaryReprogramCharacter" ],
+    "TheNaturalist": [ "TheNaturalistVolatileFormCharacter" ],
     "MrFixer": [ "MrFixerFlowingStrikeCharacter" ],
     "NightMist": [ "NightMistLimitedNumerologyCharacter" ],
     "OmnitronX": [ "OmnitronXElectroShieldedSystemsCharacter" ],

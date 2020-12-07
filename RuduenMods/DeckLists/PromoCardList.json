@@ -608,6 +608,37 @@
       }
     }
   ],
+  "TheNaturalist": [
+    {
+      "identifier": "TheNaturalistCharacter",
+      "promoIdentifier": "TheNaturalistVolatileFormCharacter",
+      "count": 1,
+      "title": "The Naturalist",
+      "body": [ "Volatile Form" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Power: Play a card. Then, for each of {gazelle}, {rhinoceres} or {crocodile} that card has in its text, until the end of your next turn you may activate that icon's effects. Draw a card.",
+      "hitpoints": 28,
+      "icons": [ "HasPower" ],
+      "nemesisIdentifiers": [ "TheNaturalist" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3,
+      "openingLines": {
+        "default": "..."
+      }
+    }
+  ],
   "NightMist": [
     {
       "identifier": "NightMistCharacter",

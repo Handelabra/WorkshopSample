@@ -526,7 +526,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestTheHarpy()
+        public void TestHarpy()
         {
             // Equipment Test
             SetupGameController("BaronBlade", "TheHarpy/RuduenWorkshop.TheHarpyExtremeCallingCharacter", "Megalopolis");
@@ -545,7 +545,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestTheHarpyFancierTrigger()
+        public void TestHarpyFancierTrigger()
         {
             // Equipment Test
             SetupGameController("BaronBlade", "TheHarpy/RuduenWorkshop.TheHarpyExtremeCallingCharacter", "Megalopolis");
@@ -569,7 +569,7 @@ namespace RuduenModsTest
         }
 
         [Test()]
-        public void TestTheHarpyNumerology()
+        public void TestHarpyNumerology()
         {
             // Equipment Test
             SetupGameController("BaronBlade", "TheHarpy/RuduenWorkshop.TheHarpyExtremeCallingCharacter", "Megalopolis");
@@ -758,6 +758,217 @@ namespace RuduenModsTest
             UsePower(luminary);
             AssertIsInPlay(mdp);
             AssertInHand(card);
+        }
+
+        [Test()]
+        public void TestNaturalistAllIconsPower()
+        {
+            SetupGameController("BaronBlade", "TheNaturalist/RuduenWorkshop.TheNaturalistVolatileFormCharacter", "Megalopolis");
+            Assert.IsTrue(naturalist.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToUsePowerPhase(naturalist);
+            Card power = PutInHand("NaturalFormsPower");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCardToPlay = power;
+
+            UsePower(naturalist);
+            AssertIsInPlay(power);
+
+            DealDamage(naturalist, naturalist.CharacterCard, 5, DamageType.Toxic);
+
+            QuickHPStorage(naturalist.CharacterCard, mdp);
+            QuickHandStorage(naturalist);
+            // To check triggers, confirm that 2 cards were drawn, Naturalist regained 2 HP, and targets (including MDP) were dealt 1 damage.
+            UsePower(power);
+            QuickHPCheck(2, -1);
+            QuickHandCheck(2);
+        }
+
+        [Test()]
+        public void TestNaturalistAllIconsPlay()
+        {
+            SetupGameController("BaronBlade", "TheNaturalist/RuduenWorkshop.TheNaturalistVolatileFormCharacter", "Megalopolis");
+            Assert.IsTrue(naturalist.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToUsePowerPhase(naturalist);
+            Card power = PutIntoPlay("NaturalFormsPower");
+            Card play = PutInHand("PrimalCharge");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCardToPlay = play;
+
+            UsePower(naturalist);
+            AssertInTrash(play);
+
+            DealDamage(naturalist, naturalist.CharacterCard, 5, DamageType.Toxic);
+
+            QuickHPStorage(naturalist.CharacterCard, mdp);
+            QuickHandStorage(naturalist);
+            // To check triggers, confirm that 2 cards were drawn, Naturalist regained 2 HP, and targets (including MDP) were dealt 1 damage.
+            UsePower(power);
+            QuickHPCheck(2, -1);
+            QuickHandCheck(2);
+        }
+
+        [Test()]
+        public void TestNaturalistNoIcons()
+        {
+            SetupGameController("BaronBlade", "TheNaturalist/RuduenWorkshop.TheNaturalistVolatileFormCharacter", "Megalopolis");
+            Assert.IsTrue(naturalist.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToUsePowerPhase(naturalist);
+
+            Card power = PutIntoPlay("NaturalFormsPower");
+            Card play = PutInHand("NaturalBornVigor");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCardToPlay = play;
+
+            UsePower(naturalist);
+            AssertIsInPlay(play);
+
+            DealDamage(naturalist, naturalist.CharacterCard, 5, DamageType.Toxic);
+
+            QuickHPStorage(naturalist.CharacterCard, mdp);
+            QuickHandStorage(naturalist);
+
+            // To check triggers, confirm that no cards were drawn and no damage was healed or dealt.
+            UsePower(power);
+
+            QuickHPCheck(0, 0);
+            QuickHandCheck(0);
+        }
+
+        [Test()]
+        public void TestNaturalistGazelle()
+        {
+            SetupGameController("BaronBlade", "TheNaturalist/RuduenWorkshop.TheNaturalistVolatileFormCharacter", "Megalopolis");
+            Assert.IsTrue(naturalist.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToUsePowerPhase(naturalist);
+
+            Card power = PutIntoPlay("NaturalFormsPower");
+            Card play = PutInHand("CraftyAssault");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCardToPlay = play;
+
+            UsePower(naturalist);
+            AssertInTrash(play);
+
+            DealDamage(naturalist, naturalist.CharacterCard, 5, DamageType.Toxic);
+
+            QuickHPStorage(naturalist.CharacterCard, mdp);
+            QuickHandStorage(naturalist);
+
+            // To check triggers, confirm that 2 cards were drawn and no damage was healed or dealt.
+            UsePower(power);
+
+            QuickHPCheck(0, 0);
+            QuickHandCheck(2);
+        }
+
+        [Test()]
+        public void TestNaturalistRhino()
+        {
+            SetupGameController("BaronBlade", "TheNaturalist/RuduenWorkshop.TheNaturalistVolatileFormCharacter", "Megalopolis");
+            Assert.IsTrue(naturalist.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToUsePowerPhase(naturalist);
+
+            Card power = PutIntoPlay("NaturalFormsPower");
+            Card play = PutInHand("IndomitableForce");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCardToPlay = play;
+
+            UsePower(naturalist);
+            AssertIsInPlay(play);
+
+            DealDamage(naturalist, naturalist.CharacterCard, 5, DamageType.Toxic);
+
+            QuickHPStorage(naturalist.CharacterCard, mdp);
+            QuickHandStorage(naturalist);
+
+            // To check triggers, confirm that no cards were drawn and 2 damage was healed, but none was dealt.
+            UsePower(power);
+
+            QuickHPCheck(2, 0);
+            QuickHandCheck(0);
+        }
+
+        [Test()]
+        public void TestNaturalistCrocodile()
+        {
+            SetupGameController("BaronBlade", "TheNaturalist/RuduenWorkshop.TheNaturalistVolatileFormCharacter", "Megalopolis");
+            Assert.IsTrue(naturalist.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToUsePowerPhase(naturalist);
+
+            Card power = PutIntoPlay("NaturalFormsPower");
+            Card play = PutInHand("ThePredatorsEye");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+
+            DecisionSelectCardToPlay = play;
+
+            UsePower(naturalist);
+            AssertInTrash(play);
+
+            DealDamage(naturalist, naturalist.CharacterCard, 5, DamageType.Toxic);
+
+            QuickHPStorage(naturalist.CharacterCard, mdp);
+            QuickHandStorage(naturalist);
+
+            // To check triggers, confirm that no cards were drawn and 0 damage was healed, but 1 was dealt.
+            UsePower(power);
+
+            QuickHPCheck(0, -1);
+            QuickHandCheck(0);
+        }
+
+        [Test()]
+        public void TestNaturalistCombo()
+        {
+            SetupGameController("BaronBlade", "TheNaturalist/RuduenWorkshop.TheNaturalistVolatileFormCharacter", "Megalopolis");
+            Assert.IsTrue(naturalist.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToUsePowerPhase(naturalist);
+
+            Card power = PutIntoPlay("NaturalFormsPower");
+            Card play = PutInHand("ThePredatorsEye");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+            PutIntoPlay("TheNimbleGazelle");
+
+            DecisionSelectCardToPlay = play;
+
+            UsePower(naturalist);
+            AssertInTrash(play);
+
+            DealDamage(naturalist, naturalist.CharacterCard, 5, DamageType.Toxic);
+
+            QuickHPStorage(naturalist.CharacterCard, mdp);
+            QuickHandStorage(naturalist);
+
+            // To check triggers, confirm that 2 cards were drawn and 0 damage was healed, but 1 was dealt.
+            UsePower(power);
+
+            QuickHPCheck(0, -1);
+            QuickHandCheck(2);
         }
 
 
