@@ -29,6 +29,7 @@
     "LaComodora": [ "LaComodoraTemporalScavengeCharacter" ],
     "Legacy": [ "LegacyInTheFrayCharacter" ],
     "Lifeline": [ "LifelineEnergyTapCharacter" ],
+    "Luminary": [ "LuminaryReprogramCharacter" ],
     "MrFixer": [ "MrFixerFlowingStrikeCharacter" ],
     "NightMist": [ "NightMistLimitedNumerologyCharacter" ],
     "OmnitronX": [ "OmnitronXElectroShieldedSystemsCharacter" ],

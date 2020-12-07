@@ -77,6 +77,7 @@
     <Compile Include="CascadeCardControllers\WaterlogCardController.cs" />
     <Compile Include="CascadeCardControllers\WaterSurgeCardController.cs" />
     <Compile Include="HeroPromoCardControllers\BunkerModeShiftCharacterCardController.cs" />
+    <Compile Include="HeroPromoCardControllers\LuminaryReprogramCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\LifelineEnergyTapCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\LegacyInTheFrayCharacterCardController.cs" />
     <Compile Include="HeroPromoCardControllers\LaComodoraTemporalScavengeCharacterCardController.cs" />

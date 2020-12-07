@@ -706,6 +706,59 @@ namespace RuduenModsTest
             QuickHPCheck(1, 0, -6); // Two hits but only one target damaged, so 1 HP.
         }
 
+        [Test()]
+        public void TestLuminaryNoDevice()
+        {
+            SetupGameController("BaronBlade", "Luminary/RuduenWorkshop.LuminaryReprogramCharacter", "Megalopolis");
+            Assert.IsTrue(luminary.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            GoToUsePowerPhase(luminary);
+
+            UsePower(luminary);
+            AssertNumberOfCardsInTrash(luminary, 1);
+        }
+
+        [Test()]
+        public void TestLuminaryDeviceDestroyed()
+        {
+            SetupGameController("BaronBlade", "Luminary/RuduenWorkshop.LuminaryReprogramCharacter", "Megalopolis");
+            Assert.IsTrue(luminary.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            DiscardAllCards(luminary);
+            Card card = PutInHand("RegressionTurret");
+            Card destroyed = PutIntoPlay("BacklashGenerator");
+            GoToUsePowerPhase(luminary);
+
+            DecisionSelectCards = new Card[] { destroyed, card };
+
+            UsePower(luminary);
+            AssertInTrash(destroyed);
+            AssertIsInPlay(card);
+        }
+
+        [Test()]
+        public void TestLuminaryDevicenotDestroyed()
+        {
+            SetupGameController("BaronBlade", "Luminary/RuduenWorkshop.LuminaryReprogramCharacter", "Megalopolis");
+            Assert.IsTrue(luminary.CharacterCard.IsPromoCard);
+
+            StartGame();
+
+            DiscardAllCards(luminary);
+            Card card = PutInHand("RegressionTurret");
+            Card mdp = FindCardInPlay("MobileDefensePlatform");
+            GoToUsePowerPhase(luminary);
+
+            DecisionSelectCards = new Card[] { mdp, card };
+
+            UsePower(luminary);
+            AssertIsInPlay(mdp);
+            AssertInHand(card);
+        }
 
 
         [Test()]

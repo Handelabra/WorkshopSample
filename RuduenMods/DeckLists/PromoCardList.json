@@ -383,7 +383,7 @@
       "powers": "Draw a card. Flip all but 1 of your {arcana} or {avian} tokens. {TheHarpy} deals herself Psychic Damage equal to the number of tokens flipped this way.",
       "hitpoints": 27,
       "icons": [ "HasPower" ],
-      "nemesisIdentifiers": [ "TheHarpy" ],
+      "nemesisIdentifiers": [ "OblivAeon" ],
       "tokenPools": [
         {
           "identifier": "AvianControlPool",
@@ -463,7 +463,7 @@
       "powers": "Flip a face-down Card in your play area, treating it as if it were just put into play. Until the end of your next turn, when one of your Equipment cards would be destroyed, flip it face-down instead.",
       "hitpoints": 26,
       "icons": [ "HasPower" ],
-      "nemesisIdentifiers": [ "Knyfe" ],
+      "nemesisIdentifiers": [ "OblivAeon" ],
       "incapacitatedAbilities": [
         "One player may play a card.",
         "One hero may use a power.",
@@ -528,7 +528,38 @@
       "powers": "{Lifeline} deals up to 2 Targets 1 Infernal Damage. {Lifeline} Regains HP equal to the number of targets damaged this way.",
       "hitpoints": 29,
       "icons": [ "HasPower", "DealDamageInfernal", "GainHP" ],
-      "nemesisIdentifiers": [ "Lifeline" ],
+      "nemesisIdentifiers": [ "OblivAeon" ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 1,
+      "openingLines": {
+        "default": "..."
+      }
+    }
+  ],
+  "Luminary": [
+    {
+      "identifier": "LuminaryCharacter",
+      "promoIdentifier": "LuminaryReprogramCharacter",
+      "count": 1,
+      "title": "Luminary",
+      "body": [ "Reprogram" ],
+      "character": true,
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "powers": "Discard the top card of your deck. Select a Device Target. That Device deals itself 5 Lightning Damage. If that Device is destroyed, draw 2 cards and you may play a Device.",
+      "hitpoints": 29,
+      "icons": [ "HasPower", "DealDamageInfernal", "GainHP" ],
+      "nemesisIdentifiers": [ "OblivAeon" ],
       "incapacitatedAbilities": [
         "One player may play a card.",
         "One hero may use a power.",
