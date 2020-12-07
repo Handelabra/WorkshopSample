@@ -619,7 +619,7 @@
       "backgroundColor": "86BB71",
       "foilBackgroundColor": "86BB71",
       "hitpointsColor": "F6AD41",
-      "powers": "Power: Play a card. Then, for each of {gazelle}, {rhinoceros} or {crocodile} that card has in its text, until the end of your next turn you may activate that icon's effects. Draw a card.",
+      "powers": "Power: Play a card. If you do, for each of {gazelle}, {rhinoceros} or {crocodile} that card has in its text, until the end of your next turn you may activate that icon's effects. Otherwise, draw a card.",
       "hitpoints": 28,
       "icons": [ "HasPower" ],
       "nemesisIdentifiers": [ "TheNaturalist" ],
