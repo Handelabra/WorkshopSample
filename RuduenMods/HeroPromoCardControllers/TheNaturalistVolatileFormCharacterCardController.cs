@@ -74,7 +74,7 @@ namespace RuduenWorkshop.TheNaturalist
             if (this.UseUnityCoroutines) { yield return this.GameController.StartCoroutine(coroutine); } else { this.GameController.ExhaustCoroutine(coroutine); }
 
             // Successful play means performing check logic for each of the three symbols on text. 
-            if (storedResults.Count > 0 || !storedResults.FirstOrDefault().IsSuccessful)
+            if (storedResults.Count > 0 && storedResults.FirstOrDefault().IsSuccessful)
             {
                 Card card = storedResults.FirstOrDefault().CardToPlay;
                 if (card != null)
