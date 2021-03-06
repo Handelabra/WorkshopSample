@@ -3,13 +3,11 @@ using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 
-namespace Workshopping.MigrantCoder
+namespace Workshopping.Cricket
 {
-    public class MigrantCoderCharacterCardController : HeroCharacterCardController
+    public class NoisyCricketCharacterCardController : HeroCharacterCardController
     {
-        public string str;
-
-        public MigrantCoderCharacterCardController(Card card, TurnTakerController turnTakerController)
+        public NoisyCricketCharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
         }
@@ -62,20 +60,8 @@ namespace Workshopping.MigrantCoder
 
         public override IEnumerator UsePower(int index = 0)
         {
-            // Draw 3 cards!
-            IEnumerator e = DrawCards(this.HeroTurnTakerController, 3);
-
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(e);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(e);
-            }
-
-            // Deal 1 target 30 psychic damage
-            e = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, new DamageSource(this.GameController, this.CharacterCard), 30, DamageType.Psychic, 1, false, 1, cardSource:GetCardSource());
+            // Destroy self!
+            var e = this.GameController.DestroyCard(this.HeroTurnTakerController, this.CharacterCard);
 
             if (UseUnityCoroutines)
             {
@@ -87,4 +73,6 @@ namespace Workshopping.MigrantCoder
             }
         }
     }
+
+
 }

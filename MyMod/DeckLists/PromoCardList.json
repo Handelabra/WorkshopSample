@@ -40,5 +40,99 @@
       }
     }
 
+  ],
+  "BaronBlade": [
+
+    {
+      "identifier": "BaronBladeCharacter",
+      "promoIdentifier": "BaronJeremyCharacter",
+      "count": 1,
+      "title": "Baron Blade",
+      "promoTitle": "Baron Jeremy",
+      "keywords": [
+        "villain"
+      ],
+      "icons": [
+        "StartOfTurnAction",
+        "DealDamageFire"
+      ],
+      "advancedIcons": [
+        "EndOfTurnAction"
+      ],
+      "body": "C.E.O.",
+      "backgroundColor": "D99FC5",
+      "foilBackgroundColor": "CD96C0",
+      "character": true,
+      "hitpoints": 30,
+      "nemesisIdentifiers": [
+        "Legacy"
+      ],
+      "setup": "At the start of the game, {BaronBlade} enters play “C.E.O.“ side up.",
+      "gameplay": [
+        "FPO"
+      ],
+      "advanced": "Nada",
+      "flippedBody": "F.P.O.",
+      "flippedHitpoints": 40,
+      "flippedGameplay": [
+        "FPO"
+      ],
+      "flippedAdvanced": "Nope",
+      "flippedIcons": [
+        "StartOfTurnAction",
+        "DealDamageEnergy",
+        "DestroyTarget"
+      ],
+      "flippedAdvancedIcons": [
+        "EndOfTurnAction",
+        "PlayCardNow"
+      ],
+      "difficulty": 2,
+      "openingLines": {
+        "default": "We have damaged Grand Warlord Vossssssss!"
+      }
+    }
+  ],
+  "Cauldron.Cricket": [
+
+    {
+      "identifier": "CricketCharacter",
+      "promoIdentifier": "NoisyCricketCharacter",
+      "count": 1,
+      "title": "Cricket",
+      "promoTitle": "Noisy Cricket",
+      "body": "Little Midgey",
+      "icons": [
+        "HasPower",
+        "Manipulate",
+        "PlayCardNow"
+      ],
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "hitpointsColor": "F6AD41",
+      "character": true,
+      "powers": [
+        "Break this dang thing!"
+      ],
+      "hitpoints": 33,
+      "nemesisIdentifiers": [
+        "Bunker"
+      ],
+      "incapacitatedAbilities": [
+        "One player may draw a card.",
+        "Select a hero. Until the start of your turn, reduce damage dealt to that hero by 1.",
+        "One environment target deals 1 target 2 fire damage."
+      ],
+      "flippedIcons": [
+        "DrawCardNow",
+        "ReduceDamageTaken",
+        "DealDamageFire"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "Come on, man, you - you get a Series Four De-atomizer and I - I get a little - little midgy cricket?"
+      }
+    }
+
   ]
 }

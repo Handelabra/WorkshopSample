@@ -15,7 +15,7 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "Draw 3 cards. {MigrantCoder} deals 1 target 2 Psychic damage."
+        "Draw 3 cards. {MigrantCoder} deals 1 target 30 Psychic damage."
       ],
       "icons": [
         "HasPower"
@@ -34,7 +34,9 @@
       "openingLines": {
         "default": "I'm a mod! Whatcha gonna do?"
       },
-      "complexity": 1
+      "complexity": 1,
+      "setup": [ "Think real hard, then do nothing." ],
+      "gameplay": [ "Do your best!" ]
     },
     {
       "identifier": "WorstCardEver",
@@ -55,7 +57,7 @@
       "keywords": [
         "one-shot"
       ],
-      "body": "{MigrantCoder} deals himself 1 melee damage.",
+      "body": "{MigrantCoder} may deal himself 1 melee damage. If damage is dealt this way, he thinks happy thoughts.",
       "icons": [
       ],
       "flavorText": "Ouch!"

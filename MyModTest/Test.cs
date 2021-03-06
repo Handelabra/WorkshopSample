@@ -117,6 +117,8 @@ namespace MyModTest
 
             StartGame();
 
+            Assert.IsInstanceOf(typeof(MigrantCoderLockdownCharacterCardController), migrant.CharacterCardController);
+
             GoToUsePowerPhase(migrant);
 
             // Use power to reduce damage by 1
@@ -124,6 +126,10 @@ namespace MyModTest
             UsePower(migrant);
             PlayCard("PunchingBag");
             QuickHPCheck(0);
+
+            SaveAndLoad();
+
+            Assert.IsInstanceOf(typeof(MigrantCoderLockdownCharacterCardController), migrant.CharacterCardController);
         }
 
         [Test()]

@@ -2,6 +2,7 @@
 using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Workshopping.MigrantCoder
 {
@@ -12,17 +13,70 @@ namespace Workshopping.MigrantCoder
         {
         }
 
+        private int _customDecisionIndex;
+
         public override IEnumerator Play()
         {
-            var damage = DealDamage(this.CharacterCard, this.CharacterCard, 1, DamageType.Melee);
+            IEnumerator e;
+
+            _customDecisionIndex = 0;
+            var storedResults = new List<YesNoCardDecision>();
+            e = this.GameController.MakeYesNoCardDecision(this.DecisionMaker, SelectionType.Custom, this.Card, storedResults:storedResults, cardSource:GetCardSource());
             if (UseUnityCoroutines)
             {
-                yield return this.GameController.StartCoroutine(damage);
+                yield return this.GameController.StartCoroutine(e);
             }
             else
             {
-                this.GameController.ExhaustCoroutine(damage);
+                this.GameController.ExhaustCoroutine(e);
             }
+
+            if (DidPlayerAnswerYes(storedResults))
+            {
+                e = DealDamage(this.CharacterCard, this.CharacterCard, 1, DamageType.Melee);
+                if (UseUnityCoroutines)
+                {
+                    yield return this.GameController.StartCoroutine(e);
+                }
+                else
+                {
+                    this.GameController.ExhaustCoroutine(e);
+                }
+
+                // TODO: think happy thoughts
+            }
+            else
+            {
+                // Ask another decision of the same type, because maybe they want cake.
+                _customDecisionIndex = 1;
+                storedResults = new List<YesNoCardDecision>();
+                e = this.GameController.MakeYesNoCardDecision(this.DecisionMaker, SelectionType.Custom, this.Card, storedResults: storedResults, cardSource: GetCardSource());
+                if (UseUnityCoroutines)
+                {
+                    yield return this.GameController.StartCoroutine(e);
+                }
+                else
+                {
+                    this.GameController.ExhaustCoroutine(e);
+                }
+            }
+        }
+
+        public override CustomDecisionText GetCustomDecisionText(IDecision decision)
+        {
+            if (decision is YesNoCardDecision yesNoCard)
+            {
+                if (_customDecisionIndex == 0)
+                {
+                    return new CustomDecisionText("Do you want to think happy thoughts about {0}?", "Should they think happy thoughts?", "Vote for thinking happy thoughts", "happy thinking");
+                }
+                else
+                {
+                    return new CustomDecisionText("Can I get you some cake?", "Should they get cake?", "Vote for getting cake", "get cake", false);
+                }
+            }
+
+            return null;
         }
     }
 }

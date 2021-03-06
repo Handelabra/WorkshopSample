@@ -55,6 +55,9 @@
     <Compile Include="TheHugMonsterTeam\WarmEmbraceCardController.cs" />
     <Compile Include="MigrantCoder\MigrantCoderLockdownCharacterCardController.cs" />
     <Compile Include="Bunker\WaywardBunkerCharacterCardController.cs" />
+    <Compile Include="TheBaddies\TheRealBaddiesCharacterCardController.cs" />
+    <Compile Include="BaronBlade\BaronJeremyCharacterCardController.cs" />
+    <Compile Include="Cauldron.Cricket\NoisyCricketCharacterCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
@@ -69,6 +72,8 @@
     <Folder Include="DevStream\" />
     <Folder Include="TheHugMonsterTeam\" />
     <Folder Include="Bunker\" />
+    <Folder Include="BaronBlade\" />
+    <Folder Include="Cauldron.Cricket\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
