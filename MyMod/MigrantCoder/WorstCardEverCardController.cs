@@ -14,7 +14,6 @@ namespace Workshopping.MigrantCoder
 
         public override IEnumerator Play()
         {
-
             var message = this.GameController.SendMessageAction("You knew this card does nothing. Why would you play it?", Priority.Medium, GetCardSource());
             if (UseUnityCoroutines)
             {

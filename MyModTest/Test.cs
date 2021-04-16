@@ -36,7 +36,7 @@ namespace MyModTest
             Assert.IsNotNull(env);
 
             Assert.AreEqual(40, baddies.CharacterCard.HitPoints);
-            Assert.AreEqual(39, migrant.CharacterCard.HitPoints);
+            Assert.AreEqual(30, migrant.CharacterCard.HitPoints);
             QuickHPStorage(baddies, migrant);
 
             // Always deals 5 psychic!
@@ -61,9 +61,11 @@ namespace MyModTest
 
             StartGame();
 
-            GoToUsePowerPhase(migrant);
+            GoToPlayCardPhase(migrant);
 
-            // Punching Bag does 1 damage!
+            // Punching Bag does 1 damage! But don't play a card.
+            DecisionYesNo = true;
+            DecisionDoNotSelectCard = SelectionType.PlayCard;
             QuickHPStorage(migrant);
             PlayCard("PunchingBag");
             QuickHPCheck(-1);
@@ -78,14 +80,14 @@ namespace MyModTest
 
             var mdp = GetCardInPlay("MobileDefensePlatform");
 
-            // Base power draws 3 cards! Deals 1 target 2 damage!
+            // Base power draws 1 card! Deals 1 target 2 damage!
             QuickHandStorage(migrant.ToHero());
             DecisionSelectTarget = mdp;
             QuickHPStorage(mdp);
 
             UsePower(migrant.CharacterCard);
 
-            QuickHandCheck(3);
+            QuickHandCheck(1);
             QuickHPCheck(-2);
 
         }

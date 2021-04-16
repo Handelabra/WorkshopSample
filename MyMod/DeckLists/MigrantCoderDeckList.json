@@ -15,33 +15,37 @@
       "hitpointsColor": "C94742",
       "character": true,
       "powers": [
-        "Draw 3 cards. {MigrantCoder} deals 1 target 30 Psychic damage."
+        "Draw 1 card. {MigrantCoder} deals 1 target 2 Psychic damage."
       ],
       "icons": [
         "HasPower",
-        "Workshopping.Whatever"
+        "DrawCardNow",
+        "DealDamagePsychic"
       ],
-      "hitpoints": 39,
+      "hitpoints": 30,
       "nemesisIdentifiers": [
         "Workshopping.MigrantCoder"
       ],
       "incapacitatedAbilities": [
-        "One hero may do something.",
-        "One player may actually do something.",
-        "The villain really super will do something."
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
       "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
       ],
       "openingLines": {
-        "default": "I'm a mod! Whatcha gonna do?"
+        "default": "You cannot defeat the power of the Workshop!"
       },
       "complexity": 1,
-      "setup": [ "Think real hard, then do nothing." ],
-      "gameplay": [ "Do your best!" ]
+      "setup": [ "Most heroes do not have setup text. This one does only as an example." ],
+      "gameplay": [ "Most heroes do not have gameplay text. This one does only as an example." ]
     },
     {
       "identifier": "WorstCardEver",
-      "count": 39,
+      "count": 5,
       "title": "Worst... Card... Ever.",
       "keywords": [
         "one-shot"
@@ -53,15 +57,31 @@
     },
     {
       "identifier": "PunchingBag",
-      "count": 1,
+      "count": 5,
       "title": "Punching Bag",
       "keywords": [
         "one-shot"
       ],
-      "body": "{MigrantCoder} may deal himself 1 melee damage. If damage is dealt this way, he thinks happy thoughts.",
+      "body": "{MigrantCoder} may think happy thoughts and deal himself 1 melee damage. If damage is dealt this way, play 2 cards. If he did not think happy thoughts, he may have cake.",
       "icons": [
+        "DealDamageMelee",
+        "PlayCardNow"
       ],
       "flavorText": "Ouch!"
+    },
+    {
+      "identifier": "CodersKeyboard",
+      "count": 2,
+      "title": "Coder's Keyboard",
+      "keywords": [
+        "equipment",
+        "limited"
+      ],
+      "body": "You may use an additional power during your power phase.",
+      "icons": [
+        "UsePowerExtra"
+      ],
+      "flavorText": "You need one of these to level up your programming!"
     }
   ],
   "promoCards": [
@@ -74,7 +94,7 @@
       "body": "Social Distance",
       "icons": [
         "HasPower",
-        "MakeDamageIrreducible"
+        "ReduceDamageTaken"
       ],
       "backgroundColor": "7B7E7C",
       "foilBackgroundColor": "86BB71",
@@ -85,19 +105,19 @@
       ],
       "hitpoints": 27,
       "nemesisIdentifiers": [
-        "Bunker"
+        "Workshopping.MigrantCoder"
       ],
       "incapacitatedAbilities": [
-        "One Hero may use a Power.",
-        "Destroy an Environment card.",
-        "Destroy a target with 1 HP."
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
       "flippedIcons": [
+        "PlayCardNow",
         "UsePowerNow",
-        "DestroyEnvironment",
-        "DestroyTarget"
+        "DrawCardNow"
       ],
-      "complexity": 2,
+      "complexity": 1,
       "openingLines": {
         "default": "Wear a mask! Honestly!"
       }

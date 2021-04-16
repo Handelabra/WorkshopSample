@@ -33,7 +33,8 @@ namespace Workshopping.MigrantCoder
 
             if (DidPlayerAnswerYes(storedResults))
             {
-                e = DealDamage(this.CharacterCard, this.CharacterCard, 1, DamageType.Melee);
+                var damageResults = new List<DealDamageAction>();
+                e = DealDamage(this.CharacterCard, this.CharacterCard, 1, DamageType.Melee, storedResults: damageResults);
                 if (UseUnityCoroutines)
                 {
                     yield return this.GameController.StartCoroutine(e);
@@ -43,7 +44,19 @@ namespace Workshopping.MigrantCoder
                     this.GameController.ExhaustCoroutine(e);
                 }
 
-                // TODO: think happy thoughts
+                if (DidDealDamage(damageResults))
+                {
+                    // Play two cards.
+                    e = SelectAndPlayCardsFromHand(this.DecisionMaker, 2);
+                    if (UseUnityCoroutines)
+                    {
+                        yield return this.GameController.StartCoroutine(e);
+                    }
+                    else
+                    {
+                        this.GameController.ExhaustCoroutine(e);
+                    }
+                }
             }
             else
             {
@@ -58,6 +71,17 @@ namespace Workshopping.MigrantCoder
                 else
                 {
                     this.GameController.ExhaustCoroutine(e);
+                }
+
+                string msg = DidPlayerAnswerYes(storedResults) ? "Good call, it's delicious and moist!" : "No cake for you!";
+                var message = this.GameController.SendMessageAction(msg, Priority.Medium, GetCardSource());
+                if (UseUnityCoroutines)
+                {
+                    yield return this.GameController.StartCoroutine(message);
+                }
+                else
+                {
+                    this.GameController.ExhaustCoroutine(message);
                 }
             }
         }
