@@ -26,7 +26,7 @@
       "character": true,
       "hitpoints": 40,
       "nemesisIdentifiers": [
-        "Legacy"
+        "Workshopping.MigrantCoder"
       ],
       "setup": [
         "At the start of the game, {TheBaddies} enters play “Are we tho?“ side up.",

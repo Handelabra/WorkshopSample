@@ -18,11 +18,12 @@
         "Draw 3 cards. {MigrantCoder} deals 1 target 30 Psychic damage."
       ],
       "icons": [
-        "HasPower"
+        "HasPower",
+        "Workshopping.Whatever"
       ],
       "hitpoints": 39,
       "nemesisIdentifiers": [
-        "Legacy"
+        "Workshopping.MigrantCoder"
       ],
       "incapacitatedAbilities": [
         "One hero may do something.",
