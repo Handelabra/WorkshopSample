@@ -54,6 +54,7 @@
     <Compile Include="Cauldron.Cricket\NoisyCricketCharacterCardController.cs" />
     <Compile Include="MigrantCoder\CodersKeyboardCardController.cs" />
     <Compile Include="MigrantCoder\BugFixCardController.cs" />
+    <Compile Include="TheBaddies\SmashBackFieldCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />

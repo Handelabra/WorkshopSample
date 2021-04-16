@@ -39,10 +39,10 @@ namespace MyModTest
             Assert.AreEqual(30, migrant.CharacterCard.HitPoints);
             QuickHPStorage(baddies, migrant);
 
-            // Always deals 5 psychic!
+            // Always deals 5 psychic to non villains!
             PlayTopCard(baddies);
 
-            QuickHPCheck(-5, -6); // Nemesis!
+            QuickHPCheck(0, -6); // Nemesis!
 
             PlayTopCard(env);
 

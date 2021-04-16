@@ -13,12 +13,12 @@
         "villain"
       ],
       "icons": [
-        "StartOfTurnAction",
-        "LoseTheGame"
+        "EndOfTurnAction",
+        "DestroyOngoing"
       ],
       "advancedIcons": [
         "EndOfTurnAction",
-        "Discard"
+        "DestroyEquipment"
       ],
       "body": "Are we tho?",
       "backgroundColor": "D99FC5",
@@ -30,24 +30,22 @@
       ],
       "setup": [
         "At the start of the game, {TheBaddies} enters play “Are we tho?“ side up.",
-        "The Villain Deck is shuffled."
+        "One “Smash-Back Field“ is put into play. The Villain Deck is shuffled.",
       ],
       "gameplay": [
-        "Nothing specific, really."
+        "At the end of the villain turn, destroy 1 hero ongoing card.",
+        "When {TheBaddies} would be destroyed, their Villain Character card flips to the “How did you get here?“ side instead."
       ],
-      "advanced": "It's all the same!",
+      "advanced": "At the end of the villain turn, destroy 1 equipment card.",
       "flippedHitpoints": 30,
       "flippedBody": "How did you get here?",
       "flippedGameplay": [
-        "Nothing even else!"
+        "When flipped to this side, {TheBaddies}'s maximum HP is 30. {TheBaddies} is restored to 30 HP."
       ],
-      "flippedAdvanced": "Nope!",
+      "flippedAdvanced": "Nothing!",
       "flippedIcons": [
-        "EndOfTurnAction",
-        "DealDamageEnergy"
       ],
       "flippedAdvancedIcons": [
-        "ReduceDamageTaken"
       ],
       "difficulty": 1,
       "openingLines": {
@@ -56,16 +54,36 @@
     },
     {
       "identifier": "FireEverything",
-      "count": 25,
+      "count": 20,
       "title": "Fire Everything!",
       "keywords": [
         "one-shot"
       ],
-      "body": "{TheBaddies} deals each target 5 Psychic damage.",
+      "body": "{TheBaddies} deals each non-villain target 5 Psychic damage.",
       "icons": [
-
+        "DealDamagePsychic"
       ],
       "flavorText": "The pain!"
+    },
+    {
+      "identifier": "SmashBackField",
+      "count": 5,
+      "title": "Smash-Back Field",
+      "keywords": [
+        "ongoing"
+      ],
+      "icons": [
+        "CounterDamage",
+        "DealDamageMelee"
+      ],
+      "body": "The first time {TheBaddies} is dealt damage by a target each turn, {TheBaddies} deals that target 2 melee damage.",
+      "flavorQuotes": [
+        {
+          "identifier": "TheBaddies",
+          "text": "You hurt me - I hurt you!"
+        }
+      ],
+      "flavorReference": "The Baddies, Dev Stream #1"
     }
   ],
   "promoCards": [
