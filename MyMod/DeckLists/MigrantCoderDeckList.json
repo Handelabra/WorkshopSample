@@ -82,6 +82,28 @@
         "UsePowerExtra"
       ],
       "flavorText": "You need one of these to level up your programming!"
+    },
+    {
+      "identifier": "BugFix",
+      "count": 5,
+      "title": "Bug Fix",
+      "keywords": [
+        "ongoing"
+      ],
+      "icons": [
+        "HasPower",
+        "DealDamageLightning"
+      ],
+      "flavorQuotes": [
+        {
+          "identifier": "MigrantCoder",
+          "text": "This was working fine yesterday!"
+        }
+      ],
+      "flavorReference": "Migrant Coder, Dev Stream #5",
+      "powers": [
+        "{MigrantCoder} deals 1 target 4 lightning damage."
+      ]
     }
   ],
   "promoCards": [

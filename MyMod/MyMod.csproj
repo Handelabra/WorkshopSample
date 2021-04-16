@@ -53,6 +53,7 @@
     <Compile Include="BaronBlade\BaronJeremyCharacterCardController.cs" />
     <Compile Include="Cauldron.Cricket\NoisyCricketCharacterCardController.cs" />
     <Compile Include="MigrantCoder\CodersKeyboardCardController.cs" />
+    <Compile Include="MigrantCoder\BugFixCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
