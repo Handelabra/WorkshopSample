@@ -60,6 +60,7 @@
     <Compile Include="TheSentinels\MainsnakeCharacterCardController.cs" />
     <Compile Include="TheSentinels\TheIdealizardCharacterCardController.cs" />
     <Compile Include="TheSentinels\WrattleCharacterCardController.cs" />
+    <Compile Include="TheBaddies\WrightWeighCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />

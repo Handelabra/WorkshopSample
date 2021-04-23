@@ -41,7 +41,7 @@ namespace MyModTest
             QuickHPStorage(baddies, migrant);
 
             // Always deals 5 psychic to non villains!
-            PlayTopCard(baddies);
+            PlayCard("FireEverything");
 
             QuickHPCheck(0, -6); // Nemesis!
 

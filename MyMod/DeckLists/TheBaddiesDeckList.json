@@ -54,7 +54,7 @@
     },
     {
       "identifier": "FireEverything",
-      "count": 20,
+      "count": 16,
       "title": "Fire Everything!",
       "keywords": [
         "one-shot"
@@ -65,6 +65,29 @@
       ],
       "flavorText": "The pain!"
     },
+    {
+      "identifier": "WrightWeigh",
+      "count": 4,
+      "title": "Wright Weigh",
+      "hitpoints": 10,
+      "keywords": [
+        "minion"
+      ],
+      "body": [
+        "At the end of the villain turn, each villain target regains {H} HP."
+      ],
+      "icons": [
+        "EndOfTurnAction",
+        "GainHP"
+      ],
+      "flavorQuotes": [
+        {
+          "identifier": "TheBaddies",
+          "text": "There's a Wright Weigh, and there's a Ronway."
+        }
+      ],
+      "flavorReference": "The Baddies, Dev Stream #1"
+    }
     {
       "identifier": "SmashBackField",
       "count": 5,
