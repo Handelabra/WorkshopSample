@@ -208,6 +208,8 @@ namespace MyModTest
 
             AssertNotInPlay("SmashBackField");
             AssertIsInPlay("WrightWeigh");
+
+            GoToEndOfTurn();
         }
     }
 }

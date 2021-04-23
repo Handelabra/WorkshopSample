@@ -122,11 +122,10 @@
       ],
       "icons": [
         "StartOfTurnAction",
-        "LoseTheGame"
+        "DealDamageToxic"
       ],
       "advancedIcons": [
-        "EndOfTurnAction",
-        "Discard"
+        
       ],
       "body": "We really are!",
       "backgroundColor": "D99FC5",
@@ -134,28 +133,28 @@
       "character": true,
       "hitpoints": 50,
       "nemesisIdentifiers": [
-        "Legacy"
+        "Workshopping.MigrantCoder"
       ],
       "setup": [
         "At the start of the game, {TheBaddies} enters play “We really are!“ side up.",
         "The Villain Deck is shuffled."
       ],
       "gameplay": [
-        "Still nothing at all."
+        "At the start of the Villain turn, {TheBaddies} deals the Hero Target with the highest HP {H} Toxic Damage.",
+        "When {TheBaddies} would be destroyed, their Villain Character card flips to the “What!“ side instead."
       ],
       "advanced": "It's all the same!",
       "flippedHitpoints": 20,
       "flippedBody": "What!",
       "flippedGameplay": [
-        "Nothing even else! Still!"
+        "When flipped to this side, {TheBaddies}'s maximum HP is 20. {TheBaddies} is restored to 20 HP."
       ],
       "flippedAdvanced": "Nope!",
       "flippedIcons": [
-        "EndOfTurnAction",
-        "DealDamageEnergy"
+        
       ],
       "flippedAdvancedIcons": [
-        "ReduceDamageTaken"
+        
       ],
       "difficulty": 2,
       "openingLines": {
