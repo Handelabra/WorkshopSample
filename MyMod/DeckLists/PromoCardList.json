@@ -41,6 +41,128 @@
     }
 
   ],
+  "TheSentinels": [
+    {
+      "identifier": "TheSentinelsInstructions",
+      "promoIdentifier": "TheSerpentinelsInstructions",
+      "count": 1,
+      "title": "The Sentinels",
+      "promoTitle": "The Serpentinels",
+      "backgroundColor": "3B1F2B",
+      "foilBackgroundColor": "3B1F2B",
+      "character": true,
+      "setup": [
+        "At the start of the game, put the character cards for {DrMedicoCharacter}, {MainstayCharacter}, {TheIdealistCharacter}, and {WritheCharacter} into play, active side up.",
+        "Shuffle the hero deck and draw 4 cards."
+      ],
+      "gameplay": [
+        "If you have no active heroes in play, flip this card."
+      ],
+      "flippedBody": "Incapacitated",
+      "incapacitatedAbilities": [
+        "One target regains 2 HP.",
+        "One Player may play a card.",
+        "One Player may draw a card.",
+        "Destroy an Ongoing card."
+      ],
+      "openingLines": {
+        "default": "Hssss!"
+      },
+      "isReal": false,
+      "complexity": 3
+    },
+    {
+      "identifier": "DrMedicoCharacter",
+      "promoIdentifier": "DrMedicobraCharacter",
+      "count": 1,
+      "title": "Dr. Medico",
+      "promoTitle": "Dr. Medicobra",
+      "body": "Regeneration",
+      "icons": [
+        "HasPower",
+        "GainHP",
+        "DrawCardNow"
+      ],
+      "backgroundColor": "C73E1D",
+      "foilBackgroundColor": "C73E1D",
+      "character": true,
+      "powers": [
+        "Each of {TheSentinels} regains 2 HP. You may draw a card."
+      ],
+      "hitpoints": 15,
+      "nemesisIdentifiers": [
+        "TheSentinels"
+      ]
+    },
+    {
+      "identifier": "MainstayCharacter",
+      "promoIdentifier": "MainsnakeCharacter",
+      "count": 1,
+      "title": "Mainstay",
+      "promoTitle": "Mainsnake",
+      "body": "Haymaker",
+      "icons": [
+        "HasPower",
+        "DealDamageMelee",
+        "MakeDamageIrreducible"
+      ],
+      "backgroundColor": "F18F01",
+      "foilBackgroundColor": "F18F01",
+      "character": true,
+      "powers": [
+        "{MainstayCharacter} deals 1 target 3 melee damage. The next damage dealt to that target is irreducible."
+      ],
+      "hitpoints": 16,
+      "nemesisIdentifiers": [
+        "TheSentinels"
+      ]
+    },
+    {
+      "identifier": "TheIdealistCharacter",
+      "promoIdentifier": "TheIdealizardCharacter",
+      "count": 1,
+      "title": "The Idealist",
+      "promoTitle": "The Idealizard",
+      "body": "T.K. Thump",
+      "icons": [
+        "HasPower",
+        "DealDamagePsychic",
+        "ReduceDamageDealt"
+      ],
+      "backgroundColor": "A23B72",
+      "foilBackgroundColor": "A23B72",
+      "character": true,
+      "powers": [
+        "{TheIdealistCharacter} deals 1 target 2 psychic damage. Until the start of your next turn, reduce damage dealt by a target dealt damage this way by 1."
+      ],
+      "hitpoints": 13,
+      "nemesisIdentifiers": [
+        "TheSentinels"
+      ]
+    },
+    {
+      "identifier": "WritheCharacter",
+      "promoIdentifier": "WrattleCharacter",
+      "count": 1,
+      "title": "Writhe",
+      "promoTitle": "Wrattle",
+      "body": "Shroud",
+      "icons": [
+        "HasPower",
+        "Manipulate"
+      ],
+      "backgroundColor": "2E86AB",
+      "foilBackgroundColor": "2E86AB",
+      "character": true,
+      "powers": [
+        "The next time a hero target is destroyed, you may move it to the owner's hand."
+      ],
+      "hitpoints": 14,
+      "nemesisIdentifiers": [
+        "TheSentinels"
+      ]
+    }
+  ],
   "BaronBlade": [
 
     {

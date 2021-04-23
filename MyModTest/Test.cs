@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections;
 using Handelabra.Sentinels.UnitTest;
 using Workshopping.TheBaddies;
+using System.Collections.Generic;
 
 namespace MyModTest
 {
@@ -151,6 +152,38 @@ namespace MyModTest
             QuickHandStorage(bunker);
             UsePower(bunker);
             QuickHandCheck(2);
+        }
+
+        [Test()]
+        public void TestTheSentinelsVariant()
+        {
+            var promos = new Dictionary<string, string>();
+
+            promos.Add("TheSentinelsInstructions", "Workshopping.TheSerpentinelsInstructions");
+            promos.Add("DrMedicoCharacter", "Workshopping.DrMedicobraCharacter");
+            promos.Add("WritheCharacter", "Workshopping.MainsnakeCharacter");
+            promos.Add("MainstayCharacter", "Workshopping.TheIdealizardCharacter");
+            promos.Add("TheIdealistCharacter", "Workshopping.TheIdealizardCharacter");
+            SetupGameController(new string[] { "BaronBlade", "TheSentinels", "Megalopolis" }, false, promos);
+
+            StartGame();
+
+            var instructions = GetCard("TheSentinelsInstructions");
+            Assert.IsTrue(instructions.IsPromoCard);
+
+            var medico = GetCard("DrMedicoCharacter");
+            Assert.AreEqual("DrMedicobraCharacter", medico.PromoIdentifierOrIdentifier);
+            Assert.AreEqual(15, medico.MaximumHitPoints);
+
+            GoToUsePowerPhase(sentinels);
+
+            // Use the power on Mainstay for 3 damage
+            var mainstay = GetCard("MainstayCharacter");
+
+            DecisionSelectTarget = GetMobileDefensePlatform().Card;
+            QuickHPStorage(DecisionSelectTarget);
+            UsePower(mainstay);
+            QuickHPCheck(-3);
         }
     }
 }

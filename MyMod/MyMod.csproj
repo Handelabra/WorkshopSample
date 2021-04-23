@@ -55,6 +55,11 @@
     <Compile Include="MigrantCoder\CodersKeyboardCardController.cs" />
     <Compile Include="MigrantCoder\BugFixCardController.cs" />
     <Compile Include="TheBaddies\SmashBackFieldCardController.cs" />
+    <Compile Include="TheSentinels\TheSerpentinelsInstructionsCardController.cs" />
+    <Compile Include="TheSentinels\DrMedicobraCharacterCardController.cs" />
+    <Compile Include="TheSentinels\MainsnakeCharacterCardController.cs" />
+    <Compile Include="TheSentinels\TheIdealizardCharacterCardController.cs" />
+    <Compile Include="TheSentinels\WrattleCharacterCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
@@ -71,6 +76,7 @@
     <Folder Include="Bunker\" />
     <Folder Include="BaronBlade\" />
     <Folder Include="Cauldron.Cricket\" />
+    <Folder Include="TheSentinels\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
