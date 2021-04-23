@@ -40,6 +40,10 @@ namespace MyModTest
             Assert.AreEqual(30, migrant.CharacterCard.HitPoints);
             QuickHPStorage(baddies, migrant);
 
+            StartGame();
+
+            AssertIsInPlay("SmashBackField");
+
             // Always deals 5 psychic to non villains!
             PlayCard("FireEverything");
 
@@ -184,6 +188,26 @@ namespace MyModTest
             QuickHPStorage(DecisionSelectTarget);
             UsePower(mainstay);
             QuickHPCheck(-3);
+        }
+
+        [Test()]
+        public void TestTheRealBaddies()
+        {
+            SetupGameController("Workshopping.TheBaddies/Workshopping.TheRealBaddiesCharacter", "Workshopping.MigrantCoder", "Workshopping.DevStream");
+
+            Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
+
+            Assert.IsNotNull(baddies);
+            Assert.IsInstanceOf(typeof(TheBaddiesTurnTakerController), baddies);
+            Assert.IsInstanceOf(typeof(TheRealBaddiesCharacterCardController), baddies.CharacterCardController);
+
+            Assert.AreEqual(50, baddies.CharacterCard.HitPoints);
+            QuickHPStorage(baddies, migrant);
+
+            StartGame();
+
+            AssertNotInPlay("SmashBackField");
+            AssertIsInPlay("WrightWeigh");
         }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="TheSentinels\TheIdealizardCharacterCardController.cs" />
     <Compile Include="TheSentinels\WrattleCharacterCardController.cs" />
     <Compile Include="TheBaddies\WrightWeighCardController.cs" />
+    <Compile Include="TheBaddies\TheRealBaddiesTurnTakerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />

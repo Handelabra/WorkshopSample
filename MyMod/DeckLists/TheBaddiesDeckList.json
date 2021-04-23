@@ -87,7 +87,7 @@
         }
       ],
       "flavorReference": "The Baddies, Dev Stream #1"
-    }
+    },
     {
       "identifier": "SmashBackField",
       "count": 5,
@@ -113,6 +113,7 @@
     {
       "identifier": "TheBaddiesCharacter",
       "promoIdentifier": "TheRealBaddiesCharacter",
+      "overrideTurnTakerController": "TheRealBaddies",
       "count": 1,
       "title": "The Baddies",
       "promoTitle": "The Real Baddies",
@@ -131,7 +132,7 @@
       "backgroundColor": "D99FC5",
       "foilBackgroundColor": "CD96C0",
       "character": true,
-      "hitpoints": 400,
+      "hitpoints": 50,
       "nemesisIdentifiers": [
         "Legacy"
       ],
@@ -143,7 +144,7 @@
         "Still nothing at all."
       ],
       "advanced": "It's all the same!",
-      "flippedHitpoints": 300,
+      "flippedHitpoints": 20,
       "flippedBody": "What!",
       "flippedGameplay": [
         "Nothing even else! Still!"
