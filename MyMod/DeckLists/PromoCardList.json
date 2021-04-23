@@ -69,7 +69,13 @@
         "default": "Hssss!"
       },
       "isReal": false,
-      "complexity": 3
+      "complexity": 3,
+      "associatedPromoIdentifiers": [
+        "DrMedicobraCharacter",
+        "MainsnakeCharacter",
+        "TheIdealizardCharacter",
+        "WrattleCharacter"
+      ]
     },
     {
       "identifier": "DrMedicoCharacter",
