@@ -169,6 +169,122 @@
       ]
     }
   ],
+  "SkyScraper": [
+    {
+      "identifier": "SkyScraperNormalCharacter",
+      "promoIdentifier": "CentristSkyScraperNormalCharacter",
+      "sharedIdentifier": "CentristSkyScraperCharacter",
+      "count": 1,
+      "title": "Sky-Scraper",
+      "promoTitle": "Centrist Sky-Scraper",
+      "body": "Compromise",
+      "keywords": [
+        "Normal"
+      ],
+      "icons": [
+        "HasPower",
+        "DrawCardNow"
+      ],
+      "backgroundColor": "47AD80",
+      "foilBackgroundColor": "47AD80",
+      "character": true,
+      "powers": [
+        "Draw 3 cards."
+      ],
+      "hitpoints": 30,
+      "nemesisIdentifiers": [
+        "SkyScraper"
+      ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3,
+      "openingLines": {
+        "default": "Meet me in the middle here."
+      }
+    },
+    {
+      "identifier": "SkyScraperTinyCharacter",
+      "promoIdentifier": "CentristSkyScraperTinyCharacter",
+      "sharedIdentifier": "CentristSkyScraperCharacter",
+      "count": 1,
+      "title": "Sky-Scraper",
+      "promoTitle": "Centrist Sky-Scraper",
+      "body": "Slightly Smaller",
+      "keywords": [
+        "Tiny"
+      ],
+      "icons": [
+        "HasPower",
+        "Manipulate"
+      ],
+      "backgroundColor": "47AD80",
+      "foilBackgroundColor": "47AD80",
+      "character": true,
+      "powers": [
+        "Reveal the top card of a deck. Put it into play or into the trash."
+      ],
+      "hitpoints": 30,
+      "nemesisIdentifiers": [
+        "SkyScraper"
+      ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3
+    },
+    {
+      "identifier": "SkyScraperHugeCharacter",
+      "promoIdentifier": "CentristSkyScraperHugeCharacter",
+      "sharedIdentifier": "CentristSkyScraperCharacter",
+      "count": 1,
+      "title": "Sky-Scraper",
+      "promoTitle": "Centrist Sky-Scraper",
+      "body": "Slightly Bigger",
+      "keywords": [
+        "Huge"
+      ],
+      "icons": [
+        "HasPower",
+        "DealDamageSonic"
+      ],
+      "backgroundColor": "47AD80",
+      "foilBackgroundColor": "47AD80",
+      "character": true,
+      "powers": [
+        "{SkyScraper} deals each target 1 sonic damage."
+      ],
+      "hitpoints": 30,
+      "nemesisIdentifiers": [
+        "SkyScraper"
+      ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 3
+    }
+  ],
   "BaronBlade": [
 
     {

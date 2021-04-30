@@ -62,6 +62,9 @@
     <Compile Include="TheSentinels\WrattleCharacterCardController.cs" />
     <Compile Include="TheBaddies\WrightWeighCardController.cs" />
     <Compile Include="TheBaddies\TheRealBaddiesTurnTakerController.cs" />
+    <Compile Include="SkyScraper\CentristSkyScraperNormalCharacterCardController.cs" />
+    <Compile Include="SkyScraper\CentristSkyScraperTinyCharacterCardController.cs" />
+    <Compile Include="SkyScraper\CentristSkyScraperHugeCharacterCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
@@ -79,6 +82,7 @@
     <Folder Include="BaronBlade\" />
     <Folder Include="Cauldron.Cricket\" />
     <Folder Include="TheSentinels\" />
+    <Folder Include="SkyScraper\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

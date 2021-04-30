@@ -211,5 +211,47 @@ namespace MyModTest
 
             GoToEndOfTurn();
         }
+
+        [Test()]
+        public void TestSkyScraperVariant()
+        {
+            var promos = new Dictionary<string, string>();
+
+            promos.Add("SkyScraper", "Workshopping.CentristSkyScraperNormalCharacter");
+            SetupGameController(new string[] { "BaronBlade", "SkyScraper", "Megalopolis" }, false, promos);
+
+            StartGame();
+
+            Assert.IsNotNull(sky);
+            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperNormalCharacterCardController), sky.CharacterCardController);
+            Assert.AreEqual(30, sky.CharacterCard.HitPoints);
+
+            // Huge and tiny should be off to the side.
+            Assert.AreEqual(2, sky.TurnTaker.OffToTheSide.NumberOfCards);
+            var tiny = GetCard("SkyScraperTinyCharacter");
+            var tinyCC = GetCardController(tiny);
+            AssertOffToTheSide(tiny);
+            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperTinyCharacterCardController), tinyCC);
+
+            var huge = GetCard("SkyScraperHugeCharacter");
+            var hugeCC = GetCardController(huge);
+            AssertOffToTheSide(huge);
+            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperHugeCharacterCardController), hugeCC);
+
+            GoToPlayCardPhase(sky);
+
+            // Normal power draws 3.
+            QuickHandStorage(sky);
+            UsePower(sky);
+            QuickHandCheck(3);
+
+            // Go huge!
+            var monolith = PlayCard("ThorathianMonolith");
+            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperHugeCharacterCardController), sky.CharacterCardController);
+            DestroyCard(monolith);
+            QuickHPStorage(GetMobileDefensePlatform().Card, sky.CharacterCard);
+            UsePower(sky);
+            QuickHPCheck(-1, -1);
+        }
     }
 }
