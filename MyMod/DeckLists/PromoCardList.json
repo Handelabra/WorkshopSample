@@ -25,14 +25,14 @@
         "Bunker"
       ],
       "incapacitatedAbilities": [
-        "One player may draw a card.",
-        "Select a hero. Until the start of your turn, reduce damage dealt to that hero by 1.",
-        "One environment target deals 1 target 2 fire damage."
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
       "flippedIcons": [
-        "DrawCardNow",
-        "ReduceDamageTaken",
-        "DealDamageFire"
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
       ],
       "complexity": 2,
       "openingLines": {
@@ -247,14 +247,14 @@
         "Bunker"
       ],
       "incapacitatedAbilities": [
-        "One player may draw a card.",
-        "Select a hero. Until the start of your turn, reduce damage dealt to that hero by 1.",
-        "One environment target deals 1 target 2 fire damage."
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
       ],
       "flippedIcons": [
-        "DrawCardNow",
-        "ReduceDamageTaken",
-        "DealDamageFire"
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
       ],
       "complexity": 2,
       "openingLines": {
