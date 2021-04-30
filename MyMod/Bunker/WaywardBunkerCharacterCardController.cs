@@ -61,7 +61,8 @@ namespace Workshopping.Bunker
         public override IEnumerator UsePower(int index = 0)
         {
             // Draw 2 cards!
-            IEnumerator e = DrawCards(this.HeroTurnTakerController, 2);
+            var numberOfCards = GetPowerNumeral(0, 2);
+            IEnumerator e = DrawCards(this.HeroTurnTakerController, numberOfCards);
 
             if (UseUnityCoroutines)
             {
