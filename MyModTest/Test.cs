@@ -240,18 +240,48 @@ namespace MyModTest
 
             GoToPlayCardPhase(sky);
 
-            // Normal power draws 3.
+            // Normal power draws 3 and goes huge.
             QuickHandStorage(sky);
             UsePower(sky);
             QuickHandCheck(3);
+            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperHugeCharacterCardController), sky.CharacterCardController);
 
             // Go huge!
-            var monolith = PlayCard("ThorathianMonolith");
-            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperHugeCharacterCardController), sky.CharacterCardController);
-            DestroyCard(monolith);
             QuickHPStorage(GetMobileDefensePlatform().Card, sky.CharacterCard);
             UsePower(sky);
             QuickHPCheck(-1, -1);
+        }
+
+        [Test()]
+        public void TestSkyScraperVariant_RepresentativeOfEarth()
+        {
+            var promos = new Dictionary<string, string>();
+
+            SetupGameController(new string[] { "BaronBlade", "Legacy", "TheCelestialTribunal" }, false, promos);
+
+            StartGame();
+
+            SelectFromBoxForNextDecision("Workshopping.CentristSkyScraperHugeCharacter", "SkyScraper");
+            var earth = PlayCard("RepresentativeOfEarth");
+
+            var rep = GetCard("SkyScraperHugeCharacter");
+            var repCC = FindCardController(rep);
+            AssertIsInPlay(rep);
+            AssertNextToCard(rep, earth);
+            AssertMaximumHitPoints(rep, 10);
+            Assert.IsTrue(rep.IsHeroCharacterCard);
+            Assert.IsTrue(rep.IsTarget && rep.IsHero);
+            Assert.IsFalse(rep.IsEnvironment);
+            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperHugeCharacterCardController), repCC);
+
+            // Make sure the other sizes loaded too, off to the side
+            AssertNumberOfCardsAtLocation(env.TurnTaker.OffToTheSide, 2);
+            var tiny = GetCard("SkyScraperTinyCharacter");
+            var tinyCC = FindCardController(tiny);
+            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperTinyCharacterCardController), tinyCC);
+            var normal = GetCard("SkyScraperNormalCharacter");
+            var normalCC = FindCardController(normal);
+            Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperNormalCharacterCardController), normalCC);
         }
     }
 }

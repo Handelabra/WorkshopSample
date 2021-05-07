@@ -71,6 +71,27 @@ namespace Workshopping.SkyScraper
             {
                 this.GameController.ExhaustCoroutine(e);
             }
+
+            // Switch to huge!
+            if (this.Card.IsInPlayAndHasGameText && !this.TurnTaker.IsIncapacitatedOrOutOfGame && this.Card.SharedIdentifier != null)
+            {
+                var otherCard = this.TurnTaker.FindCard("SkyScraperHugeCharacter");
+
+                if (otherCard != null)
+                {
+                    e = this.GameController.SwitchCards(this.Card, otherCard, cardSource: GetCardSource());
+                    if (UseUnityCoroutines)
+                    {
+                        yield return this.GameController.StartCoroutine(e);
+                    }
+                    else
+                    {
+                        this.GameController.ExhaustCoroutine(e);
+
+                    }
+                }
+
+            }
         }
     }
 }
