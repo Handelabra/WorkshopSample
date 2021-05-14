@@ -290,6 +290,7 @@
     {
       "identifier": "BaronBladeCharacter",
       "promoIdentifier": "BaronJeremyCharacter",
+      "overrideTurnTakerController": "BaronJeremy",
       "count": 1,
       "title": "Baron Blade",
       "promoTitle": "Baron Jeremy",
@@ -297,39 +298,38 @@
         "villain"
       ],
       "icons": [
-        "StartOfTurnAction",
+        "StartAndEndOfTurnAction",
         "DealDamageFire"
       ],
       "advancedIcons": [
-        "EndOfTurnAction"
       ],
       "body": "C.E.O.",
       "backgroundColor": "D99FC5",
       "foilBackgroundColor": "CD96C0",
       "character": true,
-      "hitpoints": 30,
+      "hitpoints": 50,
       "nemesisIdentifiers": [
-        "Legacy"
+        "Legacy",
+        "Workshopping.MigrantCoder"
       ],
-      "setup": "At the start of the game, {BaronBlade} enters play “C.E.O.“ side up.",
+      "setup": [
+        "At the start of the game, {BaronBlade} enters play “C.E.O.“ side up.",
+        "Four Blade Battalions are put into play. The Villain Deck is shuffled."
+      ],
       "gameplay": [
-        "FPO"
+        "At the start of the villain turn, {BaronBlade} deals {H} fire damage to all hero targets.",
+        "At the end of the villain turn, if there are no minions in play, {BaronBlade} flips."
       ],
-      "advanced": "Nada",
+      "advanced": "He's bad enough without advanced!",
       "flippedBody": "F.P.O.",
-      "flippedHitpoints": 40,
+      "flippedHitpoints": 50,
       "flippedGameplay": [
         "FPO"
       ],
       "flippedAdvanced": "Nope",
       "flippedIcons": [
-        "StartOfTurnAction",
-        "DealDamageEnergy",
-        "DestroyTarget"
       ],
       "flippedAdvancedIcons": [
-        "EndOfTurnAction",
-        "PlayCardNow"
       ],
       "difficulty": 2,
       "openingLines": {

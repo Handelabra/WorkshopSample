@@ -67,6 +67,7 @@
     <Compile Include="SkyScraper\CentristSkyScraperHugeCharacterCardController.cs" />
     <Compile Include="DevStream\SpamBotCardController.cs" />
     <Compile Include="DevStream\ModderCardController.cs" />
+    <Compile Include="BaronBlade\BaronJeremyTurnTakerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />

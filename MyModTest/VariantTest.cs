@@ -15,6 +15,8 @@ namespace MyModTest
     [TestFixture()]
     public class VariantTest : BaseTest
     {
+        protected HeroTurnTakerController migrant { get { return FindHero("MigrantCoder"); } }
+
         [Test()]
         public void TestBunkerVariant()
         {
@@ -278,6 +280,29 @@ namespace MyModTest
             Assert.AreEqual("ExtremistSkyScraperHugeCharacter", extremistHuge.QualifiedPromoIdentifierOrIdentifier);
             Assert.AreEqual("ExtremistSkyScraperNormalCharacter", extremistNormal.QualifiedPromoIdentifierOrIdentifier);
             Assert.AreEqual("ExtremistSkyScraperTinyCharacter", extremistTiny.QualifiedPromoIdentifierOrIdentifier);
+        }
+
+        [Test()]
+        public void TestBaronBladeVariant()
+        {
+            SetupGameController("BaronBlade/Workshopping.BaronJeremyCharacter", "Legacy", "Workshopping.MigrantCoder", "Tachyon", "Megalopolis");
+
+            QuickHPStorage(baron, legacy, migrant, tachyon);
+
+            StartGame();
+
+            AssertNumberOfCardsInPlay("BladeBattalion", 4);
+
+            // H damage to all hero targets (plus nemesis bonus) at start of villain turn 
+            QuickHPCheck(0, -4, -4, -3);
+
+            GoToEndOfTurn(baron);
+
+            // Next turn he flips because of no minions
+            DestroyCards(c => c.IsMinion);
+
+            GoToEndOfTurn(baron);
+            AssertFlipped(baron);
         }
     }
 }
