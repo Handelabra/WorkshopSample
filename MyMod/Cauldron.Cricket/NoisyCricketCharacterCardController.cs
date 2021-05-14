@@ -2,6 +2,7 @@
 using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Workshopping.Cricket
 {
@@ -60,8 +61,11 @@ namespace Workshopping.Cricket
 
         public override IEnumerator UsePower(int index = 0)
         {
-            // Destroy self!
-            var e = this.GameController.DestroyCard(this.HeroTurnTakerController, this.CharacterCard);
+            var targets = GetPowerNumeral(0, 1);
+            var amount = GetPowerNumeral(1, 10);
+            var storedResults = new List<DealDamageAction>();
+            var source = new DamageSource(this.GameController, this.CharacterCard);
+            var e = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker, source, amount, DamageType.Energy, targets, false, targets, true, storedResultsDamage:storedResults, cardSource: GetCardSource());
 
             if (UseUnityCoroutines)
             {
@@ -71,8 +75,21 @@ namespace Workshopping.Cricket
             {
                 this.GameController.ExhaustCoroutine(e);
             }
+
+            if (DidDealDamage(storedResults))
+            {
+                // Destroy self!
+                e = this.GameController.DestroyCard(this.HeroTurnTakerController, this.CharacterCard);
+
+                if (UseUnityCoroutines)
+                {
+                    yield return this.GameController.StartCoroutine(e);
+                }
+                else
+                {
+                    this.GameController.ExhaustCoroutine(e);
+                }
+            }
         }
     }
-
-
 }
