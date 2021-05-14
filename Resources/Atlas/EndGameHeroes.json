@@ -1,0 +1,44 @@
+{"frames": {
+
+"MigrantCoderCharacter.jpg":
+{
+	"frame": {"x":0,"y":0,"w":400,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
+	"sourceSize": {"w":400,"h":200}
+},
+"MigrantCoderCharacterFlipped.jpg":
+{
+	"frame": {"x":403,"y":0,"w":400,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
+	"sourceSize": {"w":400,"h":200}
+},
+"MigrantCoderLockdownCharacter.jpg":
+{
+	"frame": {"x":0,"y":203,"w":400,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
+	"sourceSize": {"w":400,"h":200}
+},
+"MigrantCoderLockdownCharacterFlipped.jpg":
+{
+	"frame": {"x":403,"y":203,"w":400,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
+	"sourceSize": {"w":400,"h":200}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "EndGameHeroes.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:062ac6e9de183009ab1732be45cf2ad8:fa3c71cdbe1ae183dfe099b8ee3d6012:0423ae3ad7779086353f76e081c26386$"
+}
+}

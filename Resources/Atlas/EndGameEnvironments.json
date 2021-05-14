@@ -1,0 +1,20 @@
+{"frames": {
+
+"DevStreamDeckBack.jpg":
+{
+	"frame": {"x":0,"y":0,"w":400,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":200},
+	"sourceSize": {"w":400,"h":200}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "EndGameEnvironments.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:4a9d75ae646e5a731208ad009665aa8e:f3879d2bbd17f3d0cdbb688f666c2a22:b7fe148a494bf1e85f5fd0bb60e71296$"
+}
+}

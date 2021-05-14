@@ -1,0 +1,37 @@
+{
+   "title":"Sample Mod",
+   "author":"MigrantP",
+   "description":"Nothing in this mod is intended to be balanced or playable. It exists as an example to help you as you start working on your own mod. Get the source code here: https://github.com/Handelabra/WorkshopSample",
+   "namespace":"Workshopping",
+   "publishedFileId":2422637296,
+   "dll":"MyMod.dll",
+   "version":"0.5",
+   "color":"4444DD",
+   "manualTags":[],
+   "decks":{
+      "heroes":[
+         "MigrantCoder"
+      ],
+      "villains":[
+         "TheBaddies"
+      ],
+      "teamVillains":[
+         "TheHugMonsterTeam"
+      ],
+      "environments":[
+         "DevStream"
+      ]
+   },
+   "variants":{
+       "Bunker":["WaywardBunkerCharacter"],
+       "TheSentinels":["TheSerpentinelsInstructions","DrMedicobraCharacter","MainsnakeCharacter","TheIdealizardCharacter","WrattleCharacter"],
+       "SkyScraper":["CentristSkyScraperNormalCharacter"],
+"BaronBlade":["BaronJeremyCharacter"],
+"Cauldron.Cricket":["NoisyCricketCharacter"]
+   },
+   "credits":[
+   "Credits can have many lines.",
+   "This line is one of them.",
+   "This line is another one of them."
+   ]
+}

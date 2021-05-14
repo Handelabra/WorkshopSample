@@ -1,0 +1,28 @@
+{"frames": {
+
+"MigrantCoderCharacter.jpg":
+{
+	"frame": {"x":0,"y":0,"w":330,"h":260},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":330,"h":260},
+	"sourceSize": {"w":330,"h":260}
+},
+"MigrantCoderLockdownCharacter.jpg":
+{
+	"frame": {"x":333,"y":0,"w":330,"h":260},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":330,"h":260},
+	"sourceSize": {"w":330,"h":260}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "HeroLogos0.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:28e37f2dcfd7836e1eeadca23e7b3ac5:c7f5b451d54be95eb069ec61f37442b4:abd76add2ce06cabb8b0a8e056eb9b47$"
+}
+}

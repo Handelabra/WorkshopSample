@@ -1,0 +1,28 @@
+{"frames": {
+
+"card-keywords-full.png":
+{
+	"frame": {"x":0,"y":0,"w":520,"h":527},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":520,"h":527},
+	"sourceSize": {"w":520,"h":527}
+},
+"Whatever.png":
+{
+	"frame": {"x":523,"y":0,"w":70,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":70},
+	"sourceSize": {"w":70,"h":70}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "FullCardKeywords.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2a690cab200860d86f5e615eb7566f82:b1f09c04da4d5a533686709a7672350e:78a8fe050ee96964a4e5b33f95cb8cbd$"
+}
+}

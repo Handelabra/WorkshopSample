@@ -1,0 +1,28 @@
+{"frames": {
+
+"button-labels.png":
+{
+	"frame": {"x":0,"y":0,"w":678,"h":649},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":678,"h":649},
+	"sourceSize": {"w":678,"h":649}
+},
+"Whatever.png":
+{
+	"frame": {"x":681,"y":0,"w":90,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":90},
+	"sourceSize": {"w":90,"h":90}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "ButtonGeneral.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7fb36711fe39e3c78e091626417e2b44:7287afd951a635e703a39250c53391d6:a18e781645faf149cbba388043440a07$"
+}
+}

@@ -1,0 +1,20 @@
+{"frames": {
+
+"TheHugMonsterTeamCharacter.jpg":
+{
+	"frame": {"x":0,"y":0,"w":330,"h":260},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":330,"h":260},
+	"sourceSize": {"w":330,"h":260}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "VillainTeamLogos0.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:4bb958ec5e327a7bca8e28763ee8beca:fa0803bc2978c852c17626c4d9a4285c:0062886d92aa4828fffb275a03363a1a$"
+}
+}
