@@ -479,22 +479,29 @@ namespace Handelabra.Sentinels.UnitTest
         {
             var result = new List<KeyValuePair<string, string>>();
 
+            var modDefs = ModHelper.GetAllPromoDefinitions();
+
             // Find all the playable hero character cards in the box (including other sizes of Sky-Scraper)
             var availableHeroes = DeckDefinition.AvailableHeroes;
             foreach (var heroTurnTaker in availableHeroes.Where(turnTakerCriteria))
             {
                 var heroDefinition = DeckDefinitionCache.GetDeckDefinition(heroTurnTaker);
 
-                foreach (var cardDef in heroDefinition.CardDefinitions.Concat(heroDefinition.PromoCardDefinitions))
+                var defs = heroDefinition.GetAllCardDefinitions();
+
+                // Also include mod cards
+                defs = defs.Concat(modDefs.Where(c => c.ParentDeck.QualifiedIdentifier == heroTurnTaker));
+
+                foreach (var cardDef in defs)
                 {
                     // Ignore non-real cards (Sentinels Intructions) and cards that do not start in play (Sky-Scraper sizes)
                     if (cardDef.IsCharacter
                         && cardDef.IsRealCard
-                        && identifierCriteria(cardDef.PromoIdentifierOrIdentifier))
+                        && identifierCriteria(cardDef.QualifiedPromoIdentifierOrIdentifier))
                     {
                         // It's in the box!
-                        var kvp = new KeyValuePair<string, string>(heroTurnTaker, cardDef.PromoIdentifierOrIdentifier);
-                        //Debug.LogFormat("In the box {0}: {1}", result.Count, kvp.Value);
+                        var kvp = new KeyValuePair<string, string>(heroTurnTaker, cardDef.QualifiedPromoIdentifierOrIdentifier);
+                        Console.WriteLine("In the box {0}: {1}", result.Count, kvp.Value);
                         result.Add(kvp);
                     }
                 }
