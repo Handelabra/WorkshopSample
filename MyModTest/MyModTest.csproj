@@ -46,6 +46,8 @@
     <Compile Include="Test.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="VariantTest.cs" />
+    <Compile Include="MigrantCoderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

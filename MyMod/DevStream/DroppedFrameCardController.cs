@@ -14,8 +14,8 @@ namespace Workshopping.DevStream
 
         public override IEnumerator Play()
         {
-            // When this card enters play, deal each target 1 Lightning damage.
-            var damage = DealDamage(this.Card, c => true, 1, DamageType.Lightning);
+            // When this card enters play, deal each non-chat target 1 Lightning damage.
+            var damage = DealDamage(this.Card, c => !c.DoKeywordsContain("chat"), 1, DamageType.Lightning);
             if (UseUnityCoroutines)
             {
                 yield return this.GameController.StartCoroutine(damage);
