@@ -283,5 +283,147 @@ namespace MyModTest
             var normalCC = FindCardController(normal);
             Assert.IsInstanceOf(typeof(Workshopping.SkyScraper.CentristSkyScraperNormalCharacterCardController), normalCC);
         }
+
+        [Test]
+        public void TestSkyScraperVariant_CompletionistGuiseCharacter()
+        {
+            var promos = new Dictionary<string, string>();
+            promos["Guise"] = "CompletionistGuiseCharacter";
+            SetupGameController(new string[] { "BaronBlade", "SkyScraper", "Guise", "Legacy", "TheWraith", "Unity", "Megalopolis" }, false, promos);
+            StartGame();
+            RemoveVillainCards();
+
+            var mono = PlayCard("ThorathianMonolith");
+            DestroyCard(mono);
+
+            // Examine the state of each of the size cards
+            // Old cards should be owned by Guise now
+            // New cards should be owned by SkyScraper
+            var skyHuge = sky.CharacterCard;
+            var skyNormal = GetCard("SkyScraperNormalCharacter");
+            var skyTiny = GetCard("SkyScraperTinyCharacter");
+            SelectCardsForNextDecision(sky.CharacterCard, guise.CharacterCard, legacy.CharacterCard, wraith.CharacterCard, unity.CharacterCard);
+            SelectFromBoxForNextDecision("Workshopping.CentristSkyScraperHugeCharacter", "SkyScraper");
+            UsePower(guise);
+            var variantHuge = sky.CharacterCard;
+            var variantNormal = sky.TurnTaker.OffToTheSide.Cards.Where(c => c.Identifier == "SkyScraperNormalCharacter").FirstOrDefault();
+            var variantTiny = sky.TurnTaker.OffToTheSide.Cards.Where(c => c.Identifier == "SkyScraperTinyCharacter").FirstOrDefault();
+            AssertAtLocation(skyHuge, guise.CharacterCard.UnderLocation);
+            AssertAtLocation(skyNormal, guise.TurnTaker.OffToTheSide);
+            AssertAtLocation(skyTiny, guise.TurnTaker.OffToTheSide);
+            Assert.AreEqual("Workshopping.CentristSkyScraperHugeCharacter", variantHuge.QualifiedPromoIdentifierOrIdentifier);
+            Assert.AreEqual("Workshopping.CentristSkyScraperNormalCharacter", variantNormal.QualifiedPromoIdentifierOrIdentifier);
+            Assert.AreEqual("Workshopping.CentristSkyScraperTinyCharacter", variantTiny.QualifiedPromoIdentifierOrIdentifier);
+
+            // The new SkyScraper should be the same size and change sizes normally
+            Assert.AreEqual("Workshopping.CentristSkyScraperHugeCharacter", sky.CharacterCard.QualifiedPromoIdentifierOrIdentifier);
+            PlayCard("UndetectableRelinking");
+            Assert.AreEqual(sky.CharacterCard, variantTiny);
+            PlayCard("ThorathianMonolith");
+            Assert.AreEqual(sky.CharacterCard, variantHuge);
+
+            // If Guise replaces her again, it should switch back to the old variant (without changing size)
+            var prop = PlayCard("Proportionist");
+            SelectCardsForNextDecision(sky.CharacterCard, guise.CharacterCard, legacy.CharacterCard, wraith.CharacterCard, unity.CharacterCard, baron.CharacterCard);
+            SelectFromBoxForNextDecision("SkyScraperHugeCharacter", "SkyScraper");
+            QuickHandStorage(sky);
+            UsePower(guise);
+            QuickHandCheckZero(); // Proportionist should not trigger
+            AssertAtLocation(skyHuge, sky.TurnTaker.PlayArea);
+            AssertAtLocation(variantHuge, guise.CharacterCard.UnderLocation);
+            Assert.AreEqual(skyHuge, sky.CharacterCard); // The old variant should have been switched back in
+
+            // SkyScraper should be able to switch sizes normally
+            ResetDecisions();
+            PlayCard("UndetectableRelinking");
+            Assert.AreEqual("SkyScraperTinyCharacter", sky.CharacterCard.PromoIdentifierOrIdentifier);
+        }
+
+        [Test]
+        public void TestSkyScraperVariant_CompletionistGuiseCharacter_Extremist()
+        {
+            var promos = new Dictionary<string, string>();
+            promos["Guise"] = "CompletionistGuiseCharacter";
+            SetupGameController(new string[] { "BaronBlade", "SkyScraper", "Guise", "Legacy", "TheWraith", "Unity", "Megalopolis" }, false, promos);
+            StartGame();
+            RemoveVillainCards();
+
+            var mono = PlayCard("ThorathianMonolith");
+            DestroyCard(mono);
+
+            // Examine the state of each of the size cards
+            // Old cards should be owned by Guise now
+            // New cards should be owned by SkyScraper
+            var skyHuge = sky.CharacterCard;
+            var skyNormal = GetCard("SkyScraperNormalCharacter");
+            var skyTiny = GetCard("SkyScraperTinyCharacter");
+            SelectCardsForNextDecision(sky.CharacterCard, guise.CharacterCard, legacy.CharacterCard, wraith.CharacterCard, unity.CharacterCard);
+            SelectFromBoxForNextDecision("Workshopping.CentristSkyScraperHugeCharacter", "SkyScraper");
+            UsePower(guise);
+            var variantHuge = sky.CharacterCard;
+            var variantNormal = sky.TurnTaker.OffToTheSide.Cards.Where(c => c.Identifier == "SkyScraperNormalCharacter").FirstOrDefault();
+            var variantTiny = sky.TurnTaker.OffToTheSide.Cards.Where(c => c.Identifier == "SkyScraperTinyCharacter").FirstOrDefault();
+            AssertAtLocation(skyHuge, guise.CharacterCard.UnderLocation);
+            AssertAtLocation(skyNormal, guise.TurnTaker.OffToTheSide);
+            AssertAtLocation(skyTiny, guise.TurnTaker.OffToTheSide);
+            Assert.AreEqual("Workshopping.CentristSkyScraperHugeCharacter", variantHuge.QualifiedPromoIdentifierOrIdentifier);
+            Assert.AreEqual("Workshopping.CentristSkyScraperNormalCharacter", variantNormal.QualifiedPromoIdentifierOrIdentifier);
+            Assert.AreEqual("Workshopping.CentristSkyScraperTinyCharacter", variantTiny.QualifiedPromoIdentifierOrIdentifier);
+
+            // Now switch to Extremist. Guise should have both regular and centrist huge under him.
+            SelectCardsForNextDecision(sky.CharacterCard, guise.CharacterCard, legacy.CharacterCard, wraith.CharacterCard, unity.CharacterCard, baron.CharacterCard);
+            SelectFromBoxForNextDecision("ExtremistSkyScraperHugeCharacter", "SkyScraper");
+            UsePower(guise);
+            AssertAtLocation(skyHuge, guise.CharacterCard.UnderLocation);
+            AssertAtLocation(variantHuge, guise.CharacterCard.UnderLocation);
+            var extremistHuge = sky.CharacterCard;
+            Assert.AreEqual("ExtremistSkyScraperHugeCharacter", extremistHuge.QualifiedPromoIdentifierOrIdentifier);
+        }
+
+        [Test]
+        public void TestSkyScraperVariant_CompletionistGuiseCharacter_Extremist2()
+        {
+            var promos = new Dictionary<string, string>();
+            promos["Guise"] = "CompletionistGuiseCharacter";
+            SetupGameController(new string[] { "BaronBlade", "SkyScraper", "Guise", "Legacy", "TheWraith", "Unity", "Megalopolis" }, false, promos);
+            StartGame();
+            RemoveVillainCards();
+
+            // Switch out normal sky-scraper.
+            // Examine the state of each of the size cards
+            // Old cards should be owned by Guise now
+            // New cards should be owned by SkyScraper
+            var skyNormal = sky.CharacterCard;
+            var skyHuge = GetCard("SkyScraperHugeCharacter");
+            var skyTiny = GetCard("SkyScraperTinyCharacter");
+            SelectCardsForNextDecision(sky.CharacterCard, guise.CharacterCard, legacy.CharacterCard, wraith.CharacterCard, unity.CharacterCard);
+            SelectFromBoxForNextDecision("Workshopping.CentristSkyScraperNormalCharacter", "SkyScraper");
+            UsePower(guise);
+            var variantNormal = sky.CharacterCard;
+            var variantHuge = sky.TurnTaker.OffToTheSide.Cards.Where(c => c.Identifier == "SkyScraperHugeCharacter").FirstOrDefault();
+            var variantTiny = sky.TurnTaker.OffToTheSide.Cards.Where(c => c.Identifier == "SkyScraperTinyCharacter").FirstOrDefault();
+            AssertAtLocation(skyHuge, guise.TurnTaker.OffToTheSide);
+            AssertAtLocation(skyNormal, guise.CharacterCard.UnderLocation);
+            AssertAtLocation(skyTiny, guise.TurnTaker.OffToTheSide);
+            Assert.AreEqual("Workshopping.CentristSkyScraperHugeCharacter", variantHuge.QualifiedPromoIdentifierOrIdentifier);
+            Assert.AreEqual("Workshopping.CentristSkyScraperNormalCharacter", variantNormal.QualifiedPromoIdentifierOrIdentifier);
+            Assert.AreEqual("Workshopping.CentristSkyScraperTinyCharacter", variantTiny.QualifiedPromoIdentifierOrIdentifier);
+
+            // Switch to variant huge.
+            PlayCard("ThorathianMonolith");
+
+            // Now switch to Extremist. Guise should have regular normal size and centrist huge size under him now.
+            SelectCardsForNextDecision(sky.CharacterCard, guise.CharacterCard, legacy.CharacterCard, wraith.CharacterCard, unity.CharacterCard, baron.CharacterCard);
+            SelectFromBoxForNextDecision("ExtremistSkyScraperHugeCharacter", "SkyScraper");
+            UsePower(guise);
+            AssertAtLocation(skyNormal, guise.CharacterCard.UnderLocation);
+            AssertAtLocation(variantHuge, guise.CharacterCard.UnderLocation);
+            var extremistHuge = sky.CharacterCard;
+            var extremistNormal = sky.TurnTaker.OffToTheSide.Cards.Where(c => c.Identifier == "SkyScraperNormalCharacter").FirstOrDefault();
+            var extremistTiny = sky.TurnTaker.OffToTheSide.Cards.Where(c => c.Identifier == "SkyScraperTinyCharacter").FirstOrDefault();
+            Assert.AreEqual("ExtremistSkyScraperHugeCharacter", extremistHuge.QualifiedPromoIdentifierOrIdentifier);
+            Assert.AreEqual("ExtremistSkyScraperNormalCharacter", extremistNormal.QualifiedPromoIdentifierOrIdentifier);
+            Assert.AreEqual("ExtremistSkyScraperTinyCharacter", extremistTiny.QualifiedPromoIdentifierOrIdentifier);
+        }
     }
 }
