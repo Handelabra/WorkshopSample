@@ -88,7 +88,7 @@ namespace MyModTest
             Assert.AreEqual(3, this.GameController.TurnTakerControllers.Count());
 
             Assert.IsNotNull(baddies);
-            Assert.IsInstanceOf(typeof(TheBaddiesTurnTakerController), baddies);
+            Assert.IsInstanceOf(typeof(TheRealBaddiesTurnTakerController), baddies);
             Assert.IsInstanceOf(typeof(TheRealBaddiesCharacterCardController), baddies.CharacterCardController);
 
             Assert.AreEqual(50, baddies.CharacterCard.HitPoints);
