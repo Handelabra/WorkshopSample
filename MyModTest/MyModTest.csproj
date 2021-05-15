@@ -41,6 +41,9 @@
     <Reference Include="SentinelsEngine">
       <HintPath>..\..\Handelabra\SentinelsEngine\SentinelsEngine\bin\Debug\SentinelsEngine.dll</HintPath>
     </Reference>
+    <Reference Include="Troschuetz.Random">
+      <HintPath>..\packages\Troschuetz.Random.5.0.1\lib\net40\Troschuetz.Random.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Test.cs" />
@@ -48,6 +51,8 @@
     <Compile Include="Setup.cs" />
     <Compile Include="VariantTest.cs" />
     <Compile Include="MigrantCoderTest.cs" />
+    <Compile Include="RandomGameTest.cs" />
+    <Compile Include="MyRandomTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
