@@ -5,7 +5,7 @@ For the latest information on Workshop development status, please visit the [Tre
 
 Visit the official [Engine Documentation](https://docs.google.com/document/d/e/2PACX-1vRvUNq-KAWwLdvQmhjpFp-dC6s7ZJqogQJFIFfCZrhJ6_kuS9yi5KG-OmEU3g2NqsB0zkMS0KPtTC5V/pub) to learn how to adapt this project for your mod, or to get started from scratch.
 
-The sample includes examples of the following:
+The project includes the following examples:
 
 - Hero (Migrant Coder) with variant
 - Classic villain (The Baddies) with variant
