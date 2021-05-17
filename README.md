@@ -18,4 +18,9 @@ The project includes the following examples:
   - Cricket from Cauldron mod (Noisy Cricket)
   - Baron Blade (Baron Jeremy)
 
+It also includes systems to help with testing your own projects:
+
+- BaseTest unit testing class 
+- Console project for interactive testing
+
 None of the content in this mod is intended to be balanced for use in-game. It is here as an example for you to look at, that is all.
