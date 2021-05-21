@@ -41,7 +41,18 @@
       },
       "complexity": 1,
       "setup": [ "Most heroes do not have setup text. This one does only as an example." ],
-      "gameplay": [ "Most heroes do not have gameplay text. This one does only as an example." ]
+      "gameplay": [ "Most heroes do not have gameplay text. This one does only as an example." ],
+      "tokenPools": [
+        {
+          "identifier": "ExamplePool",
+          "name": "Example Token Pool",
+          "initialValue": 5,
+          "minimumValue": 0,
+          "icon": "Workshopping.Whatever",
+          "labelBottomColor": "FF0000",
+          "labelTopColor": "0000FF"
+        }
+      ]
     },
     {
       "identifier": "WorstCardEver",
