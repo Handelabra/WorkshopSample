@@ -18,7 +18,7 @@ namespace Workshopping.MigrantCoder
             // Migrant Coder deals 1 target 4 lightning damage.
             var numberOfTargets = GetPowerNumeral(0, 1);
             var damageAmount = GetPowerNumeral(1, 4);
-            IEnumerator dealDamageE = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker,
+            return this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker,
                                                                                      new DamageSource(this.GameController, this.CharacterCard),
                                                                                      damageAmount,
                                                                                      DamageType.Lightning,
@@ -26,14 +26,6 @@ namespace Workshopping.MigrantCoder
                                                                                      false,
                                                                                      numberOfTargets,
                                                                                      cardSource: GetCardSource());
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(dealDamageE);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(dealDamageE);
-            }
         }
     }
 }

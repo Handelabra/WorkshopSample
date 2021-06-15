@@ -14,15 +14,7 @@ namespace Workshopping.TheBaddies
 
         public override IEnumerator Play()
         {
-            var damage = DealDamage(this.CharacterCard, c => c.IsNonVillainTarget, 5, DamageType.Psychic);
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(damage);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(damage);
-            }
+            return DealDamage(this.CharacterCard, c => c.IsNonVillainTarget, 5, DamageType.Psychic);
         }
     }
 }

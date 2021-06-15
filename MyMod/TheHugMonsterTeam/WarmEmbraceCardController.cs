@@ -25,15 +25,7 @@ namespace Workshopping.TheHugMonsterTeam
             info.Add(new DealDamageAction(GetCardSource(), new DamageSource(this.GameController, this.CharacterCard), null, 1, DamageType.Melee, false));
             info.Add(new DealDamageAction(GetCardSource(), new DamageSource(this.GameController, this.CharacterCard), null, 1, DamageType.Fire, false));
 
-            var e = DealMultipleInstancesOfDamage(info, c => c.IsHero);
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(e);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(e);
-            }
+            return DealMultipleInstancesOfDamage(info, c => c.IsHero);
         }
     }
 }

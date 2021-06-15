@@ -38,16 +38,7 @@ namespace Workshopping.TheSentinels
 			effect.PostDestroyDestinationMustBeChangeable = true;
 			effect.NumberOfUses = 1;
 
-			var e = AddStatusEffect(effect);
-			if (UseUnityCoroutines)
-			{
-				yield return this.GameController.StartCoroutine(e);
-			}
-			else
-			{
-				this.GameController.ExhaustCoroutine(e);
-
-			}
+			return AddStatusEffect(effect);
 		}
 
 		public IEnumerator MoveItToTheBottomOfItsDeckResponse(DestroyCardAction d, HeroTurnTaker hero, StatusEffect effect, int[] powerNumerals = null)

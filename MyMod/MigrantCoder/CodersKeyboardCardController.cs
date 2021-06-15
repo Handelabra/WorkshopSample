@@ -22,15 +22,7 @@ namespace Workshopping.MigrantCoder
         public override IEnumerator Play()
         {
             // You may use an additional power during your power phase.
-            IEnumerator increasePowerE = IncreasePhaseActionCountIfInPhase(tt => tt == this.TurnTaker, Phase.UsePower, 1);
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(increasePowerE);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(increasePowerE);
-            }
+            return IncreasePhaseActionCountIfInPhase(tt => tt == this.TurnTaker, Phase.UsePower, 1);
         }
 
         public override bool DoesHaveActivePlayMethod

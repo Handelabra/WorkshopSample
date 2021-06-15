@@ -65,29 +65,13 @@ namespace Workshopping.TheBaddies
         private IEnumerator EndVillainTurnResponse(PhaseChangeAction phaseChange)
         {
             // Destroy 1 hero ongoing card.
-            var e = this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria(c => c.IsInPlay && c.IsHero && c.IsOngoing, "hero ongoing"), false, cardSource: GetCardSource());
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(e);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(e);
-            }
+            return this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria(c => c.IsInPlay && c.IsHero && c.IsOngoing, "hero ongoing"), false, cardSource: GetCardSource());
         }
 
         private IEnumerator AdvancedEndVillainTurnResponse(PhaseChangeAction phaseChange)
         {
             // Destroy 1 equipment card.
-            var e = this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria(c => c.IsInPlay && this.GameController.IsEquipment(c), "equipment"), false, cardSource: GetCardSource());
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(e);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(e);
-            }
+            return this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria(c => c.IsInPlay && this.GameController.IsEquipment(c), "equipment"), false, cardSource: GetCardSource());
         }
 
         public override IEnumerator AfterFlipCardImmediateResponse()

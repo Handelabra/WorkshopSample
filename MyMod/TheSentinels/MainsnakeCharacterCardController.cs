@@ -19,7 +19,7 @@ namespace Workshopping.TheSentinels
 			// The next damage dealt to that target is irreducible.
 			var numberOfTargets = GetPowerNumeral(0, 1);
 			var damageAmount = GetPowerNumeral(1, 3);
-			var e = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker,
+			return this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker,
 																   new DamageSource(this.GameController, this.Card),
 																   damageAmount,
 																   DamageType.Melee,
@@ -29,15 +29,6 @@ namespace Workshopping.TheSentinels
 																   addStatusEffect: NextDamageIsIrreducibleResponse,
 																   selectTargetsEvenIfCannotDealDamage: true,
 																   cardSource: GetCardSource());
-			if (UseUnityCoroutines)
-			{
-				yield return this.GameController.StartCoroutine(e);
-			}
-			else
-			{
-				this.GameController.ExhaustCoroutine(e);
-			}
-
 		}
 
 		private IEnumerator NextDamageIsIrreducibleResponse(DealDamageAction dd)
@@ -48,16 +39,7 @@ namespace Workshopping.TheSentinels
 			effect.NumberOfUses = 1;
 			effect.UntilCardLeavesPlay(dd.Target);
 
-			var e = AddStatusEffect(effect);
-			if (UseUnityCoroutines)
-			{
-				yield return this.GameController.StartCoroutine(e);
-			}
-			else
-			{
-				this.GameController.ExhaustCoroutine(e);
-
-			}
+			return AddStatusEffect(effect);
 		}
 	}
 }

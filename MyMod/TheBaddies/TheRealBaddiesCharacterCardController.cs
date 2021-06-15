@@ -59,15 +59,7 @@ namespace Workshopping.TheBaddies
         private IEnumerator StartVillainTurnResponse(PhaseChangeAction phaseChange)
         {
             // {TheBaddies} deals the Hero Target with the highest HP {H} Toxic Damage.
-            var e = DealDamageToHighestHP(this.CharacterCard, 1, c => c.IsHero, c => H, DamageType.Toxic);
-            if (UseUnityCoroutines)
-            {
-                yield return this.GameController.StartCoroutine(e);
-            }
-            else
-            {
-                this.GameController.ExhaustCoroutine(e);
-            }
+            return DealDamageToHighestHP(this.CharacterCard, 1, c => c.IsHero, c => H, DamageType.Toxic);
         }
 
         public override IEnumerator AfterFlipCardImmediateResponse()

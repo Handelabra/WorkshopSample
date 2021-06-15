@@ -20,7 +20,7 @@ namespace Workshopping.TheSentinels
 			var numberOfTargets = GetPowerNumeral(0, 1);
 			var damageAmount = GetPowerNumeral(1, 2);
 			var damageReduceAmount = GetPowerNumeral(2, 1);
-			var e = this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker,
+			return this.GameController.SelectTargetsAndDealDamage(this.DecisionMaker,
 																   new DamageSource(this.GameController, this.Card),
 																   damageAmount,
 																   DamageType.Psychic,
@@ -29,14 +29,6 @@ namespace Workshopping.TheSentinels
 																   numberOfTargets,
 																   addStatusEffect: dd => ReduceDamageResponse(dd, damageReduceAmount),
 																   cardSource: GetCardSource());
-			if (UseUnityCoroutines)
-			{
-				yield return this.GameController.StartCoroutine(e);
-			}
-			else
-			{
-				this.GameController.ExhaustCoroutine(e);
-			}
 		}
 
 		private IEnumerator ReduceDamageResponse(DealDamageAction dd, int damageReduceAmount)
