@@ -20,6 +20,17 @@ using System.Globalization;
 
 namespace Handelabra.MyModConsole // this has to be this way to work around an EngineCommon issue, will be fixed soon.
 {
+    /*
+    * In order to use the Console version of Sentinels, you must first register your assemblies:
+    *    Find the LoadModAssemblies() function and add your assembly to the assembly list and your namespace to the namespace list
+    * 
+    * You can play the game in one of two ways, either interactive (basically the normal game) or testing (where you have complete control over everything
+    *  To toggle between the two, add the -i parameter to the project properties (in the Debug tab)
+    *  To play a set game, fill in the ConfigureGameForTesting() function with whoever you want to play with
+    *  
+    *  Improvements to Console Application made by wrhyme29
+    */
+
     // Loading a game in "friendly mode" throws an exception so we can get out of wherever we were.
     class LoadGameException : Exception
     {
