@@ -16,6 +16,7 @@ using Troschuetz.Random.Generators;
 using Handelabra;
 using Boomlagoon.JSON;
 using System.Xml.XPath;
+using System.Globalization;
 
 namespace Handelabra.MyModConsole // this has to be this way to work around an EngineCommon issue, will be fixed soon.
 {
@@ -37,6 +38,13 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
         Slow,
         Medium,
         Fast
+    };
+
+    public enum GameMode
+    {
+        Classic,
+        Team,
+        OblivAeon
     };
 
     class MainClass
@@ -135,6 +143,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             List<DeckDefinition> environments = new List<DeckDefinition>();
             List<string> heroes = new List<string>();
             List<string> availableHeroes = new List<string>(DeckDefinition.AvailableHeroes);
+
 
             Dictionary<string, string> promoIdentifiers = new Dictionary<string, string>();
 
@@ -1009,6 +1018,8 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
         public static void Main(string[] args)
         {
+            LoadModAssemblies();
+
             bool interactiveMode = args.Contains("-i");
             if (interactiveMode)
             {
@@ -1224,9 +1235,23 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             }
         }
 
+        private static void LoadModAssemblies()
+        {
+            if (NamespaceList is null)
+            {
+                NamespaceList = new List<string>();
+            }
+            //register assemblies
+            ModHelper.AddAssembly("Workshopping", typeof(Workshopping.MigrantCoder.MigrantCoderCharacterCardController).Assembly);
+
+            //add to namespace lists
+            NamespaceList.Add("Workshopping");
+        }
+
         bool UserFriendly = false;
         bool Verbose = false;
         bool EnforceRules = false;
+        static List<string> NamespaceList { get; set; }
 
         GameController GameController { get; set; }
 
@@ -1419,19 +1444,35 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
             // Find all the playable hero character cards in the box (including other sizes of Sky-Scraper)
             var availableHeroes = DeckDefinition.AvailableHeroes;
+            Dictionary<string, DeckDefinition> modHeroData = LoadAllModContentOfKind(DeckDefinition.DeckKind.Hero);
+            List<string> fullHeroList = new List<string>();
+
+            fullHeroList.AddRange(availableHeroes);
+            fullHeroList.AddRange(modHeroData.Keys);
+            DeckDefinition heroDefinition = null;
+
             foreach (var heroTurnTaker in availableHeroes.Where(turnTakerCriteria))
             {
-                var heroDefinition = DeckDefinitionCache.GetDeckDefinition(heroTurnTaker);
+                if (availableHeroes.Contains(heroTurnTaker))
+                {
+                    heroDefinition = DeckDefinitionCache.GetDeckDefinition(heroTurnTaker);
+                }
+                else
+                {
+                    heroDefinition = modHeroData[heroTurnTaker];
+                }
 
-                foreach (var cardDef in heroDefinition.CardDefinitions.Concat(heroDefinition.PromoCardDefinitions))
+                var defs = heroDefinition.GetAllCardDefinitions();
+
+                foreach (var cardDef in defs)
                 {
                     // Ignore non-real cards (Sentinels Intructions) and cards that do not start in play (Sky-Scraper sizes)
                     if (cardDef.IsCharacter
                         && cardDef.IsRealCard
-                        && identifierCriteria(cardDef.PromoIdentifierOrIdentifier))
+                        && identifierCriteria(cardDef.QualifiedPromoIdentifierOrIdentifier))
                     {
                         // It's in the box!
-                        var kvp = new KeyValuePair<string, string>(heroTurnTaker, cardDef.PromoIdentifierOrIdentifier);
+                        var kvp = new KeyValuePair<string, string>(heroTurnTaker, cardDef.QualifiedPromoIdentifierOrIdentifier);
                         //Debug.LogFormat("In the box {0}: {1}", result.Count, kvp.Value);
                         result.Add(kvp);
                     }
@@ -1439,6 +1480,52 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             }
 
             return result;
+        }
+
+        private static Dictionary<string, DeckDefinition> LoadAllModContentOfKind(DeckDefinition.DeckKind deckKind)
+        {
+            Dictionary<string, DeckDefinition> modsDictionary = new Dictionary<string, DeckDefinition>();
+            foreach (string space in NamespaceList)
+            {
+                Assembly assembly = ModHelper.GetAssemblyForNamespace(space);
+                if (assembly == null) continue;
+
+                foreach (var res in assembly.GetManifestResourceNames())
+                {
+                    var stream = assembly.GetManifestResourceStream(res);
+                    if (stream is null) continue;
+                    JSONObject jsonObject;
+                    string text;
+                    using (var sr = new StreamReader(stream))
+                    {
+                        text = sr.ReadToEnd();
+                    }
+                    if (text is null) continue;
+                    jsonObject = JSONObject.Parse(text);
+                    if (jsonObject is null) continue;
+                    string name = jsonObject.GetString("name");
+                    TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+                    name = myTI.ToTitleCase(name);
+                    name = name.Replace(" ", string.Empty);
+                    name = Regex.Replace(name, "[^a-zA-Z0-9]", String.Empty);
+                    var kind = jsonObject.GetString("kind");
+                    if (kind != null && kind != deckKind.ToString())
+                        continue;
+
+                    string qualifiedIdentifier = $"{space}.{name}";
+                    if (kind == DeckDefinition.DeckKind.VillainTeam.ToString())
+                    {
+                        qualifiedIdentifier += "Team";
+                    }
+
+                    //add exception for Cauldron's Phase - otherwise errors will occur
+                    qualifiedIdentifier = qualifiedIdentifier == "Cauldron.Phase" ? "Cauldron.PhaseVillain" : qualifiedIdentifier;
+
+                    jsonObject.Add("identifier", new JSONValue(qualifiedIdentifier));
+                    modsDictionary.Add(qualifiedIdentifier, new DeckDefinition(jsonObject, space));
+                }
+            }
+            return modsDictionary;
         }
 
         public void TeardownGameController()
