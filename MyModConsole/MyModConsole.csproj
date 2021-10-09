@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyMod\MyMod.csproj">
+      <Project>{44f8c838-553c-482c-b389-2b375b8590c9}</Project>
+      <Name>MyMod</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

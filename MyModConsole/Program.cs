@@ -16,9 +16,21 @@ using Troschuetz.Random.Generators;
 using Handelabra;
 using Boomlagoon.JSON;
 using System.Xml.XPath;
+using System.Globalization;
 
 namespace Handelabra.MyModConsole // this has to be this way to work around an EngineCommon issue, will be fixed soon.
 {
+    /*
+    * In order to use the Console version of Sentinels, you must first register your assemblies:
+    *    Find the MainClass.ModAssemblies field just below and replace the information with your namespace & type
+    * 
+    * You can play the game in one of two ways, either interactive (basically the normal game) or testing (where you have complete control over everything
+    *  To toggle between the two, add the -i parameter to the project properties (in the Debug tab)
+    *  To play a set game, fill in the ConfigureGameForTesting() function with whoever you want to play with
+    *  
+    *  Improvements to Console Application made by wrhyme29
+    */
+
     // Loading a game in "friendly mode" throws an exception so we can get out of wherever we were.
     class LoadGameException : Exception
     {
@@ -39,8 +51,26 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
         Fast
     };
 
+    public enum GameMode
+    {
+        Classic,
+        Team,
+        OblivAeon
+    };
+
     class MainClass
     {
+        public static Dictionary<string, Assembly> ModAssemblies = new Dictionary<string, Assembly>
+        {
+            { "Workshopping", typeof(Workshopping.MigrantCoder.MigrantCoderCharacterCardController).Assembly } // replace with your own namespace and type
+        };
+
+        // LoadAllModContentOfKind() tries to guess the right identifiers - use this to override ones that don't fit
+        public static Dictionary<string, string> ModIdentifierOverrides = new Dictionary<string, string>
+        {
+            { "Cauldron.Phase", "Cauldron.PhaseVillain" }
+        };
+
         public static string GameNameToLoad = null;
 
         private static Game ConfigureGameForTesting()
@@ -129,6 +159,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             List<string> availableVillains = new List<string>(DeckDefinition.AvailableVillains);
             string villain = null;
             DeckDefinition villainDeck = null;
+            List<string> availableVillainTeams = new List<string>(DeckDefinition.AvailableVillainTeamMembers);
             List<DeckDefinition> villainTeam = new List<DeckDefinition>();
             List<string> availableEnvironments = new List<string>(DeckDefinition.AvailableEnvironments);
             string environment = null;
@@ -136,11 +167,32 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             List<string> heroes = new List<string>();
             List<string> availableHeroes = new List<string>(DeckDefinition.AvailableHeroes);
 
+            Dictionary<string, DeckDefinition> modHeroData = LoadAllModContentOfKind(DeckDefinition.DeckKind.Hero);
+            Dictionary<string, DeckDefinition> modVillainData = LoadAllModContentOfKind(DeckDefinition.DeckKind.Villain);
+            Dictionary<string, DeckDefinition> modVillainTeamData = LoadAllModContentOfKind(DeckDefinition.DeckKind.VillainTeam);
+            Dictionary<string, DeckDefinition> modEnvironmentData = LoadAllModContentOfKind(DeckDefinition.DeckKind.Environment);
+
+            List<string> fullHeroList = new List<string>();
+            List<string> fullVillainList = new List<string>();
+            List<string> fullVillainTeamList = new List<string>();
+            List<string> fullEnvironmentList = new List<string>();
+
+            fullHeroList.AddRange(availableHeroes);
+            fullHeroList.AddRange(modHeroData.Keys);
+
+            fullVillainList.AddRange(availableVillains);
+            fullVillainList.AddRange(modVillainData.Keys);
+
+            fullVillainTeamList.AddRange(availableVillainTeams);
+            fullVillainTeamList.AddRange(modVillainTeamData.Keys);
+
+            fullEnvironmentList.AddRange(availableEnvironments);
+            fullEnvironmentList.AddRange(modEnvironmentData.Keys);
+
             Dictionary<string, string> promoIdentifiers = new Dictionary<string, string>();
 
             IGenerator rng = new MT19937Generator();
-
-            bool villainTeamMode = false;
+            GameMode gameMode = GameMode.Classic;
 
             string input = GetInput("Do you want to try a random scenario? (y/n)");
             if (input != null && input.ToLower().StartsWith("y"))
@@ -150,56 +202,166 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                 while (!decided)
                 {
                     heroes.Clear();
-                    availableHeroes = new List<string>(DeckDefinition.AvailableHeroes);
+                    villainTeam.Clear();
+                    environments.Clear();
                     promoIdentifiers.Clear();
+                    fullHeroList.Clear();
+                    fullVillainList.Clear();
+                    fullVillainTeamList.Clear();
+                    fullEnvironmentList.Clear();
+
+                    availableHeroes = new List<string>(DeckDefinition.AvailableHeroes);
+                    availableVillainTeams = new List<string>(DeckDefinition.AvailableVillainTeamMembers);
+                    availableEnvironments = new List<string>(DeckDefinition.AvailableEnvironments);
+
+                    fullHeroList.AddRange(availableHeroes);
+                    fullHeroList.AddRange(modHeroData.Keys);
+
+                    fullVillainList.AddRange(availableVillains);
+                    fullVillainList.AddRange(modVillainData.Keys);
+
+                    fullVillainTeamList.AddRange(availableVillainTeams);
+                    fullVillainTeamList.AddRange(modVillainTeamData.Keys);
+
+                    fullEnvironmentList.AddRange(availableEnvironments);
+                    fullEnvironmentList.AddRange(modEnvironmentData.Keys);
 
                     // Choose a villain or villain(s)
-                    int villainIndex = rng.Next(availableVillains.Count);
-                    villain = availableVillains.ElementAt(villainIndex);
-                    villainDeck = DeckDefinitionCache.GetDeckDefinition(villain);
-                    var villainName = villainDeck.Name;
+                    int modeRNG = rng.Next(0, 5);
 
-                    // If there is a promo, maybe choose it
-                    var villainPromoDefinitions = villainDeck.PromoCardDefinitions.Where(d => DeckDefinition.AvailablePromos.Contains(d.PromoIdentifier));
-                    int villainPromoIndex = rng.Next(1 + villainPromoDefinitions.Count());
-                    if (villainPromoIndex > 0)
+                    if (modeRNG == 0)
                     {
-                        var promo = villainPromoDefinitions.ElementAt(villainPromoIndex - 1);
-                        promoIdentifiers[villain] = promo.PromoIdentifier;
-                        villainName = promo.PromoTitle;
+                        gameMode = GameMode.Team;
+                    }
+                    if (modeRNG == 1)
+                    {
+                        gameMode = GameMode.OblivAeon;
                     }
 
-                    Console.WriteLine(villainName + " threatens the Multiverse!");
+                    if (gameMode == GameMode.Classic)
+                    {
+                        int villainIndex = rng.Next(fullVillainList.Count);
+                        villain = fullVillainList.ElementAt(villainIndex);
+                        IEnumerable<CardDefinition> villainPromoDefinitions = null;
 
-                    if (villain != "OblivAeon")
+                        if (availableVillains.Contains(villain))
+                        {
+                            villainDeck = DeckDefinitionCache.GetDeckDefinition(villain);
+                            villainPromoDefinitions = villainDeck.PromoCardDefinitions.Where(d => DeckDefinition.AvailablePromos.Contains(d.PromoIdentifier));
+                        } else
+                        {
+                            villainDeck = modVillainData[villain];
+                            villainPromoDefinitions = villainDeck.PromoCardDefinitions;
+                        }
+                        var villainName = villainDeck.Name;
+
+                        // If there is a promo, maybe choose it
+                        int villainPromoIndex = rng.Next(1 + villainPromoDefinitions.Count());
+                        if (villainPromoIndex > 0)
+                        {
+                            var promo = villainPromoDefinitions.ElementAt(villainPromoIndex - 1);
+                            promoIdentifiers[villain] = promo.PromoIdentifier;
+                            villainName = promo.PromoTitle;
+                        }
+
+                        Console.WriteLine(villainName + " threatens the Multiverse!");
+                    }
+
+                    int numVillains = 1;
+                    if (gameMode == GameMode.Team)
+                    {
+                        numVillains = rng.Next(3, 6);
+                        while (villainTeam.Count < numVillains)
+                        {
+                            int index = rng.Next(fullVillainTeamList.Count);
+                            var identifier = fullVillainTeamList.ElementAt(index);
+                            DeckDefinition definition = null;
+                            if (availableVillainTeams.Contains(identifier))
+                            {
+                                definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            }
+                            else
+                            {
+                                //mod team villain
+                                definition = modVillainTeamData[identifier];
+                            }
+                            string name = definition.Name;
+                            villainTeam.Add(definition);
+                            fullVillainTeamList.Remove(identifier);
+                        }
+                        Console.WriteLine(villainTeam.Select(dd => dd.Name).ToCommaList(useWordAnd: true) + " threaten the Multiverse!");
+                    }
+
+                    if (gameMode == GameMode.OblivAeon)
+                    {
+                        villain = "OblivAeon";
+                        villainDeck = DeckDefinitionCache.GetDeckDefinition(villain);
+                        Console.WriteLine("OblivAeon threatens the Multiverse!");
+                    }
+
+                    if (gameMode != GameMode.OblivAeon)
                     {
                         // Choose an environment
-                        int environmentIndex = rng.Next(availableEnvironments.Count);
-                        environment = availableEnvironments.ElementAt(environmentIndex);
-                        Console.WriteLine(DeckDefinitionCache.GetDeckDefinition(environment).Name + " is the location of the conflict.");
+                        int environmentIndex = rng.Next(fullEnvironmentList.Count);
+                        environment = fullEnvironmentList.ElementAt(environmentIndex);
+                        string envName = "";
+                        if (availableEnvironments.Contains(environment))
+                        {
+                            envName = DeckDefinitionCache.GetDeckDefinition(environment).Name;
+                        }
+                        else
+                        {
+                            envName = modEnvironmentData[environment].Name;
+                        }
+                        Console.WriteLine(envName + " is the location of the conflict.");
                     }
                     else
                     {
                         for (int i = 0; i < 5; i++)
                         {
-                            int environmentIndex = rng.Next(availableEnvironments.Count);
-                            var currentEnvironment = DeckDefinitionCache.GetDeckDefinition(availableEnvironments.ElementAt(environmentIndex));
+                            int environmentIndex = rng.Next(fullEnvironmentList.Count);
+                            string environmentIdentifier = fullEnvironmentList.ElementAt(environmentIndex);
+                            DeckDefinition currentEnvironment = null;
+                            if (availableEnvironments.Contains(environmentIdentifier))
+                            {
+                                currentEnvironment = DeckDefinitionCache.GetDeckDefinition(environmentIdentifier);
+                            }
+                            else
+                            {
+                                currentEnvironment = modEnvironmentData[environmentIdentifier];
+                            }
                             environments.Add(currentEnvironment);
+                            fullEnvironmentList.RemoveAt(environmentIndex - 1);
                             Console.WriteLine(currentEnvironment.Name + " is one of the locations threatened by OblivAeon.");
                         }
                     }
 
                     // Choose heroes
                     int numHeroes = rng.Next(3, 6);
+                    if (gameMode == GameMode.Team)
+                    {
+                        numHeroes = numVillains;
+                    }
                     while (heroes.Count < numHeroes)
                     {
-                        int index = rng.Next(availableHeroes.Count);
-                        var identifier = availableHeroes.ElementAt(index);
-                        var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                        int index = rng.Next(fullHeroList.Count);
+                        var identifier = fullHeroList.ElementAt(index);
+                        DeckDefinition definition = null;
+                        IEnumerable<CardDefinition> promoDefinitions = null;
+                        if (availableHeroes.Contains(identifier))
+                        {
+                            definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            promoDefinitions = definition.PromoCardDefinitions.Where(d => DeckDefinition.AvailablePromos.Contains(d.PromoIdentifier));
+                        }
+                        else
+                        {
+                            definition = modHeroData[identifier];
+                            promoDefinitions = definition.PromoCardDefinitions;
+
+                        }
                         var name = definition.Name;
 
                         // If there is a promo, maybe choose it
-                        var promoDefinitions = definition.PromoCardDefinitions.Where(d => DeckDefinition.AvailablePromos.Contains(d.PromoIdentifier));
                         if (promoDefinitions.Count() > 0)
                         {
                             int promoIndex = rng.Next(1 + promoDefinitions.Count());
@@ -213,7 +375,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
                         Console.WriteLine(name + " joins the team!");
                         heroes.Add(identifier);
-                        availableHeroes.Remove(identifier);
+                        fullHeroList.Remove(identifier);
                     }
 
                     input = GetInput("Do you want to play this scenario? (y/n)");
@@ -227,7 +389,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             {
                 // Choose a villain
                 Console.WriteLine();
-                if (availableVillains.Count > 1)
+                if (fullVillainList.Count > 1)
                 {
                     while (villain == null && villainTeam.Count < 3)
                     {
@@ -235,10 +397,19 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
                         Console.WriteLine("0: Team Mode");
 
-                        for (int i = 0; i < availableVillains.Count; i++)
+                        for (int i = 0; i < fullVillainList.Count; i++)
                         {
-                            var identifier = availableVillains.ElementAt(i);
-                            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            var identifier = fullVillainList.ElementAt(i);
+                            DeckDefinition definition = null;
+                            if (availableVillains.Contains(identifier))
+                            {
+                                definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            }
+                            else
+                            {
+                                definition = modVillainData[identifier];
+                            }
+
                             var name = definition.Name;
                             Console.WriteLine((i + 1) + ": " + name);
 
@@ -252,7 +423,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                         {
                             if (input == "r")
                             {
-                                index = rng.Next(availableVillains.Count) + 1;
+                                index = rng.Next(fullVillainList.Count) + 1;
                             }
                             else
                             {
@@ -260,13 +431,22 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                             }
                         }
 
-                        if (index > 0 && index <= availableVillains.Count)
+                        if (index > 0 && index <= fullVillainList.Count)
                         {
-                            villain = availableVillains.ElementAt(index - 1);
+                            villain = fullVillainList.ElementAt(index - 1);
+                            IEnumerable<CardDefinition> promoDefinitions = new List<CardDefinition>();
+                            if (availableVillains.Contains(villain))
+                            {
+                                villainDeck = DeckDefinitionCache.GetDeckDefinition(villain);
+                                promoDefinitions = villainDeck.PromoCardDefinitions.Where(d => DeckDefinition.AvailablePromos.Contains(d.PromoIdentifier));
+                            }
+                            else
+                            {
+                                villainDeck = modVillainData[villain];
+                                promoDefinitions = villainDeck.PromoCardDefinitions.ToList();
+                            }
 
-                            villainDeck = DeckDefinitionCache.GetDeckDefinition(villain);
                             var name = villainDeck.Name;
-                            var promoDefinitions = villainDeck.PromoCardDefinitions.Where(d => DeckDefinition.AvailablePromos.Contains(d.PromoIdentifier));
                             if (promoDefinitions.Count() > 0)
                             {
                                 // Ask which version
@@ -308,21 +488,29 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                         }
                         else if (index == 0)
                         {
-                            List<string> availableVillainTeams = new List<string>(DeckDefinition.AvailableVillainTeamMembers);
+                            gameMode = GameMode.Team;
 
                             Console.WriteLine("\nChoose Villain Team Members:");
 
-                            while (villainTeam.Count < 5 && availableVillainTeams.Count > 0)
+                            while (villainTeam.Count < 5 && fullVillainTeamList.Count > 0)
                             {
                                 if (villainTeam.Count >= 3)
                                 {
                                     Console.WriteLine("0: No more villains!");
                                 }
 
-                                for (int i = 0; i < availableVillainTeams.Count; i++)
+                                for (int i = 0; i < fullVillainTeamList.Count; i++)
                                 {
-                                    var identifier = availableVillainTeams.ElementAt(i);
-                                    var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                                    var identifier = fullVillainTeamList.ElementAt(i);
+                                    DeckDefinition definition = null;
+                                    if (availableVillainTeams.Contains(identifier))
+                                    {
+                                        definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                                    }
+                                    else
+                                    {
+                                        definition = modVillainTeamData[identifier];
+                                    }
                                     var name = definition.Name;
                                     Console.WriteLine((i + 1) + ": " + name);
                                 }
@@ -333,7 +521,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                                 {
                                     if (input == "r")
                                     {
-                                        index = rng.Next(availableVillainTeams.Count) + 1;
+                                        index = rng.Next(fullVillainTeamList.Count) + 1;
                                     }
                                     else
                                     {
@@ -341,14 +529,21 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                                     }
                                 }
 
-                                if (index > 0 && index <= availableVillainTeams.Count)
+                                if (index > 0 && index <= fullVillainTeamList.Count)
                                 {
-                                    var id = availableVillainTeams.ElementAt(index - 1);
-                                    var definition = DeckDefinitionCache.GetDeckDefinition(id);
-
+                                    var id = fullVillainTeamList.ElementAt(index - 1);
+                                    DeckDefinition definition = null;
+                                    if (availableVillainTeams.Contains(id))
+                                    {
+                                        definition = DeckDefinitionCache.GetDeckDefinition(id);
+                                    }
+                                    else
+                                    {
+                                        definition = modVillainTeamData[id];
+                                    }
                                     Console.WriteLine(definition.Name + " seeks vengeance!\n");
                                     villainTeam.Add(definition);
-                                    availableVillainTeams.Remove(id);
+                                    fullVillainTeamList.Remove(id);
                                 }
                                 else if (index == 0)
                                 {
@@ -360,6 +555,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                         }
                         else if (input.ToLower() == "timcosing")
                         {
+                            gameMode = GameMode.OblivAeon;
                             villain = "OblivAeon";
                             villainDeck = DeckDefinitionCache.GetDeckDefinition(villain);
                             Console.WriteLine("OblivAeon threatens the Multiverse!");
@@ -367,20 +563,26 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                     }
                 }
 
-                villainTeamMode = villainTeam.Count >= 3;
-
                 // Choose an environment
                 Console.WriteLine();
-                if (availableEnvironments.Count > 1 && villain != "OblivAeon")
+                if (fullEnvironmentList.Count > 1 && gameMode != GameMode.OblivAeon)
                 {
                     while (environment == null)
                     {
                         Console.WriteLine("Choose Environment:");
 
-                        for (int i = 0; i < availableEnvironments.Count; i++)
+                        for (int i = 0; i < fullEnvironmentList.Count; i++)
                         {
-                            var identifier = availableEnvironments.ElementAt(i);
-                            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            var identifier = fullEnvironmentList.ElementAt(i);
+                            DeckDefinition definition = null;
+                            if (availableEnvironments.Contains(identifier))
+                            {
+                                definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            }
+                            else
+                            {
+                                definition = modEnvironmentData[identifier];
+                            }
                             var name = definition.Name;
                             Console.WriteLine((i + 1) + ": " + name);
                         }
@@ -391,7 +593,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                         {
                             if (input == "r")
                             {
-                                index = rng.Next(availableEnvironments.Count) + 1;
+                                index = rng.Next(fullEnvironmentList.Count) + 1;
                             }
                             else
                             {
@@ -399,26 +601,42 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                             }
                         }
 
-                        if (index > 0 && index <= availableEnvironments.Count)
+                        if (index > 0 && index <= fullEnvironmentList.Count)
                         {
-                            environment = availableEnvironments.ElementAt(index - 1);
-                            var definition = DeckDefinitionCache.GetDeckDefinition(environment);
+                            environment = fullEnvironmentList.ElementAt(index - 1);
+                            DeckDefinition definition = null;
+                            if (availableEnvironments.Contains(environment))
+                            {
+                                definition = DeckDefinitionCache.GetDeckDefinition(environment);
+                            }
+                            else
+                            {
+                                definition = modEnvironmentData[environment];
+                            }
                             var name = definition.Name;
                             Console.WriteLine(name + " is the location of the conflict.");
                         }
                     }
                 }
-                else if (villain == "OblivAeon")
+                else if (gameMode == GameMode.OblivAeon)
                 {
                     // We need to choose 5 environments for OblivAeon mode
                     while (environments.Count() < 5)
                     {
                         Console.WriteLine("Choose Environment:");
 
-                        for (int i = 0; i < availableEnvironments.Count; i++)
+                        for (int i = 0; i < fullEnvironmentList.Count; i++)
                         {
-                            var identifier = availableEnvironments.ElementAt(i);
-                            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            var identifier = fullEnvironmentList.ElementAt(i);
+                            DeckDefinition definition = null;
+                            if (availableEnvironments.Contains(identifier))
+                            {
+                                definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            }
+                            else
+                            {
+                                definition = modEnvironmentData[identifier];
+                            }
                             var name = definition.Name;
                             Console.WriteLine((i + 1) + ": " + name);
                         }
@@ -429,7 +647,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                         {
                             if (input == "r")
                             {
-                                index = rng.Next(availableEnvironments.Count) + 1;
+                                index = rng.Next(fullEnvironmentList.Count) + 1;
                             }
                             else
                             {
@@ -437,11 +655,20 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                             }
                         }
 
-                        if (index > 0 && index <= availableEnvironments.Count)
+                        if (index > 0 && index <= fullEnvironmentList.Count)
                         {
-                            var currentEnvironment = DeckDefinitionCache.GetDeckDefinition(availableEnvironments.ElementAt(index - 1));
+                            var identifier = fullEnvironmentList.ElementAt(index - 1);
+                            DeckDefinition currentEnvironment = null;
+                            if (availableEnvironments.Contains(identifier))
+                            {
+                                currentEnvironment = DeckDefinitionCache.GetDeckDefinition(fullEnvironmentList.ElementAt(index - 1));
+                            }
+                            else
+                            {
+                                currentEnvironment = modEnvironmentData[identifier];
+                            }
                             environments.Add(currentEnvironment);
-                            availableEnvironments.RemoveAt(index - 1);
+                            fullEnvironmentList.RemoveAt(index - 1);
                             Console.WriteLine(currentEnvironment.Name + " is one of the locations threatened by OblivAeon.");
                         }
                     }
@@ -453,15 +680,23 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                     Console.WriteLine();
                     Console.WriteLine("Choose Hero #" + (heroes.Count + 1) + ":");
 
-                    if (heroes.Count >= 3 && !villainTeamMode)
+                    if (heroes.Count >= 3 && gameMode != GameMode.Team)
                     {
                         Console.WriteLine("0: No more heroes!");
                     }
 
-                    for (int i = 0; i < availableHeroes.Count; i++)
+                    for (int i = 0; i < fullHeroList.Count; i++)
                     {
-                        var identifier = availableHeroes.ElementAt(i);
-                        var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                        var identifier = fullHeroList.ElementAt(i);
+                        DeckDefinition definition = null;
+                        if (availableHeroes.Contains(identifier))
+                        {
+                            definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                        }
+                        else
+                        {
+                            definition = modHeroData[identifier];
+                        }
                         var name = definition.Name;
                         Console.WriteLine((i + 1) + ": " + name);
                     }
@@ -472,7 +707,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                     {
                         if (input == "r")
                         {
-                            index = rng.Next(availableHeroes.Count) + 1;
+                            index = rng.Next(fullHeroList.Count) + 1;
                         }
                         else
                         {
@@ -485,14 +720,22 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                         // done
                         break;
                     }
-                    else if (index > 0 && index <= availableHeroes.Count)
+                    else if (index > 0 && index <= fullHeroList.Count)
                     {
-                        var identifier = availableHeroes.ElementAt(index - 1);
-
-                        var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                        var identifier = fullHeroList.ElementAt(index - 1);
+                        DeckDefinition definition = null;
+                        List<CardDefinition> promoDefinitions = null;
+                        if (availableHeroes.Contains(identifier))
+                        {
+                            definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+                            promoDefinitions = definition.PromoCardDefinitions.Where(d => d.ParentDeck.SupportsPromoSwapping || DeckDefinition.AvailablePromos.Contains(d.PromoIdentifier)).ToList();
+                        }
+                        else
+                        {
+                            definition = modHeroData[identifier];
+                            promoDefinitions = definition.PromoCardDefinitions.ToList();
+                        }
                         var name = definition.Name;
-
-                        var promoDefinitions = definition.PromoCardDefinitions.Where(d => d.ParentDeck.SupportsPromoSwapping || DeckDefinition.AvailablePromos.Contains(d.PromoIdentifier)).ToList();
 
                         if (promoDefinitions.Count() > 0)
                         {
@@ -505,24 +748,36 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                                 {
                                     Console.WriteLine("0: Done swapping out");
                                 }
-
-                                var note = "";
-                                if (definition.SupportsPromoSwapping)
+                                if (availableHeroes.Contains(identifier))
                                 {
-                                    note = " (choose all)";
-                                }
-
-                                Console.WriteLine("1: " + definition.Name + note);
-
-                                for (int i = 0; i < promoDefinitions.Count(); i++)
-                                {
-                                    var promo = promoDefinitions.ElementAt(i);
+                                    var note = "";
                                     if (definition.SupportsPromoSwapping)
                                     {
-                                        note = promo.IsRealCard ? " (swap individual)" : " (choose all)";
+                                        note = " (choose all)";
                                     }
 
-                                    Console.WriteLine((i + 2) + ": " + (promo.PromoTitle ?? promo.Title) + note);
+                                    Console.WriteLine("1: " + definition.Name + note);
+
+                                    for (int i = 0; i < promoDefinitions.Count(); i++)
+                                    {
+                                        var promo = promoDefinitions.ElementAt(i);
+                                        if (definition.SupportsPromoSwapping)
+                                        {
+                                            note = promo.IsRealCard ? " (swap individual)" : " (choose all)";
+                                        }
+
+                                        Console.WriteLine((i + 2) + ": " + (promo.PromoTitle ?? promo.Title) + note);
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("1: " + definition.Name);
+
+                                    for (int i = 0; i < promoDefinitions.Count(); i++)
+                                    {
+                                        var promo = promoDefinitions.ElementAt(i);
+                                        Console.WriteLine((i + 2) + ": " + (promo.PromoTitle ?? promo.Title));
+                                    }
                                 }
 
                                 input = GetInput("r: random choice");
@@ -549,7 +804,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                                         var promo = promoDefinitions.ElementAtOrDefault(index - 2);
                                         if (promo != null)
                                         {
-                                            if (definition.SupportsPromoSwapping)
+                                            if (availableHeroes.Contains(identifier) && definition.SupportsPromoSwapping)
                                             {
                                                 if (!promo.IsRealCard)
                                                 {
@@ -603,9 +858,9 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
                         Console.WriteLine(name + " joins the team!");
                         heroes.Add(identifier);
-                        availableHeroes.Remove(identifier);
+                        fullHeroList.Remove(identifier);
 
-                        if (villainTeamMode && villainTeam.Count == heroes.Count)
+                        if (gameMode == GameMode.Team && villainTeam.Count == heroes.Count)
                         {
                             Console.WriteLine("All heroes have been selected!");
                             break;
@@ -662,7 +917,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
             Console.WriteLine();
             var identifiers = new List<string>();
-            if (!villainTeamMode)
+            if (gameMode != GameMode.Team)
             {
                 identifiers.Add(villain);
                 identifiers.AddRange(heroes);
@@ -677,7 +932,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                 }
             }
 
-            if (villain != "OblivAeon")
+            if (gameMode != GameMode.OblivAeon)
             {
                 identifiers.Add(environment);
             }
@@ -690,7 +945,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             var advancedInfo = "";
             var challengeInfo = "";
 
-            if (!villainTeamMode)
+            if (gameMode != GameMode.Team)
             {
                 var card = tempGame.FindTurnTaker(villain).CharacterCard;
                 advancedInfo = GetAdvancedString(tempGame, card, true);
@@ -1009,6 +1264,8 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
         public static void Main(string[] args)
         {
+            LoadModAssemblies();
+
             bool interactiveMode = args.Contains("-i");
             if (interactiveMode)
             {
@@ -1224,9 +1481,24 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             }
         }
 
+        private static void LoadModAssemblies()
+        {
+            if (NamespaceList is null)
+            {
+                NamespaceList = new List<string>();
+            }
+
+            foreach (var kvp in ModAssemblies)
+            {
+                ModHelper.AddAssembly(kvp.Key, kvp.Value);
+                NamespaceList.Add(kvp.Key);
+            }
+        }
+
         bool UserFriendly = false;
         bool Verbose = false;
         bool EnforceRules = false;
+        static List<string> NamespaceList { get; set; }
 
         GameController GameController { get; set; }
 
@@ -1419,19 +1691,35 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
             // Find all the playable hero character cards in the box (including other sizes of Sky-Scraper)
             var availableHeroes = DeckDefinition.AvailableHeroes;
+            Dictionary<string, DeckDefinition> modHeroData = LoadAllModContentOfKind(DeckDefinition.DeckKind.Hero);
+            List<string> fullHeroList = new List<string>();
+
+            fullHeroList.AddRange(availableHeroes);
+            fullHeroList.AddRange(modHeroData.Keys);
+            DeckDefinition heroDefinition = null;
+
             foreach (var heroTurnTaker in availableHeroes.Where(turnTakerCriteria))
             {
-                var heroDefinition = DeckDefinitionCache.GetDeckDefinition(heroTurnTaker);
+                if (availableHeroes.Contains(heroTurnTaker))
+                {
+                    heroDefinition = DeckDefinitionCache.GetDeckDefinition(heroTurnTaker);
+                }
+                else
+                {
+                    heroDefinition = modHeroData[heroTurnTaker];
+                }
 
-                foreach (var cardDef in heroDefinition.CardDefinitions.Concat(heroDefinition.PromoCardDefinitions))
+                var defs = heroDefinition.GetAllCardDefinitions();
+
+                foreach (var cardDef in defs)
                 {
                     // Ignore non-real cards (Sentinels Intructions) and cards that do not start in play (Sky-Scraper sizes)
                     if (cardDef.IsCharacter
                         && cardDef.IsRealCard
-                        && identifierCriteria(cardDef.PromoIdentifierOrIdentifier))
+                        && identifierCriteria(cardDef.QualifiedPromoIdentifierOrIdentifier))
                     {
                         // It's in the box!
-                        var kvp = new KeyValuePair<string, string>(heroTurnTaker, cardDef.PromoIdentifierOrIdentifier);
+                        var kvp = new KeyValuePair<string, string>(heroTurnTaker, cardDef.QualifiedPromoIdentifierOrIdentifier);
                         //Debug.LogFormat("In the box {0}: {1}", result.Count, kvp.Value);
                         result.Add(kvp);
                     }
@@ -1439,6 +1727,55 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             }
 
             return result;
+        }
+
+        private static Dictionary<string, DeckDefinition> LoadAllModContentOfKind(DeckDefinition.DeckKind deckKind)
+        {
+            Dictionary<string, DeckDefinition> modsDictionary = new Dictionary<string, DeckDefinition>();
+            foreach (string space in NamespaceList)
+            {
+                Assembly assembly = ModHelper.GetAssemblyForNamespace(space);
+                if (assembly == null) continue;
+
+                foreach (var res in assembly.GetManifestResourceNames())
+                {
+                    var stream = assembly.GetManifestResourceStream(res);
+                    if (stream is null) continue;
+                    JSONObject jsonObject;
+                    string text;
+                    using (var sr = new StreamReader(stream))
+                    {
+                        text = sr.ReadToEnd();
+                    }
+                    if (text is null) continue;
+                    jsonObject = JSONObject.Parse(text);
+                    if (jsonObject is null) continue;
+                    string name = jsonObject.GetString("name");
+                    TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+                    name = myTI.ToTitleCase(name);
+                    name = name.Replace(" ", string.Empty);
+                    name = Regex.Replace(name, "[^a-zA-Z0-9]", String.Empty);
+                    var kind = jsonObject.GetString("kind");
+                    if (kind != null && kind != deckKind.ToString())
+                        continue;
+
+                    string qualifiedIdentifier = $"{space}.{name}";
+                    if (kind == DeckDefinition.DeckKind.VillainTeam.ToString())
+                    {
+                        qualifiedIdentifier += "Team";
+                    }
+
+                    // Sometimes we don't guess right.
+                    if (ModIdentifierOverrides.ContainsKey(qualifiedIdentifier))
+                    {
+                        qualifiedIdentifier = ModIdentifierOverrides[qualifiedIdentifier];
+                    }
+
+                    jsonObject.Add("identifier", new JSONValue(qualifiedIdentifier));
+                    modsDictionary.Add(qualifiedIdentifier, new DeckDefinition(jsonObject, space));
+                }
+            }
+            return modsDictionary;
         }
 
         public void TeardownGameController()
