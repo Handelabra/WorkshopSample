@@ -22,7 +22,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 {
     /*
     * In order to use the Console version of Sentinels, you must first register your assemblies:
-    *    Find the LoadModAssemblies() function and add your assembly to the assembly list and your namespace to the namespace list
+    *    Find the MainClass.ModAssemblies field just below and replace the information with your namespace & type
     * 
     * You can play the game in one of two ways, either interactive (basically the normal game) or testing (where you have complete control over everything
     *  To toggle between the two, add the -i parameter to the project properties (in the Debug tab)
@@ -60,6 +60,17 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
     class MainClass
     {
+        public static Dictionary<string, Assembly> ModAssemblies = new Dictionary<string, Assembly>
+        {
+            { "Workshopping", typeof(Workshopping.MigrantCoder.MigrantCoderCharacterCardController).Assembly } // replace with your own namespace and type
+        };
+
+        // LoadAllModContentOfKind() tries to guess the right identifiers - use this to override ones that don't fit
+        public static Dictionary<string, string> ModIdentifierOverrides = new Dictionary<string, string>
+        {
+            { "Cauldron.Phase", "Cauldron.PhaseVillain" }
+        };
+
         public static string GameNameToLoad = null;
 
         private static Game ConfigureGameForTesting()
@@ -1476,11 +1487,12 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             {
                 NamespaceList = new List<string>();
             }
-            //register assemblies
-            ModHelper.AddAssembly("Workshopping", typeof(Workshopping.MigrantCoder.MigrantCoderCharacterCardController).Assembly);
 
-            //add to namespace lists
-            NamespaceList.Add("Workshopping");
+            foreach (var kvp in ModAssemblies)
+            {
+                ModHelper.AddAssembly(kvp.Key, kvp.Value);
+                NamespaceList.Add(kvp.Key);
+            }
         }
 
         bool UserFriendly = false;
@@ -1753,8 +1765,11 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                         qualifiedIdentifier += "Team";
                     }
 
-                    //add exception for Cauldron's Phase - otherwise errors will occur
-                    qualifiedIdentifier = qualifiedIdentifier == "Cauldron.Phase" ? "Cauldron.PhaseVillain" : qualifiedIdentifier;
+                    // Sometimes we don't guess right.
+                    if (ModIdentifierOverrides.ContainsKey(qualifiedIdentifier))
+                    {
+                        qualifiedIdentifier = ModIdentifierOverrides[qualifiedIdentifier];
+                    }
 
                     jsonObject.Add("identifier", new JSONValue(qualifiedIdentifier));
                     modsDictionary.Add(qualifiedIdentifier, new DeckDefinition(jsonObject, space));
