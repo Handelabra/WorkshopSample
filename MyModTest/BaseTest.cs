@@ -934,7 +934,7 @@ namespace Handelabra.Sentinels.UnitTest
                                     selectCardDecision.SelectedCard = selectCardDecision.Choices.FirstOrDefault();
                                 }
 
-                                if (selectCardDecision is SelectTargetDecision && this.ShowDamagePreview && selectCardDecision.SelectedCard != null)
+                                if (selectCardDecision is SelectTargetDecision && this.ShowDamagePreview && selectCardDecision.SelectedCard != null && selectCardDecision.SelectionType != SelectionType.SelectTargetNoDamage)
                                 {
                                     SelectTargetDecision selectTarget = selectCardDecision as SelectTargetDecision;
                                     Console.WriteLine("--- BEGIN PREVIEW ---");
