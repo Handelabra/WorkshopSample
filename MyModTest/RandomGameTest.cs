@@ -99,6 +99,12 @@ namespace Handelabra.Sentinels.UnitTest
                     heroName = heroInfo.FirstOrDefault().Value;
                 }
 
+                if (overrideVariants.ContainsKey(hero))
+                {
+                    var heroInfo = GetSpecificVariant(hero, overrideVariants[hero], promoIdentifiers);
+                    heroName = heroInfo.Values.FirstOrDefault();
+                }
+
                 Console.WriteLine(heroName + " joins the team!");
                 heroes.Add(hero);
                 heroesLeft.Remove(hero);
@@ -157,11 +163,11 @@ namespace Handelabra.Sentinels.UnitTest
             return GetRandomVariant(villain, promoIdentifiers);
         }
 
-                private Dictionary<string, string> GetRandomVariant(string identifier, Dictionary<string, string> promoIdentifiers)
+        private Dictionary<string, string> GetRandomVariant(string identifier, Dictionary<string, string> promoIdentifiers)
         {
             var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
             var promosToCheck = new List<CardDefinition>();
-            promosToCheck.AddRange(definition.PromoCardDefinitions);
+            promosToCheck.AddRange(definition.PromoCardDefinitions.Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
             promosToCheck.AddRange(ModHelper.GetAllPromoDefinitions().Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
 
             var name = definition.Name;
@@ -172,8 +178,21 @@ namespace Handelabra.Sentinels.UnitTest
             if (promoIndex > 0)
             {
                 var promo = promosToCheck.ElementAt(promoIndex - 1);
-                promoIdentifiers[identifier] = promo.PromoIdentifier;
                 name = promo.PromoTitle;
+                string ns = definition.Namespace != promo.Namespace ? $"{promo.Namespace}." : "";
+
+                if (identifier != "TheSentinels")
+                {
+                    promoIdentifiers[identifier] = ns + promo.PromoIdentifier;
+                }
+                else
+                {
+                    promoIdentifiers["TheSentinelsInstructions"] = ns + promo.PromoIdentifier;
+                    promoIdentifiers["DrMedicoCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(0);
+                    promoIdentifiers["MainstayCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(1);
+                    promoIdentifiers["TheIdealistCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(2);
+                    promoIdentifiers["WritheCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(3);
+                }
             }
 
             return new Dictionary<string, string> { { identifier, name } };
@@ -183,7 +202,7 @@ namespace Handelabra.Sentinels.UnitTest
         {
             var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
             var promosToCheck = new List<CardDefinition>();
-            promosToCheck.AddRange(definition.PromoCardDefinitions);
+            promosToCheck.AddRange(definition.PromoCardDefinitions.Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
             promosToCheck.AddRange(ModHelper.GetAllPromoDefinitions().Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
 
             var name = definition.Name;
@@ -197,8 +216,21 @@ namespace Handelabra.Sentinels.UnitTest
                 Assert.Fail($"ERROR: Cannot find variant {promoIdentifier} for {identifier}.");
             }
 
-            promoIdentifiers[identifier] = promo.PromoIdentifier;
             name = promo.PromoTitle;
+            string ns = definition.Namespace != promo.Namespace ? $"{promo.Namespace}." : "";
+
+            if (identifier != "TheSentinels")
+            {
+                promoIdentifiers[identifier] = ns + promo.PromoIdentifier;
+            }
+            else
+            {
+                promoIdentifiers["TheSentinelsInstructions"] = ns + promo.PromoIdentifier;
+                promoIdentifiers["DrMedicoCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(0);
+                promoIdentifiers["MainstayCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(1);
+                promoIdentifiers["TheIdealistCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(2);
+                promoIdentifiers["WritheCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(3);
+            }
 
             return new Dictionary<string, string> { { identifier, name } };
         }
