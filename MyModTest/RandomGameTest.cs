@@ -21,9 +21,10 @@ namespace Handelabra.Sentinels.UnitTest
         protected IEnumerable<string> PreferredCardsToPlay = null;
 
         protected GameController SetupRandomGameController(bool reasonable, IEnumerable<string> availableHeroes = null, IEnumerable<string> availableVillains = null, IEnumerable<string> availableEnvironments = null,
-            string overrideEnvironment = null, List<string> useHeroes = null)
+            string overrideVillain = null, string overrideEnvironment = null, List<string> useHeroes = null, bool randomizeUseHeroes = true, Dictionary<string, string> overrideVariants = null)
         {
             string environment = overrideEnvironment;
+            string villain = overrideVillain;
             var heroes = new List<string>();
             var promoIdentifiers = new Dictionary<string, string>();
 
@@ -42,9 +43,30 @@ namespace Handelabra.Sentinels.UnitTest
                 availableEnvironments = DeckDefinition.AvailableEnvironments;
             }
 
-            var villainInfo = GetRandomVillain(availableVillains, promoIdentifiers);
-            var villain = villainInfo.Keys.FirstOrDefault();
-            var villainName = villainInfo.Values.FirstOrDefault();
+            if (overrideVariants == null)
+            {
+                overrideVariants = new Dictionary<string, string>();
+            }
+
+            // Choose a villain
+            var villainName = "";
+            if (villain != null)
+            {
+                var villainInfo = GetRandomVariant(villain, promoIdentifiers);
+                villainName = villainInfo.Values.FirstOrDefault();
+            }
+            else
+            {
+                var villainInfo = GetRandomVillain(availableVillains, promoIdentifiers);
+                villain = villainInfo.Keys.FirstOrDefault();
+                villainName = villainInfo.Values.FirstOrDefault();
+            }
+
+            if (overrideVariants.ContainsKey(villain))
+            {
+                var villainInfo = GetSpecificVariant(villain, overrideVariants[villain], promoIdentifiers);
+                villainName = villainInfo.Values.FirstOrDefault();
+            }
 
             Console.WriteLine(villainName + " threatens the Multiverse!");
 
@@ -61,25 +83,25 @@ namespace Handelabra.Sentinels.UnitTest
             int numHeroes = GetRandomNumber(3, 6);
             while (heroes.Count < numHeroes)
             {
-                string identifier = "";
-                string name = "";
+                string hero = "";
+                string heroName = "";
                 if (useHeroes != null && useHeroes.Count() > 0)
                 {
-                    identifier = useHeroes.First();
-                    var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
-                    name = definition.Name;
-                    useHeroes.Remove(identifier);
+                    var heroInfo = randomizeUseHeroes ? GetRandomHero(useHeroes, promoIdentifiers) : GetRandomVariant(useHeroes.First(), promoIdentifiers);
+                    hero = heroInfo.FirstOrDefault().Key;
+                    heroName = heroInfo.FirstOrDefault().Value;
+                    useHeroes.Remove(hero);
                 }
                 else
                 {
                     var heroInfo = GetRandomHero(heroesLeft, promoIdentifiers);
-                    identifier = heroInfo.FirstOrDefault().Key;
-                    name = heroInfo.FirstOrDefault().Value;
+                    hero = heroInfo.FirstOrDefault().Key;
+                    heroName = heroInfo.FirstOrDefault().Value;
                 }
 
-                Console.WriteLine(name + " joins the team!");
-                heroes.Add(identifier);
-                heroesLeft.Remove(identifier);
+                Console.WriteLine(heroName + " joins the team!");
+                heroes.Add(hero);
+                heroesLeft.Remove(hero);
             }
 
             bool advanced = (GetRandomNumber(2) == 1);
@@ -116,21 +138,9 @@ namespace Handelabra.Sentinels.UnitTest
         private Dictionary<string, string> GetRandomHero(List<string> availableHeroes, Dictionary<string, string> promoIdentifiers)
         {
             int index = GetRandomNumber(availableHeroes.Count);
-            var identifier = availableHeroes.ElementAt(index);
-            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+            string hero = availableHeroes.ElementAt(index);
 
-            // If there is a promo, maybe choose it
-            int promoIndex = GetRandomNumber(1 + definition.PromoCardDefinitions.Count());
-            string name = definition.Name;
-
-            if (promoIndex > 0)
-            {
-                var promo = definition.PromoCardDefinitions.ElementAt(promoIndex - 1);
-                promoIdentifiers[identifier] = promo.PromoIdentifier;
-                name = promo.PromoTitle;
-            }
-
-            return new Dictionary<string, string> { { identifier, name } };
+            return GetRandomVariant(hero, promoIdentifiers);
         }
 
         private string GetRandomEnvironment(IEnumerable<string> availableEnvironments)
@@ -141,24 +151,56 @@ namespace Handelabra.Sentinels.UnitTest
 
         private Dictionary<string, string> GetRandomVillain(IEnumerable<string> availableVillains, Dictionary<string, string> promoIdentifiers)
         {
-            string villain = null;
+            int index = GetRandomNumber(availableVillains.Count());
+            string villain = availableVillains.ElementAt(index);
 
-            // Choose a villain
-            int villainIndex = GetRandomNumber(availableVillains.Count());
-            villain = availableVillains.ElementAt(villainIndex);
-            var villainDefinition = DeckDefinitionCache.GetDeckDefinition(villain);
-            var villainName = villainDefinition.Name;
+            return GetRandomVariant(villain, promoIdentifiers);
+        }
+
+                private Dictionary<string, string> GetRandomVariant(string identifier, Dictionary<string, string> promoIdentifiers)
+        {
+            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+            var promosToCheck = new List<CardDefinition>();
+            promosToCheck.AddRange(definition.PromoCardDefinitions);
+            promosToCheck.AddRange(ModHelper.GetAllPromoDefinitions().Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
+
+            var name = definition.Name;
 
             // If there is a promo, maybe choose it
-            int villainPromoIndex = GetRandomNumber(1 + villainDefinition.PromoCardDefinitions.Count());
-            if (villainPromoIndex > 0)
+            int promoIndex = GetRandomNumber(1 + promosToCheck.Count());
+
+            if (promoIndex > 0)
             {
-                var promo = villainDefinition.PromoCardDefinitions.ElementAt(villainPromoIndex - 1);
-                promoIdentifiers[villain] = promo.PromoIdentifier;
-                villainName = promo.PromoTitle;
+                var promo = promosToCheck.ElementAt(promoIndex - 1);
+                promoIdentifiers[identifier] = promo.PromoIdentifier;
+                name = promo.PromoTitle;
             }
 
-            return new Dictionary<string, string> { { villain, villainName } };
+            return new Dictionary<string, string> { { identifier, name } };
+        }
+
+        private Dictionary<string, string> GetSpecificVariant(string identifier, string promoIdentifier, Dictionary<string, string> promoIdentifiers)
+        {
+            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+            var promosToCheck = new List<CardDefinition>();
+            promosToCheck.AddRange(definition.PromoCardDefinitions);
+            promosToCheck.AddRange(ModHelper.GetAllPromoDefinitions().Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
+
+            var name = definition.Name;
+
+            var promo = promosToCheck.FirstOrDefault((CardDefinition cd) => cd.PromoIdentifier == promoIdentifier);
+
+            if (promo == null)
+            {
+                // Could probably do better error handling here, like defaulting back to the randomly-chosen variant
+                // Since the tester specified a variant, or something went wrong, should let them know to fix
+                Assert.Fail($"ERROR: Cannot find variant {promoIdentifier} for {identifier}.");
+            }
+
+            promoIdentifiers[identifier] = promo.PromoIdentifier;
+            name = promo.PromoTitle;
+
+            return new Dictionary<string, string> { { identifier, name } };
         }
 
         protected void RunParticularGame(IEnumerable<string> turnTakers, bool advanced, IDictionary<string, string> promos, int seed, bool reasonable)
