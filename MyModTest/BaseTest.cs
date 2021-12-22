@@ -4914,7 +4914,7 @@ namespace Handelabra.Sentinels.UnitTest
                 {
                     var dllpath = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
                     path = Path.GetDirectoryName(dllpath.Replace("file://", "")).Replace("\\D:", "D:").Replace("\\C:", "C:");
-                    path = Path.Combine(path, "..", "..", "DataFiles", name);
+                    path = new string[] { path, "..", "..", "DataFiles", name }.Aggregate((x, y) => Path.Combine(x, y));
                 }
                 else if (addTempPath)
                 {
@@ -4951,7 +4951,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                 var dllpath = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
                 var path = Path.GetDirectoryName(dllpath.Replace("file://", "")).Replace("\\D:", "D:").Replace("\\C:", "C:");
-                path = Path.Combine(path, "..", "..", "DataFiles", name);
+                path = new string[] { path, "..", "..", "DataFiles", name }.Aggregate((x, y) => Path.Combine(x, y));
                 var savedGame = LoadGamePath(path);
 
                 if (savedGame != null)
