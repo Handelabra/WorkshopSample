@@ -49,7 +49,10 @@
       ],
       "difficulty": 1,
       "openingLines": {
-        "default": "I'm bad! I'm bad! You know it, you know."
+        "default": "I'm bad! I'm bad! You know it, you know.",
+        "WorkshopTestA.AngryTaxPayerCharacter": "You are Angry Tax-Payer!",
+        "WorkshopTestA.HappyTaxPayerCharacter": "You are Happy Tax-Payer!",
+        "WorkshopTestB.MollifiedTaxPayerCharacter": "You are Mollified Tax-Payer!"
       }
     },
     {
@@ -158,7 +161,10 @@
       ],
       "difficulty": 2,
       "openingLines": {
-        "default": "The other one isn't really bad. I'm the baddest!"
+        "default": "The other one isn't really bad. I'm the baddest!",
+        "WorkshopTestA.AngryTaxPayerCharacter": "Real: You are Angry Tax-Payer!",
+        "WorkshopTestA.HappyTaxPayerCharacter": "Real: You are Happy Tax-Payer!",
+        "WorkshopTestB.MollifiedTaxPayerCharacter": "Real: You are Mollified Tax-Payer!"
       }
     }
   ]
