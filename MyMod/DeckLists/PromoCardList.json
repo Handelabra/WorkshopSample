@@ -355,7 +355,7 @@
       "hitpointsColor": "F6AD41",
       "character": true,
       "powers": [
-        "{Cricket} deals 1 target 10 irreducible energy damage. If damage is dealt this way, destroy {Cricket}."
+        "{Cricket} deals 1 target 10 irreducible energy damage. If damage is dealt this way, destroy {Cricket}. Also, here's an icon: {Rad}"
       ],
       "hitpoints": 25,
       "nemesisIdentifiers": [
