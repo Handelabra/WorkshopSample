@@ -30,11 +30,15 @@
       "count": 5,
       "title": "Spam Bot",
       "body": [
-        "At the end of the environment turn, this card deals the non-environment target with the second highest HP {H-1} psychic damage."
+        "At the end of the environment turn, this card deals the non-environment target with the second highest HP {H - 1} psychic damage."
       ],
       "icons": [
         "EndOfTurnAction",
         "DealDamagePsychic"
+      ],
+      "nemesisIdentifiers": [
+        "Workshopping.MigrantCoder",
+        "Legacy"
       ],
       "keywords": [
         "chat"
