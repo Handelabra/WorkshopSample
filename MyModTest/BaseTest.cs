@@ -380,6 +380,8 @@ namespace Handelabra.Sentinels.UnitTest
             DecisionSelectFromBoxIndex = 0;
             DecisionNextSelectionType = null;
             DecisionDoNotSelectLocation = false;
+            DecisionRedirectTargets = null;
+            DecisionRedirectTargetsIndex = 0;
         }
 
         private static bool IsOnTeamCity()
