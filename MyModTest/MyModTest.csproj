@@ -6,6 +6,7 @@
     <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -33,7 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.3.12.0\lib\net35\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="EngineCommon">
       <HintPath>..\..\..\Library\Application Support\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels.app\Contents\Resources\Data\Managed\EngineCommon.dll</HintPath>
@@ -42,7 +43,7 @@
       <HintPath>..\..\Handelabra\SentinelsEngine\SentinelsEngine\bin\Debug\SentinelsEngine.dll</HintPath>
     </Reference>
     <Reference Include="Troschuetz.Random">
-      <HintPath>..\packages\Troschuetz.Random.5.0.1\lib\net40\Troschuetz.Random.dll</HintPath>
+      <HintPath>..\packages\Troschuetz.Random.5.0.1\lib\net35\Troschuetz.Random.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

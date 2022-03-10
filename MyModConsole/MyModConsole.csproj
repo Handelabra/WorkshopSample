@@ -2,6 +2,7 @@
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,7 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Troschuetz.Random">
-      <HintPath>..\packages\Troschuetz.Random.5.0.1\lib\net472\Troschuetz.Random.dll</HintPath>
+      <HintPath>..\packages\Troschuetz.Random.5.0.1\lib\net35\Troschuetz.Random.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
