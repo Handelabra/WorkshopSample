@@ -2,15 +2,15 @@
 
 "card-keywords-full.png":
 {
-	"frame": {"x":0,"y":0,"w":520,"h":527},
+	"frame": {"x":0,"y":0,"w":529,"h":528},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":520,"h":527},
-	"sourceSize": {"w":520,"h":527}
+	"spriteSourceSize": {"x":0,"y":0,"w":529,"h":528},
+	"sourceSize": {"w":529,"h":528}
 },
 "Whatever.png":
 {
-	"frame": {"x":523,"y":0,"w":70,"h":70},
+	"frame": {"x":532,"y":0,"w":70,"h":70},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":70},
@@ -23,6 +23,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:2a690cab200860d86f5e615eb7566f82:b1f09c04da4d5a533686709a7672350e:78a8fe050ee96964a4e5b33f95cb8cbd$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f3df40370822a34db87ecb5837abcfcf:44c198acbd23e93b614d06135ae4cdb3:78a8fe050ee96964a4e5b33f95cb8cbd$"
 }
 }

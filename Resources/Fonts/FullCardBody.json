@@ -2,15 +2,15 @@
 
 "cardbodies_full.png":
 {
-	"frame": {"x":0,"y":0,"w":391,"h":342},
+	"frame": {"x":0,"y":0,"w":401,"h":344},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":342},
-	"sourceSize": {"w":391,"h":342}
+	"spriteSourceSize": {"x":0,"y":0,"w":401,"h":344},
+	"sourceSize": {"w":401,"h":344}
 },
 "Whatever.png":
 {
-	"frame": {"x":394,"y":0,"w":45,"h":45},
+	"frame": {"x":404,"y":0,"w":45,"h":45},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":45,"h":45},
@@ -23,6 +23,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:c05458277ab6c5dbe7a81be83a091deb:698f94e25a0817bbae1e0e0847eb0823:89c55f552016e3f6c8c145d926629d90$"
+	"smartupdate": "$TexturePacker:SmartUpdate:11c2944a36df6bda9ab065cbdee41533:4ed3f2d6e6271ce7a084f8ac37f72428:89c55f552016e3f6c8c145d926629d90$"
 }
 }

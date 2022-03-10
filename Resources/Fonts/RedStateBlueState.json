@@ -2,31 +2,31 @@
 
 "RedStateBlueState-clean96.png":
 {
-	"frame": {"x":0,"y":0,"w":714,"h":721},
+	"frame": {"x":67,"y":0,"w":755,"h":705},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":714,"h":721},
-	"sourceSize": {"w":714,"h":721}
+	"spriteSourceSize": {"x":0,"y":0,"w":755,"h":705},
+	"sourceSize": {"w":755,"h":705}
 },
 "RedStateBlueStateBold-clean96.png":
 {
-	"frame": {"x":717,"y":0,"w":842,"h":767},
+	"frame": {"x":0,"y":729,"w":891,"h":767},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":842,"h":767},
-	"sourceSize": {"w":842,"h":767}
+	"spriteSourceSize": {"x":0,"y":0,"w":891,"h":767},
+	"sourceSize": {"w":891,"h":767}
 },
 "RedStateBlueStateItalic-clean96.png":
 {
-	"frame": {"x":0,"y":770,"w":786,"h":716},
+	"frame": {"x":825,"y":0,"w":784,"h":726},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":786,"h":716},
-	"sourceSize": {"w":786,"h":716}
+	"spriteSourceSize": {"x":0,"y":0,"w":784,"h":726},
+	"sourceSize": {"w":784,"h":726}
 },
 "Whatever.png":
 {
-	"frame": {"x":789,"y":770,"w":64,"h":64},
+	"frame": {"x":0,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -39,6 +39,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ecb151b64c8c79cab51bcb018879ba80:fdc8101f7838f3658193aa79064ee550:139c651ab45bcb63c46076fcb22396a4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:4ad1025c5f783075b5245a4fe23661fc:934987be6d262776b519dbecc98069ea:139c651ab45bcb63c46076fcb22396a4$"
 }
 }
