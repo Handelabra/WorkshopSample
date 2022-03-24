@@ -684,114 +684,114 @@ namespace Handelabra.Sentinels.UnitTest
         }
 
         // Example test implementations follow
-        /*
-                [Test]
-                public void TestRandomGameToCompletion()
+/*
+        [Test]
+        public void TestRandomGameToCompletion()
+        {
+            //for (int i = 0; i < 200; i++)
+            {
+                GameController gameController = SetupRandomGameController(false);
+                RunGame(gameController);
+            }
+        }
+
+        [Test]
+        public void TestSomewhatReasonableGameToCompletion()
+        {
+            GameController gameController = SetupRandomGameController(true);
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestSkyScraper()
+        {
+            //for (int i = 0; i < 10; i++)
+            {
+                GameController gameController = SetupRandomGameController(false, useHeroes: new List<string> { "SkyScraper" });
+                RunGame(gameController);
+            }
+        }
+
+        [Test]
+        public void TestTachyon_SupersonicResponse()
+        {
+            //for (int i = 0; i < 1000; i++)
+            {
+                SetupRandomGameController(true, useHeroes: new List<string> { "Tachyon" });
+                PreferredCardsToPlay = new string[] { "SupersonicResponse", "FleetOfFoot", "HUDGoggles", "PushingTheLimits" };
+                RunGame(this.GameController);
+            }
+        }
+
+        [Test]
+        public void TestCelestialTribunal()
+        {
+            //for (int i = 0; i < 10; i++)
+            {
+                GameController gameController = SetupRandomGameController(true, overrideEnvironment:"TheCelestialTribunal");
+                RunGame(gameController);
+            }
+        }
+
+        [Test]
+        public void TestRaVersusTheEnnead()
+        {
+            GameController gameController = SetupGameController(new string[] { "TheEnnead", "Ra", "Legacy", "TheWraith", "TombOfAnubis" });
+            gameController.OnMakeDecisions -= MakeDecisions;
+            gameController.OnMakeDecisions += MakeSomewhatReasonableDecisions;
+
+            bool expectNemesis = false;
+            bool nemesisApplied = false;
+            gameController.OnWillPerformAction += action =>
+            {
+                // If it is a deal damage action between the Ennead and Ra, make sure there is some nemesis damage going on.
+                if (action is DealDamageAction)
                 {
-                    //for (int i = 0; i < 200; i++)
+                    var dd = action as DealDamageAction;
+                    if (IsRaVersusTheEnnead(dd))
                     {
-                        GameController gameController = SetupRandomGameController(false);
-                        RunGame(gameController);
+                        // We expect to see some nemesis damage before the end.
+                        expectNemesis = true;
+                    }
+                }
+                else if (action is IncreaseDamageAction)
+                {
+                    var increase = action as IncreaseDamageAction;
+                    if (increase.IsNemesisEffect)
+                    {
+                        nemesisApplied = true;
                     }
                 }
 
-                [Test]
-                public void TestSomewhatReasonableGameToCompletion()
-                {
-                    GameController gameController = SetupRandomGameController(true);
-                    RunGame(gameController);
-                }
+                return DoNothing();
+            };
 
-                [Test]
-                public void TestSkyScraper()
+            gameController.OnDidPerformAction += action =>
+            {
+                // If we expected nemesis, assert that it was applied.
+                if (action is DealDamageAction && expectNemesis)
                 {
-                    //for (int i = 0; i < 10; i++)
+                    var dd = action as DealDamageAction;
+                    if (IsRaVersusTheEnnead(dd) && dd.DidDealDamage)
                     {
-                        GameController gameController = SetupRandomGameController(false, useHeroes: new List<string> { "SkyScraper" });
-                        RunGame(gameController);
+                        Assert.IsTrue(nemesisApplied, "Damage was dealt from " + dd.DamageSource.TitleOrName + " and " + dd.Target.Title + ", but nemesis increase was not applied.");
                     }
+
+                    expectNemesis = false;
+                    nemesisApplied = false;
                 }
 
-                [Test]
-                public void TestTachyon_SupersonicResponse()
-                {
-                    //for (int i = 0; i < 1000; i++)
-                    {
-                        SetupRandomGameController(true, useHeroes: new List<string> { "Tachyon" });
-                        PreferredCardsToPlay = new string[] { "SupersonicResponse", "FleetOfFoot", "HUDGoggles", "PushingTheLimits" };
-                        RunGame(this.GameController);
-                    }
-                }
+                return DoNothing();
+            };
 
-                [Test]
-                public void TestCelestialTribunal()
-                {
-                    //for (int i = 0; i < 10; i++)
-                    {
-                        GameController gameController = SetupRandomGameController(true, overrideEnvironment:"TheCelestialTribunal");
-                        RunGame(gameController);
-                    }
-                }
+            RunGame(gameController);
+        }
 
-                [Test]
-                public void TestRaVersusTheEnnead()
-                {
-                    GameController gameController = SetupGameController(new string[] { "TheEnnead", "Ra", "Legacy", "TheWraith", "TombOfAnubis" });
-                    gameController.OnMakeDecisions -= MakeDecisions;
-                    gameController.OnMakeDecisions += MakeSomewhatReasonableDecisions;
-
-                    bool expectNemesis = false;
-                    bool nemesisApplied = false;
-                    gameController.OnWillPerformAction += action =>
-                    {
-                        // If it is a deal damage action between the Ennead and Ra, make sure there is some nemesis damage going on.
-                        if (action is DealDamageAction)
-                        {
-                            var dd = action as DealDamageAction;
-                            if (IsRaVersusTheEnnead(dd))
-                            {
-                                // We expect to see some nemesis damage before the end.
-                                expectNemesis = true;
-                            }
-                        }
-                        else if (action is IncreaseDamageAction)
-                        {
-                            var increase = action as IncreaseDamageAction;
-                            if (increase.IsNemesisEffect)
-                            {
-                                nemesisApplied = true;
-                            }
-                        }
-
-                        return DoNothing();
-                    };
-
-                    gameController.OnDidPerformAction += action =>
-                    {
-                        // If we expected nemesis, assert that it was applied.
-                        if (action is DealDamageAction && expectNemesis)
-                        {
-                            var dd = action as DealDamageAction;
-                            if (IsRaVersusTheEnnead(dd) && dd.DidDealDamage)
-                            {
-                                Assert.IsTrue(nemesisApplied, "Damage was dealt from " + dd.DamageSource.TitleOrName + " and " + dd.Target.Title + ", but nemesis increase was not applied.");
-                            }
-
-                            expectNemesis = false;
-                            nemesisApplied = false;
-                        }
-
-                        return DoNothing();
-                    };
-
-                    RunGame(gameController);
-                }
-
-                private bool IsRaVersusTheEnnead(DealDamageAction dd)
-                {
-                    return dd.DamageSource.IsCard && (dd.DamageSource.Card.Identifier == "RaCharacter" && dd.Target.Owner.Identifier == "TheEnnead")
-                        || (dd.DamageSource.Card.Owner.Identifier == "TheEnnead" && dd.Target.Identifier == "RaCharacter");
-                }
-        */
+        private bool IsRaVersusTheEnnead(DealDamageAction dd)
+        {
+            return dd.DamageSource.IsCard && (dd.DamageSource.Card.Identifier == "RaCharacter" && dd.Target.Owner.Identifier == "TheEnnead")
+                || (dd.DamageSource.Card.Owner.Identifier == "TheEnnead" && dd.Target.Identifier == "RaCharacter");
+        }
+*/
     }
 }
