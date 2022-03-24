@@ -21,9 +21,10 @@ namespace Handelabra.Sentinels.UnitTest
         protected IEnumerable<string> PreferredCardsToPlay = null;
 
         protected GameController SetupRandomGameController(bool reasonable, IEnumerable<string> availableHeroes = null, IEnumerable<string> availableVillains = null, IEnumerable<string> availableEnvironments = null,
-            string overrideEnvironment = null, List<string> useHeroes = null)
+            string overrideEnvironment = null, List<string> useHeroes = null, bool randomizeUseHeroes = true, Dictionary<string, string> overrideVariants = null, string overrideVillain = null)
         {
             string environment = overrideEnvironment;
+            string villain = overrideVillain;
             var heroes = new List<string>();
             var promoIdentifiers = new Dictionary<string, string>();
 
@@ -42,9 +43,30 @@ namespace Handelabra.Sentinels.UnitTest
                 availableEnvironments = DeckDefinition.AvailableEnvironments;
             }
 
-            var villainInfo = GetRandomVillain(availableVillains, promoIdentifiers);
-            var villain = villainInfo.Keys.FirstOrDefault();
-            var villainName = villainInfo.Values.FirstOrDefault();
+            if (overrideVariants == null)
+            {
+                overrideVariants = new Dictionary<string, string>();
+            }
+
+            // Choose a villain
+            var villainName = "";
+            if (villain != null)
+            {
+                var villainInfo = GetRandomVariant(villain, promoIdentifiers);
+                villainName = villainInfo.Values.FirstOrDefault();
+            }
+            else
+            {
+                var villainInfo = GetRandomVillain(availableVillains, promoIdentifiers);
+                villain = villainInfo.Keys.FirstOrDefault();
+                villainName = villainInfo.Values.FirstOrDefault();
+            }
+
+            if (overrideVariants.ContainsKey(villain))
+            {
+                var villainInfo = GetSpecificVariant(villain, overrideVariants[villain], promoIdentifiers);
+                villainName = villainInfo.Values.FirstOrDefault();
+            }
 
             Console.WriteLine(villainName + " threatens the Multiverse!");
 
@@ -61,25 +83,31 @@ namespace Handelabra.Sentinels.UnitTest
             int numHeroes = GetRandomNumber(3, 6);
             while (heroes.Count < numHeroes)
             {
-                string identifier = "";
-                string name = "";
+                string hero = "";
+                string heroName = "";
                 if (useHeroes != null && useHeroes.Count() > 0)
                 {
-                    identifier = useHeroes.First();
-                    var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
-                    name = definition.Name;
-                    useHeroes.Remove(identifier);
+                    var heroInfo = randomizeUseHeroes ? GetRandomHero(useHeroes, promoIdentifiers) : GetRandomVariant(useHeroes.First(), promoIdentifiers);
+                    hero = heroInfo.FirstOrDefault().Key;
+                    heroName = heroInfo.FirstOrDefault().Value;
+                    useHeroes.Remove(hero);
                 }
                 else
                 {
                     var heroInfo = GetRandomHero(heroesLeft, promoIdentifiers);
-                    identifier = heroInfo.FirstOrDefault().Key;
-                    name = heroInfo.FirstOrDefault().Value;
+                    hero = heroInfo.FirstOrDefault().Key;
+                    heroName = heroInfo.FirstOrDefault().Value;
                 }
 
-                Console.WriteLine(name + " joins the team!");
-                heroes.Add(identifier);
-                heroesLeft.Remove(identifier);
+                if (overrideVariants.ContainsKey(hero))
+                {
+                    var heroInfo = GetSpecificVariant(hero, overrideVariants[hero], promoIdentifiers);
+                    heroName = heroInfo.Values.FirstOrDefault();
+                }
+
+                Console.WriteLine(heroName + " joins the team!");
+                heroes.Add(hero);
+                heroesLeft.Remove(hero);
             }
 
             bool advanced = (GetRandomNumber(2) == 1);
@@ -116,21 +144,9 @@ namespace Handelabra.Sentinels.UnitTest
         private Dictionary<string, string> GetRandomHero(List<string> availableHeroes, Dictionary<string, string> promoIdentifiers)
         {
             int index = GetRandomNumber(availableHeroes.Count);
-            var identifier = availableHeroes.ElementAt(index);
-            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+            string hero = availableHeroes.ElementAt(index);
 
-            // If there is a promo, maybe choose it
-            int promoIndex = GetRandomNumber(1 + definition.PromoCardDefinitions.Count());
-            string name = definition.Name;
-
-            if (promoIndex > 0)
-            {
-                var promo = definition.PromoCardDefinitions.ElementAt(promoIndex - 1);
-                promoIdentifiers[identifier] = promo.PromoIdentifier;
-                name = promo.PromoTitle;
-            }
-
-            return new Dictionary<string, string> { { identifier, name } };
+            return GetRandomVariant(hero, promoIdentifiers);
         }
 
         private string GetRandomEnvironment(IEnumerable<string> availableEnvironments)
@@ -141,24 +157,82 @@ namespace Handelabra.Sentinels.UnitTest
 
         private Dictionary<string, string> GetRandomVillain(IEnumerable<string> availableVillains, Dictionary<string, string> promoIdentifiers)
         {
-            string villain = null;
+            int index = GetRandomNumber(availableVillains.Count());
+            string villain = availableVillains.ElementAt(index);
 
-            // Choose a villain
-            int villainIndex = GetRandomNumber(availableVillains.Count());
-            villain = availableVillains.ElementAt(villainIndex);
-            var villainDefinition = DeckDefinitionCache.GetDeckDefinition(villain);
-            var villainName = villainDefinition.Name;
+            return GetRandomVariant(villain, promoIdentifiers);
+        }
+
+        private Dictionary<string, string> GetRandomVariant(string identifier, Dictionary<string, string> promoIdentifiers)
+        {
+            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+            var promosToCheck = new List<CardDefinition>();
+            promosToCheck.AddRange(definition.PromoCardDefinitions.Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
+            promosToCheck.AddRange(ModHelper.GetAllPromoDefinitions().Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
+
+            var name = definition.Name;
 
             // If there is a promo, maybe choose it
-            int villainPromoIndex = GetRandomNumber(1 + villainDefinition.PromoCardDefinitions.Count());
-            if (villainPromoIndex > 0)
+            int promoIndex = GetRandomNumber(1 + promosToCheck.Count());
+
+            if (promoIndex > 0)
             {
-                var promo = villainDefinition.PromoCardDefinitions.ElementAt(villainPromoIndex - 1);
-                promoIdentifiers[villain] = promo.PromoIdentifier;
-                villainName = promo.PromoTitle;
+                var promo = promosToCheck.ElementAt(promoIndex - 1);
+                name = promo.PromoTitle;
+                string ns = definition.Namespace != promo.Namespace ? $"{promo.Namespace}." : "";
+
+                if (identifier != "TheSentinels")
+                {
+                    promoIdentifiers[identifier] = ns + promo.PromoIdentifier;
+                }
+                else
+                {
+                    promoIdentifiers["TheSentinelsInstructions"] = ns + promo.PromoIdentifier;
+                    promoIdentifiers["DrMedicoCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(0);
+                    promoIdentifiers["MainstayCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(1);
+                    promoIdentifiers["TheIdealistCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(2);
+                    promoIdentifiers["WritheCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(3);
+                }
             }
 
-            return new Dictionary<string, string> { { villain, villainName } };
+            return new Dictionary<string, string> { { identifier, name } };
+        }
+
+        private Dictionary<string, string> GetSpecificVariant(string identifier, string promoIdentifier, Dictionary<string, string> promoIdentifiers)
+        {
+            var definition = DeckDefinitionCache.GetDeckDefinition(identifier);
+            var promosToCheck = new List<CardDefinition>();
+            promosToCheck.AddRange(definition.PromoCardDefinitions.Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
+            promosToCheck.AddRange(ModHelper.GetAllPromoDefinitions().Where((CardDefinition cd) => cd.Identifier.Contains(definition.Identifier)));
+
+            var name = definition.Name;
+
+            var promo = promosToCheck.FirstOrDefault((CardDefinition cd) => cd.PromoIdentifier == promoIdentifier);
+
+            if (promo == null)
+            {
+                // Could probably do better error handling here, like defaulting back to the randomly-chosen variant
+                // Since the tester specified a variant, or something went wrong, should let them know to fix
+                Assert.Fail($"ERROR: Cannot find variant {promoIdentifier} for {identifier}.");
+            }
+
+            name = promo.PromoTitle;
+            string ns = definition.Namespace != promo.Namespace ? $"{promo.Namespace}." : "";
+
+            if (identifier != "TheSentinels")
+            {
+                promoIdentifiers[identifier] = ns + promo.PromoIdentifier;
+            }
+            else
+            {
+                promoIdentifiers["TheSentinelsInstructions"] = ns + promo.PromoIdentifier;
+                promoIdentifiers["DrMedicoCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(0);
+                promoIdentifiers["MainstayCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(1);
+                promoIdentifiers["TheIdealistCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(2);
+                promoIdentifiers["WritheCharacter"] = ns + promo.AssociatedPromoIdentifiers.ElementAt(3);
+            }
+
+            return new Dictionary<string, string> { { identifier, name } };
         }
 
         protected void RunParticularGame(IEnumerable<string> turnTakers, bool advanced, IDictionary<string, string> promos, int seed, bool reasonable)
@@ -610,115 +684,114 @@ namespace Handelabra.Sentinels.UnitTest
         }
 
         // Example test implementations follow
-/*
-        [Test]
-        public void TestRandomGameToCompletion()
-        {
-            //for (int i = 0; i < 200; i++)
-            {
-                GameController gameController = SetupRandomGameController(false);
-                RunGame(gameController);
-            }
-        }
-
-        [Test]
-        public void TestSomewhatReasonableGameToCompletion()
-        {
-            GameController gameController = SetupRandomGameController(true);
-            RunGame(gameController);
-        }
-
-        [Test]
-        public void TestSkyScraper()
-        {
-            //for (int i = 0; i < 10; i++)
-            {
-                GameController gameController = SetupRandomGameController(false, useHeroes: new List<string> { "SkyScraper" });
-                RunGame(gameController);
-            }
-        }
-
-        [Test]
-        public void TestTachyon_SupersonicResponse()
-        {
-            //for (int i = 0; i < 1000; i++)
-            {
-                SetupRandomGameController(true, useHeroes: new List<string> { "Tachyon" });
-                PreferredCardsToPlay = new string[] { "SupersonicResponse", "FleetOfFoot", "HUDGoggles", "PushingTheLimits" };
-                RunGame(this.GameController);
-            }
-        }
-
-        [Test]
-        public void TestCelestialTribunal()
-        {
-            //for (int i = 0; i < 10; i++)
-            {
-                GameController gameController = SetupRandomGameController(true, overrideEnvironment:"TheCelestialTribunal");
-                RunGame(gameController);
-            }
-        }
-
-        [Test]
-        public void TestRaVersusTheEnnead()
-        {
-            GameController gameController = SetupGameController(new string[] { "TheEnnead", "Ra", "Legacy", "TheWraith", "TombOfAnubis" });
-            gameController.OnMakeDecisions -= MakeDecisions;
-            gameController.OnMakeDecisions += MakeSomewhatReasonableDecisions;
-
-            bool expectNemesis = false;
-            bool nemesisApplied = false;
-            gameController.OnWillPerformAction += action =>
-            {
-                // If it is a deal damage action between the Ennead and Ra, make sure there is some nemesis damage going on.
-                if (action is DealDamageAction)
+        /*
+                [Test]
+                public void TestRandomGameToCompletion()
                 {
-                    var dd = action as DealDamageAction;
-                    if (IsRaVersusTheEnnead(dd))
+                    //for (int i = 0; i < 200; i++)
                     {
-                        // We expect to see some nemesis damage before the end.
-                        expectNemesis = true;
-                    }
-                }
-                else if (action is IncreaseDamageAction)
-                {
-                    var increase = action as IncreaseDamageAction;
-                    if (increase.IsNemesisEffect)
-                    {
-                        nemesisApplied = true;
+                        GameController gameController = SetupRandomGameController(false);
+                        RunGame(gameController);
                     }
                 }
 
-                return DoNothing();
-            };
-
-            gameController.OnDidPerformAction += action =>
-            {
-                // If we expected nemesis, assert that it was applied.
-                if (action is DealDamageAction && expectNemesis)
+                [Test]
+                public void TestSomewhatReasonableGameToCompletion()
                 {
-                    var dd = action as DealDamageAction;
-                    if (IsRaVersusTheEnnead(dd) && dd.DidDealDamage)
-                    {
-                        Assert.IsTrue(nemesisApplied, "Damage was dealt from " + dd.DamageSource.TitleOrName + " and " + dd.Target.Title + ", but nemesis increase was not applied.");
-                    }
-
-                    expectNemesis = false;
-                    nemesisApplied = false;
+                    GameController gameController = SetupRandomGameController(true);
+                    RunGame(gameController);
                 }
 
-                return DoNothing();
-            };
+                [Test]
+                public void TestSkyScraper()
+                {
+                    //for (int i = 0; i < 10; i++)
+                    {
+                        GameController gameController = SetupRandomGameController(false, useHeroes: new List<string> { "SkyScraper" });
+                        RunGame(gameController);
+                    }
+                }
 
-            RunGame(gameController);
-        }
+                [Test]
+                public void TestTachyon_SupersonicResponse()
+                {
+                    //for (int i = 0; i < 1000; i++)
+                    {
+                        SetupRandomGameController(true, useHeroes: new List<string> { "Tachyon" });
+                        PreferredCardsToPlay = new string[] { "SupersonicResponse", "FleetOfFoot", "HUDGoggles", "PushingTheLimits" };
+                        RunGame(this.GameController);
+                    }
+                }
 
-        private bool IsRaVersusTheEnnead(DealDamageAction dd)
-        {
-            return dd.DamageSource.IsCard && (dd.DamageSource.Card.Identifier == "RaCharacter" && dd.Target.Owner.Identifier == "TheEnnead")
-                || (dd.DamageSource.Card.Owner.Identifier == "TheEnnead" && dd.Target.Identifier == "RaCharacter");
-        }
-*/
+                [Test]
+                public void TestCelestialTribunal()
+                {
+                    //for (int i = 0; i < 10; i++)
+                    {
+                        GameController gameController = SetupRandomGameController(true, overrideEnvironment:"TheCelestialTribunal");
+                        RunGame(gameController);
+                    }
+                }
+
+                [Test]
+                public void TestRaVersusTheEnnead()
+                {
+                    GameController gameController = SetupGameController(new string[] { "TheEnnead", "Ra", "Legacy", "TheWraith", "TombOfAnubis" });
+                    gameController.OnMakeDecisions -= MakeDecisions;
+                    gameController.OnMakeDecisions += MakeSomewhatReasonableDecisions;
+
+                    bool expectNemesis = false;
+                    bool nemesisApplied = false;
+                    gameController.OnWillPerformAction += action =>
+                    {
+                        // If it is a deal damage action between the Ennead and Ra, make sure there is some nemesis damage going on.
+                        if (action is DealDamageAction)
+                        {
+                            var dd = action as DealDamageAction;
+                            if (IsRaVersusTheEnnead(dd))
+                            {
+                                // We expect to see some nemesis damage before the end.
+                                expectNemesis = true;
+                            }
+                        }
+                        else if (action is IncreaseDamageAction)
+                        {
+                            var increase = action as IncreaseDamageAction;
+                            if (increase.IsNemesisEffect)
+                            {
+                                nemesisApplied = true;
+                            }
+                        }
+
+                        return DoNothing();
+                    };
+
+                    gameController.OnDidPerformAction += action =>
+                    {
+                        // If we expected nemesis, assert that it was applied.
+                        if (action is DealDamageAction && expectNemesis)
+                        {
+                            var dd = action as DealDamageAction;
+                            if (IsRaVersusTheEnnead(dd) && dd.DidDealDamage)
+                            {
+                                Assert.IsTrue(nemesisApplied, "Damage was dealt from " + dd.DamageSource.TitleOrName + " and " + dd.Target.Title + ", but nemesis increase was not applied.");
+                            }
+
+                            expectNemesis = false;
+                            nemesisApplied = false;
+                        }
+
+                        return DoNothing();
+                    };
+
+                    RunGame(gameController);
+                }
+
+                private bool IsRaVersusTheEnnead(DealDamageAction dd)
+                {
+                    return dd.DamageSource.IsCard && (dd.DamageSource.Card.Identifier == "RaCharacter" && dd.Target.Owner.Identifier == "TheEnnead")
+                        || (dd.DamageSource.Card.Owner.Identifier == "TheEnnead" && dd.Target.Identifier == "RaCharacter");
+                }
+        */
     }
 }
-

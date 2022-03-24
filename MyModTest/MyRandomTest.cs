@@ -48,5 +48,33 @@ namespace MyModTest
                 useHeroes: new List<string> { "Workshopping.MigrantCoder" });
             RunGame(gameController);
         }
+
+        [Test]
+        public void TestRandomGameAgainstBaronJeremy()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                DeckDefinition.AvailableHeroes.Concat(ModHeroes),
+                DeckDefinition.AvailableVillains.Concat(ModVillains),
+                DeckDefinition.AvailableEnvironments.Concat(ModEnvironments),
+                overrideVillain: "BaronBlade",
+                overrideVariants: new Dictionary<string, string> { { "BaronBlade", "BaronJeremyCharacter" } });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestRandomGameAgainstCustomVariantHeroes()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                DeckDefinition.AvailableHeroes.Concat(ModHeroes),
+                DeckDefinition.AvailableVillains.Concat(ModVillains),
+                DeckDefinition.AvailableEnvironments.Concat(ModEnvironments),
+                useHeroes: new List<string> { "SkyScraper", "TheSentinels" },
+                overrideVariants: new Dictionary<string, string>
+                    {
+                        { "SkyScraper", "CentristSkyScraperNormalCharacter" },
+                        { "TheSentinels", "TheSerpentinelsInstructions" }
+                    });
+            RunGame(gameController);
+        }
     }
 }
