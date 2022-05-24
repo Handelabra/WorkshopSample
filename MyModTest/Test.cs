@@ -109,13 +109,13 @@ namespace MyModTest
 
             StartGame();
 
-            // Spam bot does H - 1 = 2 damage
+            // Spam bot does H - 1 = 2 damage, plus 1 for nemesis bonus
             GoToStartOfTurn(env);
             PlayCard("SpamBot");
             PlayCard("Modder");
             QuickHPStorage(baron, migrant, unity, adept);
             GoToEndOfTurn(env);
-            QuickHPCheck(0, -2, 0, 0);
+            QuickHPCheck(0, -3, 0, 0);
 
             // Modder plays cards at the start of turn
             GoToEndOfTurn(adept);
