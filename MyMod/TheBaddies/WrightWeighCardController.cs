@@ -15,7 +15,7 @@ namespace Workshopping.TheBaddies
         public override void AddTriggers()
         {
             // At the end of the villain turn, each villain target regains H HP.
-            AddEndOfTurnTrigger(tt => tt == this.TurnTaker, p => this.GameController.GainHP(this.DecisionMaker, card => card.IsVillainTarget, H, cardSource: GetCardSource()), TriggerType.GainHP);
+            AddEndOfTurnTrigger(tt => tt == this.TurnTaker, p => this.GameController.GainHP(this.DecisionMaker, card => IsVillainTarget(card), H, cardSource: GetCardSource()), TriggerType.GainHP);
         }
     }
 }

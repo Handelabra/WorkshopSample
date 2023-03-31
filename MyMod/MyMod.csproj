@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Workshopping</RootNamespace>
     <AssemblyName>MyMod</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,10 +29,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="EngineCommon">
-      <HintPath>..\..\..\Library\Application Support\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels.app\Contents\Resources\Data\Managed\EngineCommon.dll</HintPath>
+      <HintPath>..\..\..\..\Library\Application Support\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels.app\Contents\Resources\Data\Managed\EngineCommon.dll</HintPath>
     </Reference>
     <Reference Include="SentinelsEngine">
-      <HintPath>..\..\Handelabra\SentinelsEngine\SentinelsEngine\bin\Debug\SentinelsEngine.dll</HintPath>
+      <HintPath>..\..\..\..\Library\Application Support\Steam\steamapps\common\Sentinels of the Multiverse\Sentinels.app\Contents\Resources\Data\Managed\SentinelsEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

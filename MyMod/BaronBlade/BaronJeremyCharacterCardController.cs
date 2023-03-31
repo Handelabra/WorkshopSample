@@ -26,7 +26,6 @@ namespace Workshopping.BaronBlade
             else
             {
                 
-                
             }
 
             // Both sides defeat trigger

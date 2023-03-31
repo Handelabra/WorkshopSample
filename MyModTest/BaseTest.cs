@@ -166,6 +166,19 @@ namespace Handelabra.Sentinels.UnitTest
         protected HeroTurnTakerController voidWrithe { get { return FindHero("VoidGuardWrithe"); } }
         protected HeroTurnTakerController wraith { get { return FindHero("TheWraith"); } }
 
+        protected HeroTurnTakerController thunder { get { return FindHero("CaptainThunder"); } }
+        protected HeroTurnTakerController bowman { get { return FindHero("Bowman"); } }
+        protected HeroTurnTakerController liberty { get { return FindHero("LadyLiberty"); } }
+        protected HeroTurnTakerController metro { get { return FindHero("DrMetropolis"); } }
+        protected HeroTurnTakerController siren { get { return FindHero("Siren"); } }
+        protected HeroTurnTakerController johnny { get { return FindHero("JohnnyRocket"); } }
+        protected HeroTurnTakerController daedalus { get { return FindHero("Daedalus"); } }
+        protected HeroTurnTakerController raven { get { return FindHero("TheRaven"); } }
+        protected HeroTurnTakerController pseudo { get { return FindHero("Pseudo"); } }
+        protected HeroTurnTakerController star { get { return FindHero("StarKnight"); } }
+        protected HeroTurnTakerController jack { get { return FindHero("LanternJack"); } }
+        protected HeroTurnTakerController eldritch { get { return FindHero("Eldritch"); } }
+
         // The Sentinels
         protected Card medico { get { return GetCard("DrMedicoCharacter"); } }
         protected Card mainstay { get { return GetCard("MainstayCharacter"); } }
@@ -197,6 +210,12 @@ namespace Handelabra.Sentinels.UnitTest
         protected TurnTakerController voss { get { return FindVillain("GrandWarlordVoss"); } }
         protected TurnTakerController wager { get { return FindVillain("WagerMaster"); } }
         protected TurnTakerController warfang { get { return FindVillain("KaargraWarfang"); } }
+
+        protected TurnTakerController hades { get { return FindVillain("Hades"); } }
+        protected TurnTakerController metamind { get { return FindVillain("MetaMind"); } }
+        protected TurnTakerController omega { get { return FindVillain("Omega"); } }
+        protected TurnTakerController argo { get { return FindVillain("Argo"); } }
+        protected TurnTakerController malador { get { return FindVillain("Malador"); } }
 
         // Team villains
         protected TurnTakerController baronTeam { get { return FindVillainTeamMember("BaronBlade"); } }
@@ -2659,14 +2678,14 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected IEnumerable<DamagePreviewResult> GetDamagePreviewResults(Card source, Card target, int amount, DamageType? damageType, bool isIrreducible = false)
         {
-            var results = this.GameController.GetDamagePreviewResults(new DamageSource(this.GameController, source), target, amount, null, damageType, isIrreducible);
+            var results = this.GameController.GetDamagePreviewResults(new DamageSource(this.GameController, source), target, amount, null, damageType, isIrreducible, null, null);
             OutputDamagePreviewResults(results);
             return results;
         }
 
         protected IEnumerable<DamagePreviewResult> GetDamagePreviewResults(TurnTaker source, Card target, int amount, DamageType? damageType, bool isIrreducible = false)
         {
-            var results = this.GameController.GetDamagePreviewResults(new DamageSource(this.GameController, source), target, amount, null, damageType, isIrreducible);
+            var results = this.GameController.GetDamagePreviewResults(new DamageSource(this.GameController, source), target, amount, null, damageType, isIrreducible, null, null);
             OutputDamagePreviewResults(results);
             return results;
         }
@@ -4826,6 +4845,7 @@ namespace Handelabra.Sentinels.UnitTest
 
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
+            formatter.Binder = new SerializableRandomDeserializationBinder();
             FileStream stream = null;
             try
             {
@@ -4865,6 +4885,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
+                formatter.Binder = new SerializableRandomDeserializationBinder();
                 FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                 try
                 {

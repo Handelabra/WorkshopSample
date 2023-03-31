@@ -14,7 +14,7 @@ namespace Workshopping.TheBaddies
 
         public override IEnumerator Play()
         {
-            return DealDamage(this.CharacterCard, c => c.IsNonVillainTarget, 5, DamageType.Psychic);
+            return DealDamage(this.CharacterCard, c => c.IsTarget && !IsVillainTarget(c), 5, DamageType.Psychic);
         }
     }
 }

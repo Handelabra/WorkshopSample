@@ -65,7 +65,7 @@ namespace Workshopping.TheBaddies
         private IEnumerator EndVillainTurnResponse(PhaseChangeAction phaseChange)
         {
             // Destroy 1 hero ongoing card.
-            return this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria(c => c.IsInPlay && c.IsHero && c.IsOngoing, "hero ongoing"), false, cardSource: GetCardSource());
+            return this.GameController.SelectAndDestroyCard(this.DecisionMaker, new LinqCardCriteria(c => c.IsInPlay && c.IsHero && IsOngoing(c), "hero ongoing"), false, cardSource: GetCardSource());
         }
 
         private IEnumerator AdvancedEndVillainTurnResponse(PhaseChangeAction phaseChange)
