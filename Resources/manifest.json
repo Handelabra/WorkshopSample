@@ -1,11 +1,11 @@
 {
    "title":"Sample Mod",
    "author":"MigrantP",
-   "description":"Nothing in this mod is intended to be balanced or playable. It exists as an example to help you as you start working on your own mod. Get the source code here: https://github.com/Handelabra/WorkshopSample",
+   "description":"Nothing in this mod is intended to be balanced or playable. It exists as an example to help you as you start working on your own mod. Get the source code on GitHub here: https://github.com/Handelabra/WorkshopSample",
    "namespace":"Workshopping",
    "publishedFileId":2422637296,
    "dll":"MyMod.dll",
-   "version":"0.5",
+   "version":"0.7",
    "color":"4444DD",
    "manualTags":[],
    "decks":{
@@ -32,6 +32,23 @@
    "credits":[
    "Credits can have many lines.",
    "This line is one of them.",
+   "This line is another one of them.",
+   "This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
+   "This line is another one of them.","This line is one of them.",
    "This line is another one of them."
    ]
 }
