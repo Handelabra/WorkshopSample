@@ -58,6 +58,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected int? ExpectedDecisionChoiceCount { get; set; }
         protected Card DecisionNextToCard { get; set; }
         protected SelectionType? DecisionNextSelectionType { get; set; }
+        protected IEnumerable<Card> DecisionNextAssociatedCards { get; set; }
         protected Card[] DecisionRedirectTargets { get; set; }
         protected int DecisionRedirectTargetsIndex { get; set; }
         protected Card DecisionSelectPower { get; set; }
@@ -398,6 +399,7 @@ namespace Handelabra.Sentinels.UnitTest
             DecisionSelectFromBoxTurnTakerIdentifier = null;
             DecisionSelectFromBoxIndex = 0;
             DecisionNextSelectionType = null;
+            DecisionNextAssociatedCards = null;
             DecisionDoNotSelectLocation = false;
             DecisionRedirectTargets = null;
             DecisionRedirectTargetsIndex = 0;
@@ -3185,7 +3187,12 @@ namespace Handelabra.Sentinels.UnitTest
             Assert.IsTrue(card.HasGameText, card.Title + " should have game text.");
         }
 
-        protected void AssertCardHasKeyword(Card card, string keyword, bool isAdditional)
+        protected bool IsVillainTarget(Card card, CardSource cardSource = null)
+        {
+            return this.GameController.AskCardControllersIfIsVillainTarget(card, cardSource);
+        }
+
+    protected void AssertCardHasKeyword(Card card, string keyword, bool isAdditional)
         {
             Assert.IsTrue(this.GameController.DoesCardContainKeyword(card, keyword), "{0} should have keyword: {1}", card.Identifier, keyword);
             if (isAdditional)
@@ -5481,6 +5488,33 @@ namespace Handelabra.Sentinels.UnitTest
             this.DecisionSelectFromBoxIdentifiers = identifiers;
             this.DecisionSelectFromBoxTurnTakerIdentifier = turnTakerIdentifier;
             this.DecisionSelectFromBoxIndex = 0;
+        }
+
+        protected GameControllerDecisionEvent AssertNextDecisionAssociatedCards(IEnumerable<Card> cards)
+        {
+            this.DecisionNextAssociatedCards = cards;
+
+            GameControllerDecisionEvent decider = decision =>
+            {
+                if (this.DecisionNextAssociatedCards != null)
+                {
+                    Assert.NotNull(decision.AssociatedCards, "Associated cards should not be null");
+                    Assert.AreEqual(this.DecisionNextAssociatedCards.Count(), decision.AssociatedCards.Count(), "There should be {0} associated cards", this.DecisionNextAssociatedCards.Count());
+                    for (int i = 0; i < this.DecisionNextAssociatedCards.Count(); i++)
+                    {
+                        var expectedCard = this.DecisionNextAssociatedCards.ElementAt(i);
+                        var actualCard = decision.AssociatedCards.ElementAt(i);
+                        Assert.AreSame(expectedCard, actualCard);
+                    }
+
+                    this.DecisionNextAssociatedCards = null;
+                }
+
+                return this.MakeDecisions(decision);
+            };
+
+            ReplaceOnMakeDecisions(decider);
+            return decider;
         }
 
         protected GameControllerDecisionEvent AssertNextDecisionSelectionType(SelectionType type)
