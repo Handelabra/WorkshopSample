@@ -11,8 +11,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using Troschuetz.Random;
-using Troschuetz.Random.Generators;
+using MathNet.Numerics.Random;
 using Handelabra;
 using Boomlagoon.JSON;
 using System.Xml.XPath;
@@ -191,7 +190,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
 
             Dictionary<string, string> promoIdentifiers = new Dictionary<string, string>();
 
-            IGenerator rng = new MT19937Generator();
+            RandomSource rng = new MersenneTwister();
             GameMode gameMode = GameMode.Classic;
 
             string input = GetInput("Do you want to try a random scenario? (y/n)");
