@@ -4719,7 +4719,7 @@ namespace Handelabra.Sentinels.UnitTest
             this.GameController.AddTrigger(trigger);
         }
 
-        protected void StackDeckAfterShuffle(TurnTakerController ttc, IEnumerable<Card> cards, bool toBottom = false)
+        protected void StackDeckAfterShuffle(TurnTakerController ttc, IEnumerable<Card> cards, bool toBottom = false, CardController source = null)
         {
             ITrigger trigger = null;
             Func<ShuffleCardsAction, IEnumerator> StackDeckAndRemoveTriggerResponse = action =>
@@ -4729,7 +4729,8 @@ namespace Handelabra.Sentinels.UnitTest
                 return DoNothing();
             };
 
-            trigger = new Trigger<ShuffleCardsAction>(this.GameController, s => s.Location == ttc.TurnTaker.Deck, StackDeckAndRemoveTriggerResponse, new TriggerType[] { TriggerType.MoveCard }, TriggerTiming.After, new CardSource(ttc.CharacterCardController));
+            source = source ?? ttc.CharacterCardController;
+            trigger = new Trigger<ShuffleCardsAction>(this.GameController, s => s.Location == ttc.TurnTaker.Deck, StackDeckAndRemoveTriggerResponse, new TriggerType[] { TriggerType.MoveCard }, TriggerTiming.After, new CardSource(source));
             this.GameController.AddTrigger(trigger);
         }
 
