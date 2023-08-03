@@ -5,8 +5,7 @@ using Handelabra.Sentinels.Engine.Model;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Troschuetz.Random;
-using Troschuetz.Random.Generators;
+using MathNet.Numerics.Random;
 using System.IO;
 
 namespace Handelabra.Sentinels.UnitTest
@@ -15,7 +14,7 @@ namespace Handelabra.Sentinels.UnitTest
     [TestFixture]
     public class RandomGameTest : BaseTest
     {
-        private IGenerator rng = new MT19937Generator();
+        private RandomSource rng = new MersenneTwister();
         private Random seededRng;
 
         protected IEnumerable<string> PreferredCardsToPlay = null;
