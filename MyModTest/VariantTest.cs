@@ -304,5 +304,29 @@ namespace MyModTest
             GoToEndOfTurn(baron);
             AssertFlipped(baron);
         }
+
+        [Test()]
+        public void TestCaptainThunderVariant()
+        {
+            SetupGameController("CaptainThunder", "CaptainThunder/Workshopping.CaptainThunderstruckCharacter", "Megalopolis");
+
+            StartGame();
+
+            Assert.IsTrue(thunder.CharacterCard.IsPromoCard);
+            Assert.AreEqual("CaptainThunderstruckCharacter", thunder.CharacterCard.PromoIdentifierOrIdentifier);
+            Assert.AreEqual(25, thunder.CharacterCard.MaximumHitPoints);
+
+            GoToUsePowerPhase(thunder);
+
+            UsePower(thunder);
+
+            QuickHPStorage(thunder);
+            DealDamage(thunder, thunder, 1, DamageType.Melee);
+            QuickHPCheck(-1);
+            DealDamage(thunder, thunder, 1, DamageType.Lightning);
+            QuickHPCheck(-3);
+            DealDamage(thunder, thunder, 1, DamageType.Sonic);
+            QuickHPCheck(-3);
+        }
     }
 }

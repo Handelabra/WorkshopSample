@@ -337,7 +337,6 @@
     }
   ],
   "Cauldron.Cricket": [
-
     {
       "identifier": "CricketCharacter",
       "promoIdentifier": "NoisyCricketCharacter",
@@ -376,6 +375,44 @@
         "default": "Come on, man, you - you get a Series Four De-atomizer and I - I get a little - little midgy cricket?"
       }
     }
-
+  ],
+  "CaptainThunder": [
+    {
+      "identifier": "CaptainThunderCharacter",
+      "promoIdentifier": "CaptainThunderstruckCharacter",
+      "count": 1,
+      "title": "Captain Thunder",
+      "promoTitle": "Captain Thunderstruck",
+      "body": "Thunderstruck",
+      "icons": [
+        "HasPower",
+        "IncreaseDamageDealtLightning",
+        "IncreaseDamageDealtSonic"
+      ],
+      "backgroundColor": "86BB71",
+      "foilBackgroundColor": "86BB71",
+      "character": true,
+      "powers": [
+        "Increase all lightning damage and sonic damage dealt by 2 until the end of your next turn."
+      ],
+      "hitpoints": 25,
+      "nemesisIdentifiers": [
+        "CaptainThunder"
+      ],
+      "incapacitatedAbilities": [
+        "One player may play a card.",
+        "One hero may use a power.",
+        "One player may draw a card."
+      ],
+      "flippedIcons": [
+        "PlayCardNow",
+        "UsePowerNow",
+        "DrawCardNow"
+      ],
+      "complexity": 2,
+      "openingLines": {
+        "default": "Yeah, it's alright. We're doing fine!"
+      }
+    }
   ]
 }

@@ -27,7 +27,8 @@
        "TheSentinels":["TheSerpentinelsInstructions","DrMedicobraCharacter","MainsnakeCharacter","TheIdealizardCharacter","WrattleCharacter"],
        "SkyScraper":["CentristSkyScraperNormalCharacter"],
 "BaronBlade":["BaronJeremyCharacter"],
-"Cauldron.Cricket":["NoisyCricketCharacter"]
+"Cauldron.Cricket":["NoisyCricketCharacter"],
+"CaptainThunder":["CaptainThunderstruckCharacter"]
    },
    "credits":[
    "Credits can have many lines.",

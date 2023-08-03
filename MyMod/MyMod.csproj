@@ -68,6 +68,7 @@
     <Compile Include="DevStream\SpamBotCardController.cs" />
     <Compile Include="DevStream\ModderCardController.cs" />
     <Compile Include="BaronBlade\BaronJeremyTurnTakerController.cs" />
+    <Compile Include="CaptainThunder\CaptainThunderstruckCharacterCardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DeckLists\MigrantCoderDeckList.json" />
@@ -86,6 +87,7 @@
     <Folder Include="Cauldron.Cricket\" />
     <Folder Include="TheSentinels\" />
     <Folder Include="SkyScraper\" />
+    <Folder Include="CaptainThunder\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
