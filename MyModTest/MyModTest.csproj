@@ -54,6 +54,7 @@
     <Compile Include="MigrantCoderTest.cs" />
     <Compile Include="RandomGameTest.cs" />
     <Compile Include="MyRandomTest.cs" />
+    <Compile Include="ExperimentTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
