@@ -15,6 +15,7 @@ The project includes the following examples:
   - Bunker (Wayward Bunker)
   - The Sentinels (The Serpentinels)
   - Sky-Scraper (Centrist Sky-Scraper)
+  - Captain Thunder (Captain Thunderstruck)
   - Cricket from Cauldron mod (Noisy Cricket)
   - Baron Blade (Baron Jeremy)
 
