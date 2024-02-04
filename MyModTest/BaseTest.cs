@@ -2608,6 +2608,11 @@ namespace Handelabra.Sentinels.UnitTest
             this.RunCoroutine(this.GameController.DealDamageToTarget(new DamageSource(this.GameController, source), target, amount, type, isIrreducible, ignoreBattleZone: ignoreBattleZone, cardSource: new CardSource(this.GameController.FindCardController(source))));
         }
 
+        protected void DealDamage(TurnTaker source, Card target, int amount, DamageType type, bool isIrreducible = false, bool ignoreBattleZone = false)
+        {
+            this.RunCoroutine(this.GameController.DealDamageToTarget(new DamageSource(this.GameController, source), target, amount, type, isIrreducible, ignoreBattleZone: ignoreBattleZone, cardSource: new CardSource(this.GameController.FindCardController(target))));
+        }
+
         protected void DealDamage(Card source, TurnTakerController target, int amount, DamageType type, bool isIrreducible = false)
         {
             DealDamage(source, target.CharacterCard, amount, type);
@@ -3185,6 +3190,21 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertHasGameText(Card card)
         {
             Assert.IsTrue(card.HasGameText, card.Title + " should have game text.");
+        }
+
+        protected bool IsHero(Card card, CardSource cardSource = null)
+        {
+            return GameController.AskCardControllersIfIsHero(card, cardSource);
+        }
+
+        protected bool IsHeroTarget(Card card, CardSource cardSource = null)
+        {
+            return GameController.AskCardControllersIfIsHeroTarget(card, cardSource);
+        }
+
+        protected bool IsVillain(Card card, CardSource cardSource = null)
+        {
+            return GameController.AskCardControllersIfIsVillain(card, cardSource);
         }
 
         protected bool IsVillainTarget(Card card, CardSource cardSource = null)
