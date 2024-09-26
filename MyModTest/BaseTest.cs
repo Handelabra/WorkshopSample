@@ -1305,8 +1305,16 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        Assert.AreEqual(_numberOfChoicesInNextDecision, selectTurnTaker.Choices.Count(), "SelectTurnTakerDecision has the wrong number of choices.");
-                        _numberOfChoicesInNextDecision = null;
+                        var check = true;
+                        if (_numberOfChoicesInNextDecisionSelectionType != null && _numberOfChoicesInNextDecisionSelectionType != decision.SelectionType)
+                        {
+                            check = false;
+                        }
+                        if (check)
+                        {
+                            Assert.AreEqual(_numberOfChoicesInNextDecision, selectTurnTaker.Choices.Count(), "SelectTurnTakerDecision has the wrong number of choices.");
+                            _numberOfChoicesInNextDecision = null;
+                        }
                     }
 
 
@@ -1494,6 +1502,20 @@ namespace Handelabra.Sentinels.UnitTest
                 {
                     SelectWordDecision selectWord = decision as SelectWordDecision;
                     Console.WriteLine("Make a SelectWordDecision: [" + selectWord.Choices.ToCommaList() + "]");
+
+                    if (_numberOfChoicesInNextDecision != null)
+                    {
+                        var check = true;
+                        if (_numberOfChoicesInNextDecisionSelectionType != null && _numberOfChoicesInNextDecisionSelectionType != decision.SelectionType)
+                        {
+                            check = false;
+                        }
+                        if (check)
+                        {
+                            Assert.AreEqual(_numberOfChoicesInNextDecision, selectWord.Choices.Count(), "SelectWordDecision has the wrong number of choices.");
+                            _numberOfChoicesInNextDecision = null;
+                        }
+                    }
 
                     if (this.DecisionSelectWords != null)
                     {
