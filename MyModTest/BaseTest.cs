@@ -1054,8 +1054,15 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (this.DecisionSelectDamageType != null)
                     {
-                        damage.SelectedDamageType = this.DecisionSelectDamageType;
-                        Console.WriteLine("Selected: " + damage.SelectedDamageType);
+                        if (damage.Choices.Any(dt => dt == this.DecisionSelectDamageType))
+                        {
+                            damage.SelectedDamageType = this.DecisionSelectDamageType;
+                            Console.WriteLine("Selected: " + damage.SelectedDamageType);
+                        }
+                        else
+                        {
+                            Assert.Fail($"The selected damage type was not a choice: {this.DecisionSelectDamageType}");
+                        }
                     }
                     else
                     {
