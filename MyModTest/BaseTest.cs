@@ -3861,7 +3861,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertOnTopOfDeck(TurnTakerController ttc, string identifier, int offset = 0)
         {
-            Assert.AreEqual(identifier, ttc.TurnTaker.Deck.TopCard.Identifier, "Expected " + identifier + " to be on top of " + ttc.Name + "'s deck.");
+            Assert.AreEqual(identifier, GetTopCardOfDeck(ttc, offset).Identifier, "Expected " + identifier + " to be on top of " + ttc.Name + "'s deck.");
         }
 
         protected void AssertOnBottomOfDeck(Card card, int offset = 0)
