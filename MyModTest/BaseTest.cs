@@ -683,13 +683,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        var check = true;
-                        if (_numberOfChoicesInNextDecisionSelectionType != null && _numberOfChoicesInNextDecisionSelectionType != decision.SelectionType)
-                        {
-                            check = false;
-                        }
-
-                        if (check)
+                        if (_numberOfChoicesInNextDecisionSelectionType == null || _numberOfChoicesInNextDecisionSelectionType == decision.SelectionType)
                         {
                             Assert.AreEqual(_numberOfChoicesInNextDecision, selectCardDecision.Choices.Count(), "SelectCardDecision has the wrong number of choices.");
                             _numberOfChoicesInNextDecision = null;
@@ -1054,8 +1048,15 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (this.DecisionSelectDamageType != null)
                     {
-                        damage.SelectedDamageType = this.DecisionSelectDamageType;
-                        Console.WriteLine("Selected: " + damage.SelectedDamageType);
+                        if (damage.Choices.Any(dt => dt == this.DecisionSelectDamageType))
+                        {
+                            damage.SelectedDamageType = this.DecisionSelectDamageType;
+                            Console.WriteLine("Selected: " + damage.SelectedDamageType);
+                        }
+                        else
+                        {
+                            Assert.Fail($"The selected damage type was not a choice: {this.DecisionSelectDamageType}");
+                        }
                     }
                     else
                     {
@@ -1298,8 +1299,11 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        Assert.AreEqual(_numberOfChoicesInNextDecision, selectTurnTaker.Choices.Count(), "SelectTurnTakerDecision has the wrong number of choices.");
-                        _numberOfChoicesInNextDecision = null;
+                        if (_numberOfChoicesInNextDecisionSelectionType == null || _numberOfChoicesInNextDecisionSelectionType == decision.SelectionType)
+                        {
+                            Assert.AreEqual(_numberOfChoicesInNextDecision, selectTurnTaker.Choices.Count(), "SelectTurnTakerDecision has the wrong number of choices.");
+                            _numberOfChoicesInNextDecision = null;
+                        }
                     }
 
 
@@ -1361,13 +1365,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        var check = true;
-                        if (_numberOfChoicesInNextDecisionSelectionType != null && _numberOfChoicesInNextDecisionSelectionType != decision.SelectionType)
-                        {
-                            check = false;
-                        }
-
-                        if (check)
+                        if (_numberOfChoicesInNextDecisionSelectionType == null || _numberOfChoicesInNextDecisionSelectionType == decision.SelectionType)
                         {
                             Assert.AreEqual(_numberOfChoicesInNextDecision, selectAction.Choices.Count(), "SelectFunctionDecision has the wrong number of choices.");
                             _numberOfChoicesInNextDecision = null;
@@ -1487,6 +1485,15 @@ namespace Handelabra.Sentinels.UnitTest
                 {
                     SelectWordDecision selectWord = decision as SelectWordDecision;
                     Console.WriteLine("Make a SelectWordDecision: [" + selectWord.Choices.ToCommaList() + "]");
+
+                    if (_numberOfChoicesInNextDecision != null)
+                    {
+                        if (_numberOfChoicesInNextDecisionSelectionType == null || _numberOfChoicesInNextDecisionSelectionType == decision.SelectionType)
+                        {
+                            Assert.AreEqual(_numberOfChoicesInNextDecision, selectWord.Choices.Count(), "SelectWordDecision has the wrong number of choices.");
+                            _numberOfChoicesInNextDecision = null;
+                        }
+                    }
 
                     if (this.DecisionSelectWords != null)
                     {
@@ -3874,7 +3881,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertOnTopOfDeck(TurnTakerController ttc, string identifier, int offset = 0)
         {
-            Assert.AreEqual(identifier, ttc.TurnTaker.Deck.TopCard.Identifier, "Expected " + identifier + " to be on top of " + ttc.Name + "'s deck.");
+            Assert.AreEqual(identifier, GetTopCardOfDeck(ttc, offset).Identifier, "Expected " + identifier + " to be on top of " + ttc.Name + "'s deck.");
         }
 
         protected void AssertOnBottomOfDeck(Card card, int offset = 0)
