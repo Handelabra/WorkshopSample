@@ -1697,7 +1697,7 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
             fullHeroList.AddRange(modHeroData.Keys);
             DeckDefinition heroDefinition = null;
 
-            foreach (var heroTurnTaker in availableHeroes.Where(turnTakerCriteria))
+            foreach (var heroTurnTaker in fullHeroList.Where(turnTakerCriteria))
             {
                 if (availableHeroes.Contains(heroTurnTaker))
                 {
@@ -4519,8 +4519,26 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                     {
                         SelectFromBoxDecision selectFromBox = decision as SelectFromBoxDecision;
                         question = (address + "Select a hero from the box: ");
+                        var coreHeroes = DeckDefinition.AvailableHeroes;
                         var availableHeroes = selectFromBox.Choices.Select(c => c.Key).Distinct();
-                        var heroNames = availableHeroes.Select(s => DeckDefinitionCache.GetDeckDefinition(s).Name);
+                        Dictionary<string, DeckDefinition> modHeroData = LoadAllModContentOfKind(DeckDefinition.DeckKind.Hero);
+                        List<string> fullHeroList = new List<string>();
+                        fullHeroList.AddRange(coreHeroes);
+                        fullHeroList.AddRange(modHeroData.Keys);
+
+                        Func<string, DeckDefinition> GetDeckDefinition = (string heroTurnTaker) =>
+                        {
+                            if (DeckDefinition.AvailableHeroes.Contains(heroTurnTaker))
+                            {
+                                return DeckDefinitionCache.GetDeckDefinition(heroTurnTaker);
+                            }
+                            else
+                            {
+                                return modHeroData[heroTurnTaker];
+                            }
+                        };
+                        var heroNames = availableHeroes.Select(s => GetDeckDefinition(s).Name);
+
 
                         var turnTakerChoice = PrintAndSelectOption(question, heroNames, false, decision.AllowAutoDecide);
                         if (turnTakerChoice.HasValue)
@@ -4538,13 +4556,13 @@ namespace Handelabra.MyModConsole // this has to be this way to work around an E
                             if (!selectFromBox.AutoDecided)
                             {
                                 selectFromBox.SelectedTurnTakerIdentifier = identifier;
-                                var deckDef = DeckDefinitionCache.GetDeckDefinition(identifier);
+                                var deckDef = GetDeckDefinition(identifier);
                                 var promoQuestion = (address + "Select a promo character card from the box: ");
                                 var promoIdentifiers = selectFromBox.Choices.Where(c => c.Key == identifier).Select(c => c.Value);
 
                                 var allCharacterDefs = deckDef.CardDefinitions.Where(cd => cd.IsCharacter).ToList();
                                 allCharacterDefs.AddRange(deckDef.PromoCardDefinitions);
-                                var promoTitles = allCharacterDefs.Where(cd => promoIdentifiers.Contains(cd.PromoIdentifierOrIdentifier)).Select(cd => cd.PromoTitleOrTitle);
+                                var promoTitles = allCharacterDefs.Where(cd => promoIdentifiers.Contains(cd.QualifiedPromoIdentifierOrIdentifier)).Select(cd => cd.PromoTitleOrTitle);
 
                                 var promoChoice = PrintAndSelectOption(promoQuestion, promoTitles, false, decision.AllowAutoDecide);
                                 if (promoChoice.HasValue && promoChoice <= promoIdentifiers.Count() && promoChoice > 0)
