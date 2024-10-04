@@ -33,7 +33,8 @@
         "The Villain Deck is shuffled."
       ],
       "gameplay": [
-        "Nothing specific, really."
+        "Nothing specific, really.",
+        "However, if {Workshopping.MigrantCoder} is in the game, you can feel great about a stream team-up!"
       ],
       "advanced": "It's all the same!",
       "flippedShowHitpoints": false,
