@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using Handelabra.Sentinels.Engine.Controller.PromoCardUnlockControllers;
+using NUnit.Framework.Legacy;
 
 namespace Handelabra.Sentinels.UnitTest
 {
@@ -598,14 +599,14 @@ namespace Handelabra.Sentinels.UnitTest
             var numChoices = decision.NumberOfChoices;
             if (numChoices.HasValue)
             {
-                Assert.Greater(numChoices, 0, "Decision has 0 choices: {0}", decision);
+                ClassicAssert.Greater(numChoices, 0, "Decision has 0 choices: {0}", decision);
             }
 
             // In most cases, a non-optional decision with 1 choice is an error.
             // Exception: ActivateAbilityDecision (The Argent Adept) and UsePowerDecision (Guise, for now)
             if (!(decision is ActivateAbilityDecision || decision is UsePowerDecision))
             {
-                Assert.IsFalse(numChoices == 1 && !decision.IsOptional, "Non-optional decision has 1 choice: {0}", decision);
+                ClassicAssert.IsFalse(numChoices == 1 && !decision.IsOptional, "Non-optional decision has 1 choice: {0}", decision);
             }
 
             // If decision answers is not null, check to see if it has an entry for the decision.
@@ -667,14 +668,14 @@ namespace Handelabra.Sentinels.UnitTest
 
                 if (_assertDecisionOptional != null && decision.SelectionType == _assertDecisionOptional)
                 {
-                    Assert.IsTrue(decision.IsOptional, "Decision was not optional: " + decision);
+                    ClassicAssert.IsTrue(decision.IsOptional, "Decision was not optional: " + decision);
                 }
 
                 if (decision is SelectCardDecision)
                 {
                     SelectCardDecision selectCardDecision = (SelectCardDecision)decision;
 
-                    Assert.IsNotNull(selectCardDecision.Choices, "Choices must not be null");
+                    ClassicAssert.IsNotNull(selectCardDecision.Choices, "Choices must not be null");
 
                     if (selectCardDecision.ExtraInfo != null)
                     {
@@ -691,7 +692,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                         if (check)
                         {
-                            Assert.AreEqual(_numberOfChoicesInNextDecision, selectCardDecision.Choices.Count(), "SelectCardDecision has the wrong number of choices.");
+                            ClassicAssert.AreEqual(_numberOfChoicesInNextDecision, selectCardDecision.Choices.Count(), "SelectCardDecision has the wrong number of choices.");
                             _numberOfChoicesInNextDecision = null;
                         }
                     }
@@ -701,13 +702,13 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_includedCardsInNextDecision != null)
                     {
-                        _includedCardsInNextDecision.ForEach(e => Assert.IsTrue(selectCardDecision.Choices.Contains(e), "SelectCardDecision did not include: " + e.Title + "."));
+                        _includedCardsInNextDecision.ForEach(e => ClassicAssert.IsTrue(selectCardDecision.Choices.Contains(e), "SelectCardDecision did not include: " + e.Title + "."));
                         _includedCardsInNextDecision = null;
                     }
 
                     if (_notIncludedCardsInNextDecision != null)
                     {
-                        _notIncludedCardsInNextDecision.ForEach(e => Assert.IsFalse(selectCardDecision.Choices.Contains(e), "SelectCardDecision should not include: " + e.Title + ". (Choices: " + selectCardDecision.Choices.Select(c => c.Title).ToCommaList() + ")"));
+                        _notIncludedCardsInNextDecision.ForEach(e => ClassicAssert.IsFalse(selectCardDecision.Choices.Contains(e), "SelectCardDecision should not include: " + e.Title + ". (Choices: " + selectCardDecision.Choices.Select(c => c.Title).ToCommaList() + ")"));
                         _notIncludedCardsInNextDecision = null;
                     }
 
@@ -718,7 +719,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (this.ExpectedDecisionChoiceCount != null)
                     {
-                        Assert.AreEqual(this.ExpectedDecisionChoiceCount.Value, selectCardDecision.Choices.Count(), "Expected the decision to have " + this.ExpectedDecisionChoiceCount + " choices, but it had " + selectCardDecision.Choices.Count() + ".");
+                        ClassicAssert.AreEqual(this.ExpectedDecisionChoiceCount.Value, selectCardDecision.Choices.Count(), "Expected the decision to have " + this.ExpectedDecisionChoiceCount + " choices, but it had " + selectCardDecision.Choices.Count() + ".");
                     }
 
                     if (selectCardDecision.Choices.Count() > 0)
@@ -774,8 +775,8 @@ namespace Handelabra.Sentinels.UnitTest
                             string dealDamageInfo = "";
                             if (selectCardDecision.SelectionType == SelectionType.AmbiguousDecision && selectCardDecision.SecondarySelectionType == SelectionType.RedirectDamage)
                             {
-                                Assert.NotNull(selectCardDecision.DealDamageInfo);
-                                Assert.NotNull(selectCardDecision.DealDamageInfo.FirstOrDefault());
+                                ClassicAssert.NotNull(selectCardDecision.DealDamageInfo);
+                                ClassicAssert.NotNull(selectCardDecision.DealDamageInfo.FirstOrDefault());
 
                                 var info = selectCardDecision.DealDamageInfo.First();
                                 dealDamageInfo = " (" + info.DamageSource.TitleOrName + " dealing " + info.Amount + " " + info.DamageType + " damage to " + info.Target.Title;
@@ -994,7 +995,7 @@ namespace Handelabra.Sentinels.UnitTest
                             {
                                 // Make sure the selected card is one of the possible choices.
                                 Console.WriteLine("Selected: " + selectCardDecision.SelectedCard.Title);
-                                Assert.IsTrue(originalChoices.Contains(selectCardDecision.SelectedCard), "SelectCardDecision selected \"" + selectCardDecision.SelectedCard.Title + "\", which is not one of the decision options: " + originalChoices.Select(c => c.Title).ToCommaList());
+                                ClassicAssert.IsTrue(originalChoices.Contains(selectCardDecision.SelectedCard), "SelectCardDecision selected \"" + selectCardDecision.SelectedCard.Title + "\", which is not one of the decision options: " + originalChoices.Select(c => c.Title).ToCommaList());
                             }
                             else
                             {
@@ -1011,7 +1012,7 @@ namespace Handelabra.Sentinels.UnitTest
                     Console.WriteLine("[" + source + "] " + who + ", Make a YesNoDecision of type " + yesNo.SelectionType);
                     if (this.DecisionsYesNo != null)
                     {
-                        Assert.Greater(this.DecisionsYesNo.Count(), this.DecisionsYesNoIndex, "Not enough DecisionsYesNo were provided.");
+                        ClassicAssert.Greater(this.DecisionsYesNo.Count(), this.DecisionsYesNoIndex, "Not enough DecisionsYesNo were provided.");
                         yesNo.Answer = this.DecisionsYesNo.ElementAt(this.DecisionsYesNoIndex);
                         this.DecisionsYesNoIndex += 1;
                     }
@@ -1029,7 +1030,7 @@ namespace Handelabra.Sentinels.UnitTest
                     Console.WriteLine("[" + source + "] " + who + ", Make a YesNoCardDecision of type " + yesNo.SelectionType + " with card " + yesNo.Card.Title);
                     if (this.DecisionsYesNo != null)
                     {
-                        Assert.Greater(this.DecisionsYesNo.Count(), this.DecisionsYesNoIndex, "Not enough DecisionsYesNo were provided.");
+                        ClassicAssert.Greater(this.DecisionsYesNo.Count(), this.DecisionsYesNoIndex, "Not enough DecisionsYesNo were provided.");
                         yesNo.Answer = this.DecisionsYesNo.ElementAt(this.DecisionsYesNoIndex);
                         this.DecisionsYesNoIndex += 1;
                     }
@@ -1045,7 +1046,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        Assert.AreEqual(_numberOfChoicesInNextDecision, damage.Choices.Count(), "SelectDamageTypeDecision has the wrong number of choices.");
+                        ClassicAssert.AreEqual(_numberOfChoicesInNextDecision, damage.Choices.Count(), "SelectDamageTypeDecision has the wrong number of choices.");
                         _numberOfChoicesInNextDecision = null;
                     }
 
@@ -1069,7 +1070,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        Assert.AreEqual(_numberOfChoicesInNextDecision, moveCard.PossibleDestinations.Count(), "MoveCardDecision has the wrong number of choices.");
+                        ClassicAssert.AreEqual(_numberOfChoicesInNextDecision, moveCard.PossibleDestinations.Count(), "MoveCardDecision has the wrong number of choices.");
                         _numberOfChoicesInNextDecision = null;
                     }
 
@@ -1080,7 +1081,7 @@ namespace Handelabra.Sentinels.UnitTest
                     }
                     if (this.ExpectedDecisionChoiceCount != null)
                     {
-                        Assert.AreEqual(this.ExpectedDecisionChoiceCount.Value, moveCard.PossibleDestinations.Count());
+                        ClassicAssert.AreEqual(this.ExpectedDecisionChoiceCount.Value, moveCard.PossibleDestinations.Count());
                     }
 
                     MoveCardDestination chosenDestination = new MoveCardDestination();
@@ -1106,7 +1107,7 @@ namespace Handelabra.Sentinels.UnitTest
                         }
                         else
                         {
-                            Assert.Fail("The selected destination was not a choice: {0}", chosenDestination);
+                            Assert.Fail($"The selected destination was not a choice: {chosenDestination}");
                         }
                     }
                     else
@@ -1122,7 +1123,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        Assert.AreEqual(_numberOfChoicesInNextDecision, selectLocation.Choices.Count(), "SelectLocationDecision has the wrong number of choices.");
+                        ClassicAssert.AreEqual(_numberOfChoicesInNextDecision, selectLocation.Choices.Count(), "SelectLocationDecision has the wrong number of choices.");
                         _numberOfChoicesInNextDecision = null;
                     }
 
@@ -1138,18 +1139,18 @@ namespace Handelabra.Sentinels.UnitTest
                     }
                     if (this.ExpectedDecisionChoiceCount != null)
                     {
-                        Assert.AreEqual(this.ExpectedDecisionChoiceCount.Value, selectLocation.Choices.Count());
+                        ClassicAssert.AreEqual(this.ExpectedDecisionChoiceCount.Value, selectLocation.Choices.Count());
                     }
 
                     if (_includedLocationsInNextDecision != null)
                     {
-                        _includedLocationsInNextDecision.ForEach(e => Assert.IsTrue(selectLocation.Choices.Any(lc => lc.Location == e.Location), "SelectLocationsDecision did not include: " + e.Location.GetFriendlyName() + "."));
+                        _includedLocationsInNextDecision.ForEach(e => ClassicAssert.IsTrue(selectLocation.Choices.Any(lc => lc.Location == e.Location), "SelectLocationsDecision did not include: " + e.Location.GetFriendlyName() + "."));
                         _includedLocationsInNextDecision = null;
                     }
 
                     if (_notIncludedLocationsInNextDecision != null)
                     {
-                        _notIncludedLocationsInNextDecision.ForEach(e => Assert.IsFalse(selectLocation.Choices.Any(l => l.Location == e.Location), "SelectLocationsDecision should not include: " + e.Location.GetFriendlyName() + ". (Choices: " + selectLocation.Choices.Select(l => l.Location.GetFriendlyName()).ToCommaList() + ")"));
+                        _notIncludedLocationsInNextDecision.ForEach(e => ClassicAssert.IsFalse(selectLocation.Choices.Any(l => l.Location == e.Location), "SelectLocationsDecision should not include: " + e.Location.GetFriendlyName() + ". (Choices: " + selectLocation.Choices.Select(l => l.Location.GetFriendlyName()).ToCommaList() + ")"));
                         _notIncludedLocationsInNextDecision = null;
                     }
 
@@ -1166,7 +1167,7 @@ namespace Handelabra.Sentinels.UnitTest
                         }
                         else if (!selectLocation.Choices.Any(c => c.Location == location.Location))
                         {
-                            Assert.Fail("The selected location was not a choice: {0}", location);
+                            Assert.Fail($"The selected location was not a choice: {location}");
                         }
                         else
                         {
@@ -1177,7 +1178,7 @@ namespace Handelabra.Sentinels.UnitTest
                     {
                         if (!selectLocation.Choices.Any(c => c.Location == this.DecisionSelectLocation.Location))
                         {
-                            Assert.Fail("The selected location was not a choice: {0}", this.DecisionSelectLocation);
+                            Assert.Fail($"The selected location was not a choice: {this.DecisionSelectLocation}");
                         }
                         else
                         {
@@ -1209,7 +1210,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        Assert.AreEqual(_numberOfChoicesInNextDecision, power.Choices.Count(), "UsePowerDecision has the wrong number of choices.");
+                        ClassicAssert.AreEqual(_numberOfChoicesInNextDecision, power.Choices.Count(), "UsePowerDecision has the wrong number of choices.");
                         _numberOfChoicesInNextDecision = null;
                     }
 
@@ -1220,13 +1221,13 @@ namespace Handelabra.Sentinels.UnitTest
                     var powerCards = power.Choices.Select(p => p.CardController.Card);
                     if (_includedPowersInNextDecision != null)
                     {
-                        _includedPowersInNextDecision.ForEach(e => Assert.IsTrue(powerCards.Contains(e), "SelectPowerDecision did not include: " + e.Title + "."));
+                        _includedPowersInNextDecision.ForEach(e => ClassicAssert.IsTrue(powerCards.Contains(e), "SelectPowerDecision did not include: " + e.Title + "."));
                         _includedPowersInNextDecision = null;
                     }
 
                     if (_notIncludedPowersInNextDecision != null)
                     {
-                        _notIncludedPowersInNextDecision.ForEach(e => Assert.IsFalse(powerCards.Contains(e), "SelectPowerDecision should not include: " + e.Title + ". (Choices: " + powerCards.Select(c => c.Title).ToCommaList() + ")"));
+                        _notIncludedPowersInNextDecision.ForEach(e => ClassicAssert.IsFalse(powerCards.Contains(e), "SelectPowerDecision should not include: " + e.Title + ". (Choices: " + powerCards.Select(c => c.Title).ToCommaList() + ")"));
                         _notIncludedPowersInNextDecision = null;
                     }
 
@@ -1261,7 +1262,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        Assert.AreEqual(_numberOfChoicesInNextDecision, ability.Choices.Count(), "UseIncapacitatedAbilityDecision has the wrong number of choices.");
+                        ClassicAssert.AreEqual(_numberOfChoicesInNextDecision, ability.Choices.Count(), "UseIncapacitatedAbilityDecision has the wrong number of choices.");
                         _numberOfChoicesInNextDecision = null;
                     }
 
@@ -1298,7 +1299,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_numberOfChoicesInNextDecision != null)
                     {
-                        Assert.AreEqual(_numberOfChoicesInNextDecision, selectTurnTaker.Choices.Count(), "SelectTurnTakerDecision has the wrong number of choices.");
+                        ClassicAssert.AreEqual(_numberOfChoicesInNextDecision, selectTurnTaker.Choices.Count(), "SelectTurnTakerDecision has the wrong number of choices.");
                         _numberOfChoicesInNextDecision = null;
                     }
 
@@ -1315,13 +1316,13 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (_includedTurnTakersInNextDecision != null)
                     {
-                        _includedTurnTakersInNextDecision.ForEach(e => Assert.IsTrue(selectTurnTaker.Choices.Contains(e), "SelectTurnTakerDecision did not include: " + e.Name + "."));
+                        _includedTurnTakersInNextDecision.ForEach(e => ClassicAssert.IsTrue(selectTurnTaker.Choices.Contains(e), "SelectTurnTakerDecision did not include: " + e.Name + "."));
                         _includedTurnTakersInNextDecision = null;
                     }
 
                     if (_notIncludedTurnTakersInNextDecision != null)
                     {
-                        _notIncludedTurnTakersInNextDecision.ForEach(e => Assert.IsFalse(selectTurnTaker.Choices.Contains(e), "SelectTurnTakerDecision should not include: " + e.Name + ". (Choices: " + selectTurnTaker.Choices.Select(tt => tt.Name).ToCommaList() + ")"));
+                        _notIncludedTurnTakersInNextDecision.ForEach(e => ClassicAssert.IsFalse(selectTurnTaker.Choices.Contains(e), "SelectTurnTakerDecision should not include: " + e.Name + ". (Choices: " + selectTurnTaker.Choices.Select(tt => tt.Name).ToCommaList() + ")"));
                         _notIncludedTurnTakersInNextDecision = null;
                     }
 
@@ -1369,7 +1370,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                         if (check)
                         {
-                            Assert.AreEqual(_numberOfChoicesInNextDecision, selectAction.Choices.Count(), "SelectFunctionDecision has the wrong number of choices.");
+                            ClassicAssert.AreEqual(_numberOfChoicesInNextDecision, selectAction.Choices.Count(), "SelectFunctionDecision has the wrong number of choices.");
                             _numberOfChoicesInNextDecision = null;
                         }
                     }
@@ -1802,7 +1803,7 @@ namespace Handelabra.Sentinels.UnitTest
             SaveGameToTemp("UnitTest");
             var result = LoadGame("UnitTest", false, true, true);
             var newStateString = result.Game.ToStateString();
-            Assert.AreEqual(oldStateString, newStateString, "Game state string should be the same after saving and loading");
+            ClassicAssert.AreEqual(oldStateString, newStateString, "Game state string should be the same after saving and loading");
 
             return result;
         }
@@ -1822,10 +1823,10 @@ namespace Handelabra.Sentinels.UnitTest
             // Sanity check, at this point there should be no cards in revealed locations.
             foreach (var tt in ttc.GameController.Game.TurnTakers)
             {
-                Assert.AreEqual(0, tt.Revealed.Cards.Count(), tt.Name + " has cards in Revealed!");
+                ClassicAssert.AreEqual(0, tt.Revealed.Cards.Count(), tt.Name + " has cards in Revealed!");
 
                 // All cards should have a location
-                Assert.IsTrue(tt.GetAllCards().All(c => c.Location != null), "All cards should have a location");
+                ClassicAssert.IsTrue(tt.GetAllCards().All(c => c.Location != null), "All cards should have a location");
             }
 
             // We would get an endless loop if we are going to the PlayCard phase with no cards left in hand, so fail the test.
@@ -2090,12 +2091,12 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotOnTopOfDeck(TurnTakerController ttc, Card card, int offset = 0)
         {
-            Assert.AreNotEqual(card, GetTopCardOfDeck(ttc, offset));
+            ClassicAssert.AreNotEqual(card, GetTopCardOfDeck(ttc, offset));
         }
 
         protected void AssertNotOnBottomOfDeck(TurnTakerController ttc, Card card, int offset = 0)
         {
-            Assert.AreNotEqual(card, GetBottomCardOfDeck(ttc, offset));
+            ClassicAssert.AreNotEqual(card, GetBottomCardOfDeck(ttc, offset));
         }
 
         protected Card GetTopMatchingCardOfLocation(Location location, Func<Card, bool> criteria, int foundIndex = 1)
@@ -2902,7 +2903,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertIsAtMaxHP(Card card)
         {
-            Assert.AreEqual(card.MaximumHitPoints.Value, card.HitPoints.Value, "The HP of " + card.Title + " is not at maximum.");
+            ClassicAssert.AreEqual(card.MaximumHitPoints.Value, card.HitPoints.Value, "The HP of " + card.Title + " is not at maximum.");
         }
 
         protected void AssertAndStoreHP(TurnTakerController ttc, ref int characterHP, int change)
@@ -2912,7 +2913,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertAndStoreHP(Card card, ref int cardHP, int change)
         {
-            Assert.AreEqual(cardHP + change, card.HitPoints.Value, "The HP of " + card.Title + " is incorrect.");
+            ClassicAssert.AreEqual(cardHP + change, card.HitPoints.Value, "The HP of " + card.Title + " is incorrect.");
             StoreHP(card, ref cardHP);
         }
 
@@ -2921,7 +2922,7 @@ namespace Handelabra.Sentinels.UnitTest
             if (card.HitPoints.HasValue)
             {
                 var actual = card.HitPoints.Value;
-                Assert.AreEqual(expected, actual, "The HP of {0} is incorrect.", card.Identifier);
+                ClassicAssert.AreEqual(expected, actual, "The HP of {0} is incorrect.", card.Identifier);
             }
             else
             {
@@ -2941,7 +2942,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertMaximumHitPoints(Card card, int maxHP)
         {
-            Assert.AreEqual(maxHP, card.MaximumHitPoints.Value, card.Title + "'s maximum hit points was expected to be " + maxHP + " but was " + card.MaximumHitPoints.Value + ".");
+            ClassicAssert.AreEqual(maxHP, card.MaximumHitPoints.Value, card.Title + "'s maximum hit points was expected to be " + maxHP + " but was " + card.MaximumHitPoints.Value + ".");
         }
 
         protected void QuickHPStorage(params TurnTakerController[] ttcs)
@@ -2971,7 +2972,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void QuickShuffleCheck(params int?[] shuffleChanges)
         {
-            Assert.AreEqual(_quickShuffleStorage.Count, shuffleChanges.Length, "QuickShuffleCheck passed {0} values but {1} are stored.", shuffleChanges.Length, _quickShuffleStorage.Count);
+            ClassicAssert.AreEqual(_quickShuffleStorage.Count, shuffleChanges.Length, "QuickShuffleCheck passed {0} values but {1} are stored.", shuffleChanges.Length, _quickShuffleStorage.Count);
 
             for (int i = 0; i < shuffleChanges.Count(); i++)
             {
@@ -2982,7 +2983,7 @@ namespace Handelabra.Sentinels.UnitTest
                 {
                     var expected = previousShuffle + changeShuffle.Value;
                     var actual = location.ShuffleCount;
-                    Assert.AreEqual(expected, actual, "Expected " + location.GetFriendlyName() + "'s shuffle count to be " + expected + ", but it was " + actual + ".");
+                    ClassicAssert.AreEqual(expected, actual, "Expected " + location.GetFriendlyName() + "'s shuffle count to be " + expected + ", but it was " + actual + ".");
                     _quickShuffleStorage[location] = actual;
                 }
             }
@@ -3045,7 +3046,7 @@ namespace Handelabra.Sentinels.UnitTest
                 var ttc = pair.Key;
                 var location = pair.Value.Location;
 
-                Assert.AreEqual(expectedLocations(ttc), location, "Top card of " + ttc.Name + "'s deck was expected to be at " + expectedLocations(ttc) + " but was at " + location + ".");
+                ClassicAssert.AreEqual(expectedLocations(ttc), location, "Top card of " + ttc.Name + "'s deck was expected to be at " + expectedLocations(ttc) + " but was at " + location + ".");
             }
         }
 
@@ -3060,7 +3061,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void QuickHPCheck(params int?[] hpChange)
         {
-            Assert.AreEqual(_quickHPStorage.Count, hpChange.Length, "QuickHPCheck passed {0} values but {1} are stored.", hpChange.Length, _quickHPStorage.Count);
+            ClassicAssert.AreEqual(_quickHPStorage.Count, hpChange.Length, "QuickHPCheck passed {0} values but {1} are stored.", hpChange.Length, _quickHPStorage.Count);
 
             for (int i = 0; i < hpChange.Count(); i++)
             {
@@ -3073,7 +3074,7 @@ namespace Handelabra.Sentinels.UnitTest
                     if (card.HitPoints.HasValue)
                     {
                         var actual = card.HitPoints.Value;
-                        Assert.AreEqual(expected, actual, "Expected " + card.Title + "'s HP to be " + expected + ", but it was " + actual + ".");
+                        ClassicAssert.AreEqual(expected, actual, "Expected " + card.Title + "'s HP to be " + expected + ", but it was " + actual + ".");
                         _quickHPStorage[card] = actual;
                     }
                     else
@@ -3101,7 +3102,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void QuickHandCheck(params int[] cardNumberChange)
         {
-            Assert.AreEqual(_quickHandStorage.Count, cardNumberChange.Length, "QuickHandCheck passed {0} values but {1} are stored.", cardNumberChange.Length, _quickHandStorage.Count);
+            ClassicAssert.AreEqual(_quickHandStorage.Count, cardNumberChange.Length, "QuickHandCheck passed {0} values but {1} are stored.", cardNumberChange.Length, _quickHandStorage.Count);
 
             for (int i = 0; i < cardNumberChange.Count(); i++)
             {
@@ -3111,7 +3112,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                 var expected = previousHandCount + changeHand;
                 var actual = Math.Max(hero.HeroTurnTaker.Hand.Cards.Count(), 0);
-                Assert.AreEqual(expected, actual, "Expected " + hero.Name + " to have " + expected + " cards in hand, but they had " + actual + ".");
+                ClassicAssert.AreEqual(expected, actual, "Expected " + hero.Name + " to have " + expected + " cards in hand, but they had " + actual + ".");
                 _quickHandStorage[hero] = actual;
             }
         }
@@ -3124,7 +3125,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void QuickTokenPoolCheck(params int[] tokenChange)
         {
-            Assert.AreEqual(_quickTokenPoolStorage.Count, tokenChange.Length, "QuickTokenPoolCheck passed {0} values but {1} are stored.", tokenChange.Length, _quickTokenPoolStorage.Count);
+            ClassicAssert.AreEqual(_quickTokenPoolStorage.Count, tokenChange.Length, "QuickTokenPoolCheck passed {0} values but {1} are stored.", tokenChange.Length, _quickTokenPoolStorage.Count);
 
             for (int i = 0; i < tokenChange.Count(); i++)
             {
@@ -3134,7 +3135,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                 var expected = previousCount + change;
                 var actual = pool.CurrentValue;
-                Assert.AreEqual(expected, actual, "Expected " + pool.Name + " to have " + expected + " tokens in it, but it had " + actual + ".");
+                ClassicAssert.AreEqual(expected, actual, "Expected " + pool.Name + " to have " + expected + " tokens in it, but it had " + actual + ".");
                 _quickTokenPoolStorage[pool] = actual;
                 Console.WriteLine(pool.Name + ": " + pool.CurrentValue);
             }
@@ -3161,7 +3162,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertIsInPlay(Card card)
         {
-            Assert.IsTrue(card.IsInPlay, card.Title + " should be in play.");
+            ClassicAssert.IsTrue(card.IsInPlay, card.Title + " should be in play.");
         }
 
         protected void AssertRevealed(params Card[] cards)
@@ -3171,12 +3172,12 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertRevealed(Card card)
         {
-            Assert.IsTrue(card.Location.IsRevealed, card.Title + " is not revealed.");
+            ClassicAssert.IsTrue(card.Location.IsRevealed, card.Title + " is not revealed.");
         }
 
         protected void AssertNoGameText(Card card)
         {
-            Assert.IsFalse(card.HasGameText, card.Title + " should not have game text.");
+            ClassicAssert.IsFalse(card.HasGameText, card.Title + " should not have game text.");
         }
 
         protected void AssertPlayIndex(Card card, int? playIndex)
@@ -3184,12 +3185,12 @@ namespace Handelabra.Sentinels.UnitTest
             string expectedValue = playIndex.HasValue ? "" + playIndex.Value : "null";
             string actualValue = card.PlayIndex.HasValue ? "" + card.PlayIndex.Value : "null";
 
-            Assert.AreEqual(playIndex, card.PlayIndex, "A play index of " + expectedValue + " was expected, but it was " + actualValue);
+            ClassicAssert.AreEqual(playIndex, card.PlayIndex, "A play index of " + expectedValue + " was expected, but it was " + actualValue);
         }
 
         protected void AssertHasGameText(Card card)
         {
-            Assert.IsTrue(card.HasGameText, card.Title + " should have game text.");
+            ClassicAssert.IsTrue(card.HasGameText, card.Title + " should have game text.");
         }
 
         protected bool IsHero(Card card, CardSource cardSource = null)
@@ -3212,19 +3213,19 @@ namespace Handelabra.Sentinels.UnitTest
             return this.GameController.AskCardControllersIfIsVillainTarget(card, cardSource);
         }
 
-    protected void AssertCardHasKeyword(Card card, string keyword, bool isAdditional)
+        protected void AssertCardHasKeyword(Card card, string keyword, bool isAdditional)
         {
-            Assert.IsTrue(this.GameController.DoesCardContainKeyword(card, keyword), "{0} should have keyword: {1}", card.Identifier, keyword);
+            ClassicAssert.IsTrue(this.GameController.DoesCardContainKeyword(card, keyword), "{0} should have keyword: {1}", card.Identifier, keyword);
             if (isAdditional)
             {
-                Assert.IsTrue(this.GameController.GetAdditionalKeywords(card).Contains(keyword), "{0} should have additional keyword: {1}", card.Identifier, keyword);
+                ClassicAssert.IsTrue(this.GameController.GetAdditionalKeywords(card).Contains(keyword), "{0} should have additional keyword: {1}", card.Identifier, keyword);
             }
         }
 
         protected void AssertCardNoKeyword(Card card, string keyword)
         {
-            Assert.IsFalse(this.GameController.DoesCardContainKeyword(card, keyword), "{0} should not have keyword: {1}", card.Identifier, keyword);
-            Assert.IsFalse(this.GameController.GetAdditionalKeywords(card).Contains(keyword), "{0} should not have additional keyword: {1}", card.Identifier, keyword);
+            ClassicAssert.IsFalse(this.GameController.DoesCardContainKeyword(card, keyword), "{0} should not have keyword: {1}", card.Identifier, keyword);
+            ClassicAssert.IsFalse(this.GameController.GetAdditionalKeywords(card).Contains(keyword), "{0} should not have additional keyword: {1}", card.Identifier, keyword);
         }
 
         protected void AssertIsInPlay(params Card[] cards)
@@ -3234,13 +3235,13 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertIsInPlayAndNotUnderCard(Card card)
         {
-            Assert.IsTrue(card.IsInPlayAndHasGameText, card.Title + " should be in play, but not under another card.");
+            ClassicAssert.IsTrue(card.IsInPlayAndHasGameText, card.Title + " should be in play, but not under another card.");
         }
 
         protected void AssertIsInPlayAndNotUnderCard(string identifier, int minQuantity = 1, int maxQuantity = 1)
         {
             int count = FindCardsWhere(card => card.IsInPlay && card.Identifier == identifier).Count();
-            Assert.IsTrue(count >= minQuantity && count <= maxQuantity, identifier + " is not in play.");
+            ClassicAssert.IsTrue(count >= minQuantity && count <= maxQuantity, identifier + " is not in play.");
         }
 
         protected void AssertIsInPlay(IEnumerable<Card> cards)
@@ -3263,12 +3264,12 @@ namespace Handelabra.Sentinels.UnitTest
         {
             var cards = this.GameController.FindCardsWhere(card => card.IsInPlay && card.PromoIdentifierOrIdentifier == identifier, false);
             int count = cards.Count();
-            Assert.IsTrue(count >= minQuantity && count <= maxQuantity, identifier + " is not in play.");
+            ClassicAssert.IsTrue(count >= minQuantity && count <= maxQuantity, identifier + " is not in play.");
         }
 
         protected void AssertNotInPlay(Card card)
         {
-            Assert.IsFalse(card.IsInPlay, card.Title + " should not be in play, but it is.");
+            ClassicAssert.IsFalse(card.IsInPlay, card.Title + " should not be in play, but it is.");
         }
 
         protected void AssertNotInPlay(params Card[] cards)
@@ -3283,14 +3284,14 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotInTrash(TurnTakerController ttc, string identifier)
         {
-            Assert.IsFalse(ttc.TurnTaker.Trash.Cards.Any(c => c.Identifier == identifier), identifier + " should not be in the trash, but it is.");
+            ClassicAssert.IsFalse(ttc.TurnTaker.Trash.Cards.Any(c => c.Identifier == identifier), identifier + " should not be in the trash, but it is.");
         }
 
         protected void AssertNotInTrash(params Card[] cards)
         {
             foreach (var card in cards)
             {
-                Assert.IsFalse(card.Location.IsTrash, card.Title + " was not supposed to be in the trash, but it was.");
+                ClassicAssert.IsFalse(card.Location.IsTrash, card.Title + " was not supposed to be in the trash, but it was.");
             }
         }
 
@@ -3312,42 +3313,42 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotInPlay(Func<Card, bool> cardCriteria)
         {
-            Assert.IsFalse(FindCardsWhere(card => card.IsInPlay).Any(cardCriteria), "Card should not be in play.");
+            ClassicAssert.IsFalse(FindCardsWhere(card => card.IsInPlay).Any(cardCriteria), "Card should not be in play.");
         }
 
         protected void AssertNotInPlay(string identifier)
         {
-            Assert.IsTrue(FindCardsWhere(card => card.IsInPlay && card.Identifier == identifier).Count() == 0, identifier + " should not be in play.");
+            ClassicAssert.IsTrue(FindCardsWhere(card => card.IsInPlay && card.Identifier == identifier).Count() == 0, identifier + " should not be in play.");
         }
 
         protected void AssertOffToTheSide(string identifier)
         {
-            Assert.IsTrue(FindCardsWhere(card => card.Location.IsOffToTheSide && card.Identifier == identifier).Count() > 0, "There are no cards with identifier " + identifier + " that are off to the side.");
+            ClassicAssert.IsTrue(FindCardsWhere(card => card.Location.IsOffToTheSide && card.Identifier == identifier).Count() > 0, "There are no cards with identifier " + identifier + " that are off to the side.");
         }
 
         protected void AssertNotOffToTheSide(string identifier)
         {
-            Assert.IsTrue(FindCardsWhere(card => !card.Location.IsOffToTheSide && card.Identifier == identifier).Count() > 0, "There are cards with identifier " + identifier + " that are off to the side.");
+            ClassicAssert.IsTrue(FindCardsWhere(card => !card.Location.IsOffToTheSide && card.Identifier == identifier).Count() > 0, "There are cards with identifier " + identifier + " that are off to the side.");
         }
 
         protected void AssertNotOffToTheSide(TurnTakerController ttc, Func<Card, bool> cardCriteria)
         {
-            Assert.IsFalse(ttc.TurnTaker.OffToTheSide.Cards.Any(cardCriteria), "There were cards in  " + ttc.Name + "'s off to the side location that shouldn't be there.");
+            ClassicAssert.IsFalse(ttc.TurnTaker.OffToTheSide.Cards.Any(cardCriteria), "There were cards in  " + ttc.Name + "'s off to the side location that shouldn't be there.");
         }
 
         protected void AssertNotInDeck(string identifier)
         {
-            Assert.IsTrue(FindCardsWhere(card => card.Location.IsDeck && card.Identifier == identifier).Count() == 0, "There are cards with identifier " + identifier + " that are in a deck.");
+            ClassicAssert.IsTrue(FindCardsWhere(card => card.Location.IsDeck && card.Identifier == identifier).Count() == 0, "There are cards with identifier " + identifier + " that are in a deck.");
         }
 
         protected void AssertOffToTheSide(Card card)
         {
-            Assert.IsTrue(card.Location.IsOffToTheSide, card.Title + " is not off to the side.");
+            ClassicAssert.IsTrue(card.Location.IsOffToTheSide, card.Title + " is not off to the side.");
         }
 
         protected void AssertNotOffToTheSide(Card card)
         {
-            Assert.IsTrue(!card.Location.IsOffToTheSide, card.Title + " is off to the side.");
+            ClassicAssert.IsTrue(!card.Location.IsOffToTheSide, card.Title + " is off to the side.");
         }
 
         protected void AssertOffToTheSide(IEnumerable<Card> cards)
@@ -3362,7 +3363,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInTrash(TurnTakerController ttc, Card card)
         {
-            Assert.IsTrue(card.Location == ttc.TurnTaker.Trash, card.Title + " should be in " + ttc.Name + "'s trash, but it was in " + card.Location.GetFriendlyName());
+            ClassicAssert.IsTrue(card.Location == ttc.TurnTaker.Trash, card.Title + " should be in " + ttc.Name + "'s trash, but it was in " + card.Location.GetFriendlyName());
         }
         protected void AssertInTrash(params Card[] cards)
         {
@@ -3381,7 +3382,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInTrash(Card card)
         {
-            AssertInTrash(this.GameController.FindTurnTakerController(card.Owner), card);
+            AssertAtLocation(card, card.NativeTrash);
         }
 
         protected void AssertInTrash(string identifier)
@@ -3392,7 +3393,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInTrash(TurnTakerController ttc, string identifier)
         {
-            Assert.IsTrue(ttc.TurnTaker.Trash.Cards.Any(c => c.Identifier == identifier), identifier + " should be in " + ttc.Name + "'s trash.");
+            ClassicAssert.IsTrue(ttc.TurnTaker.Trash.Cards.Any(c => c.Identifier == identifier), identifier + " should be in " + ttc.Name + "'s trash.");
         }
 
         protected void AssertInTrash(TurnTakerController ttc, string[] identifiers)
@@ -3413,8 +3414,8 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInPlayArea(TurnTakerController ttc, Card card)
         {
-            Assert.IsTrue(card.Location == ttc.TurnTaker.PlayArea, card.Title + " should be in " + ttc.Name + "'s Play Area, but was instead in " + card.Location.GetFriendlyName());
-            Assert.IsTrue(ttc.TurnTaker.PlayArea.Cards.Contains(card), ttc.TurnTaker.PlayArea.GetFriendlyName() + " does not contain a reference to " + card.Title);
+            ClassicAssert.IsTrue(card.Location == ttc.TurnTaker.PlayArea, card.Title + " should be in " + ttc.Name + "'s Play Area, but was instead in " + card.Location.GetFriendlyName());
+            ClassicAssert.IsTrue(ttc.TurnTaker.PlayArea.Cards.Contains(card), ttc.TurnTaker.PlayArea.GetFriendlyName() + " does not contain a reference to " + card.Title);
         }
 
         protected void AssertInPlayArea(TurnTakerController ttc, IEnumerable<Card> cards)
@@ -3424,8 +3425,8 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotInPlayArea(TurnTakerController ttc, Card card)
         {
-            Assert.IsFalse(card.Location == ttc.TurnTaker.PlayArea, card.Title + " should not be in " + ttc.Name + "'s Play Area, but it is.");
-            Assert.IsFalse(ttc.TurnTaker.PlayArea.Cards.Contains(card), ttc.TurnTaker.PlayArea.GetFriendlyName() + " contains a reference to " + card.Title);
+            ClassicAssert.IsFalse(card.Location == ttc.TurnTaker.PlayArea, card.Title + " should not be in " + ttc.Name + "'s Play Area, but it is.");
+            ClassicAssert.IsFalse(ttc.TurnTaker.PlayArea.Cards.Contains(card), ttc.TurnTaker.PlayArea.GetFriendlyName() + " contains a reference to " + card.Title);
         }
 
         protected void AssertPhaseActionCount(int? phaseActionCount, TurnPhase turnPhase = null)
@@ -3434,15 +3435,15 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 turnPhase = this.GameController.ActiveTurnPhase;
             }
-            Assert.AreEqual(phaseActionCount, turnPhase.GetPhaseActionCount(), "Phase action count is incorrect");
+            ClassicAssert.AreEqual(phaseActionCount, turnPhase.GetPhaseActionCount(), "Phase action count is incorrect");
         }
 
         protected void AssertAtLocation(Card card, Location location, bool onBottom = false)
         {
-            Assert.AreEqual(location, card.Location, "Expected " + card.Identifier + " to be at " + location.GetFriendlyName() + ", but it is at " + card.Location.GetFriendlyName());
+            ClassicAssert.AreEqual(location, card.Location, "Expected " + card.Identifier + " to be at " + location.GetFriendlyName() + ", but it is at " + card.Location.GetFriendlyName());
             if (onBottom)
             {
-                Assert.AreEqual(location.BottomCard, card, "Expected " + card.Identifier + " to be at the bottom of " + location.GetFriendlyName() + ", but it is not.");
+                ClassicAssert.AreEqual(location.BottomCard, card, "Expected " + card.Identifier + " to be at the bottom of " + location.GetFriendlyName() + ", but it is not.");
             }
         }
 
@@ -3450,7 +3451,7 @@ namespace Handelabra.Sentinels.UnitTest
         {
             foreach (var card in FindCardsWhere(cardCriteria))
             {
-                Assert.AreEqual(location, card.Location);
+                ClassicAssert.AreEqual(location, card.Location);
             }
         }
 
@@ -3472,19 +3473,19 @@ namespace Handelabra.Sentinels.UnitTest
         {
             int actual = GetNumberOfCardsInHand(httc);
             number = Math.Max(number, 0);
-            Assert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their hand, but instead had {2}.", httc.Name, number, actual));
+            ClassicAssert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their hand, but instead had {2}.", httc.Name, number, actual));
         }
 
         protected void AssertNumberOfCardsNextToCard(Card card, int number)
         {
             int actual = GetNumberOfCardsNextToCard(card);
-            Assert.AreEqual(number, actual, String.Format("{0} should have had {1} cards next to it, but instead had {2}.", card.Title, number, actual));
+            ClassicAssert.AreEqual(number, actual, String.Format("{0} should have had {1} cards next to it, but instead had {2}.", card.Title, number, actual));
         }
 
         protected void AssertNumberOfCardsInDeck(TurnTakerController ttc, int number)
         {
             int actual = ttc.TurnTaker.Deck.Cards.Count();
-            Assert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their deck, but instead had {2}.", ttc.Name, number, actual));
+            ClassicAssert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their deck, but instead had {2}.", ttc.Name, number, actual));
         }
 
         protected void AssertNumberOfCardsInTrash(TurnTakerController ttc, int number, Func<Card, bool> cardCriteria = null)
@@ -3496,7 +3497,7 @@ namespace Handelabra.Sentinels.UnitTest
 
             var trash = ttc.TurnTaker.Trash;
             int actual = trash.Cards.Where(cardCriteria).Count();
-            Assert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their trash, but instead had {2}: {3}", ttc.Name, number, actual, trash.Cards.Select(c => c.Identifier).ToRecursiveString()));
+            ClassicAssert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their trash, but instead had {2}: {3}", ttc.Name, number, actual, trash.Cards.Select(c => c.Identifier).ToRecursiveString()));
         }
 
         protected void AssertNumberOfCardsAtLocation(Location location, int number, Func<Card, bool> cardCriteria = null)
@@ -3506,26 +3507,26 @@ namespace Handelabra.Sentinels.UnitTest
                 cardCriteria = c => true;
             }
             int actual = location.Cards.Where(cardCriteria).Count();
-            Assert.AreEqual(number, actual, String.Format("{0} should have had {1} cards, but instead had {2}.", location.GetFriendlyName(), number, actual));
+            ClassicAssert.AreEqual(number, actual, String.Format("{0} should have had {1} cards, but instead had {2}.", location.GetFriendlyName(), number, actual));
         }
 
         protected void AssertNumberOfCardsOutOfGame(TurnTakerController ttc, int number)
         {
             int actual = ttc.TurnTaker.OutOfGame.Cards.Count();
-            Assert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their out-of-game, but instead had {2}.", ttc.Name, number, actual));
+            ClassicAssert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their out-of-game, but instead had {2}.", ttc.Name, number, actual));
         }
 
         protected void AssertNumberOfCardsInRevealed(TurnTakerController ttc, int number)
         {
             int actual = ttc.TurnTaker.Revealed.Cards.Count();
-            Assert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their revealed area, but instead had {2}.", ttc.Name, number, actual));
+            ClassicAssert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in their revealed area, but instead had {2}.", ttc.Name, number, actual));
         }
 
         protected void AssertNumberOfCardsInPlay(TurnTakerController ttc, int number)
         {
             var cardsInPlay = ttc.TurnTaker.GetAllCards().Where(c => c.IsInPlay);
             var actual = cardsInPlay.Count();
-            Assert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in play, but actually had {2}: {3}", ttc.Name, number, actual, cardsInPlay.Select(c => c.Title).ToCommaList()));
+            ClassicAssert.AreEqual(number, actual, String.Format("{0} should have had {1} cards in play, but actually had {2}: {3}", ttc.Name, number, actual, cardsInPlay.Select(c => c.Title).ToCommaList()));
         }
 
         protected void AssertNumberOfCardsInPlay(Func<Card, bool> criteria, int number, bool includeUnderCard = false)
@@ -3535,13 +3536,13 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 actual = FindCardsWhere(c => c.IsInPlay && criteria(c)).Count();
             }
-            Assert.AreEqual(number, actual, String.Format("There are supposed to be {0} cards of matching criteria in play, but there are {1}.", number, actual));
+            ClassicAssert.AreEqual(number, actual, String.Format("There are supposed to be {0} cards of matching criteria in play, but there are {1}.", number, actual));
         }
 
         protected void AssertNumberOfCardsInGame(Func<Card, bool> criteria, int number)
         {
             int actual = FindCardsWhere(c => criteria(c) && !c.IsOutOfGame).Count();
-            Assert.AreEqual(number, actual, String.Format("There are supposed to be {0} cards of matching criteria in the game, but there are {1}.", number, actual));
+            ClassicAssert.AreEqual(number, actual, String.Format("There are supposed to be {0} cards of matching criteria in the game, but there are {1}.", number, actual));
         }
 
         protected void AssertNumberOfCardsInPlay(string identifier, int number)
@@ -3552,39 +3553,39 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertNumberOfUsablePowers(Card card, int numberExpected)
         {
             int actual = this.GameController.GetUsablePowersThisTurn(this.GameController.FindCardController(card).HeroTurnTakerController).Where(p => p.CardController.Card == card).Count();
-            Assert.AreEqual(numberExpected, actual, "There were " + actual + " usable powers this turn for " + card.Title + ".");
+            ClassicAssert.AreEqual(numberExpected, actual, "There were " + actual + " usable powers this turn for " + card.Title + ".");
         }
 
         protected void AssertNumberOfUsablePowers(HeroTurnTakerController httc, int numberExpected)
         {
             var usablePowers = this.GameController.GetUsablePowersThisTurn(httc);
             int actual = usablePowers.Count();
-            Assert.AreEqual(numberExpected, actual, "There were " + actual + " usable powers this turn for " + httc.Name + ".");
+            ClassicAssert.AreEqual(numberExpected, actual, "There were " + actual + " usable powers this turn for " + httc.Name + ".");
         }
 
         protected void AssertIncapacitated(HeroTurnTakerController httc)
         {
-            Assert.IsTrue(httc.HeroTurnTaker.IsIncapacitatedOrOutOfGame, httc.Name + " should be incapacitated or out of game.");
+            ClassicAssert.IsTrue(httc.HeroTurnTaker.IsIncapacitatedOrOutOfGame, httc.Name + " should be incapacitated or out of game.");
         }
 
         protected void AssertIncapacitated(TurnTakerController ttc)
         {
-            Assert.IsTrue(ttc.IsIncapacitatedOrOutOfGame, ttc.Name + " should be incapacitated or out of game.");
+            ClassicAssert.IsTrue(ttc.IsIncapacitatedOrOutOfGame, ttc.Name + " should be incapacitated or out of game.");
         }
 
         protected void AssertFlipped(TurnTakerController ttc)
         {
-            Assert.IsTrue(ttc.CharacterCard.IsFlipped, ttc.Name + " should be flipped.");
+            ClassicAssert.IsTrue(ttc.CharacterCard.IsFlipped, ttc.Name + " should be flipped.");
         }
 
         protected void AssertFlipped(Card card)
         {
-            Assert.IsTrue(card.IsFlipped, card.Title + " should be flipped.");
+            ClassicAssert.IsTrue(card.IsFlipped, card.Title + " should be flipped.");
         }
 
         protected void AssertNotIncapacitatedOrOutOfGame(TurnTakerController ttc)
         {
-            Assert.IsFalse(ttc.IsIncapacitatedOrOutOfGame, ttc.Name + " is not supposed to be considered incapacitated or out of game.");
+            ClassicAssert.IsFalse(ttc.IsIncapacitatedOrOutOfGame, ttc.Name + " is not supposed to be considered incapacitated or out of game.");
         }
 
         protected void AssertFlipped(params Card[] cards)
@@ -3594,22 +3595,22 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotFlipped(TurnTakerController ttc)
         {
-            Assert.IsFalse(ttc.CharacterCard.IsFlipped, ttc.Name + " should not be flipped.");
+            ClassicAssert.IsFalse(ttc.CharacterCard.IsFlipped, ttc.Name + " should not be flipped.");
         }
 
         protected void AssertNotFlipped(Card card)
         {
-            Assert.IsFalse(card.IsFlipped, card.Title + " should not be flipped.");
+            ClassicAssert.IsFalse(card.IsFlipped, card.Title + " should not be flipped.");
         }
 
         protected void AssertGameOver(EndingResult? expectedResult = null)
         {
-            Assert.IsTrue(this.GameController.IsGameOver, "The game should be over.");
+            ClassicAssert.IsTrue(this.GameController.IsGameOver, "The game should be over.");
             if (expectedResult.HasValue)
             {
                 if (this.GameController.GameOverEndingResult.HasValue)
                 {
-                    Assert.IsTrue(this.GameController.GameOverEndingResult.Value == expectedResult.Value, "Expected game over ending result " + expectedResult + ", but was " + this.GameController.GameOverEndingResult.Value);
+                    ClassicAssert.IsTrue(this.GameController.GameOverEndingResult.Value == expectedResult.Value, "Expected game over ending result " + expectedResult + ", but was " + this.GameController.GameOverEndingResult.Value);
                 }
                 else
                 {
@@ -3620,22 +3621,22 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotGameOver(string message = "The game should not be over.")
         {
-            Assert.IsFalse(this.GameController.IsGameOver, message);
+            ClassicAssert.IsFalse(this.GameController.IsGameOver, message);
         }
 
         protected void AssertPretendGameOver(string message = "The game should pretend to be over.")
         {
-            Assert.IsTrue(this.GameController.IsPretendGameOver, message);
+            ClassicAssert.IsTrue(this.GameController.IsPretendGameOver, message);
         }
 
         protected void AssertTurnTakerNotInGame(string identifier)
         {
-            Assert.IsFalse(this.GameController.AllTurnTakers.Any(tt => tt.Identifier == identifier));
+            ClassicAssert.IsFalse(this.GameController.AllTurnTakers.Any(tt => tt.Identifier == identifier));
         }
 
         protected void AssertTurnTakerInGame(string identifier)
         {
-            Assert.IsTrue(this.GameController.AllTurnTakers.Any(tt => tt.Identifier == identifier));
+            ClassicAssert.IsTrue(this.GameController.AllTurnTakers.Any(tt => tt.Identifier == identifier));
         }
 
         protected void ForceGameOver(EndingResult result, string output)
@@ -3721,7 +3722,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInHand(HeroTurnTakerController hero, Card card)
         {
-            Assert.IsTrue(hero.HeroTurnTaker.Hand.Cards.Contains(card), "Expected " + card.Title + " to be in " + hero.Name + "'s hand, but it was in " + card.Location.GetFriendlyName());
+            ClassicAssert.IsTrue(hero.HeroTurnTaker.Hand.Cards.Contains(card), "Expected " + card.Title + " to be in " + hero.Name + "'s hand, but it was in " + card.Location.GetFriendlyName());
         }
 
         protected void AssertInHand(params Card[] cards)
@@ -3734,7 +3735,7 @@ namespace Handelabra.Sentinels.UnitTest
             if (card.Owner != null && card.Owner.IsHero)
             {
                 var hero = card.Owner.ToHero();
-                Assert.IsTrue(hero.Hand.Cards.Contains(card), "Expected " + card.Title + " to be in " + hero.Name + "'s hand, but it was in " + card.Location.GetFriendlyName());
+                ClassicAssert.IsTrue(hero.Hand.Cards.Contains(card), "Expected " + card.Title + " to be in " + hero.Name + "'s hand, but it was in " + card.Location.GetFriendlyName());
             }
             else
             {
@@ -3757,7 +3758,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInHand(HeroTurnTakerController hero, string identifier)
         {
-            Assert.IsTrue(hero.HeroTurnTaker.Hand.Cards.Any(card => card.Identifier == identifier), identifier + " is not in " + hero.Name + "'s hand.");
+            ClassicAssert.IsTrue(hero.HeroTurnTaker.Hand.Cards.Any(card => card.Identifier == identifier), identifier + " is not in " + hero.Name + "'s hand.");
         }
 
         protected void AssertInHand(string identifier)
@@ -3773,7 +3774,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotInHand(HeroTurnTakerController hero, string identifier)
         {
-            Assert.IsFalse(hero.HeroTurnTaker.Hand.Cards.Any(card => card.Identifier == identifier), identifier + " was found in " + hero.Name + "'s hand.");
+            ClassicAssert.IsFalse(hero.HeroTurnTaker.Hand.Cards.Any(card => card.Identifier == identifier), identifier + " was found in " + hero.Name + "'s hand.");
         }
 
         protected void AssertNotInHand(IEnumerable<Card> cards)
@@ -3783,17 +3784,17 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotInHand(Card card)
         {
-            Assert.IsFalse(card.Location.IsHand, card.Title + " is not supposed to be in " + card.Owner.Name + "'s hand!");
+            ClassicAssert.IsFalse(card.Location.IsHand, card.Title + " is not supposed to be in " + card.Owner.Name + "'s hand!");
         }
 
         protected void AssertInDeck(TurnTakerController ttc, Card card)
         {
-            Assert.IsTrue(ttc.TurnTaker.Deck.Cards.Contains(card), card.Title + " was supposed to be in " + ttc.Name + "'s deck, but was in " + card.Location.GetFriendlyName() + ".");
+            ClassicAssert.IsTrue(ttc.TurnTaker.Deck.Cards.Contains(card), card.Title + " was supposed to be in " + ttc.Name + "'s deck, but was in " + card.Location.GetFriendlyName() + ".");
         }
 
         protected void AssertInDeck(Card card)
         {
-            AssertInDeck(this.GameController.FindTurnTakerController(card.Owner), card);
+            AssertAtLocation(card, card.NativeDeck);
         }
 
         protected void AssertInDeck(IEnumerable<Card> cards)
@@ -3816,7 +3817,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInDeckOrHand(HeroTurnTakerController httc, Card card)
         {
-            Assert.IsTrue(httc.TurnTaker.Deck.Cards.Contains(card) || httc.HeroTurnTaker.Hand.Cards.Contains(card), card.Title + " was supposed to be in " + httc.Name + "'s deck or hand, but was in " + card.Location.GetFriendlyName() + ".");
+            ClassicAssert.IsTrue(httc.TurnTaker.Deck.Cards.Contains(card) || httc.HeroTurnTaker.Hand.Cards.Contains(card), card.Title + " was supposed to be in " + httc.Name + "'s deck or hand, but was in " + card.Location.GetFriendlyName() + ".");
         }
 
         protected void AssertInDeck(TurnTakerController ttc, IEnumerable<Card> cards)
@@ -3836,24 +3837,24 @@ namespace Handelabra.Sentinels.UnitTest
         {
             if (offset == 0)
             {
-                Assert.IsTrue(ttc.TurnTaker.Deck.TopCard == card, "Expected " + card.Title + " to be on top of " + ttc.Name + "'s deck, but it was " + ttc.TurnTaker.Deck.TopCard.Title + ".");
+                ClassicAssert.IsTrue(ttc.TurnTaker.Deck.TopCard == card, "Expected " + card.Title + " to be on top of " + ttc.Name + "'s deck, but it was " + ttc.TurnTaker.Deck.TopCard.Title + ".");
             }
             else
             {
-                Assert.IsTrue(ttc.TurnTaker.Deck.Cards.ElementAt(ttc.TurnTaker.Deck.Cards.Count() - 1 - offset) == card, "Expected " + card.Title + " to be offset " + offset + " on top of " + ttc.Name + "'s deck, but it was " + ttc.TurnTaker.Deck.TopCard.Title + ".");
+                ClassicAssert.IsTrue(ttc.TurnTaker.Deck.Cards.ElementAt(ttc.TurnTaker.Deck.Cards.Count() - 1 - offset) == card, "Expected " + card.Title + " to be offset " + offset + " on top of " + ttc.Name + "'s deck, but it was " + ttc.TurnTaker.Deck.TopCard.Title + ".");
             }
         }
 
         protected void AssertOnTopOfLocation(Card card, Location location, int offset = 0)
         {
             var actual = location.Cards.Reverse().Skip(offset).FirstOrDefault();
-            Assert.AreSame(card, actual, "Expected {0} to be on top of {1}, but it was {2}.", card.Title, location.GetFriendlyName(), actual.Title);
+            ClassicAssert.AreSame(card, actual, "Expected {0} to be on top of {1}, but it was {2}.", card.Title, location.GetFriendlyName(), actual.Title);
         }
 
         protected void AssertOnBottomOfLocation(Card card, Location location, int offset = 0)
         {
             var actual = location.Cards.Skip(offset).FirstOrDefault();
-            Assert.AreSame(card, actual, "Expected {0} to be on bottom of {1}, but it was {2}.", card.Title, location.GetFriendlyName(), actual.Title);
+            ClassicAssert.AreSame(card, actual, "Expected {0} to be on bottom of {1}, but it was {2}.", card.Title, location.GetFriendlyName(), actual.Title);
         }
 
         protected void AssertOnTopOfDeck(Card card, int offset = 0)
@@ -3874,7 +3875,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertOnTopOfDeck(TurnTakerController ttc, string identifier, int offset = 0)
         {
-            Assert.AreEqual(identifier, ttc.TurnTaker.Deck.TopCard.Identifier, "Expected " + identifier + " to be on top of " + ttc.Name + "'s deck.");
+            ClassicAssert.AreEqual(identifier, ttc.TurnTaker.Deck.TopCard.Identifier, "Expected " + identifier + " to be on top of " + ttc.Name + "'s deck.");
         }
 
         protected void AssertOnBottomOfDeck(Card card, int offset = 0)
@@ -3895,37 +3896,37 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertOnBottomOfTrash(TurnTakerController ttc, Card card)
         {
-            Assert.IsTrue(ttc.TurnTaker.Trash.BottomCard == card, "Expected " + card.Identifier + " to be on bottom of " + ttc.Name + "'s trash.");
+            ClassicAssert.IsTrue(ttc.TurnTaker.Trash.BottomCard == card, "Expected " + card.Identifier + " to be on bottom of " + ttc.Name + "'s trash.");
         }
 
         protected void AssertOnBottomOfDeck(TurnTakerController ttc, Card card, int offset = 0)
         {
-            Assert.IsTrue(ttc.TurnTaker.Deck.GetBottomCards(offset + 1).LastOrDefault() == card, "Expected " + card.Identifier + " to be on bottom of " + ttc.Name + "'s deck.");
+            ClassicAssert.IsTrue(ttc.TurnTaker.Deck.GetBottomCards(offset + 1).LastOrDefault() == card, "Expected " + card.Identifier + " to be on bottom of " + ttc.Name + "'s deck.");
         }
 
         protected void AssertOnBottomOfDeck(TurnTakerController ttc, string identifier)
         {
-            Assert.AreEqual(identifier, ttc.TurnTaker.Deck.BottomCard.Identifier, "Expected " + identifier + " to be on the bottom of " + ttc.Name + "'s deck.");
+            ClassicAssert.AreEqual(identifier, ttc.TurnTaker.Deck.BottomCard.Identifier, "Expected " + identifier + " to be on the bottom of " + ttc.Name + "'s deck.");
         }
 
         protected void AssertOnTopOfTrash(TurnTakerController ttc, Card card, int offset = 0)
         {
             if (offset == 0)
             {
-                Assert.IsTrue(ttc.TurnTaker.Trash.TopCard == card);
+                ClassicAssert.IsTrue(ttc.TurnTaker.Trash.TopCard == card);
             }
             else
             {
-                Assert.IsTrue(ttc.TurnTaker.Trash.Cards.ElementAt(ttc.TurnTaker.Trash.Cards.Count() - 1 - offset) == card);
+                ClassicAssert.IsTrue(ttc.TurnTaker.Trash.Cards.ElementAt(ttc.TurnTaker.Trash.Cards.Count() - 1 - offset) == card);
             }
         }
 
         protected void AssertCardsInPlayOrder(Card[] orderedCards)
         {
-            Assert.AreEqual(orderedCards.Count(), this.GameController.Game.OrderedCardsInPlay.Count());
+            ClassicAssert.AreEqual(orderedCards.Count(), this.GameController.Game.OrderedCardsInPlay.Count());
             for (int i = 0; i < orderedCards.Count(); i++)
             {
-                Assert.AreEqual(this.GameController.Game.OrderedCardsInPlay.ElementAt(i), orderedCards[i]);
+                ClassicAssert.AreEqual(this.GameController.Game.OrderedCardsInPlay.ElementAt(i), orderedCards[i]);
             }
         }
 
@@ -3937,9 +3938,9 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertTurnPhaseDetails(TurnPhase turnPhase, TurnTakerController ttc, Phase phase, bool isEphemeral = false)
         {
             var ephemeralString = turnPhase.EphemeralSource != null ? "ephemeral " : null;
-            Assert.AreEqual(ttc.TurnTaker, turnPhase.TurnTaker, "Expected " + ttc.TurnTaker.Name + "'s " + phase + " phase, but was " + ephemeralString + turnPhase.TurnTaker.Name + "'s " + turnPhase.Phase + " phase.");
-            Assert.AreEqual(phase, turnPhase.Phase, "Expected " + phase + ", but was " + turnPhase.Phase + ".");
-            Assert.AreEqual(isEphemeral, turnPhase.IsEphemeral, ttc.TurnTaker.Name + "'s " + phase + " phase should be ephemeral.");
+            ClassicAssert.AreEqual(ttc.TurnTaker, turnPhase.TurnTaker, "Expected " + ttc.TurnTaker.Name + "'s " + phase + " phase, but was " + ephemeralString + turnPhase.TurnTaker.Name + "'s " + turnPhase.Phase + " phase.");
+            ClassicAssert.AreEqual(phase, turnPhase.Phase, "Expected " + phase + ", but was " + turnPhase.Phase + ".");
+            ClassicAssert.AreEqual(isEphemeral, turnPhase.IsEphemeral, ttc.TurnTaker.Name + "'s " + phase + " phase should be ephemeral.");
         }
 
         protected void AssertTurnPhaseList(int index, TurnTakerController ttc, Phase phase, bool isEphemeral = false)
@@ -4106,7 +4107,7 @@ namespace Handelabra.Sentinels.UnitTest
                 result = this.GameController.FindVillainTurnTakerControllers(false).FirstOrDefault();
             }
 
-            Assert.IsNotNull(result, "FindVillain could not find {0} in the game.", identifier);
+            ClassicAssert.IsNotNull(result, "FindVillain could not find {0} in the game.", identifier);
 
             return result;
         }
@@ -4124,7 +4125,7 @@ namespace Handelabra.Sentinels.UnitTest
                 result = this.GameController.FindTurnTakerController(identifier + "Team");
             }
 
-            Assert.IsNotNull(result, "FindVillainTeamMember could not find {0} in the game.", identifier);
+            ClassicAssert.IsNotNull(result, "FindVillainTeamMember could not find {0} in the game.", identifier);
 
             return result;
         }
@@ -4132,7 +4133,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected TurnTakerController FindEnvironment(BattleZone bz = null)
         {
             TurnTakerController result = this.GameController.FindEnvironmentTurnTakerController(bz);
-            Assert.IsNotNull(result, "FindEnvironment could not find an environment in the game.");
+            ClassicAssert.IsNotNull(result, "FindEnvironment could not find an environment in the game.");
             return result;
         }
 
@@ -4155,7 +4156,7 @@ namespace Handelabra.Sentinels.UnitTest
 
             if (identifier != null && assertIfMissing)
             {
-                Assert.IsNotNull(result, "FindHero could not find {0} in the game.", identifier);
+                ClassicAssert.IsNotNull(result, "FindHero could not find {0} in the game.", identifier);
             }
 
             return result;
@@ -4182,9 +4183,9 @@ namespace Handelabra.Sentinels.UnitTest
             else
             {
                 var entry = entries.First();
-                Assert.AreEqual(answerIndex, entry.AnswerIndex, "Answer index should be " + answerIndex ?? "null" + " but was " + entry.AnswerIndex ?? "null");
-                Assert.AreEqual(skipped, entry.Skipped, "Skipped should be " + skipped ?? "null" + " but was " + entry.Skipped ?? "null");
-                Assert.AreEqual(autodecided, entry.AutoDecided, "Auto decided should be " + autodecided ?? "null" + " but was " + entry.AutoDecided ?? "null");
+                ClassicAssert.AreEqual(answerIndex, entry.AnswerIndex, "Answer index should be " + answerIndex ?? "null" + " but was " + entry.AnswerIndex ?? "null");
+                ClassicAssert.AreEqual(skipped, entry.Skipped, "Skipped should be " + skipped ?? "null" + " but was " + entry.Skipped ?? "null");
+                ClassicAssert.AreEqual(autodecided, entry.AutoDecided, "Auto decided should be " + autodecided ?? "null" + " but was " + entry.AutoDecided ?? "null");
             }
         }
 
@@ -4202,14 +4203,14 @@ namespace Handelabra.Sentinels.UnitTest
         protected GameControllerDecisionEvent AssertNoDecision(SelectionType selectionTypeThatShouldNotShowUp)
         {
             GameControllerDecisionEvent decider = decision =>
+            {
+                if (decision.SelectionType == selectionTypeThatShouldNotShowUp)
                 {
-                    if (decision.SelectionType == selectionTypeThatShouldNotShowUp)
-                    {
-                        Assert.Fail("No decision of selection type " + selectionTypeThatShouldNotShowUp + " was expected to be present, but there was a decision: " + decision.ToStringForMultiplayerDebugging());
-                    }
+                    Assert.Fail("No decision of selection type " + selectionTypeThatShouldNotShowUp + " was expected to be present, but there was a decision: " + decision.ToStringForMultiplayerDebugging());
+                }
 
-                    return this.MakeDecisions(decision);
-                };
+                return this.MakeDecisions(decision);
+            };
 
             ReplaceOnMakeDecisions(decider);
             return decider;
@@ -4222,7 +4223,7 @@ namespace Handelabra.Sentinels.UnitTest
             GameControllerDecisionEvent decider = decisions =>
             {
                 numberSoFar++;
-                Assert.LessOrEqual(numberSoFar, maxNumber, "There are more decisions than expected.");
+                ClassicAssert.LessOrEqual(numberSoFar, maxNumber, "There are more decisions than expected.");
                 return this.MakeDecisions(decisions);
             };
 
@@ -4232,22 +4233,22 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertCanPerformPhaseAction()
         {
-            Assert.IsTrue(this.GameController.CanPerformPhaseAction(this.GameController.ActiveTurnPhase), "Should be able to perform action in phase {0}", this.GameController.ActiveTurnPhase);
+            ClassicAssert.IsTrue(this.GameController.CanPerformPhaseAction(this.GameController.ActiveTurnPhase), "Should be able to perform action in phase {0}", this.GameController.ActiveTurnPhase);
         }
 
         protected void AssertCannotPerformPhaseAction()
         {
-            Assert.IsFalse(this.GameController.CanPerformPhaseAction(this.GameController.ActiveTurnPhase), "Should not be able to perform action in phase {0}", this.GameController.ActiveTurnPhase);
+            ClassicAssert.IsFalse(this.GameController.CanPerformPhaseAction(this.GameController.ActiveTurnPhase), "Should not be able to perform action in phase {0}", this.GameController.ActiveTurnPhase);
         }
 
         protected void AssertCanPlayCards(TurnTakerController ttc)
         {
-            Assert.IsTrue(this.GameController.CanPerformAction<PlayCardAction>(ttc, null), ttc.Name + " should be able to play cards.");
+            ClassicAssert.IsTrue(this.GameController.CanPerformAction<PlayCardAction>(ttc, null), ttc.Name + " should be able to play cards.");
         }
 
         protected void AssertCannotPlayCards(TurnTakerController ttc)
         {
-            Assert.IsFalse(this.GameController.CanPerformAction<PlayCardAction>(ttc, null), ttc.Name + " should not be able to play cards.");
+            ClassicAssert.IsFalse(this.GameController.CanPerformAction<PlayCardAction>(ttc, null), ttc.Name + " should not be able to play cards.");
             var keeper = ttc.TurnTaker.GetAllCards().Where(c => !c.IsCharacter && c.IsKeeper).FirstOrDefault();
             Console.WriteLine("Checking to make sure {0} cannot play cards by playing {1} from {2}", ttc.Name, keeper.Identifier, keeper.Location.GetFriendlyName());
             PlayCard(keeper);
@@ -4257,22 +4258,22 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertDamagePreviewResults(IEnumerable<DamagePreviewResult> results, int index, Card target, int amount, DamageType? damageType)
         {
             DamagePreviewResult result = results.ElementAt(index);
-            Assert.AreEqual(target, result.Target, "Damage preview target is incorrect");
-            Assert.AreEqual(amount, result.Amount, "Damage preview amount is incorrect");
+            ClassicAssert.AreEqual(target, result.Target, "Damage preview target is incorrect");
+            ClassicAssert.AreEqual(amount, result.Amount, "Damage preview amount is incorrect");
             if (damageType.HasValue)
             {
-                Assert.AreEqual(damageType.Value, result.DamageType, "Damage preview type is incorrect");
+                ClassicAssert.AreEqual(damageType.Value, result.DamageType, "Damage preview type is incorrect");
             }
             else
             {
-                Assert.IsFalse(result.DamageType.HasValue, "Damage preview type expected to be unknown, but was defined.");
+                ClassicAssert.IsFalse(result.DamageType.HasValue, "Damage preview type expected to be unknown, but was defined.");
             }
         }
 
         protected void AssertDamagePreviewResultsNumberOfActions(IEnumerable<DamagePreviewResult> results, int index, int expectedNumberOfActions)
         {
             DamagePreviewResult result = results.ElementAt(index);
-            Assert.AreEqual(expectedNumberOfActions, result.OrderedGameActions.Count(), "Damage preview number of actions are incorrect");
+            ClassicAssert.AreEqual(expectedNumberOfActions, result.OrderedGameActions.Count(), "Damage preview number of actions are incorrect");
         }
 
         protected void AssertDamagePreviewNoDuplicates(IEnumerable<DamagePreviewResult> results, int index)
@@ -4297,22 +4298,22 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertDamagePreviewResultNotKnowable(IEnumerable<DamagePreviewResult> results, int index)
         {
-            Assert.IsFalse(results.ElementAt(index).IsResultKnowable, "Preview result of this damage should not be knowable, but is marked as knowable.");
+            ClassicAssert.IsFalse(results.ElementAt(index).IsResultKnowable, "Preview result of this damage should not be knowable, but is marked as knowable.");
         }
 
         protected void AssertDamagePreviewResultKnowable(IEnumerable<DamagePreviewResult> results, int index)
         {
-            Assert.IsTrue(results.ElementAt(index).IsResultKnowable, "Preview result of this damage should be knowable, but is marked as not knowable.");
+            ClassicAssert.IsTrue(results.ElementAt(index).IsResultKnowable, "Preview result of this damage should be knowable, but is marked as not knowable.");
         }
 
         protected void AssertDamagePreviewResultsOrderAffectsOutcome(IEnumerable<DamagePreviewResult> results, int index)
         {
-            Assert.IsTrue(results.ElementAt(index).DoesOrderAffectOutcome);
+            ClassicAssert.IsTrue(results.ElementAt(index).DoesOrderAffectOutcome);
         }
 
         public void AssertNumberOfStatusEffectsInPlay(int number)
         {
-            Assert.AreEqual(number, this.GameController.StatusEffectControllers.Count());
+            ClassicAssert.AreEqual(number, this.GameController.StatusEffectControllers.Count());
         }
 
         public void PrintCannotPerformStringsAndAssertNumber(int number)
@@ -4322,7 +4323,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 Console.WriteLine(s);
             }
-            Assert.AreEqual(number, strings.Count());
+            ClassicAssert.AreEqual(number, strings.Count());
         }
 
         public void PrintSpecialStringsForCard(Card card)
@@ -4372,7 +4373,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 Console.WriteLine(ss.GeneratedString());
             }
-            Assert.AreEqual(number, strings.Count());
+            ClassicAssert.AreEqual(number, strings.Count());
         }
 
         public void PrintUsablePowers(HeroTurnTakerController hero)
@@ -4393,7 +4394,7 @@ namespace Handelabra.Sentinels.UnitTest
 
             foreach (var powerIndex in indexes)
             {
-                Assert.AreEqual(description, powerIndex.Description);
+                ClassicAssert.AreEqual(description, powerIndex.Description);
             }
         }
 
@@ -4426,7 +4427,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertStatusEffectsContains(string statusEffect)
         {
             var strings = this.GameController.StatusEffectControllers.Select(s => s.StatusEffect.ToString());
-            Assert.IsTrue(strings.Any(ss => ss.Contains(statusEffect)), "Status Effects were expected to contain string \"" + statusEffect + "\".");
+            ClassicAssert.IsTrue(strings.Any(ss => ss.Contains(statusEffect)), "Status Effects were expected to contain string \"" + statusEffect + "\".");
         }
 
         protected void PrintHand(HeroTurnTakerController hero)
@@ -4444,29 +4445,29 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertEffectsListSpecialStringsContains(string specialString)
         {
             var strings = this.GameController.GetSpecialStringsForEffectsList().Select(ss => ss.GeneratedString());
-            Assert.IsTrue(strings.Any(ss => ss.Contains(specialString)), "Effects list was expected to contain string \"" + specialString + "\".");
+            ClassicAssert.IsTrue(strings.Any(ss => ss.Contains(specialString)), "Effects list was expected to contain string \"" + specialString + "\".");
         }
 
         protected void AssertEffectsListSpecialStringsContains(Card card, int stringNumber, string specialString)
         {
             var strings = this.GameController.GetSpecialStringsForEffectsList();
-            Assert.IsTrue(strings.Where(ss => ss.CardSource.Card == card).ElementAt(stringNumber).GeneratedString().Contains(specialString), "[" + card.Title + "]: Was expected to contain string \"" + specialString + "\" but string was: \"" + strings.Where(ss => ss.CardSource.Card == card).ElementAt(stringNumber).GeneratedString() + "\".");
+            ClassicAssert.IsTrue(strings.Where(ss => ss.CardSource.Card == card).ElementAt(stringNumber).GeneratedString().Contains(specialString), "[" + card.Title + "]: Was expected to contain string \"" + specialString + "\" but string was: \"" + strings.Where(ss => ss.CardSource.Card == card).ElementAt(stringNumber).GeneratedString() + "\".");
         }
 
         protected void AssertEffectsListSpecialStringsContains(string identifier, int stringNumber, string specialString)
         {
             var output = this.GameController.GetSpecialStringsForEffectsList().Where(ss => ss.CardSource.Card.Identifier == identifier).ElementAt(stringNumber).GeneratedString();
-            Assert.IsTrue(output.Contains(specialString), "[" + identifier + "]: Was expected to contain string \"" + specialString + "\" but string was: \"" + output + "\".");
+            ClassicAssert.IsTrue(output.Contains(specialString), "[" + identifier + "]: Was expected to contain string \"" + specialString + "\" but string was: \"" + output + "\".");
         }
 
         protected void AssertCardSpecialString(Card card, int stringNumber, string specialString)
         {
             var specials = this.GameController.GetSpecialStringsForCard(card);
             var special = specials.ElementAtOrDefault(stringNumber);
-            Assert.NotNull(special, "{0} does not have a special string at index {1}", card.Identifier, stringNumber);
+            ClassicAssert.NotNull(special, "{0} does not have a special string at index {1}", card.Identifier, stringNumber);
             string output = special.GeneratedString();
             Console.WriteLine("Special String: " + output);
-            Assert.AreEqual(specialString, output, "[" + card.Identifier + "]: Special string was expected to be: \"" + specialString + "\" but was \"" + output + "\".");
+            ClassicAssert.AreEqual(specialString, output, "[" + card.Identifier + "]: Special string was expected to be: \"" + specialString + "\" but was \"" + output + "\".");
         }
 
         protected void AssertCardSpecialString(IEnumerable<Card> cards, int stringNumber, string specialString)
@@ -4488,12 +4489,12 @@ namespace Handelabra.Sentinels.UnitTest
                     Console.WriteLine("Special String: " + special.GeneratedString());
                 }
             }
-            Assert.AreEqual(number, actual, "[" + card.Title + "]: Expected to have " + number + " special strings, but had " + actual + ".");
+            ClassicAssert.AreEqual(number, actual, "[" + card.Title + "]: Expected to have " + number + " special strings, but had " + actual + ".");
         }
 
         protected void AssertNumberOfCardsUnderCard(Card card, int number)
         {
-            Assert.AreEqual(number, card.UnderLocation.Cards.Count());
+            ClassicAssert.AreEqual(number, card.UnderLocation.Cards.Count());
         }
 
         protected IEnumerable<Card> GetCardsUnderCard(Card card)
@@ -4504,7 +4505,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertStatusEffectAssociatedTurnTaker(int statusNumber, TurnTaker associatedTurnTaker)
         {
             var actual = this.GameController.StatusEffectControllers.ElementAt(statusNumber).FindAssociatedTurnTaker(this.GameController);
-            Assert.AreEqual(associatedTurnTaker, actual, "Status effect associated turn taker should be {0} but was {1}", associatedTurnTaker.Identifier, actual.Identifier);
+            ClassicAssert.AreEqual(associatedTurnTaker, actual, "Status effect associated turn taker should be {0} but was {1}", associatedTurnTaker.Identifier, actual.Identifier);
         }
 
         protected GameControllerMessageEvent AssertNextMessage(string expectedMessage, GameControllerMessageEvent oldReceiver = null)
@@ -4516,7 +4517,7 @@ namespace Handelabra.Sentinels.UnitTest
             GameControllerMessageEvent receiver = (message) =>
             {
                 RunCoroutine(this.ReceiveMessage(message));
-                Assert.AreEqual(expectedMessage, message.Message);
+                ClassicAssert.AreEqual(expectedMessage, message.Message);
                 _expectedMessageWasShown = true;
                 return DoNothing();
             };
@@ -4533,12 +4534,12 @@ namespace Handelabra.Sentinels.UnitTest
                 RemoveAssertNextMessage(oldReceiver);
             }
             GameControllerMessageEvent receiver = (message) =>
-                {
-                    RunCoroutine(this.ReceiveMessage(message));
-                    Assert.IsTrue(message.Message.Contains(expectedMessage));
-                    _expectedMessageWasShown = true;
-                    return DoNothing();
-                };
+            {
+                RunCoroutine(this.ReceiveMessage(message));
+                ClassicAssert.IsTrue(message.Message.Contains(expectedMessage));
+                _expectedMessageWasShown = true;
+                return DoNothing();
+            };
 
             this.GameController.OnSendMessage += receiver;
             _expectedMessageWasShown = false;
@@ -4559,7 +4560,7 @@ namespace Handelabra.Sentinels.UnitTest
                 var expected = expectedMessages.ElementAtOrDefault(index);
                 if (expected != null)
                 {
-                    Assert.AreEqual(expected, message.Message);
+                    ClassicAssert.AreEqual(expected, message.Message);
                 }
                 else
                 {
@@ -4592,11 +4593,11 @@ namespace Handelabra.Sentinels.UnitTest
                 RemoveAssertNextMessage(oldReceiver);
             }
             GameControllerMessageEvent receiver = (message) =>
-                {
-                    RunCoroutine(this.ReceiveMessage(message));
-                    Assert.Fail("No message was expected, but there was one: '" + message.Message + "'");
-                    return DoNothing();
-                };
+            {
+                RunCoroutine(this.ReceiveMessage(message));
+                Assert.Fail("No message was expected, but there was one: '" + message.Message + "'");
+                return DoNothing();
+            };
 
             this.GameController.OnSendMessage += receiver;
             return receiver;
@@ -4626,7 +4627,7 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertPersistentValue<T>(string key, T value)
         {
             T actual = GetPersistentValueFromView<T>(key);
-            Assert.AreEqual(value, actual, "Persistent value for " + key + " was expected to be " + value + " but was " + actual + ".");
+            ClassicAssert.AreEqual(value, actual, "Persistent value for " + key + " was expected to be " + value + " but was " + actual + ".");
         }
 
         protected void AssertPromoCardIsNotUnlockableThisGame(string identifier)
@@ -4647,32 +4648,32 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNextToCard(Card card, Card cardThatItShouldBeNextTo)
         {
-            Assert.AreEqual(cardThatItShouldBeNextTo.NextToLocation, card.Location);
+            ClassicAssert.AreEqual(cardThatItShouldBeNextTo.NextToLocation, card.Location);
         }
 
         protected void AssertBelowCard(Card card, Card cardThatItShouldBeBelow)
         {
-            Assert.AreEqual(cardThatItShouldBeBelow.BelowLocation, card.Location, "{0} should be below {1} but it is not.", card.Identifier, cardThatItShouldBeBelow.Identifier);
+            ClassicAssert.AreEqual(cardThatItShouldBeBelow.BelowLocation, card.Location, "{0} should be below {1} but it is not.", card.Identifier, cardThatItShouldBeBelow.Identifier);
         }
 
         protected void AssertNotBelowCard(Card card, Card cardThatItShouldNotBeBelow)
         {
-            Assert.AreNotEqual(cardThatItShouldNotBeBelow.BelowLocation, card.Location);
+            ClassicAssert.AreNotEqual(cardThatItShouldNotBeBelow.BelowLocation, card.Location);
         }
 
         protected void AssertNotNextToCard(Card card, Card cardThatItShouldBeNextTo)
         {
-            Assert.AreNotEqual(card.Location, cardThatItShouldBeNextTo.NextToLocation);
+            ClassicAssert.AreNotEqual(card.Location, cardThatItShouldBeNextTo.NextToLocation);
         }
 
         protected void AssertUsablePower(HeroTurnTakerController hero, string identifier)
         {
-            Assert.IsTrue(this.GameController.GetUsablePowersThisTurn(hero).Select(p => p.CardController.Card).Any(c => c.Identifier == identifier), "Power on " + identifier + " is not usable this turn.");
+            ClassicAssert.IsTrue(this.GameController.GetUsablePowersThisTurn(hero).Select(p => p.CardController.Card).Any(c => c.Identifier == identifier), "Power on " + identifier + " is not usable this turn.");
         }
 
         protected void AssertNotUsablePower(HeroTurnTakerController hero, string identifier)
         {
-            Assert.IsFalse(this.GameController.GetUsablePowersThisTurn(hero).Select(p => p.CardController.Card).Any(c => c.Identifier == identifier), "Power on " + identifier + " is still usable this turn.");
+            ClassicAssert.IsFalse(this.GameController.GetUsablePowersThisTurn(hero).Select(p => p.CardController.Card).Any(c => c.Identifier == identifier), "Power on " + identifier + " is still usable this turn.");
         }
 
         protected void AssertUsablePower(HeroTurnTakerController hero, Card card, Card cardSource = null)
@@ -4682,7 +4683,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 usable = usable.Where(p => p.CardSource.Card == cardSource);
             }
-            Assert.IsTrue(usable.Count() > 0, "Power on " + card.Title + " is not usable this turn.");
+            ClassicAssert.IsTrue(usable.Count() > 0, "Power on " + card.Title + " is not usable this turn.");
         }
 
         protected void AssertNotUsablePower(HeroTurnTakerController hero, Card card, Card cardSource = null)
@@ -4692,7 +4693,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 usable = usable.Where(p => p.CardSource.Card == cardSource);
             }
-            Assert.IsFalse(usable.Count() > 0, "Power on " + card.Title + " is still usable this turn.");
+            ClassicAssert.IsFalse(usable.Count() > 0, "Power on " + card.Title + " is still usable this turn.");
         }
 
         protected void StackAfterShuffle(Location location, string[] identifiers)
@@ -4799,7 +4800,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertSourceDamageModified(IEnumerable<Card> cards, IEnumerable<int> modifications, Card testTarget)
         {
-            Assert.AreEqual(cards.Count(), modifications.Count(), "AssertDamageModified: The number of cards provided and the number of expected results do not match up: " + cards.Count() + " and " + modifications.Count());
+            ClassicAssert.AreEqual(cards.Count(), modifications.Count(), "AssertDamageModified: The number of cards provided and the number of expected results do not match up: " + cards.Count() + " and " + modifications.Count());
             for (int i = 0; i < cards.Count(); i++)
             {
                 var card = cards.ElementAt(i);
@@ -4814,7 +4815,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertTargetDamageModified(IEnumerable<Card> targets, IEnumerable<int> modifications, Card testSource)
         {
-            Assert.AreEqual(targets.Count(), modifications.Count(), "AssertDamageModified: The number of cards provided and the number of expected results do not match up: " + targets.Count() + " and " + modifications.Count());
+            ClassicAssert.AreEqual(targets.Count(), modifications.Count(), "AssertDamageModified: The number of cards provided and the number of expected results do not match up: " + targets.Count() + " and " + modifications.Count());
             for (int i = 0; i < targets.Count(); i++)
             {
                 var target = targets.ElementAt(i);
@@ -4829,7 +4830,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertHpAtStartOfTurn(TurnTakerController ttc, IEnumerable<Card> cards, IEnumerable<int?> hpChanges)
         {
-            Assert.AreEqual(cards.Count(), hpChanges.Count(), "AssertHPAtEndOfTurn: The number of cards provided and the number of expected results do not match up: " + cards.Count() + " and " + hpChanges.Count());
+            ClassicAssert.AreEqual(cards.Count(), hpChanges.Count(), "AssertHPAtEndOfTurn: The number of cards provided and the number of expected results do not match up: " + cards.Count() + " and " + hpChanges.Count());
             int index = this.GameController.TurnTakerControllers.IndexOf(ttc).Value;
             TurnTakerController previousTTC = null;
             if (index > 0)
@@ -4852,7 +4853,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertHpAtEndOfTurn(TurnTakerController ttc, IEnumerable<Card> cards, IEnumerable<int?> hpChanges)
         {
-            Assert.AreEqual(cards.Count(), hpChanges.Count(), "AssertHPAtEndOfTurn: The number of cards provided and the number of expected results do not match up: " + cards.Count() + " and " + hpChanges.Count());
+            ClassicAssert.AreEqual(cards.Count(), hpChanges.Count(), "AssertHPAtEndOfTurn: The number of cards provided and the number of expected results do not match up: " + cards.Count() + " and " + hpChanges.Count());
             var now = this.GameController.ActiveTurnPhase;
             if (now.TurnTaker != ttc.TurnTaker || now.Phase != Phase.PlayCard)
             {
@@ -4929,7 +4930,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                     if (ex is SerializationException && ex.Message.Contains("Unexpected binary element: 9"))
                     {
-                        Assert.Inconclusive("Failed to load game due to .NET version: {0}", ex.Message);
+                        Assert.Inconclusive($"Failed to load game due to .NET version: {ex.Message}");
                     }
 
                     return null;
@@ -5118,7 +5119,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotTarget(Card card)
         {
-            Assert.IsFalse(card.IsTarget, card.Title + " should not be a target.");
+            ClassicAssert.IsFalse(card.IsTarget, card.Title + " should not be a target.");
         }
 
         protected void AssertAreTargets(Func<Card, bool> cardCriteria)
@@ -5132,10 +5133,10 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertIsTarget(Card card, int? maxHitPoints = null)
         {
-            Assert.IsTrue(card.IsTarget, card.Title + " should be a target.");
+            ClassicAssert.IsTrue(card.IsTarget, card.Title + " should be a target.");
             if (maxHitPoints.HasValue)
             {
-                Assert.AreEqual(maxHitPoints.Value, card.HitPoints.Value);
+                ClassicAssert.AreEqual(maxHitPoints.Value, card.HitPoints.Value);
             }
         }
 
@@ -5196,7 +5197,7 @@ namespace Handelabra.Sentinels.UnitTest
 
             if (gameAction is DealDamageAction && _notDamageSource != null)
             {
-                Assert.AreNotEqual(_notDamageSource, (gameAction as DealDamageAction).DamageSource, _notDamageSource.Title + " was not expected to be a damage source.");
+                ClassicAssert.AreNotEqual(_notDamageSource, (gameAction as DealDamageAction).DamageSource, _notDamageSource.Title + " was not expected to be a damage source.");
             }
 
             if (_decisionSourceCriteria != null)
@@ -5204,7 +5205,7 @@ namespace Handelabra.Sentinels.UnitTest
                 if (gameAction.DecisionSources != null)
                 {
                     var match = gameAction.DecisionSources.Where(_decisionSourceCriteria).FirstOrDefault();
-                    Assert.IsNotNull(match, "There were no decision sources matching the expected criteria.");
+                    ClassicAssert.IsNotNull(match, "There were no decision sources matching the expected criteria.");
                     _decisionSourceCriteria = null;
                 }
             }
@@ -5285,7 +5286,7 @@ namespace Handelabra.Sentinels.UnitTest
 
                                 if (_expectedDecisionSourceOutput != null)
                                 {
-                                    Assert.AreEqual(_expectedDecisionSourceOutput, output, "Decision source output was expected to be: " + _expectedDecisionSourceOutput + ", but was " + output + ".");
+                                    ClassicAssert.AreEqual(_expectedDecisionSourceOutput, output, "Decision source output was expected to be: " + _expectedDecisionSourceOutput + ", but was " + output + ".");
                                     _expectedDecisionSourceOutput = null;
                                 }
                             }
@@ -5520,13 +5521,13 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 if (this.DecisionNextAssociatedCards != null)
                 {
-                    Assert.NotNull(decision.AssociatedCards, "Associated cards should not be null");
-                    Assert.AreEqual(this.DecisionNextAssociatedCards.Count(), decision.AssociatedCards.Count(), "There should be {0} associated cards", this.DecisionNextAssociatedCards.Count());
+                    ClassicAssert.NotNull(decision.AssociatedCards, "Associated cards should not be null");
+                    ClassicAssert.AreEqual(this.DecisionNextAssociatedCards.Count(), decision.AssociatedCards.Count(), "There should be {0} associated cards", this.DecisionNextAssociatedCards.Count());
                     for (int i = 0; i < this.DecisionNextAssociatedCards.Count(); i++)
                     {
                         var expectedCard = this.DecisionNextAssociatedCards.ElementAt(i);
                         var actualCard = decision.AssociatedCards.ElementAt(i);
-                        Assert.AreSame(expectedCard, actualCard);
+                        ClassicAssert.AreSame(expectedCard, actualCard);
                     }
 
                     this.DecisionNextAssociatedCards = null;
@@ -5547,7 +5548,7 @@ namespace Handelabra.Sentinels.UnitTest
             {
                 if (this.DecisionNextSelectionType.HasValue)
                 {
-                    Assert.AreEqual(this.DecisionNextSelectionType, decision.SelectionType,
+                    ClassicAssert.AreEqual(this.DecisionNextSelectionType, decision.SelectionType,
                         "The next decision type was expected to be " + type + " but was " + decision.SelectionType);
                     this.DecisionNextSelectionType = null;
                 }
@@ -5569,7 +5570,7 @@ namespace Handelabra.Sentinels.UnitTest
                 {
                     var expectedMaker = decisionMaker != null ? decisionMaker.Name : "a communal vote";
                     var actualMaker = decision.HeroTurnTakerController != null ? decision.HeroTurnTakerController.Name : "a communal vote";
-                    Assert.AreEqual(decisionMaker, decision.HeroTurnTakerController, "The next decision maker was expected to be " + expectedMaker + " but was " + actualMaker + ".");
+                    ClassicAssert.AreEqual(decisionMaker, decision.HeroTurnTakerController, "The next decision maker was expected to be " + expectedMaker + " but was " + actualMaker + ".");
                     if (removeExpectationAfterFirstDecision)
                     {
                         expected = false;
@@ -5584,7 +5585,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertOutOfGame(Card card)
         {
-            Assert.IsTrue(card.Location.Name == LocationName.OutOfGame, card.Title + " was not out of game.");
+            ClassicAssert.IsTrue(card.Location.Name == LocationName.OutOfGame, card.Title + " was not out of game.");
         }
 
         protected void AssertOutOfGame(params Card[] cards)
@@ -5594,7 +5595,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotOutOfGame(Card card)
         {
-            Assert.IsTrue(card.Location.Name != LocationName.OutOfGame, card.Title + " was out of game.");
+            ClassicAssert.IsTrue(card.Location.Name != LocationName.OutOfGame, card.Title + " was out of game.");
         }
 
         protected void AssertOutOfGame(IEnumerable<Card> cards)
@@ -5604,7 +5605,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertInTheBox(Card card)
         {
-            Assert.IsTrue(card.Location.Name == LocationName.InTheBox, card.Title + " was not in the box.");
+            ClassicAssert.IsTrue(card.Location.Name == LocationName.InTheBox, card.Title + " was not in the box.");
         }
 
         protected void AssertInTheBox(params Card[] cards)
@@ -5614,7 +5615,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertNotInTheBox(Card card)
         {
-            Assert.IsTrue(card.Location.Name != LocationName.InTheBox, card.Title + " was in the box.");
+            ClassicAssert.IsTrue(card.Location.Name != LocationName.InTheBox, card.Title + " was in the box.");
         }
 
         protected void AssertInTheBox(IEnumerable<Card> cards)
@@ -5625,13 +5626,13 @@ namespace Handelabra.Sentinels.UnitTest
         protected void AssertNoTriggersWhere(Func<ITrigger, bool> criteria)
         {
             var triggers = this.GameController.FindTriggersWhere(criteria);
-            Assert.IsFalse(triggers.Count() > 0, "Triggers were found that matched criteria when none were expected: " + triggers.ToCommaList());
+            ClassicAssert.IsFalse(triggers.Count() > 0, "Triggers were found that matched criteria when none were expected: " + triggers.ToCommaList());
         }
 
         protected void AssertTriggersWhere(Func<ITrigger, bool> criteria)
         {
             var triggers = this.GameController.FindTriggersWhere(criteria);
-            Assert.IsTrue(triggers.Count() > 0, "Triggers were not found that matched criteria when none were expected: " + triggers.ToCommaList());
+            ClassicAssert.IsTrue(triggers.Count() > 0, "Triggers were not found that matched criteria when none were expected: " + triggers.ToCommaList());
         }
 
         protected void AssertNotOutOfGame(IEnumerable<Card> cards)
@@ -5653,7 +5654,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertExpectedMessageWasShown(GameControllerMessageEvent receiver = null)
         {
-            Assert.IsTrue(_expectedMessageWasShown, "Expected a message that was never shown.");
+            ClassicAssert.IsTrue(_expectedMessageWasShown, "Expected a message that was never shown.");
             _expectedMessageWasShown = false;
 
             if (receiver != null)
@@ -5666,7 +5667,7 @@ namespace Handelabra.Sentinels.UnitTest
         {
             var deck = ttc.TurnTaker.Deck;
             var same = deck.TopCard == originalTop && deck.GetTopCards(2).ElementAt(1) == originalTop2 && deck.BottomCard == originalBottom && deck.GetBottomCards(2).ElementAt(1) == originalBottom2;
-            Assert.IsFalse(same, ttc.Name + " deck was not shuffled.");
+            ClassicAssert.IsFalse(same, ttc.Name + " deck was not shuffled.");
         }
 
         protected Card DiscardCard(HeroTurnTakerController hero)
@@ -5748,7 +5749,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertExpectedDecisionSourceOutputWasShown()
         {
-            Assert.IsNull(_expectedDecisionSourceOutput, "Expected decision source output was not shown: " + _expectedDecisionSourceOutput);
+            ClassicAssert.IsNull(_expectedDecisionSourceOutput, "Expected decision source output was not shown: " + _expectedDecisionSourceOutput);
         }
 
         protected void RevealCards(TurnTakerController ttc, int numberOfCards)
@@ -5768,7 +5769,7 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertTokenPoolCount(TokenPool pool, int count)
         {
-            Assert.AreEqual(count, pool.CurrentValue, "{0} should have {1} tokens but it has {2}", pool.Identifier, count, pool.CurrentValue);
+            ClassicAssert.AreEqual(count, pool.CurrentValue, "{0} should have {1} tokens but it has {2}", pool.Identifier, count, pool.CurrentValue);
         }
 
         protected void RemoveInitialConditions(TurnTakerController wager)
@@ -6010,17 +6011,17 @@ namespace Handelabra.Sentinels.UnitTest
 
         protected void AssertFaceUp(Card card)
         {
-            Assert.IsTrue(card.IsFaceUp, card.Title + " was supposed to be face-up.");
+            ClassicAssert.IsTrue(card.IsFaceUp, card.Title + " was supposed to be face-up.");
         }
 
         protected void AssertBattleZone(TurnTakerController ttc, BattleZone bz)
         {
-            Assert.AreEqual(bz, ttc.BattleZone, "{0} should be in {1} but they were in {2}", ttc.Name, bz.Identifier, ttc.BattleZone.Identifier);
+            ClassicAssert.AreEqual(bz, ttc.BattleZone, "{0} should be in {1} but they were in {2}", ttc.Name, bz.Identifier, ttc.BattleZone.Identifier);
         }
 
         protected void AssertBattleZone(Card card, BattleZone bz)
         {
-            Assert.AreEqual(bz, card.BattleZone, "{0} should be in {1} but they were in {2}", card.Identifier, bz.Identifier, card.BattleZone.Identifier);
+            ClassicAssert.AreEqual(bz, card.BattleZone, "{0} should be in {1} but they were in {2}", card.Identifier, bz.Identifier, card.BattleZone.Identifier);
         }
 
         protected void SwitchCards(Card cardA, Card cardB)
@@ -6034,4 +6035,3 @@ namespace Handelabra.Sentinels.UnitTest
         }
     }
 }
-
